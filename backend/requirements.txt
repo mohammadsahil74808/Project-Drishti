@@ -1,0 +1,44 @@
+# ============================================================
+# SentinelX AI — Backend Dependencies (all free/open-source)
+# Pin versions once Phase 2 development begins; ranges for now.
+# ============================================================
+
+# --- Core API ---
+fastapi>=0.111
+uvicorn[standard]>=0.30
+pydantic>=2.7
+pydantic-settings>=2.3
+python-multipart>=0.0.9
+
+# --- Database ---
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+geoalchemy2>=0.15
+alembic>=1.13
+
+# --- Auth ---
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+
+# --- Cache / Queue ---
+redis>=5.0
+celery>=5.4
+
+# --- AI / ML (added incrementally as features are built) ---
+scikit-learn>=1.5
+lightgbm>=4.3
+xgboost>=2.0
+prophet>=1.1
+shap>=0.45
+networkx>=3.3
+sentence-transformers>=3.0
+faiss-cpu>=1.8
+langchain>=0.2
+pandas>=2.2
+numpy>=1.26
+
+# --- Dev / Quality ---
+ruff>=0.5
+black>=24.4
+pytest>=8.2
+httpx>=0.27

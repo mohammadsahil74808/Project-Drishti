@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-sx-bg;
+  }
+
+  body {
+    @apply bg-sx-bg text-sx-text antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    @apply bg-sx-accent/30 text-white;
+  }
+
+  /* Command-center scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #1f2937;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #374151;
+  }
+}
+
+@layer components {
+  /* Shared panel surface used across dashboard cards/widgets */
+  .sx-panel-base {
+    @apply bg-sx-panel border border-sx-border rounded-xl shadow-panel;
+  }
+}
