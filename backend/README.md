@@ -1,6 +1,6 @@
-# Backend — SentinelX AI (FastAPI)
+# Backend — Project Drishti (FastAPI)
 
-The API, business logic, AI/ML pipelines, and database layer for SentinelX AI.
+The API, business logic, AI/ML pipelines, and database layer for Project Drishti.
 
 ## Structure
 | Folder | Purpose |

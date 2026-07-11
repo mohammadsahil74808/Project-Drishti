@@ -1,4 +1,4 @@
-# Frontend — SentinelX AI (React + Vite + TypeScript + Tailwind)
+# Frontend — Project Drishti (React + Vite + TypeScript + Tailwind)
 
 Role-based command dashboards, live crime map, AI assistant chat, and analytics views.
 

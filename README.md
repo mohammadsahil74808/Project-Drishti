@@ -1,7 +1,7 @@
-# SentinelX AI
+# Project Drishti
 ### AI-Driven Crime Analytics & Visualization Platform — Karnataka State Police Datathon 2026
 
-SentinelX AI is a production-ready, AI-native crime intelligence platform combining
+Project Drishti is a production-ready, AI-native crime intelligence platform combining
 geospatial analytics, predictive forecasting, NLP-driven investigation tools, and
 role-based command dashboards for Karnataka State Police.
 
