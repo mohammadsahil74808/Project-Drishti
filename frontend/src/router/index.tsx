@@ -20,18 +20,7 @@ import Alerts from "@/pages/alerts/Alerts";
 import Reports from "@/pages/reports/Reports";
 import Settings from "@/pages/settings/Settings";
 
-export const ROUTES = {
-  LOGIN: "/login",
-  DASHBOARD: "/",
-  HEATMAP: "/heatmap",
-  ANALYTICS: "/analytics",
-  ASSISTANT: "/assistant",
-  NETWORK: "/network",
-  FORECAST: "/forecast",
-  REPORTS: "/reports",
-  ALERTS: "/alerts",
-  SETTINGS: "/settings",
-} as const;
+import { ROUTES } from "./routes";
 
 function NotFound() {
   return (

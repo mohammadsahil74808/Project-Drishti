@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 import { useUIStore } from "@/store/uiStore";
-import { ROUTES } from "@/router";
+import { ROUTES } from "@/router/routes";
 
 const NAV_ITEMS = [
   { label: "Dashboard", to: ROUTES.DASHBOARD, icon: LayoutDashboard, end: true },
