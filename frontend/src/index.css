@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,8 +10,15 @@
   }
 
   body {
+    /* Set Inter as default font, Rajdhani will be used via font-display class */
     @apply bg-sx-bg text-sx-text antialiased;
     font-feature-settings: "cv11", "ss01";
+    
+    /* Cyber/Command Center Background Texture */
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(67, 56, 202, 0.12) 0%, transparent 50%);
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -18,24 +27,35 @@
 
   /* Command-center scrollbars */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(0,0,0,0.2);
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #1f2937;
+    background-color: rgba(0, 242, 254, 0.2);
     border-radius: 8px;
+    border: 1px solid rgba(0, 242, 254, 0.1);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #374151;
+    background-color: rgba(0, 242, 254, 0.5);
   }
 }
 
 @layer components {
-  /* Shared panel surface used across dashboard cards/widgets */
+  /* Shared panel surface used across dashboard cards/widgets with glassmorphism */
   .sx-panel-base {
-    @apply bg-sx-panel border border-sx-border rounded-xl shadow-panel;
+    @apply bg-sx-panel border border-sx-border rounded-xl shadow-panel backdrop-blur-md;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .sx-panel-base:hover {
+    @apply border-sx-accent/40 shadow-glow-dim;
+  }
+
+  /* Cyber headings */
+  .sx-heading {
+    @apply font-display font-bold uppercase tracking-wider;
   }
 }

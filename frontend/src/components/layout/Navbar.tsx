@@ -23,14 +23,14 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="h-16 shrink-0 border-b border-sx-border bg-sx-surface/80 backdrop-blur px-4 flex items-center justify-between gap-4">
+    <header className="h-16 shrink-0 border-b border-sx-border bg-sx-panel backdrop-blur-md px-4 flex items-center justify-between gap-4 shadow-sm z-10">
       {/* Global search */}
       <div className="flex-1 max-w-md relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-sx-text-faint" />
         <input
           type="text"
           placeholder="Search FIRs, suspects, locations…"
-          className="w-full bg-sx-panel border border-sx-border rounded-lg pl-9 pr-3 py-2 text-sm text-sx-text placeholder:text-sx-text-faint focus:outline-none focus:ring-1 focus:ring-sx-accent focus:border-sx-accent transition-colors"
+          className="w-full bg-sx-surface/50 border border-sx-border rounded-lg pl-9 pr-3 py-2 text-sm text-sx-text placeholder:text-sx-text-faint focus:outline-none focus:ring-1 focus:ring-sx-accent focus:border-sx-accent focus:shadow-[0_0_12px_rgba(0,242,254,0.3)] transition-all"
         />
       </div>
 

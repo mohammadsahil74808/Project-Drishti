@@ -1,24 +1,24 @@
 import type { Config } from "tailwindcss";
 
-// SentinelX AI design tokens — dark police command-center theme
+// SentinelX AI design tokens — premium cyber command-center theme
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        "sx-bg": "#0B0F17",
-        "sx-surface": "#0F1420",
-        "sx-panel": "#111827",
-        "sx-panel-light": "#1A2333",
-        "sx-border": "#1F2937",
-        "sx-accent": "#3B82F6",
-        "sx-accent-dim": "#1D4ED8",
-        "sx-alert": "#F59E0B",
-        "sx-critical": "#EF4444",
-        "sx-success": "#10B981",
-        "sx-text": "#E5E7EB",
-        "sx-text-dim": "#9CA3AF",
-        "sx-text-faint": "#6B7280",
+        "sx-bg": "#040814",
+        "sx-surface": "#081020",
+        "sx-panel": "rgba(8, 16, 32, 0.65)", // Glassmorphic translucent panel
+        "sx-panel-light": "rgba(16, 28, 51, 0.85)",
+        "sx-border": "rgba(0, 242, 254, 0.15)", // Subtle neon border
+        "sx-accent": "#00F2FE", // Neon Cyan
+        "sx-accent-dim": "#4338CA", // Electric Indigo
+        "sx-alert": "#FF4500", // High intensity orange/red
+        "sx-critical": "#FF003C", // Cyberpunk red
+        "sx-success": "#00FFA3", // Neon Green
+        "sx-text": "#F8FAFC",
+        "sx-text-dim": "#94A3B8",
+        "sx-text-faint": "#475569",
       },
       fontFamily: {
         sans: [
@@ -28,15 +28,24 @@ export default {
           "Segoe UI",
           "sans-serif",
         ],
+        display: ["Rajdhani", "Space Grotesk", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        panel: "0 0 0 1px rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4)",
-        glow: "0 0 20px rgba(59,130,246,0.35)",
+        panel: "0 0 0 1px rgba(0,242,254,0.1), 0 8px 32px rgba(0,0,0,0.6)",
+        glow: "0 0 24px rgba(0,242,254,0.45)",
+        "glow-dim": "0 0 16px rgba(67,56,202,0.35)",
       },
       animation: {
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "glow-pulse": "glow-pulse 2s alternate infinite",
       },
+      keyframes: {
+        "glow-pulse": {
+          "0%": { boxShadow: "0 0 12px rgba(0,242,254,0.2)" },
+          "100%": { boxShadow: "0 0 24px rgba(0,242,254,0.5)" }
+        }
+      }
     },
   },
   plugins: [],

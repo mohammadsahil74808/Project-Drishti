@@ -42,15 +42,15 @@ export default function Sidebar() {
   return (
     <aside
       className={clsx(
-        "h-screen shrink-0 flex flex-col bg-sx-panel border-r border-sx-border transition-all duration-200",
+        "h-screen shrink-0 flex flex-col bg-sx-panel backdrop-blur-md border-r border-sx-border transition-all duration-200",
         isSidebarCollapsed ? "w-[72px]" : "w-64"
       )}
     >
-      <div className="flex items-center gap-2 px-4 h-16 border-b border-sx-border shrink-0 overflow-hidden">
-        <ShieldAlert className="h-6 w-6 text-sx-accent shrink-0" />
+      <div className="flex items-center gap-2 px-4 h-16 border-b border-sx-border shrink-0 overflow-hidden shadow-glow-dim">
+        <ShieldAlert className="h-6 w-6 text-sx-accent shrink-0 drop-shadow-[0_0_8px_rgba(0,242,254,0.8)]" />
         {!isSidebarCollapsed && (
-          <span className="font-bold text-white tracking-tight whitespace-nowrap">
-            Sentinel<span className="text-sx-accent">X</span> AI
+          <span className="text-white tracking-widest whitespace-nowrap sx-heading text-lg">
+            Sentinel<span className="text-sx-accent drop-shadow-[0_0_8px_rgba(0,242,254,0.8)]">X</span> AI
           </span>
         )}
       </div>

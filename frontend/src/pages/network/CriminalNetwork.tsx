@@ -1,16 +1,14 @@
 /**
  * SentinelX AI — Criminal Network Analysis Page
  *
- * Graph view of suspect linkages (co-accused, shared address/vehicle, etc.).
- * Rendered as a lightweight SVG circular layout with dummy nodes/edges so
- * the page runs with zero extra dependencies — swap for react-force-graph
- * or a Deck.gl graph layer for physics-based layout once wired to
- * `/api/v1/network/graph`.
+ * Advanced physics-based graph view of suspect linkages (co-accused, shared address/vehicle, etc.).
+ * Rendered using Apache ECharts with a dark cyber aesthetic.
  */
 import { useMemo, useState } from "react";
 import { Share2, User } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
+import ReactECharts from "echarts-for-react";
 
 interface DummyNode {
   id: string;
@@ -46,36 +44,105 @@ const EDGES: DummyEdge[] = [
 ];
 
 function riskColor(score: number) {
-  if (score >= 75) return "#EF4444";
-  if (score >= 50) return "#F59E0B";
-  if (score >= 30) return "#3B82F6";
-  return "#10B981";
+  if (score >= 75) return "#EF4444"; // sx-critical
+  if (score >= 50) return "#F59E0B"; // sx-alert
+  if (score >= 30) return "#00F2FE"; // sx-accent
+  return "#10B981"; // sx-success
 }
 
 export default function CriminalNetwork() {
   const [selected, setSelected] = useState<DummyNode | null>(NODES[0]);
 
-  const positions = useMemo(() => {
-    const cx = 250;
-    const cy = 220;
-    const r = 170;
-    const map: Record<string, { x: number; y: number }> = {};
-    NODES.forEach((n, i) => {
-      const angle = (i / NODES.length) * Math.PI * 2 - Math.PI / 2;
-      map[n.id] = { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
-    });
-    return map;
-  }, []);
-
   const connectedEdges = selected
     ? EDGES.filter((e) => e.source === selected.id || e.target === selected.id)
     : [];
+
+  const graphOptions = useMemo(() => {
+    return {
+      backgroundColor: "transparent",
+      tooltip: {
+        trigger: "item",
+        backgroundColor: "rgba(8, 16, 32, 0.85)",
+        borderColor: "rgba(0, 242, 254, 0.3)",
+        textStyle: { color: "#F8FAFC" },
+        formatter: (params: any) => {
+          if (params.dataType === "edge") {
+            return `${params.data.relation}`;
+          }
+          return `<strong>${params.data.name}</strong><br/>Risk Score: ${params.data.riskScore}<br/>Cases: ${params.data.caseCount}`;
+        },
+      },
+      series: [
+        {
+          type: "graph",
+          layout: "force",
+          force: {
+            repulsion: 400,
+            edgeLength: 120,
+            gravity: 0.1,
+          },
+          roam: true, // Allow zooming and panning
+          label: {
+            show: true,
+            position: "bottom",
+            color: "#94A3B8",
+            fontSize: 11,
+            formatter: "{b}",
+          },
+          lineStyle: {
+            color: "rgba(255,255,255,0.2)",
+            width: 2,
+            curveness: 0.2, // Cyber-style curved links
+          },
+          emphasis: {
+            focus: "adjacency",
+            lineStyle: {
+              width: 4,
+              color: "#00F2FE", // Glowing neon cyan
+              shadowBlur: 10,
+              shadowColor: "#00F2FE",
+            },
+          },
+          data: NODES.map((n) => ({
+            id: n.id,
+            name: n.label,
+            symbolSize: 20 + n.caseCount * 2, // Size by case count
+            itemStyle: {
+              color: riskColor(n.riskScore),
+              shadowBlur: 20,
+              shadowColor: riskColor(n.riskScore),
+              borderColor: "rgba(255,255,255,0.8)",
+              borderWidth: n.id === selected?.id ? 3 : 1, // Highlight selected
+            },
+            // store data for tooltip
+            riskScore: n.riskScore,
+            caseCount: n.caseCount,
+          })),
+          edges: EDGES.map((e) => ({
+            source: e.source,
+            target: e.target,
+            relation: e.relation,
+          })),
+        },
+      ],
+    };
+  }, [selected]);
+
+  // ECharts event handler
+  const onEvents = {
+    click: (params: any) => {
+      if (params.dataType === "node") {
+        const node = NODES.find((n) => n.id === params.data.id);
+        if (node) setSelected(node);
+      }
+    },
+  };
 
   return (
     <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-white">Criminal Network Analysis</h1>
+          <h1 className="text-xl font-semibold text-white sx-heading">Criminal Network Analysis</h1>
           <p className="text-sm text-sx-text-dim mt-1">
             Suspect linkage graph — co-accused, shared address, shared vehicle
           </p>
@@ -86,66 +153,25 @@ export default function CriminalNetwork() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        <Card className="xl:col-span-2">
+        <Card className="xl:col-span-2 sx-panel-base border-none shadow-glow">
           <CardHeader>
             <CardTitle>Network Graph</CardTitle>
-            <CardDescription>Node size = case count · color = risk score</CardDescription>
+            <CardDescription>Node size = case count · color = risk score · drag to interact</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            <svg viewBox="0 0 500 440" className="w-full h-[440px]">
-              {EDGES.map((e, i) => {
-                const s = positions[e.source];
-                const t = positions[e.target];
-                const isHighlighted =
-                  selected && (e.source === selected.id || e.target === selected.id);
-                return (
-                  <line
-                    key={i}
-                    x1={s.x}
-                    y1={s.y}
-                    x2={t.x}
-                    y2={t.y}
-                    stroke={isHighlighted ? "#3B82F6" : "#1F2937"}
-                    strokeWidth={isHighlighted ? 2 : 1}
-                  />
-                );
-              })}
-
-              {NODES.map((n) => {
-                const pos = positions[n.id];
-                const radius = 10 + n.caseCount * 1.4;
-                const isSelected = selected?.id === n.id;
-                return (
-                  <g
-                    key={n.id}
-                    transform={`translate(${pos.x}, ${pos.y})`}
-                    onClick={() => setSelected(n)}
-                    className="cursor-pointer"
-                  >
-                    <circle
-                      r={radius}
-                      fill={riskColor(n.riskScore)}
-                      fillOpacity={isSelected ? 0.9 : 0.55}
-                      stroke={isSelected ? "#fff" : "transparent"}
-                      strokeWidth={2}
-                    />
-                    <text
-                      y={radius + 14}
-                      textAnchor="middle"
-                      fill="#9CA3AF"
-                      fontSize="10"
-                    >
-                      {n.label}
-                    </text>
-                  </g>
-                );
-              })}
-            </svg>
+            <div className="h-[480px] w-full bg-[#040814] relative overflow-hidden rounded-b-xl border-t border-sx-border/20">
+              <ReactECharts
+                option={graphOptions}
+                onEvents={onEvents}
+                style={{ height: "100%", width: "100%" }}
+                opts={{ renderer: "canvas" }}
+              />
+            </div>
           </CardContent>
         </Card>
 
         {/* Selected node detail panel */}
-        <Card>
+        <Card className="sx-panel-base border-none">
           <CardHeader>
             <CardTitle>Node Detail</CardTitle>
           </CardHeader>
@@ -153,7 +179,7 @@ export default function CriminalNetwork() {
             {selected ? (
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-sx-panel-light flex items-center justify-center text-sx-text-dim">
+                  <div className="h-10 w-10 rounded-full bg-sx-surface border border-sx-border flex items-center justify-center text-sx-accent shadow-glow-dim">
                     <User className="h-5 w-5" />
                   </div>
                   <div>
@@ -175,31 +201,31 @@ export default function CriminalNetwork() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div>
+                  <div className="bg-sx-surface/50 p-3 rounded-lg border border-sx-border/50">
                     <p className="text-xs text-sx-text-faint">Linked Cases</p>
-                    <p className="text-white font-medium">{selected.caseCount}</p>
+                    <p className="text-white font-medium text-lg">{selected.caseCount}</p>
                   </div>
-                  <div>
+                  <div className="bg-sx-surface/50 p-3 rounded-lg border border-sx-border/50">
                     <p className="text-xs text-sx-text-faint">Centrality</p>
-                    <p className="text-white font-medium">{selected.centrality.toFixed(2)}</p>
+                    <p className="text-white font-medium text-lg">{selected.centrality.toFixed(2)}</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-xs text-sx-text-faint mb-2 flex items-center gap-1.5">
+                  <p className="text-xs text-sx-text-faint mb-2 flex items-center gap-1.5 uppercase tracking-wider font-bold">
                     <Share2 className="h-3.5 w-3.5" /> Connections
                   </p>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
                     {connectedEdges.map((e, i) => {
                       const otherId = e.source === selected.id ? e.target : e.source;
                       const other = NODES.find((n) => n.id === otherId);
                       return (
                         <li
                           key={i}
-                          className="flex items-center justify-between text-sm bg-sx-panel-light rounded-lg px-3 py-2"
+                          className="flex items-center justify-between text-sm bg-sx-surface/60 border border-sx-border/40 hover:border-sx-accent/30 rounded-lg px-3 py-2.5 transition-colors cursor-default"
                         >
-                          <span className="text-sx-text">{other?.label}</span>
-                          <span className="text-[11px] text-sx-text-faint">{e.relation}</span>
+                          <span className="text-sx-text font-medium">{other?.label}</span>
+                          <Badge variant="info" className="bg-sx-accent/10 text-[10px]">{e.relation}</Badge>
                         </li>
                       );
                     })}
@@ -207,7 +233,7 @@ export default function CriminalNetwork() {
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-sx-text-dim">Select a node to view details.</p>
+              <p className="text-sm text-sx-text-dim text-center py-8">Select a node to view details.</p>
             )}
           </CardContent>
         </Card>
