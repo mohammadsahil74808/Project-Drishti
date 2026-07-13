@@ -3,7 +3,7 @@ import uuid
 
 from pydantic import BaseModel, Field
 
-from app.models.user import UserRole
+from app.core.deps import UserRole
 from app.schemas.common import ORMBase
 
 

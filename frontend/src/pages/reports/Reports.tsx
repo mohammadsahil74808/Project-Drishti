@@ -1,16 +1,11 @@
-/**
- * SentinelX AI — Reports Page
- *
- * Report generation form + history table. "Generate" simulates a Celery
- * PDF-generation job locally — wire to POST /api/v1/reports/generate and
- * GET /api/v1/reports/{id}/download once the backend is live.
- */
 import { useState, type FormEvent } from "react";
-import { FileText, Download, Loader2 } from "lucide-react";
+import { FileText, Download } from "lucide-react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-import type { ReportItem, ReportType } from "@/types";
+import type { ReportType } from "@/types";
+import { reportsApi, geoApi } from "@/api";
 
 const REPORT_TYPES: Array<{ value: ReportType; label: string }> = [
   { value: "weekly", label: "Weekly District Summary" },
@@ -18,53 +13,59 @@ const REPORT_TYPES: Array<{ value: ReportType; label: string }> = [
   { value: "case", label: "Case File Report" },
 ];
 
-const DISTRICTS = ["Bengaluru Urban", "Mysuru", "Mangaluru", "Hubballi-Dharwad", "Belagavi"];
-
-const INITIAL_REPORTS: ReportItem[] = [
-  {
-    id: "r1",
-    type: "weekly",
-    title: "Weekly District Summary — Bengaluru Urban",
-    generatedAt: new Date(Date.now() - 3600000).toISOString(),
-    downloadUrl: "#",
-  },
-  {
-    id: "r2",
-    type: "hotspot",
-    title: "Hotspot Assessment — Majestic Bus Stand",
-    generatedAt: new Date(Date.now() - 86400000).toISOString(),
-    downloadUrl: "#",
-  },
-  {
-    id: "r3",
-    type: "case",
-    title: "Case File Report — FIR #KA-2026-08213",
-    generatedAt: new Date(Date.now() - 2 * 86400000).toISOString(),
-    downloadUrl: "#",
-  },
-];
-
 export default function Reports() {
-  const [reports, setReports] = useState<ReportItem[]>(INITIAL_REPORTS);
+  const queryClient = useQueryClient();
   const [type, setType] = useState<ReportType>("weekly");
-  const [district, setDistrict] = useState(DISTRICTS[0]);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [district, setDistrict] = useState("");
+  const [downloadError, setDownloadError] = useState("");
 
-  const handleGenerate = async (e: FormEvent) => {
+  const { data: districtsData } = useQuery({
+    queryKey: ["districts"],
+    queryFn: geoApi.getDistricts,
+  });
+
+  const districts = districtsData || [];
+  const districtName = district || (districts.length > 0 ? districts[0].name : "");
+
+  const { data: reports = [], isLoading } = useQuery({
+    queryKey: ["reports"],
+    queryFn: () => reportsApi.getReports(),
+  });
+
+  const { mutate: generateReport, isPending: isGenerating } = useMutation({
+    mutationFn: reportsApi.createReport,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["reports"] });
+    }
+  });
+
+  const handleGenerate = (e: FormEvent) => {
     e.preventDefault();
-    setIsGenerating(true);
-    await new Promise((r) => setTimeout(r, 1200));
-
     const label = REPORT_TYPES.find((t) => t.value === type)?.label ?? "Report";
-    const newReport: ReportItem = {
-      id: crypto.randomUUID(),
-      type,
-      title: `${label} — ${district}`,
-      generatedAt: new Date().toISOString(),
-      downloadUrl: "#",
-    };
-    setReports((prev) => [newReport, ...prev]);
-    setIsGenerating(false);
+    generateReport({
+      title: `${label} — ${districtName}`,
+      type: type,
+      parameters: { district: districtName }
+    });
+  };
+
+  const handleDownload = async (reportId: string) => {
+    try {
+      const response = await reportsApi.downloadReport(reportId);
+      // Create a blob URL from the response and trigger download
+      // Since our new downloadReport returns the actual blob/data from client.get(url, { responseType: 'blob' })
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `report-${reportId}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      setDownloadError("Failed to download.");
+    }
   };
 
   return (
@@ -105,12 +106,12 @@ export default function Reports() {
                 District
               </label>
               <select
-                value={district}
+                value={districtName}
                 onChange={(e) => setDistrict(e.target.value)}
                 className="bg-sx-panel border border-sx-border rounded-lg text-sm text-sx-text px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-sx-accent min-w-[200px]"
               >
-                {DISTRICTS.map((d) => (
-                  <option key={d}>{d}</option>
+                {districts.map((d: any) => (
+                  <option key={d.id} value={d.name}>{d.name}</option>
                 ))}
               </select>
             </div>
@@ -142,30 +143,38 @@ export default function Reports() {
               </tr>
             </thead>
             <tbody className="divide-y divide-sx-border">
-              {reports.map((r) => (
-                <tr key={r.id} className="hover:bg-sx-panel-light/50 transition-colors">
-                  <td className="px-5 py-3 text-sx-text flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-sx-text-faint shrink-0" />
-                    {r.title}
-                    {isGenerating && r.id === reports[0]?.id && (
-                      <Loader2 className="h-3.5 w-3.5 animate-spin text-sx-accent" />
-                    )}
-                  </td>
-                  <td className="px-5 py-3">
-                    <Badge variant="neutral">{r.type}</Badge>
-                  </td>
-                  <td className="px-5 py-3 text-sx-text-dim">
-                    {new Date(r.generatedAt).toLocaleString()}
-                  </td>
-                  <td className="px-5 py-3 text-right">
-                    <Button variant="ghost" size="sm" leftIcon={<Download className="h-3.5 w-3.5" />}>
-                      Download
-                    </Button>
-                  </td>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={4} className="px-5 py-3 text-center text-sx-text-dim">Loading reports...</td>
                 </tr>
-              ))}
+              ) : reports.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="px-5 py-3 text-center text-sx-text-dim">No reports generated yet.</td>
+                </tr>
+              ) : (
+                reports.map((r: any) => (
+                  <tr key={r.id} className="hover:bg-sx-panel-light/50 transition-colors">
+                    <td className="px-5 py-3 text-sx-text flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-sx-text-faint shrink-0" />
+                      <span className="truncate max-w-[300px]">{r.title}</span>
+                    </td>
+                    <td className="px-5 py-3">
+                      <Badge variant="neutral">{r.type || r.report_type}</Badge>
+                    </td>
+                    <td className="px-5 py-3 text-sx-text-dim">
+                      {new Date(r.created_at || r.generatedAt).toLocaleString()}
+                    </td>
+                    <td className="px-5 py-3 text-right">
+                      <Button variant="ghost" size="sm" leftIcon={<Download className="h-3.5 w-3.5" />} onClick={() => handleDownload(r.id)}>
+                        Download
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
+          {downloadError && <p className="px-5 py-3 text-xs text-sx-critical">{downloadError}</p>}
         </CardContent>
       </Card>
     </div>

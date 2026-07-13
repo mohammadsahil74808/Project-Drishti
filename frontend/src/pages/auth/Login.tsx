@@ -9,10 +9,11 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShieldAlert, BadgeCheck, Lock } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useAuthStore } from "@/store/authStore";
-import type { LoginResponse } from "@/types";
+import { authApi } from "@/api";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -20,10 +21,19 @@ export default function Login() {
 
   const [badgeNo, setBadgeNo] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const { mutate: login, isPending } = useMutation({
+    mutationFn: authApi.login,
+    onSuccess: (data) => {
+      loginSuccess(data);
+      navigate("/", { replace: true });
+    },
+    onError: (err: any) => {
+      setError(err.response?.data?.detail || "Authentication failed. Please try again.");
+    }
+  });
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -32,27 +42,7 @@ export default function Login() {
       return;
     }
 
-    setIsLoading(true);
-
-    // --- Mock auth (replace with real POST /auth/login once backend is live) ---
-    await new Promise((r) => setTimeout(r, 700));
-
-    const mockResponse: LoginResponse = {
-      accessToken: "mock-access-token",
-      refreshToken: "mock-refresh-token",
-      user: {
-        id: "usr_001",
-        name: "Inspector Rakesh Gowda",
-        badgeNo: badgeNo.trim(),
-        role: "sho",
-        stationName: "Whitefield Police Station",
-        districtName: "Bengaluru East",
-      },
-    };
-
-    loginSuccess(mockResponse);
-    setIsLoading(false);
-    navigate("/", { replace: true });
+    login({ badgeNo: badgeNo.trim(), password });
   };
 
   return (
@@ -116,10 +106,10 @@ export default function Login() {
             variant="primary"
             size="lg"
             className="w-full"
-            isLoading={isLoading}
-            leftIcon={isLoading ? undefined : <Lock className="h-4 w-4" />}
+            isLoading={isPending}
+            leftIcon={isPending ? undefined : <Lock className="h-4 w-4" />}
           >
-            {isLoading ? "Authenticating…" : "Sign In"}
+            {isPending ? "Authenticating…" : "Sign In"}
           </Button>
 
           <p className="text-[11px] text-sx-text-faint text-center pt-1">

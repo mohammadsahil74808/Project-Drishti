@@ -13,7 +13,14 @@ from sqlalchemy.orm import Session
 
 from app.core.security import TokenError, decode_token
 from app.db.session import get_db
-from app.models.user import User, UserRole
+from database.models.user import User
+from enum import Enum
+class UserRole(str, Enum):
+    ADMIN = 'ADMIN'
+    SP = 'SP'
+    COMMISSIONER = 'COMMISSIONER'
+    SHO = 'SHO'
+    ANALYST = 'ANALYST'
 
 bearer_scheme = HTTPBearer(auto_error=False)
 

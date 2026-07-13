@@ -3,10 +3,16 @@ import uuid
 
 from pydantic import BaseModel
 
-from app.models.fir import CrimeType
-from app.models.hotspot import HotspotSeverity
+from app.schemas.crime_type import CrimeType
+from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
 from app.schemas.common import ORMBase
 from app.schemas.fir import GeoPoint
+
+class DistrictResponse(ORMBase):
+    id: uuid.UUID
+    name: str
+    state: str
+    population: int | None = None
 
 
 class HeatmapPoint(BaseModel):

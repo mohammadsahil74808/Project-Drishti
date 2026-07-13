@@ -14,7 +14,7 @@ import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
-from app.models import Base
+from database.models.base import Base
 
 TEST_DATABASE_URL = os.getenv(
     "TEST_DATABASE_URL",

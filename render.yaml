@@ -1,0 +1,58 @@
+# SentinelX AI — Render.com Infrastructure as Code
+services:
+  # ---- Backend API (FastAPI) ----
+  - type: web
+    name: sentinelx-backend
+    env: docker
+    region: oregon
+    dockerfilePath: ./backend/Dockerfile.prod
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sentinelx-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sentinelx-redis
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+
+  # ---- Celery Worker ----
+  - type: worker
+    name: sentinelx-worker
+    env: docker
+    region: oregon
+    dockerfilePath: ./backend/Dockerfile.prod
+    dockerContext: .
+    dockerCommand: celery -A app.workers.celery_app worker --loglevel=info
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sentinelx-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sentinelx-redis
+          property: connectionString
+      - key: APP_ENV
+        value: production
+
+  # ---- Managed Redis ----
+  - type: redis
+    name: sentinelx-redis
+    region: oregon
+    plan: free
+
+databases:
+  # ---- Managed PostgreSQL ----
+  - name: sentinelx-db
+    region: oregon
+    plan: starter
+    postgresMajorVersion: 15

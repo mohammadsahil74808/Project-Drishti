@@ -1,7 +1,7 @@
 """SentinelX AI — Risk scoring / explainability schemas."""
 from pydantic import BaseModel
 
-from app.models.risk import RiskEntityType
+from database.models.analytics import RiskScore, RiskEntityType
 
 
 class ShapContribution(BaseModel):

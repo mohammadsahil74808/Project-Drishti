@@ -4,7 +4,7 @@ from datetime import date
 
 from pydantic import BaseModel
 
-from app.models.fir import CrimeType
+from app.schemas.crime_type import CrimeType
 
 
 class ForecastPoint(BaseModel):

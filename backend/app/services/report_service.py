@@ -6,7 +6,7 @@ import uuid
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.report import Report, ReportStatus
+from database.models.report import Report, ReportStatus
 from app.schemas.report import ReportGenerateRequest
 
 

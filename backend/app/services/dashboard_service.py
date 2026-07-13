@@ -4,16 +4,17 @@ SentinelX AI — Dashboard Summary Service
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.models.fir import CaseStatus, FIRRecord
-from app.models.geo import District
-from app.models.hotspot import Hotspot
-from app.models.missing_person import MissingPerson, MissingPersonStatus
-from app.models.risk import RiskEntityType, RiskScore
+from app.schemas.crime_type import CrimeType
+from database.models.fir import CaseStatus, FIR
+from database.models.geo import District
+from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from database.models.missing_person import MissingPerson, MissingPersonStatus
+from database.models.analytics import RiskScore, RiskEntityType
 from app.schemas.dashboard import DashboardSummaryResponse, DistrictRiskRow, StatTile
 
 
 def get_dashboard_summary(db: Session) -> DashboardSummaryResponse:
-    total_firs = db.scalar(select(func.count(FIRRecord.id))) or 0
+    total_firs = db.scalar(select(func.count(FIR.id))) or 0
     active_hotspots = db.scalar(select(func.count(Hotspot.id))) or 0
     open_missing = (
         db.scalar(

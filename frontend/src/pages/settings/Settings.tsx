@@ -1,15 +1,11 @@
-/**
- * SentinelX AI — Settings Page
- *
- * Profile, notification preferences, and security settings. Local state
- * only for now — wire to PATCH /api/v1/users/{id} once the backend is live.
- */
 import { useState, type FormEvent } from "react";
 import { User, Bell, Lock, Save } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useAuthStore } from "@/store/authStore";
+import { usersApi } from "@/api";
 
 export default function Settings() {
   const user = useAuthStore((s) => s.user);
@@ -25,7 +21,22 @@ export default function Settings() {
 
   const [currentPw, setCurrentPw] = useState("");
   const [newPw, setNewPw] = useState("");
+  const [pwError, setPwError] = useState("");
   const [savedPw, setSavedPw] = useState(false);
+
+  const { mutate: changePassword, isPending: isChangingPw } = useMutation({
+    mutationFn: usersApi.changePassword,
+    onSuccess: () => {
+      setSavedPw(true);
+      setCurrentPw("");
+      setNewPw("");
+      setPwError("");
+      setTimeout(() => setSavedPw(false), 2000);
+    },
+    onError: (err: any) => {
+      setPwError(err.response?.data?.detail || "Failed to update password");
+    }
+  });
 
   const handleProfileSave = (e: FormEvent) => {
     e.preventDefault();
@@ -35,10 +46,8 @@ export default function Settings() {
 
   const handlePasswordSave = (e: FormEvent) => {
     e.preventDefault();
-    setSavedPw(true);
-    setCurrentPw("");
-    setNewPw("");
-    setTimeout(() => setSavedPw(false), 2000);
+    setPwError("");
+    changePassword({ old_password: currentPw, new_password: newPw });
   };
 
   const Toggle = ({
@@ -58,6 +67,7 @@ export default function Settings() {
         <p className="text-xs text-sx-text-faint mt-0.5">{description}</p>
       </div>
       <button
+        type="button"
         onClick={onChange}
         className={`h-6 w-11 rounded-full transition-colors relative shrink-0 ${
           checked ? "bg-sx-accent" : "bg-sx-panel-light border border-sx-border"
@@ -170,15 +180,21 @@ export default function Settings() {
             />
           </CardContent>
           <CardFooter>
-            <span className="text-xs text-sx-success">
-              {savedPw ? "Password updated." : ""}
-            </span>
+            <div className="flex flex-col">
+               <span className="text-xs text-sx-success">
+                 {savedPw ? "Password updated." : ""}
+               </span>
+               <span className="text-xs text-sx-critical mt-1">
+                 {pwError}
+               </span>
+            </div>
             <Button
               type="submit"
               variant="secondary"
-              disabled={!currentPw || !newPw}
+              disabled={!currentPw || !newPw || isChangingPw}
+              isLoading={isChangingPw}
             >
-              Update Password
+              {isChangingPw ? "Updating..." : "Update Password"}
             </Button>
           </CardFooter>
         </form>

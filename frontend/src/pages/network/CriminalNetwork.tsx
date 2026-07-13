@@ -1,47 +1,10 @@
-/**
- * SentinelX AI — Criminal Network Analysis Page
- *
- * Advanced physics-based graph view of suspect linkages (co-accused, shared address/vehicle, etc.).
- * Rendered using Apache ECharts with a dark cyber aesthetic.
- */
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Share2, User } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import ReactECharts from "echarts-for-react";
-
-interface DummyNode {
-  id: string;
-  label: string;
-  riskScore: number;
-  caseCount: number;
-  centrality: number;
-}
-interface DummyEdge {
-  source: string;
-  target: string;
-  relation: string;
-}
-
-const NODES: DummyNode[] = [
-  { id: "s1", label: "Suspect A-104", riskScore: 91, caseCount: 12, centrality: 0.82 },
-  { id: "s2", label: "Suspect B-217", riskScore: 76, caseCount: 8, centrality: 0.61 },
-  { id: "s3", label: "Suspect C-338", riskScore: 68, caseCount: 6, centrality: 0.54 },
-  { id: "s4", label: "Suspect D-449", riskScore: 54, caseCount: 4, centrality: 0.38 },
-  { id: "s5", label: "Suspect E-560", riskScore: 47, caseCount: 3, centrality: 0.29 },
-  { id: "s6", label: "Suspect F-671", riskScore: 33, caseCount: 2, centrality: 0.18 },
-  { id: "s7", label: "Suspect G-782", riskScore: 22, caseCount: 1, centrality: 0.11 },
-];
-
-const EDGES: DummyEdge[] = [
-  { source: "s1", target: "s2", relation: "Co-accused" },
-  { source: "s1", target: "s3", relation: "Shared vehicle" },
-  { source: "s1", target: "s4", relation: "Co-accused" },
-  { source: "s2", target: "s5", relation: "Shared address" },
-  { source: "s3", target: "s6", relation: "Co-accused" },
-  { source: "s4", target: "s7", relation: "Shared vehicle" },
-  { source: "s2", target: "s3", relation: "Co-accused" },
-];
+import { networkApi } from "@/api";
 
 function riskColor(score: number) {
   if (score >= 75) return "#EF4444"; // sx-critical
@@ -51,10 +14,25 @@ function riskColor(score: number) {
 }
 
 export default function CriminalNetwork() {
-  const [selected, setSelected] = useState<DummyNode | null>(NODES[0]);
+  const [selected, setSelected] = useState<any | null>(null);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["network-graph"],
+    queryFn: () => networkApi.getGraph(),
+  });
+
+  const nodes = data?.nodes || [];
+  const edges = data?.edges || [];
+
+  // Automatically select the first node if available and none selected
+  useEffect(() => {
+    if (nodes.length > 0 && !selected) {
+      setSelected(nodes[0]);
+    }
+  }, [nodes, selected]);
 
   const connectedEdges = selected
-    ? EDGES.filter((e) => e.source === selected.id || e.target === selected.id)
+    ? edges.filter((e: any) => e.source === selected.id || e.target === selected.id)
     : [];
 
   const graphOptions = useMemo(() => {
@@ -67,7 +45,7 @@ export default function CriminalNetwork() {
         textStyle: { color: "#F8FAFC" },
         formatter: (params: any) => {
           if (params.dataType === "edge") {
-            return `${params.data.relation}`;
+            return `${params.data.relation_type || params.data.relation}`;
           }
           return `<strong>${params.data.name}</strong><br/>Risk Score: ${params.data.riskScore}<br/>Cases: ${params.data.caseCount}`;
         },
@@ -103,36 +81,37 @@ export default function CriminalNetwork() {
               shadowColor: "#00F2FE",
             },
           },
-          data: NODES.map((n) => ({
+          data: nodes.map((n: any) => ({
             id: n.id,
             name: n.label,
-            symbolSize: 20 + n.caseCount * 2, // Size by case count
+            symbolSize: 20 + (n.case_count || n.caseCount || 0) * 2, // Size by case count
             itemStyle: {
-              color: riskColor(n.riskScore),
+              color: riskColor(n.risk_score || n.riskScore || 0),
               shadowBlur: 20,
-              shadowColor: riskColor(n.riskScore),
+              shadowColor: riskColor(n.risk_score || n.riskScore || 0),
               borderColor: "rgba(255,255,255,0.8)",
               borderWidth: n.id === selected?.id ? 3 : 1, // Highlight selected
             },
             // store data for tooltip
-            riskScore: n.riskScore,
-            caseCount: n.caseCount,
+            riskScore: n.risk_score || n.riskScore,
+            caseCount: n.case_count || n.caseCount,
           })),
-          edges: EDGES.map((e) => ({
+          edges: edges.map((e: any) => ({
             source: e.source,
             target: e.target,
-            relation: e.relation,
+            relation: e.relation_type || e.relation,
+            relation_type: e.relation_type || e.relation,
           })),
         },
       ],
     };
-  }, [selected]);
+  }, [nodes, edges, selected]);
 
   // ECharts event handler
   const onEvents = {
     click: (params: any) => {
       if (params.dataType === "node") {
-        const node = NODES.find((n) => n.id === params.data.id);
+        const node = nodes.find((n: any) => n.id === params.data.id);
         if (node) setSelected(node);
       }
     },
@@ -148,7 +127,7 @@ export default function CriminalNetwork() {
           </p>
         </div>
         <Badge variant="info" dot>
-          {NODES.length} nodes · {EDGES.length} edges
+          {nodes.length} nodes · {edges.length} edges
         </Badge>
       </div>
 
@@ -160,12 +139,18 @@ export default function CriminalNetwork() {
           </CardHeader>
           <CardContent className="p-0">
             <div className="h-[480px] w-full bg-[#040814] relative overflow-hidden rounded-b-xl border-t border-sx-border/20">
-              <ReactECharts
-                option={graphOptions}
-                onEvents={onEvents}
-                style={{ height: "100%", width: "100%" }}
-                opts={{ renderer: "canvas" }}
-              />
+              {isLoading ? (
+                 <div className="absolute inset-0 z-10 flex items-center justify-center text-sx-text-dim">Loading Network Graph...</div>
+              ) : isError ? (
+                 <div className="absolute inset-0 z-10 flex items-center justify-center text-sx-critical">Failed to load graph</div>
+              ) : (
+                <ReactECharts
+                  option={graphOptions}
+                  onEvents={onEvents}
+                  style={{ height: "100%", width: "100%" }}
+                  opts={{ renderer: "canvas" }}
+                />
+              )}
             </div>
           </CardContent>
         </Card>
@@ -183,19 +168,19 @@ export default function CriminalNetwork() {
                     <User className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white">{selected.label}</p>
+                    <p className="text-sm font-semibold text-white truncate max-w-[150px]">{selected.label}</p>
                     <Badge
                       variant={
-                        selected.riskScore >= 75
+                        (selected.risk_score || selected.riskScore) >= 75
                           ? "critical"
-                          : selected.riskScore >= 50
+                          : (selected.risk_score || selected.riskScore) >= 50
                           ? "medium"
-                          : selected.riskScore >= 30
+                          : (selected.risk_score || selected.riskScore) >= 30
                           ? "info"
                           : "success"
                       }
                     >
-                      Risk {selected.riskScore}
+                      Risk {selected.risk_score || selected.riskScore}
                     </Badge>
                   </div>
                 </div>
@@ -203,11 +188,11 @@ export default function CriminalNetwork() {
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="bg-sx-surface/50 p-3 rounded-lg border border-sx-border/50">
                     <p className="text-xs text-sx-text-faint">Linked Cases</p>
-                    <p className="text-white font-medium text-lg">{selected.caseCount}</p>
+                    <p className="text-white font-medium text-lg">{selected.case_count || selected.caseCount || 0}</p>
                   </div>
                   <div className="bg-sx-surface/50 p-3 rounded-lg border border-sx-border/50">
                     <p className="text-xs text-sx-text-faint">Centrality</p>
-                    <p className="text-white font-medium text-lg">{selected.centrality.toFixed(2)}</p>
+                    <p className="text-white font-medium text-lg">{(selected.centrality || 0).toFixed(2)}</p>
                   </div>
                 </div>
 
@@ -216,16 +201,19 @@ export default function CriminalNetwork() {
                     <Share2 className="h-3.5 w-3.5" /> Connections
                   </p>
                   <ul className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
-                    {connectedEdges.map((e, i) => {
+                    {connectedEdges.length === 0 && (
+                      <li className="text-xs text-sx-text-dim text-center py-2">No connections</li>
+                    )}
+                    {connectedEdges.map((e: any, i: number) => {
                       const otherId = e.source === selected.id ? e.target : e.source;
-                      const other = NODES.find((n) => n.id === otherId);
+                      const other = nodes.find((n: any) => n.id === otherId);
                       return (
                         <li
                           key={i}
                           className="flex items-center justify-between text-sm bg-sx-surface/60 border border-sx-border/40 hover:border-sx-accent/30 rounded-lg px-3 py-2.5 transition-colors cursor-default"
                         >
-                          <span className="text-sx-text font-medium">{other?.label}</span>
-                          <Badge variant="info" className="bg-sx-accent/10 text-[10px]">{e.relation}</Badge>
+                          <span className="text-sx-text font-medium truncate max-w-[120px]">{other?.label || otherId}</span>
+                          <Badge variant="info" className="bg-sx-accent/10 text-[10px]">{e.relation_type || e.relation}</Badge>
                         </li>
                       );
                     })}

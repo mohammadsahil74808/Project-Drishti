@@ -1,10 +1,4 @@
-/**
- * SentinelX AI — Dashboard Home
- *
- * Command-center landing view: KPI stat tiles, a crime trend snapshot,
- * district risk table, and recent alerts feed. All data is dummy/mock —
- * wired to `/api/v1/*` endpoints once the backend is live.
- */
+import { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import {
   FileWarning,
@@ -14,101 +8,117 @@ import {
   ArrowUpRight,
   ArrowDownRight,
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
+import { dashboardApi, analyticsApi, alertsApi } from "@/api";
 
-const STATS = [
-  {
-    label: "Total FIRs (30d)",
-    value: "4,812",
-    delta: "+6.2%",
-    trend: "up" as const,
-    icon: FileWarning,
-    colorClass: "text-[#00F2FE] bg-[#00F2FE]/5 border border-[#00F2FE]/20 group-hover:bg-[#00F2FE]/10 group-hover:border-[#00F2FE]/40 group-hover:shadow-[0_0_15px_rgba(0,242,254,0.5)]",
-  },
-  {
-    label: "Active Hotspots",
-    value: "37",
-    delta: "+3",
-    trend: "up" as const,
-    icon: MapPinned,
-    colorClass: "text-[#FF4500] bg-[#FF4500]/5 border border-[#FF4500]/20 group-hover:bg-[#FF4500]/10 group-hover:border-[#FF4500]/40 group-hover:shadow-[0_0_15px_rgba(255,69,0,0.5)]",
-  },
-  {
-    label: "Missing Persons (open)",
-    value: "128",
-    delta: "-8.1%",
-    trend: "down" as const,
-    icon: Users,
-    colorClass: "text-[#A855F7] bg-[#A855F7]/5 border border-[#A855F7]/20 group-hover:bg-[#A855F7]/10 group-hover:border-[#A855F7]/40 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",
-  },
-  {
-    label: "Forecast Risk (7d)",
-    value: "Elevated",
-    delta: "3 districts",
-    trend: "up" as const,
-    icon: TrendingUp,
-    colorClass: "text-[#EAB308] bg-[#EAB308]/5 border border-[#EAB308]/20 group-hover:bg-[#EAB308]/10 group-hover:border-[#EAB308]/40 group-hover:shadow-[0_0_15px_rgba(234,179,8,0.5)]",
-  },
-];
+// Mapping icons by label
+const getIconForStat = (label: string) => {
+  if (label.toLowerCase().includes("hotspot")) return MapPinned;
+  if (label.toLowerCase().includes("missing")) return Users;
+  if (label.toLowerCase().includes("risk")) return TrendingUp;
+  return FileWarning;
+};
 
-const DISTRICT_RISK = [
-  { district: "Bengaluru Urban", score: 82, severity: "critical" as const },
-  { district: "Mysuru", score: 61, severity: "high" as const },
-  { district: "Mangaluru", score: 44, severity: "medium" as const },
-  { district: "Hubballi-Dharwad", score: 38, severity: "medium" as const },
-  { district: "Belagavi", score: 21, severity: "low" as const },
-];
-
-const RECENT_ALERTS = [
-  { id: "1", msg: "Anomaly: burglary spike in Yelahanka (+40% vs 4-wk avg)", severity: "high" as const, time: "12 min ago" },
-  { id: "2", msg: "New hotspot formed near Majestic Bus Stand", severity: "critical" as const, time: "48 min ago" },
-  { id: "3", msg: "Missing person match found — case #MP-2291", severity: "medium" as const, time: "2 hr ago" },
-  { id: "4", msg: "Forecast: chain-snatching risk elevated in Indiranagar this weekend", severity: "medium" as const, time: "4 hr ago" },
-];
-
-const trendOption = {
-  backgroundColor: "transparent",
-  grid: { left: 36, right: 16, top: 16, bottom: 28 },
-  xAxis: {
-    type: "category",
-    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    axisLine: { lineStyle: { color: "#1F2937" } },
-    axisLabel: { color: "#9CA3AF", fontSize: 11 },
-  },
-  yAxis: {
-    type: "value",
-    splitLine: { lineStyle: { color: "#1F2937" } },
-    axisLabel: { color: "#9CA3AF", fontSize: 11 },
-  },
-  series: [
-    {
-      data: [120, 132, 101, 154, 190, 210, 176],
-      type: "line",
-      smooth: true,
-      symbol: "circle",
-      symbolSize: 6,
-      lineStyle: { color: "#3B82F6", width: 2 },
-      itemStyle: { color: "#3B82F6" },
-      areaStyle: {
-        color: {
-          type: "linear",
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            { offset: 0, color: "rgba(59,130,246,0.35)" },
-            { offset: 1, color: "rgba(59,130,246,0)" },
-          ],
-        },
-      },
-    },
-  ],
-  tooltip: { trigger: "axis" },
+const getColorClassForStat = (label: string) => {
+  if (label.toLowerCase().includes("hotspot"))
+    return "text-[#FF4500] bg-[#FF4500]/5 border border-[#FF4500]/20 group-hover:bg-[#FF4500]/10 group-hover:border-[#FF4500]/40 group-hover:shadow-[0_0_15px_rgba(255,69,0,0.5)]";
+  if (label.toLowerCase().includes("missing"))
+    return "text-[#A855F7] bg-[#A855F7]/5 border border-[#A855F7]/20 group-hover:bg-[#A855F7]/10 group-hover:border-[#A855F7]/40 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]";
+  if (label.toLowerCase().includes("risk"))
+    return "text-[#EAB308] bg-[#EAB308]/5 border border-[#EAB308]/20 group-hover:bg-[#EAB308]/10 group-hover:border-[#EAB308]/40 group-hover:shadow-[0_0_15px_rgba(234,179,8,0.5)]";
+  return "text-[#00F2FE] bg-[#00F2FE]/5 border border-[#00F2FE]/20 group-hover:bg-[#00F2FE]/10 group-hover:border-[#00F2FE]/40 group-hover:shadow-[0_0_15px_rgba(0,242,254,0.5)]";
 };
 
 export default function DashboardHome() {
+  const { data: summary, isLoading: isLoadingSummary, isError: isErrorSummary } = useQuery({
+    queryKey: ["dashboard-summary"],
+    queryFn: dashboardApi.getSummary,
+    refetchInterval: 30000,
+  });
+
+  const { data: trendData, isLoading: isLoadingTrend } = useQuery({
+    queryKey: ["analytics-trend"],
+    queryFn: () => analyticsApi.getTrend("daily"),
+    refetchInterval: 30000,
+  });
+
+  // Use websockets for real alerts, but fallback to polling via React Query
+  const { data: alertsData, isLoading: isLoadingAlerts } = useQuery({
+    queryKey: ["alerts"],
+    queryFn: alertsApi.getAlerts,
+    refetchInterval: 30000,
+  });
+
+  const [liveAlerts, setLiveAlerts] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Merge REST alerts with WebSocket alerts
+    if (alertsData) {
+      setLiveAlerts(alertsData);
+    }
+  }, [alertsData]);
+
+  useEffect(() => {
+    // Connect to WebSocket
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    const host = import.meta.env.VITE_API_BASE_URL 
+      ? new URL(import.meta.env.VITE_API_BASE_URL).host 
+      : "localhost:8000";
+    const ws = new WebSocket(`${protocol}//${host}/api/v1/ws/alerts`);
+    
+    ws.onmessage = (event) => {
+      try {
+        const newAlert = JSON.parse(event.data);
+        setLiveAlerts((prev) => [newAlert, ...prev].slice(0, 10)); // Keep last 10
+      } catch (err) {}
+    };
+
+    return () => ws.close();
+  }, []);
+
+  const trendOption = {
+    backgroundColor: "transparent",
+    grid: { left: 36, right: 16, top: 16, bottom: 28 },
+    xAxis: {
+      type: "category",
+      data: trendData?.points?.map((p: any) => p.period) || ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      axisLine: { lineStyle: { color: "#1F2937" } },
+      axisLabel: { color: "#9CA3AF", fontSize: 11 },
+    },
+    yAxis: {
+      type: "value",
+      splitLine: { lineStyle: { color: "#1F2937" } },
+      axisLabel: { color: "#9CA3AF", fontSize: 11 },
+    },
+    series: [
+      {
+        data: trendData?.points?.map((p: any) => p.count) || [0, 0, 0, 0, 0, 0, 0],
+        type: "line",
+        smooth: true,
+        symbol: "circle",
+        symbolSize: 6,
+        lineStyle: { color: "#3B82F6", width: 2 },
+        itemStyle: { color: "#3B82F6" },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              { offset: 0, color: "rgba(59,130,246,0.35)" },
+              { offset: 1, color: "rgba(59,130,246,0)" },
+            ],
+          },
+        },
+      },
+    ],
+    tooltip: { trigger: "axis" },
+  };
+
   return (
     <div className="p-6 space-y-6">
       <div>
@@ -120,31 +130,45 @@ export default function DashboardHome() {
 
       {/* KPI tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {STATS.map(({ label, value, delta, trend, icon: Icon, colorClass }) => (
-          <Card key={label} className="group cursor-default hover:bg-sx-panel-light/30 transition-colors duration-300">
-            <CardContent className="flex items-start justify-between">
-              <div>
-                <p className="text-xs text-sx-text-dim">{label}</p>
-                <p className="text-2xl font-bold text-white mt-1">{value}</p>
-                <div
-                  className={`flex items-center gap-1 mt-2 text-xs font-medium ${
-                    trend === "up" ? "text-sx-critical" : "text-sx-success"
-                  }`}
-                >
-                  {trend === "up" ? (
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  ) : (
-                    <ArrowDownRight className="h-3.5 w-3.5" />
-                  )}
-                  {delta}
-                </div>
-              </div>
-              <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${colorClass}`}>
-                <Icon className="h-5 w-5" />
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        {isLoadingSummary ? (
+          Array(4).fill(0).map((_, i) => (
+            <Card key={i} className="animate-pulse bg-sx-panel/50">
+              <CardContent className="h-24"></CardContent>
+            </Card>
+          ))
+        ) : isErrorSummary ? (
+          <div className="text-sx-critical col-span-4">Failed to load summary stats.</div>
+        ) : (
+          summary?.stats?.map((stat: any) => {
+            const Icon = getIconForStat(stat.label);
+            const colorClass = getColorClassForStat(stat.label);
+            return (
+              <Card key={stat.label} className="group cursor-default hover:bg-sx-panel-light/30 transition-colors duration-300">
+                <CardContent className="flex items-start justify-between">
+                  <div>
+                    <p className="text-xs text-sx-text-dim">{stat.label}</p>
+                    <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
+                    <div
+                      className={`flex items-center gap-1 mt-2 text-xs font-medium ${
+                        stat.trend === "up" ? "text-sx-critical" : "text-sx-success"
+                      }`}
+                    >
+                      {stat.trend === "up" ? (
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      ) : (
+                        <ArrowDownRight className="h-3.5 w-3.5" />
+                      )}
+                      {stat.delta}
+                    </div>
+                  </div>
+                  <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${colorClass}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })
+        )}
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
@@ -155,12 +179,14 @@ export default function DashboardHome() {
               <CardTitle>Crime Volume — Last 7 Days</CardTitle>
               <CardDescription>All crime types, statewide</CardDescription>
             </div>
-            <Badge variant="info" dot>
-              Live
-            </Badge>
+            <Badge variant="info" dot>Live</Badge>
           </CardHeader>
           <CardContent>
-            <ReactECharts option={trendOption} style={{ height: 260 }} />
+            {isLoadingTrend ? (
+               <div className="h-[260px] flex items-center justify-center text-sx-text-dim">Loading chart...</div>
+            ) : (
+               <ReactECharts option={trendOption} style={{ height: 260 }} />
+            )}
           </CardContent>
         </Card>
 
@@ -170,19 +196,26 @@ export default function DashboardHome() {
             <CardTitle>Recent Alerts</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-            <ul className="divide-y divide-sx-border">
-              {RECENT_ALERTS.map((a) => (
-                <li key={a.id} className="px-5 py-3.5">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm text-sx-text leading-snug">{a.msg}</p>
-                    <Badge variant={a.severity} className="shrink-0">
-                      {a.severity}
-                    </Badge>
-                  </div>
-                  <p className="text-[11px] text-sx-text-faint mt-1">{a.time}</p>
-                </li>
-              ))}
-            </ul>
+            {isLoadingAlerts ? (
+              <div className="p-5 text-center text-sx-text-dim">Loading alerts...</div>
+            ) : (
+              <ul className="divide-y divide-sx-border">
+                {liveAlerts.length === 0 && <li className="px-5 py-3.5 text-sx-text-dim text-sm">No recent alerts</li>}
+                {liveAlerts.map((a: any) => (
+                  <li key={a.id} className="px-5 py-3.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm text-sx-text leading-snug">{a.message || a.msg}</p>
+                      <Badge variant={a.severity} className="shrink-0">
+                        {a.severity}
+                      </Badge>
+                    </div>
+                    <p className="text-[11px] text-sx-text-faint mt-1">
+                      {a.created_at ? new Date(a.created_at).toLocaleTimeString() : (a.time || "Just now")}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -203,9 +236,11 @@ export default function DashboardHome() {
               </tr>
             </thead>
             <tbody className="divide-y divide-sx-border">
-              {DISTRICT_RISK.map((d) => (
-                <tr key={d.district} className="hover:bg-sx-panel-light/50 transition-colors">
-                  <td className="px-5 py-3 text-sx-text">{d.district}</td>
+              {isLoadingSummary ? (
+                 <tr><td colSpan={3} className="px-5 py-3 text-center text-sx-text-dim">Loading...</td></tr>
+              ) : summary?.district_risk?.map((d: any) => (
+                <tr key={d.district_id || d.district} className="hover:bg-sx-panel-light/50 transition-colors">
+                  <td className="px-5 py-3 text-sx-text">{d.district_name || d.district}</td>
                   <td className="px-5 py-3">
                     <div className="flex items-center gap-2">
                       <div className="w-28 h-1.5 rounded-full bg-sx-panel-light overflow-hidden">

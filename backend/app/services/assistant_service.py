@@ -9,36 +9,18 @@ from sqlalchemy.orm import Session
 
 from app.schemas.analytics import CrimeTrendResponse
 from app.schemas.assistant import ChatMessageResponse
-from app.services import analytics_service, search_service
+from assistant.chat_backend import handle_chat_message
+
 
 
 def answer_query(db: Session, query: str, district_id: uuid.UUID | None = None) -> ChatMessageResponse:
-    normalized = query.lower()
-
-    if re.search(r"trend|how many|volume|cases?\b", normalized):
-        distribution = analytics_service.get_crime_type_distribution(db, district_id, None, None)
-        trend = analytics_service.get_crime_trend(db, district_id, None, None, None, "daily")
-        insight = analytics_service.generate_ai_insight(distribution, trend)
-        content = insight.summary
-        chart_payload = {
-            "type": "distribution",
-            "data": [i.model_dump(mode="json") for i in distribution.items[:5]],
-        }
-    elif re.search(r"search|find|show me cases|pattern", normalized):
-        results = search_service.semantic_search(db, query, top_k=5)
-        if results.results:
-            content = (
-                f"Found {len(results.results)} matching cases. Top match: FIR "
-                f"{results.results[0].fir_no} — \"{results.results[0].snippet[:100]}\""
-            )
-        else:
-            content = "No matching cases found for that description in the current dataset."
-        chart_payload = {"type": "search_results", "data": [r.model_dump(mode="json") for r in results.results]}
-    else:
-        content = (
-            "I can answer questions about crime trends, case volumes, and search FIR "
-            "narratives. Try asking about a specific crime type, district, or time range."
-        )
+    session_id = str(uuid.uuid4())
+    try:
+        ai_response = handle_chat_message(query, session_id=session_id)
+        content = ai_response.get("response", ai_response.get("content", ""))
+        chart_payload = ai_response.get("data")
+    except Exception as e:
+        content = f"Error communicating with AI engine: {e}"
         chart_payload = None
 
     return ChatMessageResponse(

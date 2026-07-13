@@ -8,8 +8,9 @@ from geoalchemy2.functions import ST_Distance
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.fir import CrimeType, FIRRecord
-from app.models.missing_person import MissingPerson
+from app.schemas.crime_type import CrimeType
+from database.models.fir import FIR
+from database.models.missing_person import MissingPerson
 from app.schemas.fir import GeoPoint
 from app.schemas.missing_person import MissingPersonCreate, MissingPersonMatch, MissingPersonMatchResponse
 from app.services.fir_service import _make_point
@@ -56,13 +57,13 @@ def find_candidate_matches(db: Session, mp_id: uuid.UUID, radius_km: float = 15.
 
     stmt = (
         select(
-            FIRRecord,
-            ST_Distance(FIRRecord.location, mp.last_seen_location).label("distance_m"),
+            FIR,
+            ST_Distance(FIR.location, mp.last_seen_location).label("distance_m"),
         )
         .where(
-            FIRRecord.crime_type == CrimeType.MISSING_PERSON,
-            FIRRecord.incident_datetime >= window_start,
-            FIRRecord.incident_datetime <= window_end,
+            FIR.crime_type == CrimeType.MISSING_PERSON,
+            FIR.incident_datetime >= window_start,
+            FIR.incident_datetime <= window_end,
         )
         .order_by("distance_m")
         .limit(5)

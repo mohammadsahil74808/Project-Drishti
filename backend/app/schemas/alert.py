@@ -4,8 +4,8 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.models.alert import AlertType
-from app.models.hotspot import HotspotSeverity
+from database.models.alert import AlertType
+from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
 from app.schemas.common import ORMBase
 
 

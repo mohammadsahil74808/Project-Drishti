@@ -8,8 +8,8 @@ from datetime import date, timedelta
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.fir import CrimeType
-from app.models.forecast import CrimeForecast
+from app.schemas.crime_type import CrimeType
+from database.models.analytics import CrimeForecast
 from app.schemas.forecast import ForecastPoint, ForecastSeriesResponse
 
 

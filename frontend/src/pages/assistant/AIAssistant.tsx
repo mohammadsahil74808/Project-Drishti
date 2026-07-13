@@ -1,12 +1,8 @@
-/**
- * SentinelX AI — AI Assistant Page
- *
- * Advanced Cyber-Intelligence Terminal UI.
- * Full-screen chat interface for the LangChain-backed assistant (SQL tool + RAG tool).
- */
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Bot, Send, Sparkles, User, TerminalSquare } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
 import type { ChatMessage } from "@/types";
+import { assistantApi } from "@/api";
 
 const SUGGESTED_PROMPTS = [
   "How many chain-snatching cases were reported in Bengaluru Urban this month?",
@@ -14,22 +10,6 @@ const SUGGESTED_PROMPTS = [
   "Summarize common MO patterns in recent burglary cases",
   "Which districts have rising forecast risk this weekend?",
 ];
-
-function simulateResponse(prompt: string): string {
-  if (/vehicle theft|whitefield/i.test(prompt)) {
-    return "Vehicle theft in Whitefield has declined 8% over the last 6 months, from 54 to 50 monthly cases, following increased night patrols introduced in March. Two-wheelers account for 71% of thefts, concentrated near ITPL Main Road between 10 PM–2 AM.";
-  }
-  if (/chain.snatching|bengaluru urban/i.test(prompt)) {
-    return "Bengaluru Urban recorded 212 chain-snatching cases this month, up 34% quarter-over-quarter. 68% occurred on weekends between 7–9 PM, concentrated near transit hubs including Majestic and Shivajinagar.";
-  }
-  if (/burglary|mo pattern/i.test(prompt)) {
-    return "Recent burglary cases show a recurring pattern: forced entry via rear windows during 1–4 AM on weekdays, with 40% of cases in gated communities where perimeter CCTV coverage is incomplete.";
-  }
-  if (/forecast|weekend/i.test(prompt)) {
-    return "Bengaluru Urban and Mysuru show elevated forecast risk this weekend, driven by a festival + payday overlap. Predicted case volume is 18% above the 4-week baseline in both districts.";
-  }
-  return "Based on the latest FIR data and forecast models, I don't have a specific pattern to highlight for that query yet — try asking about a specific district, crime type, or time range.";
-}
 
 export default function AIAssistant() {
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -42,8 +22,29 @@ export default function AIAssistant() {
     },
   ]);
   const [input, setInput] = useState("");
-  const [isThinking, setIsThinking] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  const { mutate: sendChat, isPending: isThinking } = useMutation({
+    mutationFn: (text: string) => assistantApi.chat(text),
+    onSuccess: (data) => {
+      const assistantMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: data.response || data.content || "Message received but no content returned.",
+        createdAt: new Date().toISOString(),
+      };
+      setMessages((m) => [...m, assistantMsg]);
+    },
+    onError: (err: any) => {
+      const errorMsg: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: "Sorry, I encountered an error while processing your request: " + (err.response?.data?.detail || err.message),
+        createdAt: new Date().toISOString(),
+      };
+      setMessages((m) => [...m, errorMsg]);
+    }
+  });
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,18 +61,8 @@ export default function AIAssistant() {
     };
     setMessages((m) => [...m, userMsg]);
     setInput("");
-    setIsThinking(true);
-
-    await new Promise((r) => setTimeout(r, 1200));
-
-    const assistantMsg: ChatMessage = {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content: simulateResponse(text),
-      createdAt: new Date().toISOString(),
-    };
-    setMessages((m) => [...m, assistantMsg]);
-    setIsThinking(false);
+    
+    sendChat(text);
   };
 
   const handleSubmit = (e: FormEvent) => {

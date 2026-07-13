@@ -8,7 +8,8 @@ from sqlalchemy import cast, func, select
 from sqlalchemy.orm import Session
 from sqlalchemy.types import Date
 
-from app.models.fir import CrimeType, FIRRecord
+from app.schemas.crime_type import CrimeType
+from database.models.fir import FIR
 from app.schemas.analytics import (
     AIInsight,
     CrimeTrendResponse,
@@ -27,17 +28,17 @@ def get_crime_trend(
     date_to: datetime | None,
     granularity: str = "daily",
 ) -> CrimeTrendResponse:
-    bucket = func.date_trunc(granularity.rstrip("ly") if granularity != "daily" else "day", FIRRecord.incident_datetime)
+    bucket = func.date_trunc(granularity.rstrip("ly") if granularity != "daily" else "day", FIR.incident_datetime)
 
-    stmt = select(bucket.label("period"), func.count(FIRRecord.id).label("count"))
+    stmt = select(bucket.label("period"), func.count(FIR.id).label("count"))
     if district_id:
-        stmt = stmt.where(FIRRecord.district_id == district_id)
+        stmt = stmt.where(FIR.district_id == district_id)
     if crime_type:
-        stmt = stmt.where(FIRRecord.crime_type == crime_type)
+        stmt = stmt.where(FIR.crime_type == crime_type)
     if date_from:
-        stmt = stmt.where(FIRRecord.incident_datetime >= date_from)
+        stmt = stmt.where(FIR.incident_datetime >= date_from)
     if date_to:
-        stmt = stmt.where(FIRRecord.incident_datetime <= date_to)
+        stmt = stmt.where(FIR.incident_datetime <= date_to)
 
     stmt = stmt.group_by(bucket).order_by(bucket)
     rows = db.execute(stmt).all()
@@ -54,14 +55,14 @@ def get_crime_trend(
 def get_crime_type_distribution(
     db: Session, district_id: uuid.UUID | None, date_from: datetime | None, date_to: datetime | None
 ) -> CrimeTypeDistributionResponse:
-    stmt = select(FIRRecord.crime_type, func.count(FIRRecord.id).label("count"))
+    stmt = select(FIR.crime_type, func.count(FIR.id).label("count"))
     if district_id:
-        stmt = stmt.where(FIRRecord.district_id == district_id)
+        stmt = stmt.where(FIR.district_id == district_id)
     if date_from:
-        stmt = stmt.where(FIRRecord.incident_datetime >= date_from)
+        stmt = stmt.where(FIR.incident_datetime >= date_from)
     if date_to:
-        stmt = stmt.where(FIRRecord.incident_datetime <= date_to)
-    stmt = stmt.group_by(FIRRecord.crime_type).order_by(func.count(FIRRecord.id).desc())
+        stmt = stmt.where(FIR.incident_datetime <= date_to)
+    stmt = stmt.group_by(FIR.crime_type).order_by(func.count(FIR.id).desc())
 
     rows = db.execute(stmt).all()
     items = [CrimeTypeDistributionItem(crime_type=r.crime_type, count=r.count) for r in rows]
@@ -69,10 +70,10 @@ def get_crime_type_distribution(
 
 
 def get_day_of_week_pattern(db: Session, district_id: uuid.UUID | None) -> list[DayOfWeekBucket]:
-    dow = func.extract("dow", FIRRecord.incident_datetime)
-    stmt = select(dow.label("dow"), func.count(FIRRecord.id).label("count"))
+    dow = func.extract("dow", FIR.incident_datetime)
+    stmt = select(dow.label("dow"), func.count(FIR.id).label("count"))
     if district_id:
-        stmt = stmt.where(FIRRecord.district_id == district_id)
+        stmt = stmt.where(FIR.district_id == district_id)
     stmt = stmt.group_by(dow).order_by(dow)
 
     labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]

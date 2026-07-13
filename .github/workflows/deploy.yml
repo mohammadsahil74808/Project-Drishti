@@ -1,0 +1,61 @@
+name: Production Deployment CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Frontend Build Verification
+        working-directory: frontend
+        run: |
+          npm ci
+          npx tsc --noEmit
+          npm run build
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          
+      - name: Backend Syntax & Types
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m compileall .
+
+  docker-build:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Backend Image
+        run: docker build -t sentinelx-backend:latest -f backend/Dockerfile.prod .
+        
+      - name: Build Frontend Image
+        run: docker build -t sentinelx-frontend:latest -f frontend/Dockerfile.prod .
+
+  deploy-render:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }} \
+          -H "Accept: application/json"

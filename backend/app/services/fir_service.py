@@ -8,7 +8,8 @@ from geoalchemy2.functions import ST_MakePoint, ST_SetSRID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.fir import CaseStatus, FIRRecord
+from app.schemas.crime_type import CrimeType
+from database.models.fir import CaseStatus, FIR
 from app.schemas.fir import FIRCreate, FIRFilterParams, FIRUpdate
 
 
@@ -24,8 +25,8 @@ def _make_point(lat: float, lng: float):
     return ST_SetSRID(ST_MakePoint(lng, lat), 4326)
 
 
-def get_fir(db: Session, fir_id: uuid.UUID) -> FIRRecord:
-    fir = db.get(FIRRecord, fir_id)
+def get_fir(db: Session, fir_id: uuid.UUID) -> FIR:
+    fir = db.get(FIR, fir_id)
     if fir is None:
         raise FIRNotFoundError(f"FIR {fir_id} not found.")
     return fir
@@ -36,26 +37,26 @@ def list_firs(
     filters: FIRFilterParams,
     page: int = 1,
     page_size: int = 25,
-) -> tuple[list[FIRRecord], int]:
-    stmt = select(FIRRecord)
+) -> tuple[list[FIR], int]:
+    stmt = select(FIR)
 
     if filters.district_id:
-        stmt = stmt.where(FIRRecord.district_id == filters.district_id)
+        stmt = stmt.where(FIR.district_id == filters.district_id)
     if filters.station_id:
-        stmt = stmt.where(FIRRecord.station_id == filters.station_id)
+        stmt = stmt.where(FIR.station_id == filters.station_id)
     if filters.crime_type:
-        stmt = stmt.where(FIRRecord.crime_type == filters.crime_type)
+        stmt = stmt.where(FIR.crime_type == filters.crime_type)
     if filters.status:
-        stmt = stmt.where(FIRRecord.status == filters.status)
+        stmt = stmt.where(FIR.status == filters.status)
     if filters.date_from:
-        stmt = stmt.where(FIRRecord.incident_datetime >= filters.date_from)
+        stmt = stmt.where(FIR.incident_datetime >= filters.date_from)
     if filters.date_to:
-        stmt = stmt.where(FIRRecord.incident_datetime <= filters.date_to)
+        stmt = stmt.where(FIR.incident_datetime <= filters.date_to)
 
     total = len(list(db.scalars(stmt)))
 
     stmt = (
-        stmt.order_by(FIRRecord.incident_datetime.desc())
+        stmt.order_by(FIR.incident_datetime.desc())
         .offset((page - 1) * page_size)
         .limit(page_size)
     )
@@ -63,12 +64,22 @@ def list_firs(
     return items, total
 
 
-def create_fir(db: Session, payload: FIRCreate) -> FIRRecord:
-    existing = db.scalar(select(FIRRecord).where(FIRRecord.fir_no == payload.fir_no))
+from nlp.fir_parser import parse_fir_text
+def create_fir(db: Session, payload: FIRCreate) -> FIR:
+    existing = db.scalar(select(FIR).where(FIR.fir_no == payload.fir_no))
     if existing:
         raise DuplicateFIRNumberError(f"FIR number '{payload.fir_no}' already exists.")
+    if payload.mo_description:
+        try:
+            parsed = parse_fir_text(payload.mo_description, use_spacy=False)
+            if not payload.ipc_sections and parsed.get("sections"):
+                payload.ipc_sections = parsed["sections"]
+            if not payload.weapon_used and parsed.get("weapons"):
+                payload.weapon_used = parsed["weapons"][0]
+        except Exception:
+            pass
 
-    fir = FIRRecord(
+    fir = FIR(
         fir_no=payload.fir_no,
         station_id=payload.station_id,
         district_id=payload.district_id,
@@ -90,7 +101,7 @@ def create_fir(db: Session, payload: FIRCreate) -> FIRRecord:
     return fir
 
 
-def update_fir(db: Session, fir_id: uuid.UUID, payload: FIRUpdate) -> FIRRecord:
+def update_fir(db: Session, fir_id: uuid.UUID, payload: FIRUpdate) -> FIR:
     fir = get_fir(db, fir_id)
     for field, value in payload.model_dump(exclude_unset=True).items():
         setattr(fir, field, value)

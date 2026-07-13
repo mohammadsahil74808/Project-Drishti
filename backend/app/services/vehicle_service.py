@@ -6,23 +6,23 @@ import uuid
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
 
-from app.models.vehicle import VehicleCrimeRecord, VehicleCrimeStatus
+from database.models.vehicle import Vehicle, VehicleCrimeStatus
 from app.schemas.vehicle import VehicleRecoveryRateResponse, VehicleTheftTrendResponse, VehicleTrendPoint
 
 
 def get_theft_trend(
     db: Session, district_id: uuid.UUID | None, vehicle_type: str | None
 ) -> VehicleTheftTrendResponse:
-    bucket = func.date_trunc("month", VehicleCrimeRecord.theft_date)
+    bucket = func.date_trunc("month", Vehicle.theft_date)
 
-    stolen_count = func.count(VehicleCrimeRecord.id)
+    stolen_count = func.count(Vehicle.id)
     recovered_count = func.sum(
-        case((VehicleCrimeRecord.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)
+        case((Vehicle.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)
     )
 
     stmt = select(bucket.label("period"), stolen_count.label("stolen"), recovered_count.label("recovered"))
     if vehicle_type:
-        stmt = stmt.where(VehicleCrimeRecord.vehicle_type == vehicle_type)
+        stmt = stmt.where(Vehicle.vehicle_type == vehicle_type)
     stmt = stmt.group_by(bucket).order_by(bucket)
 
     rows = db.execute(stmt).all()
@@ -35,9 +35,9 @@ def get_theft_trend(
 
 def get_recovery_rate(db: Session, vehicle_type: str) -> VehicleRecoveryRateResponse:
     stmt = select(
-        func.count(VehicleCrimeRecord.id).label("total"),
-        func.sum(case((VehicleCrimeRecord.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)).label("recovered"),
-    ).where(VehicleCrimeRecord.vehicle_type == vehicle_type)
+        func.count(Vehicle.id).label("total"),
+        func.sum(case((Vehicle.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)).label("recovered"),
+    ).where(Vehicle.vehicle_type == vehicle_type)
 
     row = db.execute(stmt).one()
     total = row.total or 0

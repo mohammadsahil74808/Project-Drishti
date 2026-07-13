@@ -6,7 +6,7 @@ from datetime import datetime
 from fastapi import APIRouter
 
 from app.core.deps import DbSession
-from app.models.fir import CrimeType
+from app.schemas.crime_type import CrimeType
 from app.schemas.analytics import (
     AIInsight,
     CrimeTrendResponse,
@@ -14,6 +14,11 @@ from app.schemas.analytics import (
     DayOfWeekBucket,
 )
 from app.services import analytics_service
+from app.core.ai_deps import CrimeClassifierDep
+from pydantic import BaseModel
+
+class ClassifyRequest(BaseModel):
+    text: str
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 
@@ -58,3 +63,8 @@ def ai_insight(db: DbSession, district_id: uuid.UUID | None = None):
         db, district_id, None, None, None, "daily"
     )
     return analytics_service.generate_ai_insight(distribution, trend)
+
+@router.post('/classify')
+def classify_text(payload: ClassifyRequest, classifier: CrimeClassifierDep):
+    return classifier.predict(payload.text)
+

@@ -2,7 +2,7 @@
 SentinelX AI — Alembic Migration Environment
 
 Overrides the SQLAlchemy URL from app.core.config (not alembic.ini's
-placeholder) and targets app.models' metadata for autogenerate, so
+placeholder) and targets database.models' metadata for autogenerate, so
 `alembic revision --autogenerate` picks up every model automatically.
 """
 
@@ -12,7 +12,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.core.config import settings
-from app.models import Base  # noqa: F401 — imports every model onto Base.metadata
+from database.models import Base  # noqa: F401 — imports every model onto Base.metadata
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

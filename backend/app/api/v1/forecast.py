@@ -5,7 +5,7 @@ import uuid
 from fastapi import APIRouter, Depends
 
 from app.core.deps import DbSession, require_analyst_or_above
-from app.models.fir import CrimeType
+from app.schemas.crime_type import CrimeType
 from app.schemas.forecast import ForecastRetrainResponse, ForecastSeriesResponse
 from app.services import forecast_service
 

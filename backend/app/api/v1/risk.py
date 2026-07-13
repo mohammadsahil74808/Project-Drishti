@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 
 from app.core.deps import DbSession
-from app.models.risk import RiskEntityType
+from database.models.analytics import RiskScore, RiskEntityType
 from app.schemas.risk import RiskScoreResponse
 from app.services import risk_service
 

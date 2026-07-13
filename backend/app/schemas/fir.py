@@ -4,7 +4,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from app.models.fir import CaseStatus, CrimeType
+from app.schemas.crime_type import CrimeType
+from database.models.fir import CaseStatus
 from app.schemas.common import ORMBase
 
 

@@ -7,7 +7,8 @@ from collections import defaultdict
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.suspect import CriminalNetworkEdge, Suspect
+from database.models.people import Suspect
+from database.models.criminal import CriminalNetworkEdge
 from app.schemas.network import CentralNodeResponse, CriminalNetworkGraphResponse, NetworkEdge, NetworkNode
 
 

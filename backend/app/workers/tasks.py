@@ -17,13 +17,14 @@ from sqlalchemy import func, select
 
 from app.core.logging import configure_logging, get_logger
 from app.db.session import SessionLocal
-from app.models.alert import Alert, AlertType
-from app.models.fir import CrimeType, FIRRecord
-from app.models.forecast import CrimeForecast
-from app.models.geo import District
-from app.models.hotspot import Hotspot, HotspotSeverity
-from app.models.report import Report, ReportStatus
-from app.models.risk import RiskEntityType, RiskScore
+from database.models.alert import Alert, AlertType
+from app.schemas.crime_type import CrimeType
+from database.models.fir import FIR
+from database.models.analytics import CrimeForecast
+from database.models.geo import District
+from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from database.models.report import Report, ReportStatus
+from database.models.analytics import RiskScore, RiskEntityType
 from app.workers.celery_app import celery_app
 
 configure_logging()
@@ -47,10 +48,10 @@ def retrain_forecast_models() -> str:
             for crime_type in CrimeType:
                 recent_avg = (
                     db.scalar(
-                        select(func.count(FIRRecord.id)).where(
-                            FIRRecord.district_id == district.id,
-                            FIRRecord.crime_type == crime_type,
-                            FIRRecord.incident_datetime
+                        select(func.count(FIR.id)).where(
+                            FIR.district_id == district.id,
+                            FIR.crime_type == crime_type,
+                            FIR.incident_datetime
                             >= datetime.utcnow() - timedelta(days=30),
                         )
                     )
@@ -95,9 +96,9 @@ def recompute_hotspots() -> str:
         for district in districts:
             count_30d = (
                 db.scalar(
-                    select(func.count(FIRRecord.id)).where(
-                        FIRRecord.district_id == district.id,
-                        FIRRecord.incident_datetime
+                    select(func.count(FIR.id)).where(
+                        FIR.district_id == district.id,
+                        FIR.incident_datetime
                         >= datetime.utcnow() - timedelta(days=30),
                     )
                 )
@@ -120,8 +121,8 @@ def recompute_hotspots() -> str:
                 )
             )
             sample_point = db.scalar(
-                select(FIRRecord.location)
-                .where(FIRRecord.district_id == district.id)
+                select(FIR.location)
+                .where(FIR.district_id == district.id)
                 .limit(1)
             )
             if sample_point is None:
@@ -163,9 +164,9 @@ def recompute_risk_scores() -> str:
         for d in districts:
             c = (
                 db.scalar(
-                    select(func.count(FIRRecord.id)).where(
-                        FIRRecord.district_id == d.id,
-                        FIRRecord.incident_datetime
+                    select(func.count(FIR.id)).where(
+                        FIR.district_id == d.id,
+                        FIR.incident_datetime
                         >= datetime.utcnow() - timedelta(days=30),
                     )
                 )
@@ -224,9 +225,9 @@ def evaluate_alert_rules() -> str:
         for d in districts:
             last_24h = (
                 db.scalar(
-                    select(func.count(FIRRecord.id)).where(
-                        FIRRecord.district_id == d.id,
-                        FIRRecord.incident_datetime
+                    select(func.count(FIR.id)).where(
+                        FIR.district_id == d.id,
+                        FIR.incident_datetime
                         >= datetime.utcnow() - timedelta(hours=24),
                     )
                 )
@@ -234,11 +235,11 @@ def evaluate_alert_rules() -> str:
             )
             trailing_avg = (
                 db.scalar(
-                    select(func.count(FIRRecord.id)).where(
-                        FIRRecord.district_id == d.id,
-                        FIRRecord.incident_datetime
+                    select(func.count(FIR.id)).where(
+                        FIR.district_id == d.id,
+                        FIR.incident_datetime
                         >= datetime.utcnow() - timedelta(days=28),
-                        FIRRecord.incident_datetime
+                        FIR.incident_datetime
                         < datetime.utcnow() - timedelta(days=1),
                     )
                 )
