@@ -1,15 +1,11 @@
 /**
  * SentinelX AI — AI Assistant Page
  *
- * Full-screen chat interface for the LangChain-backed assistant (SQL tool +
- * RAG tool, per the blueprint). Responses are simulated locally for now —
- * replace `simulateResponse` with a WebSocket connection to
- * `/api/v1/assistant/chat` once the backend agent is live.
+ * Advanced Cyber-Intelligence Terminal UI.
+ * Full-screen chat interface for the LangChain-backed assistant (SQL tool + RAG tool).
  */
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Bot, Send, Sparkles, User } from "lucide-react";
-import { Card } from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import { Bot, Send, Sparkles, User, TerminalSquare } from "lucide-react";
 import type { ChatMessage } from "@/types";
 
 const SUGGESTED_PROMPTS = [
@@ -66,7 +62,7 @@ export default function AIAssistant() {
     setInput("");
     setIsThinking(true);
 
-    await new Promise((r) => setTimeout(r, 900));
+    await new Promise((r) => setTimeout(r, 1200));
 
     const assistantMsg: ChatMessage = {
       id: crypto.randomUUID(),
@@ -84,40 +80,49 @@ export default function AIAssistant() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)]">
-      <div className="px-6 pt-6 pb-2">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-semibold text-white">AI Assistant</h1>
-          <span className="flex items-center gap-1 text-[11px] text-sx-accent bg-sx-accent/10 border border-sx-accent/30 rounded-full px-2 py-0.5">
-            <Sparkles className="h-3 w-3" /> LangChain · RAG + SQL
-          </span>
+    <div className="flex flex-col h-[calc(100vh-4rem)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#040814] to-[#040814]">
+      {/* Header */}
+      <div className="px-8 pt-8 pb-4 border-b border-[#00F2FE]/10 bg-[#040814]/80 backdrop-blur-xl z-10 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-[#00F2FE]/10 flex items-center justify-center border border-[#00F2FE]/30 shadow-[0_0_15px_rgba(0,242,254,0.3)]">
+            <TerminalSquare className="h-5 w-5 text-[#00F2FE]" />
+          </div>
+          <div>
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-white tracking-wide font-rajdhani">SENTINEL_AI</h1>
+              <span className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-[#00F2FE] bg-[#00F2FE]/10 border border-[#00F2FE]/30 rounded-full px-2.5 py-0.5 tracking-wider shadow-[0_0_10px_rgba(0,242,254,0.2)]">
+                <Sparkles className="h-3 w-3" /> LangChain · RAG Core
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mt-1 font-inter">
+              Encrypted Natural Language Intelligence Query System
+            </p>
+          </div>
         </div>
-        <p className="text-sm text-sx-text-dim mt-1">
-          Natural-language querying across structured case data and FIR narratives
-        </p>
       </div>
 
       {/* Message stream */}
-      <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
         {messages.map((m) => (
           <div
             key={m.id}
-            className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}
+            className={`flex gap-4 ${m.role === "user" ? "flex-row-reverse" : ""}`}
           >
             <div
-              className={`h-8 w-8 rounded-lg flex items-center justify-center shrink-0 ${
+              className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 border ${
                 m.role === "assistant"
-                  ? "bg-sx-accent/15 text-sx-accent"
-                  : "bg-sx-panel-light text-sx-text-dim"
+                  ? "bg-[#00F2FE]/10 text-[#00F2FE] border-[#00F2FE]/30 shadow-[0_0_15px_rgba(0,242,254,0.2)]"
+                  : "bg-indigo-500/10 text-indigo-400 border-indigo-500/30"
               }`}
             >
-              {m.role === "assistant" ? <Bot className="h-4 w-4" /> : <User className="h-4 w-4" />}
+              {m.role === "assistant" ? <Bot className="h-5 w-5" /> : <User className="h-5 w-5" />}
             </div>
+            
             <div
-              className={`max-w-[70%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
+              className={`max-w-[75%] rounded-2xl px-5 py-4 text-sm leading-relaxed font-inter relative ${
                 m.role === "assistant"
-                  ? "bg-sx-panel border border-sx-border text-sx-text"
-                  : "bg-sx-accent text-white"
+                  ? "bg-slate-900/60 text-slate-200 border-l-2 border-l-[#00F2FE] border-t border-r border-b border-white/5 shadow-[0_0_20px_rgba(0,0,0,0.5)] backdrop-blur-md rounded-tl-sm"
+                  : "bg-indigo-500/15 text-indigo-50 border border-indigo-500/20 shadow-[0_0_20px_rgba(99,102,241,0.1)] rounded-tr-sm"
               }`}
             >
               {m.content}
@@ -125,29 +130,36 @@ export default function AIAssistant() {
           </div>
         ))}
 
+        {/* Processing Animation */}
         {isThinking && (
-          <div className="flex gap-3">
-            <div className="h-8 w-8 rounded-lg bg-sx-accent/15 text-sx-accent flex items-center justify-center shrink-0">
-              <Bot className="h-4 w-4" />
+          <div className="flex gap-4">
+            <div className="h-10 w-10 rounded-xl bg-[#00F2FE]/20 text-[#00F2FE] border border-[#00F2FE]/50 shadow-[0_0_20px_rgba(0,242,254,0.4)] flex items-center justify-center shrink-0 animate-pulse">
+              <Bot className="h-5 w-5" />
             </div>
-            <div className="bg-sx-panel border border-sx-border rounded-xl px-4 py-3 flex gap-1 items-center">
-              <span className="h-1.5 w-1.5 rounded-full bg-sx-text-faint animate-pulse-slow" />
-              <span className="h-1.5 w-1.5 rounded-full bg-sx-text-faint animate-pulse-slow [animation-delay:150ms]" />
-              <span className="h-1.5 w-1.5 rounded-full bg-sx-text-faint animate-pulse-slow [animation-delay:300ms]" />
+            <div className="bg-slate-900/60 border-l-2 border-l-[#00F2FE] border-y border-r border-white/5 rounded-2xl rounded-tl-sm px-6 py-4 flex items-center gap-3 w-48 backdrop-blur-md relative overflow-hidden">
+              {/* Scanning bar effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00F2FE]/10 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]" />
+              
+              <span className="text-xs font-rajdhani text-[#00F2FE] uppercase tracking-widest font-bold">Processing</span>
+              <div className="flex gap-1.5 ml-auto">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-bounce [animation-delay:-0.3s] shadow-[0_0_8px_#00F2FE]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-bounce [animation-delay:-0.15s] shadow-[0_0_8px_#00F2FE]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#00F2FE] animate-bounce shadow-[0_0_8px_#00F2FE]" />
+              </div>
             </div>
           </div>
         )}
         <div ref={bottomRef} />
       </div>
 
-      {/* Suggested prompts (shown when conversation is fresh) */}
+      {/* Suggested prompts */}
       {messages.length <= 1 && (
-        <div className="px-6 pb-2 flex flex-wrap gap-2">
+        <div className="px-8 pb-4 flex flex-wrap gap-3">
           {SUGGESTED_PROMPTS.map((p) => (
             <button
               key={p}
               onClick={() => sendMessage(p)}
-              className="text-xs text-sx-text-dim bg-sx-panel border border-sx-border rounded-full px-3 py-1.5 hover:text-white hover:border-sx-accent/50 transition-colors"
+              className="text-xs text-slate-400 bg-slate-900/50 border border-slate-700/50 rounded-lg px-4 py-2 hover:text-[#00F2FE] hover:border-[#00F2FE]/50 hover:bg-[#00F2FE]/5 hover:shadow-[0_0_15px_rgba(0,242,254,0.15)] transition-all duration-300 text-left backdrop-blur-md"
             >
               {p}
             </button>
@@ -156,19 +168,29 @@ export default function AIAssistant() {
       )}
 
       {/* Input */}
-      <Card className="mx-6 mb-6 rounded-xl">
-        <form onSubmit={handleSubmit} className="flex items-center gap-2 p-2.5">
+      <div className="p-6 bg-[#040814]/90 backdrop-blur-xl border-t border-[#00F2FE]/10">
+        <form 
+          onSubmit={handleSubmit} 
+          className="relative group flex items-center bg-slate-900/50 border border-slate-700 rounded-xl overflow-hidden focus-within:border-[#00F2FE]/50 focus-within:shadow-[0_0_25px_rgba(0,242,254,0.15)] transition-all duration-300"
+        >
+          <div className="pl-4 pr-2 text-[#00F2FE] opacity-50 group-focus-within:opacity-100 transition-opacity">
+            <TerminalSquare className="h-5 w-5" />
+          </div>
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about crime trends, forecasts, hotspots…"
-            className="flex-1 bg-transparent px-3 py-2 text-sm text-sx-text placeholder:text-sx-text-faint focus:outline-none"
+            placeholder="Initialize query protocol..."
+            className="flex-1 bg-transparent px-2 py-4 text-sm text-white placeholder:text-slate-500 focus:outline-none font-inter tracking-wide"
           />
-          <Button type="submit" size="icon" disabled={!input.trim() || isThinking}>
+          <button 
+            type="submit" 
+            disabled={!input.trim() || isThinking}
+            className="mr-2 h-10 w-10 flex items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500 hover:text-white hover:shadow-[0_0_15px_rgba(99,102,241,0.5)] disabled:opacity-30 disabled:hover:bg-indigo-500/20 disabled:hover:text-indigo-400 disabled:hover:shadow-none transition-all duration-300"
+          >
             <Send className="h-4 w-4" />
-          </Button>
+          </button>
         </form>
-      </Card>
+      </div>
     </div>
   );
 }

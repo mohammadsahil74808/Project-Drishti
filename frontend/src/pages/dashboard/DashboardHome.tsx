@@ -24,6 +24,7 @@ const STATS = [
     delta: "+6.2%",
     trend: "up" as const,
     icon: FileWarning,
+    colorClass: "text-[#00F2FE] bg-[#00F2FE]/5 border border-[#00F2FE]/20 group-hover:bg-[#00F2FE]/10 group-hover:border-[#00F2FE]/40 group-hover:shadow-[0_0_15px_rgba(0,242,254,0.5)]",
   },
   {
     label: "Active Hotspots",
@@ -31,6 +32,7 @@ const STATS = [
     delta: "+3",
     trend: "up" as const,
     icon: MapPinned,
+    colorClass: "text-[#FF4500] bg-[#FF4500]/5 border border-[#FF4500]/20 group-hover:bg-[#FF4500]/10 group-hover:border-[#FF4500]/40 group-hover:shadow-[0_0_15px_rgba(255,69,0,0.5)]",
   },
   {
     label: "Missing Persons (open)",
@@ -38,6 +40,7 @@ const STATS = [
     delta: "-8.1%",
     trend: "down" as const,
     icon: Users,
+    colorClass: "text-[#A855F7] bg-[#A855F7]/5 border border-[#A855F7]/20 group-hover:bg-[#A855F7]/10 group-hover:border-[#A855F7]/40 group-hover:shadow-[0_0_15px_rgba(168,85,247,0.5)]",
   },
   {
     label: "Forecast Risk (7d)",
@@ -45,6 +48,7 @@ const STATS = [
     delta: "3 districts",
     trend: "up" as const,
     icon: TrendingUp,
+    colorClass: "text-[#EAB308] bg-[#EAB308]/5 border border-[#EAB308]/20 group-hover:bg-[#EAB308]/10 group-hover:border-[#EAB308]/40 group-hover:shadow-[0_0_15px_rgba(234,179,8,0.5)]",
   },
 ];
 
@@ -116,8 +120,8 @@ export default function DashboardHome() {
 
       {/* KPI tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {STATS.map(({ label, value, delta, trend, icon: Icon }) => (
-          <Card key={label}>
+        {STATS.map(({ label, value, delta, trend, icon: Icon, colorClass }) => (
+          <Card key={label} className="group cursor-default hover:bg-sx-panel-light/30 transition-colors duration-300">
             <CardContent className="flex items-start justify-between">
               <div>
                 <p className="text-xs text-sx-text-dim">{label}</p>
@@ -135,7 +139,7 @@ export default function DashboardHome() {
                   {delta}
                 </div>
               </div>
-              <div className="h-10 w-10 rounded-lg bg-sx-accent/10 flex items-center justify-center text-sx-accent shrink-0">
+              <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${colorClass}`}>
                 <Icon className="h-5 w-5" />
               </div>
             </CardContent>

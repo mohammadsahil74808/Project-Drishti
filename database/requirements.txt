@@ -1,0 +1,8 @@
+# SentinelX AI — Database layer dependencies
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+geoalchemy2>=0.15
+alembic>=1.13
+pydantic-settings>=2.3
+faker>=25.0
+python-dateutil>=2.9

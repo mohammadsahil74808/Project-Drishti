@@ -39,11 +39,15 @@ export default {
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "glow-pulse": "glow-pulse 2s alternate infinite",
+        "shimmer": "shimmer 1.5s infinite linear",
       },
       keyframes: {
         "glow-pulse": {
           "0%": { boxShadow: "0 0 12px rgba(0,242,254,0.2)" },
           "100%": { boxShadow: "0 0 24px rgba(0,242,254,0.5)" }
+        },
+        "shimmer": {
+          "100%": { transform: "translateX(100%)" }
         }
       }
     },
