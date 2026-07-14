@@ -4,7 +4,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from database.models.report import ReportStatus, ReportType
+from app.models.report import ReportStatus, ReportType
 from app.schemas.common import ORMBase
 
 

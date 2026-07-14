@@ -4,7 +4,7 @@ from datetime import date
 
 from pydantic import BaseModel
 
-from database.models.vehicle import VehicleCrimeStatus
+from app.models.vehicle import VehicleCrimeStatus
 
 
 class VehicleTrendPoint(BaseModel):

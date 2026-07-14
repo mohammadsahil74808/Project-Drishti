@@ -10,7 +10,7 @@ from app.core.deps import DbSession, require_analyst_or_above
 from fastapi import Depends
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import CaseStatus
+from app.models.fir import CaseStatus
 from app.schemas.common import PaginatedResponse
 from app.schemas.fir import FIRCreate, FIRFilterParams, FIRResponse, FIRUpdate
 from app.services import fir_service

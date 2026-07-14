@@ -11,7 +11,7 @@ from app.core.security import (
     decode_token,
     verify_password,
 )
-from database.models.user import User
+from app.models.user import User
 
 
 class InvalidCredentialsError(Exception):

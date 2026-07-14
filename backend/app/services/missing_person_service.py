@@ -9,8 +9,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import FIR
-from database.models.missing_person import MissingPerson
+from app.models.fir import FIR
+from app.models.missing_person import MissingPerson
 from app.schemas.fir import GeoPoint
 from app.schemas.missing_person import MissingPersonCreate, MissingPersonMatch, MissingPersonMatchResponse
 from app.services.fir_service import _make_point

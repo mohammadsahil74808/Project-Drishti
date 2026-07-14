@@ -5,11 +5,11 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import CaseStatus, FIR
-from database.models.geo import District
-from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
-from database.models.missing_person import MissingPerson, MissingPersonStatus
-from database.models.analytics import RiskScore, RiskEntityType
+from app.models.fir import CaseStatus, FIR
+from app.models.geo import District
+from app.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from app.models.missing_person import MissingPerson, MissingPersonStatus
+from app.models.analytics import RiskScore, RiskEntityType
 from app.schemas.dashboard import DashboardSummaryResponse, DistrictRiskRow, StatTile
 
 
@@ -19,7 +19,7 @@ def get_dashboard_summary(db: Session) -> DashboardSummaryResponse:
     open_missing = (
         db.scalar(
             select(func.count(MissingPerson.id)).where(
-                MissingPerson.status != MissingPersonStatus.CLOSED
+                MissingPerson.status != MissingPersonStatus.closed
             )
         )
         or 0
@@ -36,7 +36,7 @@ def get_dashboard_summary(db: Session) -> DashboardSummaryResponse:
     for d in districts:
         score_row = db.scalar(
             select(RiskScore)
-            .where(RiskScore.entity_type == RiskEntityType.ZONE, RiskScore.entity_id == str(d.id))
+            .where(RiskScore.entity_type == RiskEntityType.zone, RiskScore.entity_id == str(d.id))
             .order_by(RiskScore.created_at.desc())
         )
         score = score_row.score if score_row else 0.0

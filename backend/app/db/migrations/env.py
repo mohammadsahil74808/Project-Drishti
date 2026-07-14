@@ -12,10 +12,10 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.core.config import settings
-from database.models import Base  # noqa: F401 — imports every model onto Base.metadata
+from app.db.base import Base  # noqa: F401 — imports every model onto Base.metadata
 
 config = context.config
-config.set_main_option("sqlalchemy.url", settings.database_url)
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

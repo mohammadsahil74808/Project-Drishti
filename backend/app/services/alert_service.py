@@ -6,7 +6,7 @@ import uuid
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from database.models.alert import Alert
+from app.models.alert import Alert
 
 
 class AlertNotFoundError(Exception):

@@ -4,14 +4,14 @@ import uuid
 from pydantic import BaseModel
 
 from app.schemas.crime_type import CrimeType
-from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from app.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
 from app.schemas.common import ORMBase
 from app.schemas.fir import GeoPoint
 
 class DistrictResponse(ORMBase):
     id: uuid.UUID
     name: str
-    state: str
+    state: str | None = None
     population: int | None = None
 
 

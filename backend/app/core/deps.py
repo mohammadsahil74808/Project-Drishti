@@ -13,14 +13,7 @@ from sqlalchemy.orm import Session
 
 from app.core.security import TokenError, decode_token
 from app.db.session import get_db
-from database.models.user import User
-from enum import Enum
-class UserRole(str, Enum):
-    ADMIN = 'ADMIN'
-    SP = 'SP'
-    COMMISSIONER = 'COMMISSIONER'
-    SHO = 'SHO'
-    ANALYST = 'ANALYST'
+from app.models.user import User, UserRole
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
@@ -62,7 +55,7 @@ CurrentUser = Annotated[User, Depends(get_current_user)]
 def require_roles(*allowed_roles: UserRole):
     """Dependency factory — restricts a route to the given roles.
 
-    Usage: `current_user: CurrentUser = Depends(require_roles(UserRole.SHO, UserRole.SP))`
+    Usage: `current_user: CurrentUser = Depends(require_roles(UserRole.sho, UserRole.sp))`
     """
 
     def _check(current_user: CurrentUser) -> User:
@@ -76,8 +69,8 @@ def require_roles(*allowed_roles: UserRole):
     return _check
 
 
-require_admin = require_roles(UserRole.ADMIN)
-require_command_staff = require_roles(UserRole.SP, UserRole.COMMISSIONER, UserRole.ADMIN)
+require_admin = require_roles(UserRole.admin)
+require_command_staff = require_roles(UserRole.sp, UserRole.commissioner, UserRole.admin)
 require_analyst_or_above = require_roles(
-    UserRole.ANALYST, UserRole.SHO, UserRole.SP, UserRole.COMMISSIONER, UserRole.ADMIN
+    UserRole.analyst, UserRole.sho, UserRole.sp, UserRole.commissioner, UserRole.admin
 )

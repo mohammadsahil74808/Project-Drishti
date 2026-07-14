@@ -17,14 +17,14 @@ from sqlalchemy import func, select
 
 from app.core.logging import configure_logging, get_logger
 from app.db.session import SessionLocal
-from database.models.alert import Alert, AlertType
+from app.models.alert import Alert, AlertType
 from app.schemas.crime_type import CrimeType
-from database.models.fir import FIR
-from database.models.analytics import CrimeForecast
-from database.models.geo import District
-from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
-from database.models.report import Report, ReportStatus
-from database.models.analytics import RiskScore, RiskEntityType
+from app.models.fir import FIR
+from app.models.analytics import CrimeForecast
+from app.models.geo import District
+from app.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from app.models.report import Report, ReportStatus
+from app.models.analytics import RiskScore, RiskEntityType
 from app.workers.celery_app import celery_app
 
 configure_logging()
@@ -108,15 +108,15 @@ def recompute_hotspots() -> str:
                 continue
 
             severity = (
-                HotspotSeverity.CRITICAL
+                HotspotSeverity.critical
                 if count_30d >= 60
                 else (
-                    HotspotSeverity.HIGH
+                    HotspotSeverity.high
                     if count_30d >= 30
                     else (
-                        HotspotSeverity.MEDIUM
+                        HotspotSeverity.medium
                         if count_30d >= 10
-                        else HotspotSeverity.LOW
+                        else HotspotSeverity.low
                     )
                 )
             )
@@ -180,7 +180,7 @@ def recompute_risk_scores() -> str:
             score = round((counts[d.id] / max_count) * 100, 1)
             db.add(
                 RiskScore(
-                    entity_type=RiskEntityType.ZONE,
+                    entity_type=RiskEntityType.zone,
                     entity_id=str(d.id),
                     entity_label=d.name,
                     score=score,
@@ -249,10 +249,10 @@ def evaluate_alert_rules() -> str:
             if trailing_avg > 0 and last_24h > trailing_avg * 1.4 and last_24h >= 5:
                 pct = round(((last_24h - trailing_avg) / trailing_avg) * 100)
                 alert = Alert(
-                    type=AlertType.ANOMALY,
+                    type=AlertType.anomaly,
                     message=f"Anomaly: crime volume in {d.name} up {pct}% vs 4-week average in the last 24h.",
                     severity=(
-                        HotspotSeverity.HIGH if pct >= 60 else HotspotSeverity.MEDIUM
+                        HotspotSeverity.high if pct >= 60 else HotspotSeverity.medium
                     ),
                     target_role=None,
                 )
@@ -284,7 +284,7 @@ def generate_report_pdf(report_id: str) -> str:
         if report is None:
             return f"report {report_id} not found"
 
-        report.status = ReportStatus.GENERATING
+        report.status = ReportStatus.generating
         db.commit()
 
         output_dir = "/tmp/sentinelx_reports"
@@ -310,7 +310,7 @@ def generate_report_pdf(report_id: str) -> str:
         c.drawString(50, height - 185, "once the report template is finalized.")
         c.save()
 
-        report.status = ReportStatus.READY
+        report.status = ReportStatus.ready
         report.file_path = file_path
         db.commit()
         logger.info("generate_report_pdf: wrote %s", file_path)
@@ -319,7 +319,7 @@ def generate_report_pdf(report_id: str) -> str:
         db.rollback()
         report = db.get(Report, uuid.UUID(report_id))
         if report:
-            report.status = ReportStatus.FAILED
+            report.status = ReportStatus.failed
             db.commit()
         raise
     finally:

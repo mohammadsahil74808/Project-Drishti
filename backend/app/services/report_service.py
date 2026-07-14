@@ -6,7 +6,7 @@ import uuid
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from database.models.report import Report, ReportStatus
+from app.models.report import Report, ReportStatus
 from app.schemas.report import ReportGenerateRequest
 
 
@@ -40,7 +40,7 @@ def request_report(db: Session, payload: ReportGenerateRequest, requested_by: uu
     report = Report(
         type=payload.type,
         title=title,
-        status=ReportStatus.PENDING,
+        status=ReportStatus.pending,
         requested_by=requested_by,
         district_id=payload.district_id,
     )

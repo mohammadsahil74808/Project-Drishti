@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.types import Date
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import FIR
+from app.models.fir import FIR
 from app.schemas.analytics import (
     AIInsight,
     CrimeTrendResponse,

@@ -7,7 +7,7 @@ from datetime import datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from database.models.analytics import RiskScore, RiskEntityType
+from app.models.analytics import RiskScore, RiskEntityType
 from app.schemas.risk import RiskScoreResponse, ShapContribution
 
 

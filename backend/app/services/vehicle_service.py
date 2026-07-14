@@ -6,7 +6,7 @@ import uuid
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
 
-from database.models.vehicle import Vehicle, VehicleCrimeStatus
+from app.models.vehicle import Vehicle, VehicleCrimeStatus
 from app.schemas.vehicle import VehicleRecoveryRateResponse, VehicleTheftTrendResponse, VehicleTrendPoint
 
 
@@ -17,7 +17,7 @@ def get_theft_trend(
 
     stolen_count = func.count(Vehicle.id)
     recovered_count = func.sum(
-        case((Vehicle.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)
+        case((Vehicle.status == VehicleCrimeStatus.recovered, 1), else_=0)
     )
 
     stmt = select(bucket.label("period"), stolen_count.label("stolen"), recovered_count.label("recovered"))
@@ -36,7 +36,7 @@ def get_theft_trend(
 def get_recovery_rate(db: Session, vehicle_type: str) -> VehicleRecoveryRateResponse:
     stmt = select(
         func.count(Vehicle.id).label("total"),
-        func.sum(case((Vehicle.status == VehicleCrimeStatus.RECOVERED, 1), else_=0)).label("recovered"),
+        func.sum(case((Vehicle.status == VehicleCrimeStatus.recovered, 1), else_=0)).label("recovered"),
     ).where(Vehicle.vehicle_type == vehicle_type)
 
     row = db.execute(stmt).one()

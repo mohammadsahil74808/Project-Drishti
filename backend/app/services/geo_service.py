@@ -4,14 +4,15 @@ SentinelX AI — Geo / Heatmap Service
 import uuid
 from datetime import datetime, timedelta
 
+from geoalchemy2 import Geometry
 from geoalchemy2.functions import ST_X, ST_Y
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import FIR
-from database.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
-from database.models.geo import District
+from app.models.fir import FIR
+from app.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity
+from app.models.geo import District
 from app.schemas.geo import HeatmapPoint, HeatmapResponse, HotspotResponse, DistrictResponse
 from app.schemas.fir import GeoPoint
 
@@ -28,8 +29,8 @@ def get_heatmap(
     since = datetime.utcnow() - timedelta(days=days)
 
     stmt = select(
-        ST_Y(FIR.location).label("lat"),
-        ST_X(FIR.location).label("lng"),
+        ST_Y(FIR.location.cast(Geometry)).label("lat"),
+        ST_X(FIR.location.cast(Geometry)).label("lng"),
         FIR.crime_type,
     ).where(FIR.incident_datetime >= since)
 
@@ -51,8 +52,8 @@ def list_hotspots(
 ) -> list[HotspotResponse]:
     stmt = select(
         Hotspot,
-        ST_Y(Hotspot.centroid).label("lat"),
-        ST_X(Hotspot.centroid).label("lng"),
+        ST_Y(Hotspot.centroid.cast(Geometry)).label("lat"),
+        ST_X(Hotspot.centroid.cast(Geometry)).label("lng"),
     )
     if district_id:
         stmt = stmt.where(Hotspot.district_id == district_id)
@@ -62,8 +63,18 @@ def list_hotspots(
 
     results = []
     for hotspot, lat, lng in db.execute(stmt).all():
-        item = HotspotResponse.model_validate(hotspot)
-        item.centroid = GeoPoint(lat=lat, lng=lng)
+        item = HotspotResponse(
+            id=hotspot.id,
+            district_id=hotspot.district_id,
+            name=hotspot.name,
+            radius_m=hotspot.radius_m,
+            crime_density=hotspot.crime_density,
+            time_window=hotspot.time_window,
+            severity=hotspot.severity,
+            created_at=hotspot.created_at,
+            updated_at=hotspot.updated_at,
+            centroid=GeoPoint(lat=lat, lng=lng)
+        )
         results.append(item)
     return results
 

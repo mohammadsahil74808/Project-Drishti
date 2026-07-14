@@ -5,16 +5,19 @@ Loaded from environment variables (see root .env.example). Single source of
 truth for every setting used across the backend — never read os.environ
 directly elsewhere in the app.
 """
+import json
 from functools import lru_cache
-from typing import List
+from typing import List, Union
+from pathlib import Path
 
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(ROOT_DIR / ".env"),
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
@@ -44,7 +47,7 @@ class Settings(BaseSettings):
     refresh_token_expire_days: int = 7
 
     # ---- CORS ----
-    cors_allow_origins: List[str] = ["http://localhost:5173"]
+    cors_allow_origins: Union[str, List[str]] = ["http://localhost:5173"]
 
     # ---- AI / ML ----
     embedding_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"
@@ -57,6 +60,12 @@ class Settings(BaseSettings):
     @classmethod
     def _split_csv(cls, v):
         if isinstance(v, str):
+            v = v.strip()
+            if v.startswith("[") and v.endswith("]"):
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
             return [origin.strip() for origin in v.split(",") if origin.strip()]
         return v
 

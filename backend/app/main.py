@@ -15,19 +15,19 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     logger.info("Starting up and loading AI models...")
     try:
-        from classification.crime_classifier import CrimeClassifier
+        from app.ai.classification.crime_classifier import CrimeClassifier
         app.state.crime_classifier = CrimeClassifier.load_latest()
     except Exception:
         app.state.crime_classifier = None
 
     try:
-        from risk.risk_predictor import RiskPredictor
+        from app.ai.risk_scoring.risk_predictor import RiskPredictor
         app.state.risk_predictor = RiskPredictor.load_latest()
     except Exception:
         app.state.risk_predictor = None
 
     try:
-        from search.semantic_search import SemanticSearchService
+        from app.ai.search.semantic_search import SemanticSearchService
         app.state.semantic_search = SemanticSearchService()
     except Exception:
         app.state.semantic_search = None

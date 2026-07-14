@@ -9,7 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.schemas.crime_type import CrimeType
-from database.models.fir import CaseStatus, FIR
+from app.models.fir import CaseStatus, FIR
 from app.schemas.fir import FIRCreate, FIRFilterParams, FIRUpdate
 
 
@@ -64,7 +64,7 @@ def list_firs(
     return items, total
 
 
-from nlp.fir_parser import parse_fir_text
+from app.ai.nlp.fir_parser import parse_fir_text
 def create_fir(db: Session, payload: FIRCreate) -> FIR:
     existing = db.scalar(select(FIR).where(FIR.fir_no == payload.fir_no))
     if existing:
@@ -93,7 +93,7 @@ def create_fir(db: Session, payload: FIRCreate) -> FIR:
         victim_age_bucket=payload.victim_age_bucket,
         accused_count=payload.accused_count,
         weapon_used=payload.weapon_used,
-        status=CaseStatus.OPEN,
+        status=CaseStatus.open,
     )
     db.add(fir)
     db.commit()

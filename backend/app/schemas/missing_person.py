@@ -4,7 +4,7 @@ from datetime import date
 
 from pydantic import BaseModel, Field
 
-from database.models.missing_person import MissingPersonStatus
+from app.models.missing_person import MissingPersonStatus
 from app.schemas.common import ORMBase
 from app.schemas.fir import GeoPoint
 

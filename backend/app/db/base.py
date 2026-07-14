@@ -30,3 +30,6 @@ class TimestampMixin:
         onupdate=func.now(),
         nullable=False,
     )
+
+# Import models at the end to avoid circular imports but ensure metadata is populated
+from app.models import *
