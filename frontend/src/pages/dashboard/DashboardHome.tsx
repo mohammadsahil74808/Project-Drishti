@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import ReactECharts from "echarts-for-react";
 import {
   FileWarning, MapPinned, Users, TrendingUp, ArrowUpRight,
@@ -11,6 +11,15 @@ import Badge from "@/components/ui/Badge";
 import { dashboardApi, analyticsApi, alertsApi, firApi } from "@/api";
 import { tokenStorage } from "@/api/client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+
+const DashboardClock = React.memo(() => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+  return <>{time}</>;
+});
 
 const AnimatedCounter = ({ value }: { value: string | number }) => {
   const numericValue = typeof value === 'string' ? parseFloat(value.replace(/[^0-9.]/g, '')) : (value || 0);
@@ -54,12 +63,6 @@ export default function DashboardHome() {
   const { data: firsData } = useQuery({ queryKey: ["firs-recent"], queryFn: () => firApi.getFirs({ page_size: 5 }) });
   
   const [liveAlerts, setLiveAlerts] = useState<any[]>([]);
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     if (alertsData) setLiveAlerts(alertsData);
@@ -158,13 +161,13 @@ export default function DashboardHome() {
         <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.15, 0.05] }} transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-[#A855F7] blur-[150px] mix-blend-screen pointer-events-none" />
       </div>
 
-      <div className="p-6 space-y-8 relative z-10">
+      <div className="px-6 py-2 space-y-6 relative z-10">
         {/* HERO SECTION */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative rounded-3xl p-8 overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-[#0A101C]/80 to-transparent backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+          className="relative rounded-3xl py-5 px-6 overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-[#0A101C]/80 to-transparent backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
         >
           {/* Inner glass reflections */}
           <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10 pointer-events-none" />
@@ -193,7 +196,7 @@ export default function DashboardHome() {
               
               <div className="flex flex-col items-end gap-2 shrink-0">
                 <div className="text-3xl font-mono font-bold text-white tracking-widest drop-shadow-[0_0_10px_rgba(0,242,254,0.5)]">
-                  {time}
+                  <DashboardClock />
                 </div>
                 <Badge variant="info" className="bg-[#00F2FE]/10 border border-[#00F2FE]/30 text-[#00F2FE] px-3 py-1 shadow-[0_0_15px_rgba(0,242,254,0.3)] backdrop-blur-md">
                   <span className="relative flex h-2 w-2 mr-2 inline-block"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F2FE] opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-[#00F2FE]"></span></span>
@@ -207,7 +210,7 @@ export default function DashboardHome() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-white/10"
+              className="flex flex-wrap items-center gap-4 mt-5 pt-4 border-t border-white/10"
             >
               <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-black/40 border border-white/5 backdrop-blur-md">
                 <Radio className="h-4 w-4 text-[#00F2FE] animate-pulse" />
@@ -320,7 +323,7 @@ export default function DashboardHome() {
                       </span>
                    </h2>
                    <p className="text-[10px] text-[#00E5FF]/70 mt-2 font-mono uppercase tracking-widest flex items-center gap-2">
-                      <Radio className="h-3 w-3 animate-pulse" /> Live Monitoring • Sync {time}
+                      <Radio className="h-3 w-3 animate-pulse" /> Live Monitoring â€¢ Sync <DashboardClock />
                    </p>
                 </div>
                 <div className="flex gap-2">
@@ -540,11 +543,11 @@ export default function DashboardHome() {
 
       {/* Bottom Row - Activity, Status & Previews */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-          <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+          <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><Activity className="h-5 w-5 text-[#00F2FE]" /> Live Activity Feed</CardTitle>
           </CardHeader>
-          <CardContent className="p-4 overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-white/20">
+          <CardContent className="p-4 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-white/20">
             <div className="space-y-4">
               {[...recentFirs.map((f:any)=>({id:`fir-${f.id}`, type:'FIR Registered', time: f.reported_datetime, text:`FIR ${f.fir_no} filed`})), 
                 ...liveAlerts.slice(0,3).map((a:any)=>({id:`alert-${a.id}`, type:'Alert Generated', time: a.created_at || a.time, text: a.message?.slice(0, 30)})),
@@ -569,11 +572,11 @@ export default function DashboardHome() {
           </CardContent>
         </Card>
 
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-          <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+          <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><ShieldAlert className="h-5 w-5 text-[#10B981]" /> System Status Panel</CardTitle>
           </CardHeader>
-          <CardContent className="p-4">
+          <CardContent className="p-4 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20">
              <div className="space-y-2">
                 {[
                   { name: "Database Engine", status: "Online", textClass: "text-[#10B981]", bgClass: "bg-[#10B981]/10", dotClass: "bg-[#10B981]", borderClass: "border-[#10B981]/30" },
@@ -594,11 +597,11 @@ export default function DashboardHome() {
           </CardContent>
         </Card>
 
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-          <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+          <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><Network className="h-5 w-5 text-[#EAB308]" /> District Risk Ranking</CardTitle>
           </CardHeader>
-          <CardContent className="p-4 overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-white/20">
+          <CardContent className="p-4 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-white/20">
              <div className="space-y-3">
                {summary?.district_risk?.map((d: any, i: number) => (
                   <motion.div 
@@ -606,15 +609,15 @@ export default function DashboardHome() {
                      animate={{ opacity: 1, x: 0 }}
                      transition={{ delay: i * 0.1 }}
                      key={d.district_id || d.district} 
-                     className="flex items-center w-full p-3 rounded-xl bg-gradient-to-r from-white/5 to-transparent border border-white/5 hover:border-white/20 transition-all gap-4"
+                     className="flex flex-col w-full p-3 rounded-xl bg-gradient-to-r from-white/5 to-transparent border border-white/5 hover:border-white/20 transition-all gap-3"
                   >
-                     <div className="flex items-center gap-3 flex-1 min-w-0">
-                        <span className="text-white/40 font-mono font-bold w-4 text-xs shrink-0">{i+1}</span>
-                        <span className="text-white/90 font-medium tracking-wide text-sm flex-1 truncate">{d.district_name || d.district}</span>
+                     <div className="flex items-start gap-2 w-full">
+                        <span className="text-white/40 font-mono font-bold w-4 text-xs shrink-0 mt-0.5">{i+1}</span>
+                        <span className="text-white/90 font-medium tracking-wide text-sm flex-1 break-words">{d.district_name || d.district}</span>
                      </div>
-                     <div className="flex flex-col items-end shrink-0">
-                        <span className="text-[10px] text-white/50 mb-1 font-bold uppercase tracking-widest">Risk: <span className="text-white font-black">{d.score}</span></span>
-                        <div className="w-20 sm:w-24 h-1.5 rounded-full bg-white/10 overflow-hidden shadow-inner">
+                     <div className="flex items-center justify-between pl-6 w-full gap-4">
+                        <span className="text-[10px] text-white/50 font-bold uppercase tracking-widest shrink-0">Risk: <span className="text-white font-black">{d.score}</span></span>
+                        <div className="flex-1 max-w-[120px] h-1.5 rounded-full bg-white/10 overflow-hidden shadow-inner">
                            <motion.div 
                               initial={{ width: 0 }}
                               animate={{ width: `${Math.min(d.score, 100)}%` }}

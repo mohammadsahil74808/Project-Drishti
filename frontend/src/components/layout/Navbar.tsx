@@ -5,6 +5,7 @@ import { useAuthStore } from "@/store/authStore";
 import { useUIStore } from "@/store/uiStore";
 import { alertsApi, firApi, reportsApi } from "@/api";
 import { formatDistanceToNow, format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const ROLE_LABELS: Record<string, string> = {
   constable: "Constable",
@@ -15,6 +16,7 @@ const ROLE_LABELS: Record<string, string> = {
 };
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
   const toggleAssistant = useUIStore((s) => s.toggleAssistant);
@@ -47,7 +49,7 @@ export default function Navbar() {
   const unreadCount = alerts.filter((a: any) => a.severity === 'critical' || a.severity === 'high').length;
 
   return (
-    <header className="h-20 shrink-0 bg-[#050B14]/60 backdrop-blur-3xl rounded-3xl border border-white/10 px-6 flex items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] z-30 relative">
+    <header className="h-14 shrink-0 bg-[#050B14]/60 backdrop-blur-3xl rounded-3xl border border-white/10 px-2 flex items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] z-30 relative">
       {/* Top Gloss */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
 
@@ -87,7 +89,7 @@ export default function Navbar() {
         </div>
 
         <button
-          onClick={toggleAssistant}
+          onClick={() => navigate('/assistant')}
           className="relative group p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all duration-300 shadow-lg"
           title="SentinelX AI Core"
         >

@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+﻿import { useMemo, useState, useEffect } from "react";
 import { 
   Share2, User, 
   Car, Phone, MapPin, Building, Briefcase, FileText,
@@ -7,7 +7,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import ReactECharts from "echarts-for-react";
 import { networkApi } from "@/api";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";`nimport { useToastStore } from "@/store/toastStore";
 
 // ---- TYPE HEURISTICS ---- //
 const getNodeType = (label: string = "") => {
@@ -113,7 +113,7 @@ export default function CriminalNetwork() {
              const tgt = allNodes.find((n:any) => n.id === params.data.target)?.label || 'Unknown';
             return `<div class="uppercase tracking-widest text-[9px] text-[#00E5FF] mb-1">RELATIONSHIP</div>
                     <div class="font-bold text-white mb-2">${params.data.relation}</div>
-                    <div class="text-white/60 text-xs">${src} ↔ ${tgt}</div>`;
+                    <div class="text-white/60 text-xs">${src} â†” ${tgt}</div>`;
           }
           const t = getNodeType(params.data.name);
           return `<div class="uppercase tracking-widest text-[9px] text-[${getTypeColor(t, params.data.riskScore)}] mb-1">${t}</div>
@@ -370,11 +370,11 @@ export default function CriminalNetwork() {
 
                   {/* Tiny Action Buttons */}
                   <div className="shrink-0 p-2 bg-black/40 border-t border-white/5 flex gap-1.5">
-                     <button className="flex-1 flex items-center justify-center gap-1 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] border border-[#00E5FF]/30 py-1.5 rounded text-[7px] font-bold uppercase tracking-widest transition-all">
+                     <button onClick={() => { addToast(`Accessing classified dossier for ${selectedNode.id}...`, "info"); setTimeout(() => window.location.href="/reports", 1500); }} className="flex-1 flex items-center justify-center gap-1 bg-[#00E5FF]/10 hover:bg-[#00E5FF]/20 text-[#00E5FF] border border-[#00E5FF]/30 py-1.5 rounded text-[7px] font-bold uppercase tracking-widest transition-all">
                         <FileText className="h-2 w-2" /> Dossier
                      </button>
-                     <button className="flex-1 flex items-center justify-center gap-1 bg-transparent hover:bg-[#EF4444]/10 text-white/40 hover:text-[#EF4444] border border-white/10 hover:border-[#EF4444]/30 py-1.5 rounded text-[7px] font-bold uppercase tracking-widest transition-all">
-                        <AlertTriangle className="h-2 w-2" /> Flag
+                     <button onClick={() => { setFlaggedNodes(prev => { const n = new Set(prev); if (n.has(selectedNode.id)) { n.delete(selectedNode.id); addToast(`Removed flag from ${selectedNode.id}`, "info"); } else { n.add(selectedNode.id); addToast(`Subject ${selectedNode.id} flagged for priority surveillance.`, "warning"); } return n; }); }} className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded text-[7px] font-bold uppercase tracking-widest transition-all ${flaggedNodes.has(selectedNode.id) ? "bg-[#EF4444]/20 text-[#EF4444] border border-[#EF4444]/50 shadow-[0_0_10px_#EF4444]" : "bg-transparent hover:bg-[#EF4444]/10 text-white/40 hover:text-[#EF4444] border border-white/10 hover:border-[#EF4444]/30"}`}>
+                        <AlertTriangle className="h-2 w-2" /> {flaggedNodes.has(selectedNode.id) ? "Flagged" : "Flag"}
                      </button>
                   </div>
                </motion.div>
@@ -384,3 +384,6 @@ export default function CriminalNetwork() {
     </div>
   );
 }
+
+
+

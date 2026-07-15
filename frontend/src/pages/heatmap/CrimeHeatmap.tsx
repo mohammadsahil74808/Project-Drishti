@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { Layers, Filter, Crosshair, Activity, Cpu, Maximize, Minus, Plus, Radio, Brain, Shield } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { Layers, Filter, Crosshair, Maximize, Minus, Plus, Brain, Activity } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useToastStore } from "@/store/toastStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, TileLayer, CircleMarker, useMap, Marker } from "react-leaflet";
 import L from "leaflet";
@@ -73,6 +74,7 @@ export default function CrimeHeatmap() {
   const [window, setWindow] = useState(TIME_WINDOWS[1]);
   const [selected, setSelected] = useState<any | null>(null);
   const [showDensity, setShowDensity] = useState(true);
+  const { addToast } = useToastStore();
 
   const { data: districtsData } = useQuery({ queryKey: ["districts"], queryFn: geoApi.getDistricts });
   const districts = (districtsData || []).filter((d: any) => !d.state || d.state.toLowerCase() === "karnataka");
@@ -84,7 +86,9 @@ export default function CrimeHeatmap() {
     refetchInterval: 30000,
   });
 
-  const hotspots = rawHotspots.filter((h: any) => h.centroid?.lat && h.centroid?.lng && isKarnataka(h.centroid.lat, h.centroid.lng));
+  const hotspots = useMemo(() => {
+    return rawHotspots.filter((h: any) => h.centroid?.lat && h.centroid?.lng && isKarnataka(h.centroid.lat, h.centroid.lng));
+  }, [rawHotspots]);
 
   return (
     <>
@@ -93,7 +97,7 @@ export default function CrimeHeatmap() {
         filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(120%) saturate(30%);
       }
     `}</style>
-    <div className="h-[calc(100vh-6rem)] w-full flex flex-col p-4 space-y-4 relative overflow-hidden">
+    <div className="min-h-[calc(100vh-6rem)] w-full flex flex-col px-4 pt-1 pb-4 space-y-4 relative overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-white/10">
        {/* Background FX */}
        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-30 mix-blend-screen pointer-events-none z-0" />
        
@@ -104,27 +108,15 @@ export default function CrimeHeatmap() {
              initial={{ opacity: 0, scale: 0.98 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.8, ease: "easeOut" }}
-             className="lg:col-span-3 h-full relative rounded-3xl border border-white/10 bg-[#050B14]/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group"
+             className="lg:col-span-3 w-full h-[calc(100vh-6.5rem)] relative rounded-3xl border border-white/10 bg-[#050B14]/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group"
           >
              {/* Map Overlay Glows */}
              <div className="absolute inset-0 bg-gradient-to-t from-[#00E5FF]/10 via-transparent to-transparent pointer-events-none z-[400]" />
              <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(0,0,0,0.8)] pointer-events-none z-[400]" />
 
              {/* Live HUD (Top Left) */}
-             <div className="absolute top-6 left-6 z-[450] flex flex-col gap-3">
-                <div className="bg-black/60 backdrop-blur-xl border border-white/10 px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-4">
-                   <div className="flex items-center gap-2">
-                      <Cpu className="h-4 w-4 text-[#00E5FF]" />
-                      <span className="text-xs font-black tracking-widest uppercase text-white drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]">Sentinel HQ</span>
-                   </div>
-                   <div className="w-[1px] h-4 bg-white/10" />
-                   <div className="flex items-center gap-2">
-                      <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span></span>
-                      <span className="text-[10px] text-white/60 font-mono uppercase">Live Link</span>
-                   </div>
-                </div>
+             <div className="absolute top-3 left-3 z-[450] flex flex-col gap-3">
 
-                {/* Filters */}
                 <div className="bg-black/60 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-xl flex flex-wrap items-center gap-2">
                    <Filter className="h-3.5 w-3.5 text-[#8B5CF6] ml-2" />
                    <select value={selectedDistrictId} onChange={(e) => { setDistrict(e.target.value); setSelected(null); }} className="bg-transparent border-none text-[11px] font-bold text-white uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-0 [&>option]:bg-[#050B14]">
@@ -150,14 +142,14 @@ export default function CrimeHeatmap() {
              <AnimatePresence>
                 {selected && (
                    <motion.div 
-                      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                      initial={{ opacity: 0, y: -20, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute bottom-6 left-6 z-[500] w-80 bg-gradient-to-br from-[#050B14]/95 to-black/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      className="absolute top-6 right-6 z-[500] w-80 bg-gradient-to-br from-[#050B14]/95 to-black/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
                    >
                       <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: severityColors[selected.severity as SeverityLevel] || "#00E5FF" }} />
                       <div className="p-5 relative">
-                         <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">✕</button>
+                         <button onClick={() => setSelected(null)} className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢</button>
                          <div className="text-[10px] uppercase font-bold tracking-widest text-white/50 mb-1 flex items-center gap-1.5"><Crosshair className="w-3 h-3"/> Target Hotspot</div>
                          <h3 className="text-lg font-black text-white leading-tight mb-4 pr-6">{selected.name || selected.id}</h3>
                          
@@ -173,8 +165,8 @@ export default function CrimeHeatmap() {
                          </div>
                          
                          <div className="flex gap-2">
-                            <button className="flex-1 bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg transition-colors border border-white/5">Generate Report</button>
-                            <button className="flex-1 bg-[#00E5FF]/20 hover:bg-[#00E5FF]/30 text-[#00E5FF] text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg transition-colors border border-[#00E5FF]/30">Dispatch Unit</button>
+                            <button onClick={() => { addToast(`Compiling tactical report for ${selected.name || selected.district || 'Location'}...`, "info"); setTimeout(() => { globalThis.window.location.href = "/reports"; }, 1500); }} className="flex-1 bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg transition-colors border border-white/5">Generate Report</button>
+                            <button onClick={() => addToast(`ðŸš¨ Patrol Unit dispatched to ${selected.name || selected.district || 'Location'}. ETA: 4 mins.`, "warning")} className="flex-1 bg-[#00E5FF]/20 hover:bg-[#00E5FF]/30 text-[#00E5FF] text-[10px] font-bold uppercase tracking-widest py-2 rounded-lg transition-colors border border-[#00E5FF]/30">Dispatch Unit</button>
                          </div>
                       </div>
                    </motion.div>
@@ -182,7 +174,7 @@ export default function CrimeHeatmap() {
              </AnimatePresence>
 
              {/* Floating Legend */}
-             <div className="absolute bottom-6 right-6 z-[450] bg-black/60 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-xl flex items-center gap-4 hidden sm:flex">
+             <div className="absolute bottom-3 right-3 z-[450] bg-black/60 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-xl flex items-center gap-4 hidden sm:flex">
                 {Object.entries(severityColors).map(([level, color]) => (
                    <div key={level} className="flex items-center gap-1.5">
                       <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
@@ -198,7 +190,7 @@ export default function CrimeHeatmap() {
                    <span className="text-xs font-mono text-[#00E5FF] uppercase tracking-widest animate-pulse">Initializing Geo-Spatial Matrix...</span>
                 </div>
              ) : (
-                <MapContainer center={[14.5, 76.0]} zoom={7} style={{ height: "100%", width: "100%", backgroundColor: '#020617' }} zoomControl={false} attributionControl={false}>
+                <MapContainer center={[14.5, 76.0]} zoom={6.5} zoomSnap={0.5} style={{ height: "100%", width: "100%", backgroundColor: '#020617' }} zoomControl={false} scrollWheelZoom={false} attributionControl={false}>
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" className="custom-osm-dark" opacity={0.85} />
                   <MapCustomControls />
                   <MapController selected={selected} zoomLevel={14} />
@@ -219,14 +211,12 @@ export default function CrimeHeatmap() {
              )}
           </motion.div>
 
-          {/* Right Intelligence Sidebar */}
           <motion.div 
              initial={{ opacity: 0, x: 20 }}
              animate={{ opacity: 1, x: 0 }}
              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-             className="lg:col-span-1 h-full flex flex-col gap-4"
+             className="lg:col-span-1 h-[calc(100vh-6.5rem)] flex flex-col gap-4"
           >
-             {/* Intelligence Panel */}
              <div className="flex-1 border border-white/10 bg-gradient-to-b from-[#050B14]/90 to-[#0A101C]/90 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.8)] p-5 overflow-hidden relative flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#8B5CF6]/5 to-transparent pointer-events-none" />
                 
@@ -251,51 +241,18 @@ export default function CrimeHeatmap() {
                             className="bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 p-3 rounded-xl cursor-pointer transition-all group relative overflow-hidden"
                          >
                             <div className="absolute left-0 top-0 bottom-0 w-1 transition-all group-hover:w-1.5" style={{ backgroundColor: color }} />
-                            <div className="flex justify-between items-start pl-2">
-                               <div>
-                                  <div className="text-xs font-bold text-white tracking-wide truncate max-w-[150px]">{h.name || h.id}</div>
-                                  <div className="text-[9px] uppercase tracking-widest text-white/40 mt-1 flex items-center gap-1"><Activity className="w-3 h-3"/> Density: {h.crime_density || 0}</div>
+                            <div className="flex justify-between items-start pl-2 gap-2">
+                               <div className="flex-1 min-w-0">
+                                  <div className="text-xs font-bold text-white tracking-wide truncate">{h.name || h.id}</div>
+                                  <div className="text-[9px] uppercase tracking-widest text-white/40 mt-1 flex items-center gap-1"><Activity className="w-3 h-3 shrink-0"/> <span className="truncate">Density: {h.crime_density || 0}</span></div>
                                </div>
-                               <div className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded border" style={{ color: color, borderColor: color, backgroundColor: `${color}20` }}>
+                               <div className="shrink-0 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded border" style={{ color: color, borderColor: color, backgroundColor: `${color}20` }}>
                                   {h.severity}
                                </div>
                             </div>
                          </motion.div>
                       )
                    })}
-                </div>
-
-                {/* AI Recommendation */}
-                <div className="mt-4 pt-4 border-t border-white/10">
-                   <div className="bg-[#00E5FF]/5 border border-[#00E5FF]/20 rounded-xl p-3 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 p-2"><Shield className="w-10 h-10 text-[#00E5FF] opacity-10" /></div>
-                      <div className="text-[9px] uppercase tracking-widest text-[#00E5FF] font-bold mb-1 flex items-center gap-1.5"><Radio className="w-3 h-3 animate-pulse"/> AI Directive</div>
-                      <p className="text-[10px] text-white/80 leading-relaxed font-mono">Reallocate patrol units to {hotspots[0]?.name || "High Risk Zones"} immediately. Expected escalation within 12 hours based on recent anomaly clusters.</p>
-                   </div>
-                </div>
-             </div>
-
-             {/* Bottom Analytics Card */}
-             <div className="border border-white/10 bg-[#050B14]/90 backdrop-blur-2xl rounded-3xl p-5 shadow-[0_15px_50px_rgba(0,0,0,0.8)] relative overflow-hidden shrink-0">
-                <div className="absolute inset-0 bg-gradient-to-bl from-[#00E5FF]/5 to-transparent pointer-events-none" />
-                <div className="grid grid-cols-2 gap-4">
-                   <div>
-                      <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-1">Active Hotspots</div>
-                      <div className="text-2xl font-black text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">{hotspots.length}</div>
-                   </div>
-                   <div>
-                      <div className="text-[9px] uppercase tracking-widest text-[#10B981] font-bold mb-1">Patrol Units</div>
-                      <div className="text-2xl font-black text-white drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]">{hotspots.length * 3 + 12}</div>
-                   </div>
-                   <div className="col-span-2 pt-3 border-t border-white/10">
-                      <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold flex justify-between mb-2">
-                         <span>Network Threat Level</span>
-                         <span className="text-[#FB923C] font-black">ELEVATED</span>
-                      </div>
-                      <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                         <div className="h-full bg-gradient-to-r from-[#10B981] via-[#F59E0B] to-[#EF4444] w-[65%] rounded-full shadow-[0_0_10px_#FB923C]" />
-                      </div>
-                   </div>
                 </div>
              </div>
           </motion.div>
@@ -304,3 +261,4 @@ export default function CrimeHeatmap() {
     </>
   );
 }
+

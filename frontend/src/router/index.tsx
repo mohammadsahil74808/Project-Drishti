@@ -10,15 +10,17 @@ import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
 import Login from "@/pages/auth/Login";
-import DashboardHome from "@/pages/dashboard/DashboardHome";
-import CrimeHeatmap from "@/pages/heatmap/CrimeHeatmap";
-import CrimeAnalytics from "@/pages/analytics/CrimeAnalytics";
-import Forecast from "@/pages/forecast/Forecast";
-import CriminalNetwork from "@/pages/network/CriminalNetwork";
-import AIAssistant from "@/pages/assistant/AIAssistant";
-import Alerts from "@/pages/alerts/Alerts";
-import Reports from "@/pages/reports/Reports";
-import Settings from "@/pages/settings/Settings";
+import { lazy, Suspense } from "react";
+import DashboardHome from "@/pages/dashboard/DashboardHome"; // Keep eager
+
+const CrimeHeatmap = lazy(() => import("@/pages/heatmap/CrimeHeatmap"));
+const CrimeAnalytics = lazy(() => import("@/pages/analytics/CrimeAnalytics"));
+const Forecast = lazy(() => import("@/pages/forecast/Forecast"));
+const CriminalNetwork = lazy(() => import("@/pages/network/CriminalNetwork"));
+const AIAssistant = lazy(() => import("@/pages/assistant/AIAssistant"));
+const Alerts = lazy(() => import("@/pages/alerts/Alerts"));
+const Reports = lazy(() => import("@/pages/reports/Reports"));
+const Settings = lazy(() => import("@/pages/settings/Settings"));
 
 import { ROUTES } from "./routes";
 
@@ -46,14 +48,14 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { index: true, element: <DashboardHome /> },
-          { path: "heatmap", element: <CrimeHeatmap /> },
-          { path: "analytics", element: <CrimeAnalytics /> },
-          { path: "assistant", element: <AIAssistant /> },
-          { path: "network", element: <CriminalNetwork /> },
-          { path: "forecast", element: <Forecast /> },
-          { path: "reports", element: <Reports /> },
-          { path: "alerts", element: <Alerts /> },
-          { path: "settings", element: <Settings /> },
+          { path: "heatmap", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Map...</div>}><CrimeHeatmap /></Suspense> },
+          { path: "analytics", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Analytics...</div>}><CrimeAnalytics /></Suspense> },
+          { path: "assistant", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading AI Core...</div>}><AIAssistant /></Suspense> },
+          { path: "network", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Network...</div>}><CriminalNetwork /></Suspense> },
+          { path: "forecast", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Forecast...</div>}><Forecast /></Suspense> },
+          { path: "reports", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Reports...</div>}><Reports /></Suspense> },
+          { path: "alerts", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Alerts...</div>}><Alerts /></Suspense> },
+          { path: "settings", element: <Suspense fallback={<div className="p-8 text-center text-white/50 animate-pulse">Loading Config...</div>}><Settings /></Suspense> },
         ],
       },
     ],

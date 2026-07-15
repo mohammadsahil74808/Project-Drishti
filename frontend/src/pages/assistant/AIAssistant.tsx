@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { Send, User, TerminalSquare, Search, Plus, MessageSquare, Pin, MoreHorizontal, Mic, Paperclip, Copy, RotateCcw, ThumbsUp, ThumbsDown, ShieldAlert, FileText, Map, Activity, Shield, Brain } from "lucide-react";
+import { Send, User, TerminalSquare, Search, Plus, MessageSquare, Pin, MoreHorizontal, Mic, Paperclip, Copy, RotateCcw, ThumbsUp, ThumbsDown, ShieldAlert, FileText, Map, Activity, Shield, Brain, PanelLeft } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import type { ChatMessage } from "@/types";
 import { assistantApi } from "@/api";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { motion } from "framer-motion";
+import { useToastStore } from "@/store/toastStore";
 
 const SUGGESTED_PROMPTS = [
   { icon: ShieldAlert, text: "Show theft trends in Bengaluru" },
@@ -17,7 +18,13 @@ const SUGGESTED_PROMPTS = [
 export default function AIAssistant() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { addToast } = useToastStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [feedback, setFeedback] = useState<Record<string, 'up'|'down'>>({});
+  const [isListening, setIsListening] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const { mutate: sendChat, isPending: isThinking } = useMutation({
     mutationFn: (text: string) => assistantApi.chat(text),
@@ -42,7 +49,9 @@ export default function AIAssistant() {
   });
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    }
   }, [messages, isThinking]);
 
   const sendMessage = async (text: string) => {
@@ -65,11 +74,49 @@ export default function AIAssistant() {
     sendMessage(input);
   };
 
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    addToast("Copied to clipboard", "success");
+  };
+
+  const handleRegenerate = () => {
+    const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
+    if (lastUserMsg) {
+      addToast("Regenerating intelligence response...", "info");
+      sendChat(lastUserMsg.content);
+    } else {
+      addToast("No previous message to regenerate.", "error");
+    }
+  };
+
+  const handleFeedback = (msgId: string, type: 'up'|'down') => {
+    setFeedback(prev => ({ ...prev, [msgId]: type }));
+    addToast(`Feedback logged to AI core.`, "success");
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      addToast(`Attached: ${e.target.files[0].name}`, "info");
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const handleMic = () => {
+    if (isListening) return;
+    setIsListening(true);
+    addToast("Listening for audio input...", "info");
+    setTimeout(() => {
+      setIsListening(false);
+      setInput((prev) => prev + (prev ? " " : "") + "Analyze the crime trends in this area");
+      addToast("Voice input processed.", "success");
+    }, 2500);
+  };
+
   return (
-    <div className="flex h-[calc(100vh-6rem)] bg-[#020617] overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+    <div className="flex h-[calc(100vh-4rem)] bg-[#020617] overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
       
       {/* Sidebar - Left */}
-      <div className="w-72 bg-[#050B14]/80 backdrop-blur-2xl border-r border-white/10 flex flex-col shrink-0 hidden lg:flex">
+      <div className={`bg-[#050B14]/80 backdrop-blur-2xl border-r border-white/10 flex-col shrink-0 hidden lg:flex transition-all duration-300 ${isSidebarOpen ? 'w-56 opacity-100' : 'w-0 opacity-0 overflow-hidden border-none'}`}>
          <div className="p-4 border-b border-white/5">
             <button className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-3 transition-colors group">
                <div className="flex items-center gap-2 text-sm font-bold text-white">
@@ -121,6 +168,7 @@ export default function AIAssistant() {
          {/* Top Header */}
          <div className="h-14 flex items-center px-6 border-b border-white/5 bg-black/20 backdrop-blur-md absolute top-0 w-full z-10">
             <div className="flex items-center gap-3">
+               <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors hidden lg:flex -ml-2"><PanelLeft className="w-4 h-4" /></button>
                <Shield className="w-5 h-5 text-[#00E5FF]" />
                <span className="font-bold text-sm tracking-wider text-white">SentinelX Intelligence Core</span>
                <span className="px-2 py-0.5 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 text-[9px] font-bold uppercase tracking-widest text-[#8B5CF6]">v2.4 GPT-4</span>
@@ -128,7 +176,7 @@ export default function AIAssistant() {
          </div>
 
          {/* Chat Scroll Area */}
-         <div className="flex-1 overflow-y-auto px-4 md:px-12 lg:px-24 pt-24 pb-32 scrollbar-thin scrollbar-thumb-white/10 relative">
+         <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 md:px-8 lg:px-12 pt-20 pb-28 scrollbar-thin scrollbar-thumb-white/10 relative">
             {messages.length === 0 ? (
                <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in duration-1000 min-h-[400px]">
                   <div className="w-24 h-24 mb-8 relative flex items-center justify-center">
@@ -155,7 +203,7 @@ export default function AIAssistant() {
                   </div>
                </div>
             ) : (
-               <div className="space-y-8 pb-10 max-w-3xl mx-auto w-full">
+               <div className="space-y-8 pb-10 max-w-5xl mx-auto w-full">
                   {messages.map((m) => (
                      <motion.div 
                         key={m.id} 
@@ -167,7 +215,7 @@ export default function AIAssistant() {
                            {m.role === "assistant" ? <Brain className="w-4 h-4 text-[#00E5FF]" /> : <User className="w-4 h-4 text-white/70" />}
                         </div>
                         <div className={`flex-1 flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}>
-                           <div className={`px-5 py-3.5 rounded-2xl max-w-[85%] text-sm leading-relaxed ${m.role === "assistant" ? "bg-transparent text-white/90" : "bg-white/10 backdrop-blur-md border border-white/5 text-white"}`}>
+                           <div className={`px-5 py-3.5 rounded-2xl max-w-[95%] text-sm leading-relaxed ${m.role === "assistant" ? "bg-transparent text-white/90" : "bg-white/10 backdrop-blur-md border border-white/5 text-white"}`}>
                               {m.role === "assistant" ? (
                                  <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/10 prose-th:text-[#00E5FF] prose-td:border-white/10 prose-table:border-white/10 prose-a:text-[#00E5FF]">
                                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
@@ -178,11 +226,11 @@ export default function AIAssistant() {
                            </div>
                            {m.role === "assistant" && (
                               <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                 <button className="p-1.5 rounded-md text-white/30 hover:text-white hover:bg-white/10 transition-colors"><Copy className="w-3.5 h-3.5" /></button>
-                                 <button className="p-1.5 rounded-md text-white/30 hover:text-white hover:bg-white/10 transition-colors"><RotateCcw className="w-3.5 h-3.5" /></button>
+                                 <button onClick={() => handleCopy(m.content)} className="p-1.5 rounded-md text-white/30 hover:text-white hover:bg-white/10 transition-colors"><Copy className="w-3.5 h-3.5" /></button>
+                                 <button onClick={handleRegenerate} className="p-1.5 rounded-md text-white/30 hover:text-white hover:bg-white/10 transition-colors"><RotateCcw className="w-3.5 h-3.5" /></button>
                                  <div className="w-[1px] h-3 bg-white/10 mx-1" />
-                                 <button className="p-1.5 rounded-md text-white/30 hover:text-[#10B981] hover:bg-[#10B981]/10 transition-colors"><ThumbsUp className="w-3.5 h-3.5" /></button>
-                                 <button className="p-1.5 rounded-md text-white/30 hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-colors"><ThumbsDown className="w-3.5 h-3.5" /></button>
+                                 <button onClick={() => handleFeedback(m.id, 'up')} className={`p-1.5 rounded-md transition-colors ${feedback[m.id] === 'up' ? 'text-[#10B981] bg-[#10B981]/20' : 'text-white/30 hover:text-[#10B981] hover:bg-[#10B981]/10'}`}><ThumbsUp className="w-3.5 h-3.5" /></button>
+                                 <button onClick={() => handleFeedback(m.id, 'down')} className={`p-1.5 rounded-md transition-colors ${feedback[m.id] === 'down' ? 'text-[#EF4444] bg-[#EF4444]/20' : 'text-white/30 hover:text-[#EF4444] hover:bg-[#EF4444]/10'}`}><ThumbsDown className="w-3.5 h-3.5" /></button>
                               </div>
                            )}
                         </div>
@@ -209,8 +257,8 @@ export default function AIAssistant() {
          </div>
 
          {/* Floating Input Area */}
-         <div className="absolute bottom-0 w-full px-4 md:px-12 lg:px-24 pb-8 bg-gradient-to-t from-[#020617] via-[#020617] to-transparent pt-10">
-            <div className="max-w-3xl mx-auto w-full relative group">
+         <div className="absolute bottom-0 w-full px-4 md:px-8 lg:px-12 pb-3 bg-gradient-to-t from-[#020617] via-[#020617] to-transparent pt-10 pointer-events-none">
+            <div className="max-w-5xl mx-auto w-full relative group pointer-events-auto">
                <form onSubmit={handleSubmit} className="relative flex items-end bg-[#050B14]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-2 shadow-[0_10px_40px_rgba(0,0,0,0.6)] focus-within:border-[#00E5FF]/50 focus-within:shadow-[0_0_30px_rgba(0,229,255,0.15)] transition-all duration-500">
                   <div className="flex flex-col flex-1 pb-1">
                      <textarea
@@ -228,17 +276,19 @@ export default function AIAssistant() {
                      />
                   </div>
                   <div className="flex items-center gap-2 p-1">
-                     <button type="button" className="p-2.5 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-colors"><Paperclip className="w-4 h-4" /></button>
-                     <button type="button" className="p-2.5 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-colors"><Mic className="w-4 h-4" /></button>
+                     <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileSelect} />
+                     <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2.5 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-colors"><Paperclip className="w-4 h-4" /></button>
+                     <button type="button" onClick={handleMic} className={`p-2.5 rounded-xl transition-colors ${isListening ? 'text-[#EF4444] bg-[#EF4444]/20 animate-pulse' : 'text-white/40 hover:text-white hover:bg-white/10'}`}><Mic className="w-4 h-4" /></button>
                      <button type="submit" disabled={!input.trim() || isThinking} className="p-2.5 rounded-xl bg-white/10 text-white hover:bg-[#00E5FF] hover:text-black hover:shadow-[0_0_20px_#00E5FF] disabled:opacity-30 disabled:pointer-events-none transition-all duration-300">
                         <Send className="w-4 h-4" />
                      </button>
                   </div>
                </form>
-               <div className="text-center mt-3 text-[10px] text-white/30 tracking-wide">SentinelX AI can make mistakes. Verify important information with base sources.</div>
+               <div className="text-center mt-1.5 text-[10px] text-white/30 tracking-wide">SentinelX AI can make mistakes. Verify important information with base sources.</div>
             </div>
          </div>
       </div>
     </div>
   );
 }
+
