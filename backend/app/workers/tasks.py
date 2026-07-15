@@ -287,7 +287,8 @@ def generate_report_pdf(report_id: str) -> str:
         report.status = ReportStatus.generating
         db.commit()
 
-        output_dir = "/tmp/sentinelx_reports"
+        import tempfile
+        output_dir = os.path.join(tempfile.gettempdir(), "sentinelx_reports")
         os.makedirs(output_dir, exist_ok=True)
         file_path = os.path.join(output_dir, f"{report.id}.pdf")
 

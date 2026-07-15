@@ -32,15 +32,12 @@ class RAGPipeline:
         context = self.build_context(retrieved)
 
         if not retrieved:
-            answer = (
-                "I couldn't find any indexed cases matching that query. Try rephrasing, "
-                "or check whether the FAISS index has been built for this dataset yet."
-            )
+            answer = "I couldn't find indexed cases matching your query."
         else:
             top = retrieved[0]
             answer = (
                 f"Found {len(retrieved)} relevant case(s). The closest match is FIR {top['fir_no']} "
-                f"(relevance {top['score']:.2f}): \"{top['snippet'][:150]}\""
+                f"(relevance {top['score']:.2f}): \"{top['snippet'][:150]}...\""
             )
 
         return {

@@ -35,7 +35,7 @@ def get_report(db: Session, report_id: uuid.UUID) -> Report:
     return report
 
 
-def request_report(db: Session, payload: ReportGenerateRequest, requested_by: uuid.UUID) -> Report:
+def request_report(db: Session, payload: ReportGenerateRequest, requested_by: uuid.UUID, background_tasks = None) -> Report:
     title = _TYPE_TITLES.get(payload.type.value, "Report")
     report = Report(
         type=payload.type,
@@ -50,6 +50,14 @@ def request_report(db: Session, payload: ReportGenerateRequest, requested_by: uu
 
     from app.workers.tasks import generate_report_pdf
 
-    generate_report_pdf.delay(str(report.id))
+    if background_tasks:
+        background_tasks.add_task(generate_report_pdf, str(report.id))
+    else:
+        try:
+            generate_report_pdf.delay(str(report.id))
+        except Exception as e:
+            import logging
+            logging.getLogger("sentinelx").warning("Celery broker unavailable, falling back to synchronous report generation: %s", e)
+            generate_report_pdf(str(report.id))
 
     return report

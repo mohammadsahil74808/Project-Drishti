@@ -25,11 +25,19 @@ export default function Reports() {
   });
 
   const districts = districtsData || [];
-  const districtName = district || (districts.length > 0 ? districts[0].name : "");
+  const selectedDistrictId = district || (districts.length > 0 ? districts[0].id : "");
+  const selectedDistrictName = districts.find((d: any) => d.id === selectedDistrictId)?.name || "";
 
   const { data: reports = [], isLoading } = useQuery({
     queryKey: ["reports"],
     queryFn: () => reportsApi.getReports(),
+    refetchInterval: (query) => {
+      const data = query.state.data as any[] | undefined;
+      if (data && data.some(r => r.status === 'pending' || r.status === 'generating')) {
+        return 2000;
+      }
+      return false;
+    }
   });
 
   const { mutate: generateReport, isPending: isGenerating } = useMutation({
@@ -43,9 +51,9 @@ export default function Reports() {
     e.preventDefault();
     const label = REPORT_TYPES.find((t) => t.value === type)?.label ?? "Report";
     generateReport({
-      title: `${label} — ${districtName}`,
+      title: `${label} — ${selectedDistrictName}`,
       type: type,
-      parameters: { district: districtName }
+      district_id: selectedDistrictId,
     });
   };
 
@@ -53,7 +61,6 @@ export default function Reports() {
     try {
       const response = await reportsApi.downloadReport(reportId);
       // Create a blob URL from the response and trigger download
-      // Since our new downloadReport returns the actual blob/data from client.get(url, { responseType: 'blob' })
       const blob = new Blob([response], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -106,12 +113,12 @@ export default function Reports() {
                 District
               </label>
               <select
-                value={districtName}
+                value={selectedDistrictId}
                 onChange={(e) => setDistrict(e.target.value)}
                 className="bg-sx-panel border border-sx-border rounded-lg text-sm text-sx-text px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-sx-accent min-w-[200px]"
               >
                 {districts.map((d: any) => (
-                  <option key={d.id} value={d.name}>{d.name}</option>
+                  <option key={d.id} value={d.id}>{d.name}</option>
                 ))}
               </select>
             </div>
@@ -138,6 +145,7 @@ export default function Reports() {
               <tr className="text-left text-xs text-sx-text-faint uppercase tracking-wide border-b border-sx-border">
                 <th className="px-5 py-3 font-medium">Report</th>
                 <th className="px-5 py-3 font-medium">Type</th>
+                <th className="px-5 py-3 font-medium">Status</th>
                 <th className="px-5 py-3 font-medium">Generated</th>
                 <th className="px-5 py-3 font-medium text-right">Action</th>
               </tr>
@@ -145,11 +153,11 @@ export default function Reports() {
             <tbody className="divide-y divide-sx-border">
               {isLoading ? (
                 <tr>
-                  <td colSpan={4} className="px-5 py-3 text-center text-sx-text-dim">Loading reports...</td>
+                  <td colSpan={5} className="px-5 py-3 text-center text-sx-text-dim">Loading reports...</td>
                 </tr>
               ) : reports.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="px-5 py-3 text-center text-sx-text-dim">No reports generated yet.</td>
+                  <td colSpan={5} className="px-5 py-3 text-center text-sx-text-dim">No reports generated yet.</td>
                 </tr>
               ) : (
                 reports.map((r: any) => (
@@ -159,13 +167,24 @@ export default function Reports() {
                       <span className="truncate max-w-[300px]">{r.title}</span>
                     </td>
                     <td className="px-5 py-3">
-                      <Badge variant="neutral">{r.type || r.report_type}</Badge>
+                      <Badge variant="neutral">{r.type}</Badge>
+                    </td>
+                    <td className="px-5 py-3">
+                      <Badge variant={r.status === 'ready' ? 'success' : r.status === 'failed' ? 'critical' : 'medium'}>
+                        {r.status}
+                      </Badge>
                     </td>
                     <td className="px-5 py-3 text-sx-text-dim">
-                      {new Date(r.created_at || r.generatedAt).toLocaleString()}
+                      {new Date(r.created_at).toLocaleString()}
                     </td>
                     <td className="px-5 py-3 text-right">
-                      <Button variant="ghost" size="sm" leftIcon={<Download className="h-3.5 w-3.5" />} onClick={() => handleDownload(r.id)}>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        leftIcon={<Download className="h-3.5 w-3.5" />} 
+                        onClick={() => handleDownload(r.id)}
+                        disabled={r.status !== 'ready'}
+                      >
                         Download
                       </Button>
                     </td>

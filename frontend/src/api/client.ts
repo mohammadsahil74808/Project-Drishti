@@ -20,9 +20,9 @@ const REFRESH_TOKEN_KEY = "sentinelx_refresh_token";
 export const tokenStorage = {
   getAccessToken: () => localStorage.getItem(ACCESS_TOKEN_KEY),
   getRefreshToken: () => localStorage.getItem(REFRESH_TOKEN_KEY),
-  setTokens: (accessToken: string, refreshToken: string) => {
-    localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+  setTokens: (access_token: string, refresh_token: string) => {
+    localStorage.setItem(ACCESS_TOKEN_KEY, access_token);
+    localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token);
   },
   clearTokens: () => {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -38,11 +38,10 @@ export const apiClient: AxiosInstance = axios.create({
   },
 });
 
-// ---- Request interceptor: attach access token ----
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = tokenStorage.getAccessToken();
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (token) {
+    config.headers.set("Authorization", `Bearer ${token}`);
   }
   return config;
 });
@@ -80,9 +79,9 @@ apiClient.interceptors.response.use(
     isRefreshing = true;
     try {
       const { data } = await axios.post(`${API_BASE_URL}/auth/refresh`, {
-        refreshToken,
+        refresh_token: refreshToken,
       });
-      tokenStorage.setTokens(data.accessToken, data.refreshToken);
+      tokenStorage.setTokens(data.access_token, data.refresh_token);
       pendingQueue.forEach((resolveQueued) => resolveQueued());
       pendingQueue = [];
       return apiClient(originalRequest);

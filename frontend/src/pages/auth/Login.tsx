@@ -29,7 +29,14 @@ export default function Login() {
       navigate("/", { replace: true });
     },
     onError: (err: any) => {
-      setError(err.response?.data?.detail || "Authentication failed. Please try again.");
+      const detail = err.response?.data?.detail;
+      let message = "Authentication failed. Please try again.";
+      if (Array.isArray(detail)) {
+        message = detail.map((e: any) => e.msg).join(", ");
+      } else if (typeof detail === "string") {
+        message = detail;
+      }
+      setError(message);
     }
   });
 
@@ -42,7 +49,7 @@ export default function Login() {
       return;
     }
 
-    login({ badgeNo: badgeNo.trim(), password });
+    login({ badge_no: badgeNo.trim(), password });
   };
 
   return (

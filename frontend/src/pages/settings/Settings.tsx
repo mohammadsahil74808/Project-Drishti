@@ -11,7 +11,7 @@ export default function Settings() {
   const user = useAuthStore((s) => s.user);
 
   const [name, setName] = useState(user?.name ?? "");
-  const [station, setStation] = useState(user?.stationName ?? "");
+  const [station, setStation] = useState(user?.station_name ?? "");
   const [savedProfile, setSavedProfile] = useState(false);
 
   const [notifyAnomaly, setNotifyAnomaly] = useState(true);
@@ -103,9 +103,9 @@ export default function Settings() {
           </CardHeader>
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
-            <Input label="Badge Number" value={user?.badgeNo ?? ""} disabled />
+            <Input label="Badge Number" value={user?.badge_no ?? ""} disabled />
             <Input label="Station" value={station} onChange={(e) => setStation(e.target.value)} />
-            <Input label="District" value={user?.districtName ?? ""} disabled />
+            <Input label="District" value={user?.district_name ?? ""} disabled />
           </CardContent>
           <CardFooter>
             <span className="text-xs text-sx-success">

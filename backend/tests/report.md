@@ -1,22 +1,22 @@
 # SentinelX Automated Integration Test Report
 
 ## Summary
-- **PASS:** 38
-- **FAIL:** 0
+- **PASS:** 40
+- **FAIL:** 1
 - **SKIPPED:** 3
-- **Average Response Time:** 180.48 ms
-- **Slowest Endpoint:** POST http://testserver/api/v1/users/me/change-password (712.76 ms)
-- **Fastest Endpoint:** GET http://testserver/api/v1/health/ai (2.23 ms)
+- **Average Response Time:** 287.60 ms
+- **Slowest Endpoint:** GET http://testserver/api/v1/network/graph (3576.25 ms)
+- **Fastest Endpoint:** GET http://testserver/api/v1/health/ai (1.61 ms)
 
 ## Details
 
 ### tests/test_alerts.py::test_alerts_crud
 **Status:** PASS
-**Test Duration:** 0.20s
+**Test Duration:** 0.55s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 432.59 ms
+  - Execution Time: 485.89 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -29,11 +29,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDczLCJleHAiOjE3ODQwNDY2NzMsInJvbGUiOiJhZG1pbiJ9.vyRKN4hZIg35XziYSgHHPmfU1MiqDlr9ippai896YwM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3MywiZXhwIjoxNzg0NjQ3ODczfQ.hD5J2XkVIxSls3T8dfWFH5TyHkNYpg3DmMNHs35p3mI",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAwLCJleHAiOjE3ODQxMDM0MDAsInJvbGUiOiJhZG1pbiJ9.LgnSMVp5xiR0p5ZEFCVVCrhoL3m_w_j7NKKQaQXoCrY",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMCwiZXhwIjoxNzg0NzA0NjAwfQ.Kie8QCm00sbhJJjuPVunxhWHEl_066Ob_OUWgiPEzBw",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -45,117 +45,117 @@
   </details>
 - **2. GET http://testserver/api/v1/alerts** 
   - Status Code: 200
-  - Execution Time: 154.10 ms
-  - Response Size: 2092 bytes
+  - Execution Time: 455.17 ms
+  - Response Size: 2093 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "ba1eb934-7a21-440c-ba74-5831f26f8da7",
-    "type": "anomaly",
-    "message": "System generated alert #2 for statewide monitoring.",
-    "severity": "medium",
-    "target_role": "admin",
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "72d95a16-8b80-4a41-8dac-3d950743f7fa",
-    "type": "new_hotspot",
+    "id": "f7e93f90-a213-4546-be4c-5e61b302b201",
+    "type": "missing_person_match",
     "message": "System generated alert #3 for statewide monitoring.",
-    "severity": "critical",
-    "target_role": null,
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "e223e03a-3714-42d7-81a4-b5bf4e543b83",
-    "type": "forecast_spike",
-    "message": "System generated alert #8 for statewide monitoring.",
-    "severity": "critical",
-    "target_role": "admin",
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "659d0b8b-1ca7-46fd-9bdf-f163fbc611f0",
-    "type": "missing_person_match",
-    "message": "System generated alert #10 for statewide monitoring.",
-    "severity": "high",
-    "target_role": "admin",
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "53f36fe9-a808-4c6a-b3e2-e103d28da1b9",
-    "type": "missing_person_match",
-    "message": "System generated alert #14 for statewide monitoring.",
-    "severity": "critical",
-    "target_role": "admin",
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "c9404e97-70f6-460f-814e-d6f2ae79a147",
-    "type": "forecast_spike",
-    "message": "System generated alert #20 for statewide monitoring.",
-    "severity": "high",
-    "target_role": null,
-    "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
-  },
-  {
-    "id": "da992e24-5f0a-4212-9a3e-7566bd45162e",
-    "type": "new_hotspot",
-    "message": "System generated alert #21 for statewide monitoring.",
     "severity": "low",
     "target_role": "admin",
     "station_id": null,
-    "acknowledged": true,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
   },
   {
-    "id": "0a82f176-0d80-4894-9ab5-778c3c94b69d",
+    "id": "af176606-533d-4bc3-abad-b02be96a4c7a",
     "type": "new_hotspot",
-    "message": "System generated alert #28 for statewide monitoring.",
+    "message": "System generated alert #5 for statewide monitoring.",
+    "severity": "low",
+    "target_role": null,
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "fb1ebcbb-ff49-4fe2-93bd-20b034ef1a55",
+    "type": "new_hotspot",
+    "message": "System generated alert #6 for statewide monitoring.",
     "severity": "medium",
     "target_role": "admin",
     "station_id": null,
     "acknowledged": false,
-    "created_at": "2026-07-14T13:43:54.730339+05:30"
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "b8c680b7-161a-4774-965e-3473588b70b1",
+    "type": "missing_person_match",
+    "message": "System generated alert #9 for statewide monitoring.",
+    "severity": "critical",
+    "target_role": "admin",
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "19366f6a-7761-4bb4-9c66-fc488dda6613",
+    "type": "new_hotspot",
+    "message": "System generated alert #12 for statewide monitoring.",
+    "severity": "high",
+    "target_role": "admin",
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "62743091-ec94-469a-8b81-ee4b4faae507",
+    "type": "forecast_spike",
+    "message": "System generated alert #15 for statewide monitoring.",
+    "severity": "high",
+    "target_role": null,
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "7220a757-b361-4968-8025-f36601217c4b",
+    "type": "missing_person_match",
+    "message": "System generated alert #17 for statewide monitoring.",
+    "severity": "high",
+    "target_role": "admin",
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
+  },
+  {
+    "id": "dff247fc-4fda-4ea9-8eac-ab42d8ccd7cc",
+    "type": "anomaly",
+    "message": "System generated alert #27 for statewide monitoring.",
+    "severity": "high",
+    "target_role": "admin",
+    "station_id": null,
+    "acknowledged": false,
+    "created_at": "2026-07-15T12:32:10.548431+05:30"
   }
 ]
   ```
   </details>
-- **3. POST http://testserver/api/v1/alerts/ba1eb934-7a21-440c-ba74-5831f26f8da7/acknowledge** 
+- **3. POST http://testserver/api/v1/alerts/f7e93f90-a213-4546-be4c-5e61b302b201/acknowledge** 
   - Status Code: 200
-  - Execution Time: 28.01 ms
+  - Execution Time: 67.76 ms
   - Response Size: 122 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "ba1eb934-7a21-440c-ba74-5831f26f8da7",
+  "id": "f7e93f90-a213-4546-be4c-5e61b302b201",
   "acknowledged": true,
-  "acknowledged_by": "fa370e15-9b16-4795-a076-cbf98f0e2ace"
+  "acknowledged_by": "3462b7a8-536b-4755-a557-c987b2883d5a"
 }
   ```
   </details>
-- **4. POST http://testserver/api/v1/alerts/ba1eb934-7a21-440c-ba74-5831f26f8da7/acknowledge** 
+- **4. POST http://testserver/api/v1/alerts/f7e93f90-a213-4546-be4c-5e61b302b201/acknowledge** 
   - Status Code: 200
-  - Execution Time: 19.75 ms
+  - Execution Time: 20.91 ms
   - Response Size: 122 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "ba1eb934-7a21-440c-ba74-5831f26f8da7",
+  "id": "f7e93f90-a213-4546-be4c-5e61b302b201",
   "acknowledged": true,
-  "acknowledged_by": "fa370e15-9b16-4795-a076-cbf98f0e2ace"
+  "acknowledged_by": "3462b7a8-536b-4755-a557-c987b2883d5a"
 }
   ```
   </details>
@@ -163,11 +163,11 @@
 
 ### tests/test_alerts.py::test_alerts_ack_nonexistent
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.02s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 383.76 ms
+  - Execution Time: 332.22 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -180,11 +180,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc0LCJleHAiOjE3ODQwNDY2NzQsInJvbGUiOiJhZG1pbiJ9.MK5IuvgJ4XWWkrCmcl9aJR1dfPia0xUTjiW68h8gvcY",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NCwiZXhwIjoxNzg0NjQ3ODc0fQ.OPavc2OaMwstUY4lCt64xGk0T9nypnvo0eWhtOccHPI",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAxLCJleHAiOjE3ODQxMDM0MDEsInJvbGUiOiJhZG1pbiJ9.eb0-SnG_Ep4Nrw2XxNVoppAjX_xRrC4KxQLkz1FX1KQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMSwiZXhwIjoxNzg0NzA0NjAxfQ.Wf_Qgj_ONCUwj-dH0irrevyBolyHWn_M767O_SO8FoI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -194,14 +194,14 @@
 }
   ```
   </details>
-- **2. POST http://testserver/api/v1/alerts/d8db92db-f539-4261-9906-3902ace75208/acknowledge** 
+- **2. POST http://testserver/api/v1/alerts/3d8ee400-1c6b-4073-a36b-b709b8214b2a/acknowledge** 
   - Status Code: 404
-  - Execution Time: 10.12 ms
+  - Execution Time: 15.27 ms
   - Response Size: 66 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "Alert d8db92db-f539-4261-9906-3902ace75208 not found."
+  "detail": "Alert 3d8ee400-1c6b-4073-a36b-b709b8214b2a not found."
 }
   ```
   </details>
@@ -209,11 +209,11 @@
 
 ### tests/test_analytics.py::test_analytics_trend
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.04s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 391.66 ms
+  - Execution Time: 385.24 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -226,11 +226,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc0LCJleHAiOjE3ODQwNDY2NzQsInJvbGUiOiJhZG1pbiJ9.MK5IuvgJ4XWWkrCmcl9aJR1dfPia0xUTjiW68h8gvcY",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NCwiZXhwIjoxNzg0NjQ3ODc0fQ.OPavc2OaMwstUY4lCt64xGk0T9nypnvo0eWhtOccHPI",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAxLCJleHAiOjE3ODQxMDM0MDEsInJvbGUiOiJhZG1pbiJ9.eb0-SnG_Ep4Nrw2XxNVoppAjX_xRrC4KxQLkz1FX1KQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMSwiZXhwIjoxNzg0NzA0NjAxfQ.Wf_Qgj_ONCUwj-dH0irrevyBolyHWn_M767O_SO8FoI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -242,8 +242,8 @@
   </details>
 - **2. GET http://testserver/api/v1/analytics/trend** 
   - Status Code: 200
-  - Execution Time: 12.98 ms
-  - Response Size: 5682 bytes
+  - Execution Time: 34.21 ms
+  - Response Size: 5477 bytes
   <details><summary>Response</summary>
   ```json
   {
@@ -252,23 +252,35 @@
   "granularity": "daily",
   "points": [
     {
-      "period": "2025-07-12",
+      "period": "2025-07-15",
+      "count": 1
+    },
+    {
+      "period": "2025-07-16",
       "count": 2
     },
     {
-      "period": "2025-07-17",
+      "period": "2025-07-19",
       "count": 1
     },
     {
-      "period": "2025-07-18",
+      "period": "2025-07-20",
       "count": 1
     },
     {
-      "period": "2025-07-22",
+      "period": "2025-07-21",
       "count": 1
     },
     {
-      "period": "2025-07-25",
+      "period": "2025-07-24",
+      "count": 1
+    },
+    {
+      "period": "2025-07-29",
+      "count": 2
+    },
+    {
+      "period": "2025-07-30",
       "count": 1
     },
     {
@@ -276,35 +288,31 @@
       "count": 1
     },
     {
-      "period": "2025-08-07",
+      "period": "2025-08-05",
       "count": 1
     },
     {
-      "period": "2025-08-08",
+      "period": "2025-08-10",
       "count": 1
     },
     {
-      "period": "2025-08-09",
+      "period": "2025-08-13",
       "count": 1
     },
     {
-      "period": "2025-08-12",
+      "period": "2025-08-14",
+      "count": 1
+    },
+    {
+      "period": "2025-08-16",
       "count": 1
     },
     {
       "period": "2025-08-17",
-      "count": 4
-    },
-    {
-      "period": "2025-08-18",
       "count": 1
     },
     {
       "period": "2025-08-21",
-      "count": 1
-    },
-    {
-      "period": "2025-08-22",
       "count": 1
     },
     {
@@ -316,67 +324,35 @@
       "count": 1
     },
     {
-      "period": "2025-08-29",
-      "count": 1
-    },
-    {
-      "period": "2025-08-31",
-      "count": 1
-    },
-    {
-      "period": "2025-09-01",
-      "count": 1
-    },
-    {
-      "period": "2025-09-03",
-      "count": 1
+      "period": "2025-09-04",
+      "count": 3
     },
     {
       "period": "2025-09-05",
       "count": 1
     },
     {
-      "period": "2025-09-06",
+      "period": "2025-09-08",
       "count": 1
     },
     {
-      "period": "2025-09-10",
+      "period": "2025-09-12",
       "count": 1
-    },
-    {
-      "period": "2025-09-11",
-      "count": 2
     },
     {
       "period": "2025-09-14",
+      "count": 2
+    },
+    {
+      "period": "2025-09-15",
       "count": 1
     },
     {
-      "period": "2025-09-17",
+      "period": "2025-09-19",
       "count": 1
     },
     {
-      "period": "2025-09-18",
-      "count": 1
-    },
-    {
-      "period": "2025-09-20",
-      "count": 1
-    },
-    {
-      "period": "2025-09-21",
-      "count": 1
-    },
-    {
-      "period": "2025-09-23",
-      "count": 1
-    },
-    {
-      "period": "2025-09-24",
-      "count": 1
-    },
-    {
-      "period": "2025-09-27",
+      "period": "2025-09-25",
       "count": 1
     },
     {
@@ -384,7 +360,15 @@
       "count": 1
     },
     {
+      "period": "2025-09-29",
+      "count": 2
+    },
+    {
       "period": "2025-09-30",
+      "count": 1
+    },
+    {
+      "period": "2025-10-03",
       "count": 1
     },
     {
@@ -392,16 +376,16 @@
       "count": 2
     },
     {
-      "period": "2025-10-06",
+      "period": "2025-10-05",
       "count": 1
     },
     {
-      "period": "2025-10-08",
+      "period": "2025-10-07",
       "count": 1
     },
     {
       "period": "2025-10-09",
-      "count": 1
+      "count": 2
     },
     {
       "period": "2025-10-10",
@@ -412,47 +396,23 @@
       "count": 1
     },
     {
-      "period": "2025-10-15",
+      "period": "2025-10-14",
       "count": 1
     },
     {
-      "period": "2025-10-17",
+      "period": "2025-10-19",
       "count": 1
-    },
-    {
-      "period": "2025-10-18",
-      "count": 2
     },
     {
       "period": "2025-10-20",
-      "count": 2
+      "count": 3
     },
     {
       "period": "2025-10-21",
       "count": 1
     },
     {
-      "period": "2025-10-22",
-      "count": 1
-    },
-    {
-      "period": "2025-10-23",
-      "count": 2
-    },
-    {
       "period": "2025-10-26",
-      "count": 1
-    },
-    {
-      "period": "2025-10-28",
-      "count": 2
-    },
-    {
-      "period": "2025-10-29",
-      "count": 1
-    },
-    {
-      "period": "2025-10-30",
       "count": 1
     },
     {
@@ -468,79 +428,83 @@
       "count": 1
     },
     {
-      "period": "2025-11-08",
+      "period": "2025-11-06",
       "count": 1
     },
     {
-      "period": "2025-11-10",
-      "count": 2
-    },
-    {
-      "period": "2025-11-14",
+      "period": "2025-11-09",
       "count": 1
     },
     {
-      "period": "2025-11-15",
-      "count": 2
+      "period": "2025-11-13",
+      "count": 1
+    },
+    {
+      "period": "2025-11-17",
+      "count": 1
     },
     {
       "period": "2025-11-18",
       "count": 1
     },
     {
-      "period": "2025-11-19",
-      "count": 1
-    },
-    {
-      "period": "2025-11-21",
-      "count": 1
+      "period": "2025-11-22",
+      "count": 2
     },
     {
       "period": "2025-11-23",
       "count": 2
     },
     {
-      "period": "2025-11-27",
+      "period": "2025-11-24",
       "count": 1
     },
     {
-      "period": "2025-11-28",
+      "period": "2025-11-26",
       "count": 1
     },
     {
-      "period": "2025-12-02",
+      "period": "2025-12-01",
       "count": 1
     },
     {
-      "period": "2025-12-03",
-      "count": 1
-    },
-    {
-      "period": "2025-12-04",
+      "period": "2025-12-05",
       "count": 1
     },
     {
       "period": "2025-12-06",
-      "count": 4
-    },
-    {
-      "period": "2025-12-08",
       "count": 1
     },
     {
-      "period": "2025-12-13",
+      "period": "2025-12-07",
+      "count": 1
+    },
+    {
+      "period": "2025-12-09",
+      "count": 2
+    },
+    {
+      "period": "2025-12-11",
+      "count": 1
+    },
+    {
+      "period": "2025-12-12",
       "count": 1
     },
     {
       "period": "2025-12-14",
-      "count": 3
-    },
-    {
-      "period": "2025-12-16",
       "count": 1
     },
     {
-      "period": "2025-12-22",
+      "period": "2025-12-17",
+      "count": 2
+    },
+    {
+      "period": "2025-12-18",
+      "count": 1
+    },
+    {
+      "period": "2025-12-24",
       "count": 1
     },
     {
@@ -548,39 +512,19 @@
       "count": 1
     },
     {
-      "period": "2025-12-28",
-      "count": 3
-    },
-    {
-      "period": "2025-12-29",
+      "period": "2025-12-27",
       "count": 1
     },
     {
-      "period": "2025-12-31",
-      "count": 1
-    },
-    {
-      "period": "2026-01-01",
-      "count": 2
-    },
-    {
-      "period": "2026-01-04",
+      "period": "2026-01-03",
       "count": 1
     },
     {
       "period": "2026-01-05",
-      "count": 1
-    },
-    {
-      "period": "2026-01-06",
       "count": 2
     },
     {
-      "period": "2026-01-08",
-      "count": 1
-    },
-    {
-      "period": "2026-01-09",
+      "period": "2026-01-06",
       "count": 1
     },
     {
@@ -589,7 +533,7 @@
     },
     {
       "period": "2026-01-12",
-      "count": 2
+      "count": 3
     },
     {
       "period": "2026-01-13",
@@ -597,63 +541,67 @@
     },
     {
       "period": "2026-01-15",
-      "count": 1
-    },
-    {
-      "period": "2026-01-16",
-      "count": 1
-    },
-    {
-      "period": "2026-01-21",
-      "count": 1
-    },
-    {
-      "period": "2026-01-22",
       "count": 2
+    },
+    {
+      "period": "2026-01-17",
+      "count": 2
+    },
+    {
+      "period": "2026-01-19",
+      "count": 1
+    },
+    {
+      "period": "2026-01-20",
+      "count": 1
+    },
+    {
+      "period": "2026-01-23",
+      "count": 1
     },
     {
       "period": "2026-01-25",
       "count": 1
     },
     {
-      "period": "2026-01-27",
+      "period": "2026-01-31",
       "count": 1
     },
     {
-      "period": "2026-01-28",
+      "period": "2026-02-01",
       "count": 1
     },
     {
-      "period": "2026-02-03",
+      "period": "2026-02-02",
       "count": 1
     },
     {
-      "period": "2026-02-04",
+      "period": "2026-02-05",
+      "count": 1
+    },
+    {
+      "period": "2026-02-06",
       "count": 1
     },
     {
       "period": "2026-02-07",
-      "count": 1
-    },
-    {
-      "period": "2026-02-10",
-      "count": 1
-    },
-    {
-      "period": "2026-02-11",
-      "count": 1
-    },
-    {
-      "period": "2026-02-12",
       "count": 2
     },
     {
-      "period": "2026-02-13",
+      "period": "2026-02-08",
       "count": 2
     },
     {
-      "period": "2026-02-17",
+      "period": "2026-02-09",
       "count": 1
+    },
+    {
+      "period": "2026-02-15",
+      "count": 1
+    },
+    {
+      "period": "2026-02-16",
+      "count": 2
     },
     {
       "period": "2026-02-18",
@@ -661,7 +609,7 @@
     },
     {
       "period": "2026-02-19",
-      "count": 1
+      "count": 2
     },
     {
       "period": "2026-02-20",
@@ -672,20 +620,8 @@
       "count": 1
     },
     {
-      "period": "2026-02-23",
-      "count": 1
-    },
-    {
-      "period": "2026-02-25",
-      "count": 1
-    },
-    {
       "period": "2026-02-26",
       "count": 1
-    },
-    {
-      "period": "2026-02-28",
-      "count": 2
     },
     {
       "period": "2026-03-01",
@@ -693,11 +629,23 @@
     },
     {
       "period": "2026-03-03",
+      "count": 2
+    },
+    {
+      "period": "2026-03-04",
+      "count": 1
+    },
+    {
+      "period": "2026-03-05",
       "count": 1
     },
     {
       "period": "2026-03-07",
       "count": 1
+    },
+    {
+      "period": "2026-03-08",
+      "count": 2
     },
     {
       "period": "2026-03-09",
@@ -708,39 +656,43 @@
       "count": 1
     },
     {
-      "period": "2026-03-12",
-      "count": 1
+      "period": "2026-03-11",
+      "count": 2
     },
     {
       "period": "2026-03-15",
       "count": 1
     },
     {
-      "period": "2026-03-16",
+      "period": "2026-03-17",
+      "count": 1
+    },
+    {
+      "period": "2026-03-19",
       "count": 1
     },
     {
       "period": "2026-03-21",
-      "count": 1
+      "count": 3
     },
     {
-      "period": "2026-03-22",
+      "period": "2026-03-24",
       "count": 1
     },
     {
       "period": "2026-03-26",
-      "count": 2
+      "count": 1
     },
     {
       "period": "2026-03-27",
       "count": 1
     },
     {
-      "period": "2026-03-28",
+      "period": "2026-03-29",
       "count": 1
     },
     {
-      "period": "2026-03-30",
+      "period": "2026-04-01",
       "count": 1
     },
     {
@@ -748,11 +700,15 @@
       "count": 1
     },
     {
+      "period": "2026-04-03",
+      "count": 1
+    },
+    {
       "period": "2026-04-05",
       "count": 1
     },
     {
-      "period": "2026-04-06",
+      "period": "2026-04-07",
       "count": 1
     },
     {
@@ -760,7 +716,7 @@
       "count": 1
     },
     {
-      "period": "2026-04-15",
+      "period": "2026-04-12",
       "count": 2
     },
     {
@@ -768,15 +724,19 @@
       "count": 1
     },
     {
-      "period": "2026-04-18",
+      "period": "2026-04-23",
       "count": 1
     },
     {
-      "period": "2026-04-19",
-      "count": 1
+      "period": "2026-04-25",
+      "count": 2
     },
     {
       "period": "2026-04-26",
+      "count": 1
+    },
+    {
+      "period": "2026-04-27",
       "count": 1
     },
     {
@@ -784,16 +744,20 @@
       "count": 1
     },
     {
-      "period": "2026-05-02",
-      "count": 1
+      "period": "2026-04-29",
+      "count": 2
+    },
+    {
+      "period": "2026-04-30",
+      "count": 2
     },
     {
       "period": "2026-05-03",
       "count": 1
     },
     {
-      "period": "2026-05-04",
-      "count": 3
+      "period": "2026-05-07",
+      "count": 1
     },
     {
       "period": "2026-05-08",
@@ -804,27 +768,31 @@
       "count": 1
     },
     {
-      "period": "2026-05-16",
+      "period": "2026-05-12",
+      "count": 2
+    },
+    {
+      "period": "2026-05-17",
       "count": 1
     },
     {
       "period": "2026-05-18",
-      "count": 1
+      "count": 3
     },
     {
-      "period": "2026-05-23",
-      "count": 1
+      "period": "2026-05-19",
+      "count": 2
     },
     {
       "period": "2026-05-24",
       "count": 1
     },
     {
-      "period": "2026-05-25",
+      "period": "2026-05-26",
       "count": 2
     },
     {
-      "period": "2026-05-29",
+      "period": "2026-05-30",
       "count": 1
     },
     {
@@ -833,18 +801,14 @@
     },
     {
       "period": "2026-06-02",
-      "count": 2
-    },
-    {
-      "period": "2026-06-03",
       "count": 1
     },
     {
-      "period": "2026-06-07",
-      "count": 2
+      "period": "2026-06-05",
+      "count": 1
     },
     {
-      "period": "2026-06-08",
+      "period": "2026-06-06",
       "count": 1
     },
     {
@@ -852,28 +816,24 @@
       "count": 1
     },
     {
-      "period": "2026-06-13",
-      "count": 1
-    },
-    {
-      "period": "2026-06-14",
+      "period": "2026-06-11",
       "count": 1
     },
     {
       "period": "2026-06-15",
-      "count": 1
+      "count": 3
     },
     {
       "period": "2026-06-16",
       "count": 1
     },
     {
-      "period": "2026-06-17",
+      "period": "2026-06-18",
       "count": 1
     },
     {
-      "period": "2026-06-20",
-      "count": 2
+      "period": "2026-06-19",
+      "count": 1
     },
     {
       "period": "2026-06-23",
@@ -884,7 +844,19 @@
       "count": 1
     },
     {
+      "period": "2026-06-27",
+      "count": 2
+    },
+    {
+      "period": "2026-06-28",
+      "count": 1
+    },
+    {
       "period": "2026-06-29",
+      "count": 1
+    },
+    {
+      "period": "2026-07-01",
       "count": 1
     },
     {
@@ -892,24 +864,28 @@
       "count": 1
     },
     {
-      "period": "2026-07-06",
+      "period": "2026-07-04",
+      "count": 2
+    },
+    {
+      "period": "2026-07-05",
       "count": 1
     },
     {
-      "period": "2026-07-10",
+      "period": "2026-07-07",
+      "count": 1
+    },
+    {
+      "period": "2026-07-08",
       "count": 1
     },
     {
       "period": "2026-07-11",
-      "count": 2
+      "count": 1
     },
     {
       "period": "2026-07-12",
       "count": 1
-    },
-    {
-      "period": "2026-07-14",
-      "count": 27
     }
   ]
 }
@@ -919,11 +895,11 @@
 
 ### tests/test_analytics.py::test_analytics_distribution
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.04s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 421.33 ms
+  - Execution Time: 338.22 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -936,11 +912,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc1LCJleHAiOjE3ODQwNDY2NzUsInJvbGUiOiJhZG1pbiJ9.xXLgwTxNxa2NjevCzRQkP5CRrHIOLBwQ6TlTxMponXc",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NSwiZXhwIjoxNzg0NjQ3ODc1fQ.GuoQ4xWSno-wPFRCgzUYAXuyCLEeeYqoU3Q695Lpz_U",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAxLCJleHAiOjE3ODQxMDM0MDEsInJvbGUiOiJhZG1pbiJ9.eb0-SnG_Ep4Nrw2XxNVoppAjX_xRrC4KxQLkz1FX1KQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMSwiZXhwIjoxNzg0NzA0NjAxfQ.Wf_Qgj_ONCUwj-dH0irrevyBolyHWn_M767O_SO8FoI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -952,48 +928,48 @@
   </details>
 - **2. GET http://testserver/api/v1/analytics/distribution** 
   - Status Code: 200
-  - Execution Time: 9.13 ms
+  - Execution Time: 42.10 ms
   - Response Size: 368 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "total": 227,
+  "total": 200,
   "items": [
     {
-      "crime_type": "theft",
-      "count": 47
-    },
-    {
-      "crime_type": "robbery",
+      "crime_type": "chain_snatching",
       "count": 29
     },
     {
-      "crime_type": "chain_snatching",
-      "count": 28
-    },
-    {
-      "crime_type": "assault",
-      "count": 26
-    },
-    {
-      "crime_type": "missing_person",
-      "count": 25
-    },
-    {
-      "crime_type": "cybercrime",
-      "count": 23
+      "crime_type": "theft",
+      "count": 24
     },
     {
       "crime_type": "burglary",
-      "count": 18
+      "count": 23
+    },
+    {
+      "crime_type": "missing_person",
+      "count": 22
+    },
+    {
+      "crime_type": "assault",
+      "count": 22
+    },
+    {
+      "crime_type": "robbery",
+      "count": 22
     },
     {
       "crime_type": "other",
-      "count": 16
+      "count": 21
     },
     {
       "crime_type": "vehicle_theft",
-      "count": 15
+      "count": 20
+    },
+    {
+      "crime_type": "cybercrime",
+      "count": 17
     }
   ]
 }
@@ -1003,11 +979,11 @@
 
 ### tests/test_analytics.py::test_analytics_day_of_week
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.11s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 417.67 ms
+  - Execution Time: 344.18 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1020,11 +996,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc1LCJleHAiOjE3ODQwNDY2NzUsInJvbGUiOiJhZG1pbiJ9.xXLgwTxNxa2NjevCzRQkP5CRrHIOLBwQ6TlTxMponXc",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NSwiZXhwIjoxNzg0NjQ3ODc1fQ.GuoQ4xWSno-wPFRCgzUYAXuyCLEeeYqoU3Q695Lpz_U",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAyLCJleHAiOjE3ODQxMDM0MDIsInJvbGUiOiJhZG1pbiJ9.cp2BJQ-6CJhLNftz5bcmN0SJTK_KtuNr_tN1c2niyCk",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMiwiZXhwIjoxNzg0NzA0NjAyfQ.4uCqtrkeQXFk7KIZF8H-NIoLN2sEiH-HuZN8HB7G4zA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1036,38 +1012,38 @@
   </details>
 - **2. GET http://testserver/api/v1/analytics/day-of-week** 
   - Status Code: 200
-  - Execution Time: 8.51 ms
+  - Execution Time: 107.34 ms
   - Response Size: 176 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
     "day": "Sun",
-    "count": 38
+    "count": 41
   },
   {
     "day": "Mon",
-    "count": 28
+    "count": 30
   },
   {
     "day": "Tue",
-    "count": 54
+    "count": 34
   },
   {
     "day": "Wed",
-    "count": 23
+    "count": 19
   },
   {
     "day": "Thu",
-    "count": 29
+    "count": 32
   },
   {
     "day": "Fri",
-    "count": 21
+    "count": 16
   },
   {
     "day": "Sat",
-    "count": 34
+    "count": 28
   }
 ]
   ```
@@ -1080,7 +1056,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 389.20 ms
+  - Execution Time: 284.14 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1093,11 +1069,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc2LCJleHAiOjE3ODQwNDY2NzYsInJvbGUiOiJhZG1pbiJ9.h7Daof1VCIeDK4WuBCcI2GnWP9Arxh8Pu2VdPDzT8GU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NiwiZXhwIjoxNzg0NjQ3ODc2fQ.NfYgMRgC9aCuhEa8iu9hCMHDyITVN3Y4RrRvZmpG6es",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAyLCJleHAiOjE3ODQxMDM0MDIsInJvbGUiOiJhZG1pbiJ9.cp2BJQ-6CJhLNftz5bcmN0SJTK_KtuNr_tN1c2niyCk",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMiwiZXhwIjoxNzg0NzA0NjAyfQ.4uCqtrkeQXFk7KIZF8H-NIoLN2sEiH-HuZN8HB7G4zA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1109,13 +1085,13 @@
   </details>
 - **2. GET http://testserver/api/v1/analytics/insight** 
   - Status Code: 200
-  - Execution Time: 12.43 ms
-  - Response Size: 178 bytes
+  - Execution Time: 9.17 ms
+  - Response Size: 188 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "summary": "Theft is the leading crime type in this view (47 cases, 21% of total). Overall volume trend for the period looks rising.",
-  "generated_at": "2026-07-14T15:31:16.035138"
+  "summary": "Chain Snatching is the leading crime type in this view (29 cases, 14% of total). Overall volume trend for the period looks stable.",
+  "generated_at": "2026-07-15T07:16:42.676888"
 }
   ```
   </details>
@@ -1123,11 +1099,11 @@
 
 ### tests/test_analytics.py::test_analytics_classify
 **Status:** SKIPPED
-**Test Duration:** 0.40s
+**Test Duration:** 0.30s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 389.64 ms
+  - Execution Time: 292.52 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1140,11 +1116,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc2LCJleHAiOjE3ODQwNDY2NzYsInJvbGUiOiJhZG1pbiJ9.h7Daof1VCIeDK4WuBCcI2GnWP9Arxh8Pu2VdPDzT8GU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NiwiZXhwIjoxNzg0NjQ3ODc2fQ.NfYgMRgC9aCuhEa8iu9hCMHDyITVN3Y4RrRvZmpG6es",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAyLCJleHAiOjE3ODQxMDM0MDIsInJvbGUiOiJhZG1pbiJ9.cp2BJQ-6CJhLNftz5bcmN0SJTK_KtuNr_tN1c2niyCk",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMiwiZXhwIjoxNzg0NzA0NjAyfQ.4uCqtrkeQXFk7KIZF8H-NIoLN2sEiH-HuZN8HB7G4zA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1156,7 +1132,7 @@
   </details>
 - **2. GET http://testserver/api/v1/health/ai** 
   - Status Code: 404
-  - Execution Time: 3.81 ms
+  - Execution Time: 5.22 ms
   - Response Size: 22 bytes
   <details><summary>Response</summary>
   ```json
@@ -1169,11 +1145,11 @@
 
 ### tests/test_analytics.py::test_analytics_classify_invalid_payload
 **Status:** SKIPPED
-**Test Duration:** 0.42s
+**Test Duration:** 0.34s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 407.08 ms
+  - Execution Time: 328.63 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1186,11 +1162,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc2LCJleHAiOjE3ODQwNDY2NzYsInJvbGUiOiJhZG1pbiJ9.h7Daof1VCIeDK4WuBCcI2GnWP9Arxh8Pu2VdPDzT8GU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NiwiZXhwIjoxNzg0NjQ3ODc2fQ.NfYgMRgC9aCuhEa8iu9hCMHDyITVN3Y4RrRvZmpG6es",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAzLCJleHAiOjE3ODQxMDM0MDMsInJvbGUiOiJhZG1pbiJ9.aG8XRRajOPdmZjMC-PGqSqez35AdJ8i_lhcxsXegJF0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMywiZXhwIjoxNzg0NzA0NjAzfQ.8j0_rXMSMOIPVUhgI-P6R8Q_Pu0fKiEKOYTpw1Pj3sg",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1202,7 +1178,7 @@
   </details>
 - **2. GET http://testserver/api/v1/health/ai** 
   - Status Code: 404
-  - Execution Time: 2.39 ms
+  - Execution Time: 1.71 ms
   - Response Size: 22 bytes
   <details><summary>Response</summary>
   ```json
@@ -1215,11 +1191,11 @@
 
 ### tests/test_assistant.py::test_assistant_chat
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 3.35s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 433.35 ms
+  - Execution Time: 329.72 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1232,11 +1208,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc3LCJleHAiOjE3ODQwNDY2NzcsInJvbGUiOiJhZG1pbiJ9.Q1l_A-gb1-88rnNc4PodYBAhRoaE--yiuWjBUXbF9fI",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NywiZXhwIjoxNzg0NjQ3ODc3fQ.25jMSJN2cC775QceysdhD12lWYWcGyEu4XyzLl8Zt14",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODAzLCJleHAiOjE3ODQxMDM0MDMsInJvbGUiOiJhZG1pbiJ9.aG8XRRajOPdmZjMC-PGqSqez35AdJ8i_lhcxsXegJF0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwMywiZXhwIjoxNzg0NzA0NjAzfQ.8j0_rXMSMOIPVUhgI-P6R8Q_Pu0fKiEKOYTpw1Pj3sg",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1248,7 +1224,7 @@
   </details>
 - **2. GET http://testserver/api/v1/health/ai** 
   - Status Code: 404
-  - Execution Time: 3.10 ms
+  - Execution Time: 2.71 ms
   - Response Size: 22 bytes
   <details><summary>Response</summary>
   ```json
@@ -1257,10 +1233,10 @@
 }
   ```
   </details>
-- **3. POST http://testserver/api/v1/assistant/chat** 
+- **3. POST http://testserver/api/v1/assistant/chat**  ⚠️ **WARNING: >3s**
   - Status Code: 200
-  - Execution Time: 6.23 ms
-  - Response Size: 45 bytes
+  - Execution Time: 3352.09 ms
+  - Response Size: 262 bytes
   <details><summary>Payload</summary>
   ```json
   {
@@ -1272,7 +1248,7 @@
   <details><summary>Response</summary>
   ```json
   {
-  "message": "AI Assistant is not configured."
+  "content": "### Crime Trends in Karnataka\n\nHere are the top reported crime categories based on live FIR data:\n\n| Crime Type | Total Cases |\n|---|---|\n| Chain Snatching | 29 |\n| Theft | 24 |\n| Burglary | 23 |\n| Missing Person | 22 |\n| Assault | 22 |\n"
 }
   ```
   </details>
@@ -1280,11 +1256,11 @@
 
 ### tests/test_assistant.py::test_assistant_chat_invalid_payload
 **Status:** PASS
-**Test Duration:** 0.00s
+**Test Duration:** 0.36s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 491.77 ms
+  - Execution Time: 402.52 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1297,11 +1273,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc3LCJleHAiOjE3ODQwNDY2NzcsInJvbGUiOiJhZG1pbiJ9.Q1l_A-gb1-88rnNc4PodYBAhRoaE--yiuWjBUXbF9fI",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3NywiZXhwIjoxNzg0NjQ3ODc3fQ.25jMSJN2cC775QceysdhD12lWYWcGyEu4XyzLl8Zt14",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA3LCJleHAiOjE3ODQxMDM0MDcsInJvbGUiOiJhZG1pbiJ9.gpL81DV3a4Sr_f2Yh9uBXbwT5oMZGjwhgKgUolBLjyk",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwNywiZXhwIjoxNzg0NzA0NjA3fQ.G9bzIPZ_PWEBloeHAY50RcxUj-trWKTbXYpS406oVe8",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1313,7 +1289,7 @@
   </details>
 - **2. POST http://testserver/api/v1/assistant/chat** 
   - Status Code: 422
-  - Execution Time: 4.04 ms
+  - Execution Time: 354.68 ms
   - Response Size: 112 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1345,11 +1321,11 @@
 
 ### tests/test_auth.py::test_login_success
 **Status:** PASS
-**Test Duration:** 0.38s
+**Test Duration:** 0.39s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 383.03 ms
+  - Execution Time: 387.09 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1362,11 +1338,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc4LCJleHAiOjE3ODQwNDY2NzgsInJvbGUiOiJhZG1pbiJ9.o-nzwPPgNUPixfCa3gzXxqK7s1Xq2VHfnJDAm0ZFHxc",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OCwiZXhwIjoxNzg0NjQ3ODc4fQ.pIke1eY-z3vhdxmi_xVe4iwG-pya_LJfKDHfoRXL8M8",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA4LCJleHAiOjE3ODQxMDM0MDgsInJvbGUiOiJhZG1pbiJ9.3afPifB-UCKLKieIwtf0g8bGDaRZfWU-vVTrpSijUM0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOCwiZXhwIjoxNzg0NzA0NjA4fQ.hZppqHvCqNz7q30rFgb7j3vEytbXMb9HPNBUOzDiBNY",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1380,11 +1356,11 @@
 
 ### tests/test_auth.py::test_login_invalid_credentials
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.04s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 401
-  - Execution Time: 10.19 ms
+  - Execution Time: 34.23 ms
   - Response Size: 46 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1405,11 +1381,11 @@
 
 ### tests/test_auth.py::test_refresh_token
 **Status:** PASS
-**Test Duration:** 0.44s
+**Test Duration:** 0.36s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 490.99 ms
+  - Execution Time: 393.05 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1422,11 +1398,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc4LCJleHAiOjE3ODQwNDY2NzgsInJvbGUiOiJhZG1pbiJ9.o-nzwPPgNUPixfCa3gzXxqK7s1Xq2VHfnJDAm0ZFHxc",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OCwiZXhwIjoxNzg0NjQ3ODc4fQ.pIke1eY-z3vhdxmi_xVe4iwG-pya_LJfKDHfoRXL8M8",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA4LCJleHAiOjE3ODQxMDM0MDgsInJvbGUiOiJhZG1pbiJ9.3afPifB-UCKLKieIwtf0g8bGDaRZfWU-vVTrpSijUM0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOCwiZXhwIjoxNzg0NzA0NjA4fQ.hZppqHvCqNz7q30rFgb7j3vEytbXMb9HPNBUOzDiBNY",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1438,7 +1414,7 @@
   </details>
 - **2. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 433.48 ms
+  - Execution Time: 349.48 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1451,11 +1427,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc5LCJleHAiOjE3ODQwNDY2NzksInJvbGUiOiJhZG1pbiJ9.DpkmaxRA_-XRBngrFs_mqc8PAE9Y8bTpz0m56Ije1EU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OSwiZXhwIjoxNzg0NjQ3ODc5fQ.c9edxmRuSX_sjww-ZVvXVvwwWBKrjUhDiXvGqLHxxaM",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA5LCJleHAiOjE3ODQxMDM0MDksInJvbGUiOiJhZG1pbiJ9.oDcvZGnRV2pSiWA0guZcV9IbKk8LlKNkmBmhFnmE2zI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOSwiZXhwIjoxNzg0NzA0NjA5fQ.ncvc3bKMolriSJ7Osk49bwRWrYk3I-vAmV2O_Hi8QEY",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1467,20 +1443,20 @@
   </details>
 - **3. POST http://testserver/api/v1/auth/refresh** 
   - Status Code: 200
-  - Execution Time: 7.91 ms
+  - Execution Time: 6.55 ms
   - Response Size: 500 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OSwiZXhwIjoxNzg0NjQ3ODc5fQ.c9edxmRuSX_sjww-ZVvXVvwwWBKrjUhDiXvGqLHxxaM"
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOSwiZXhwIjoxNzg0NzA0NjA5fQ.ncvc3bKMolriSJ7Osk49bwRWrYk3I-vAmV2O_Hi8QEY"
 }
   ```
   </details>
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc5LCJleHAiOjE3ODQwNDY2NzksInJvbGUiOiJhZG1pbiJ9.DpkmaxRA_-XRBngrFs_mqc8PAE9Y8bTpz0m56Ije1EU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OSwiZXhwIjoxNzg0NjQ3ODc5fQ.c9edxmRuSX_sjww-ZVvXVvwwWBKrjUhDiXvGqLHxxaM",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA5LCJleHAiOjE3ODQxMDM0MDksInJvbGUiOiJhZG1pbiJ9.oDcvZGnRV2pSiWA0guZcV9IbKk8LlKNkmBmhFnmE2zI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOSwiZXhwIjoxNzg0NzA0NjA5fQ.ncvc3bKMolriSJ7Osk49bwRWrYk3I-vAmV2O_Hi8QEY",
   "token_type": "bearer"
 }
   ```
@@ -1489,11 +1465,11 @@
 
 ### tests/test_auth.py::test_refresh_token_invalid
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.00s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/refresh** 
   - Status Code: 401
-  - Execution Time: 7.51 ms
+  - Execution Time: 3.00 ms
   - Response Size: 129 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1513,11 +1489,11 @@
 
 ### tests/test_auth.py::test_get_me
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.02s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 374.50 ms
+  - Execution Time: 292.09 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1530,11 +1506,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDc5LCJleHAiOjE3ODQwNDY2NzksInJvbGUiOiJhZG1pbiJ9.DpkmaxRA_-XRBngrFs_mqc8PAE9Y8bTpz0m56Ije1EU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA3OSwiZXhwIjoxNzg0NjQ3ODc5fQ.c9edxmRuSX_sjww-ZVvXVvwwWBKrjUhDiXvGqLHxxaM",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA5LCJleHAiOjE3ODQxMDM0MDksInJvbGUiOiJhZG1pbiJ9.oDcvZGnRV2pSiWA0guZcV9IbKk8LlKNkmBmhFnmE2zI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOSwiZXhwIjoxNzg0NzA0NjA5fQ.ncvc3bKMolriSJ7Osk49bwRWrYk3I-vAmV2O_Hi8QEY",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1546,12 +1522,12 @@
   </details>
 - **2. GET http://testserver/api/v1/auth/me** 
   - Status Code: 200
-  - Execution Time: 7.98 ms
+  - Execution Time: 19.93 ms
   - Response Size: 139 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+  "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
   "name": "System Admin",
   "badge_no": "ADMIN001",
   "role": "admin",
@@ -1564,11 +1540,11 @@
 
 ### tests/test_auth.py::test_get_me_unauthorized
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.03s
 #### API Requests
 - **1. GET http://testserver/api/v1/auth/me** 
   - Status Code: 401
-  - Execution Time: 7.89 ms
+  - Execution Time: 25.50 ms
   - Response Size: 30 bytes
   <details><summary>Response</summary>
   ```json
@@ -1581,11 +1557,11 @@
 
 ### tests/test_auth.py::test_get_me_invalid_jwt
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.03s
 #### API Requests
 - **1. GET http://testserver/api/v1/auth/me** 
   - Status Code: 401
-  - Execution Time: 9.03 ms
+  - Execution Time: 23.15 ms
   - Response Size: 132 bytes
   <details><summary>Response</summary>
   ```json
@@ -1598,11 +1574,11 @@
 
 ### tests/test_dashboard.py::test_dashboard_summary
 **Status:** PASS
-**Test Duration:** 0.07s
+**Test Duration:** 0.04s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 462.56 ms
+  - Execution Time: 417.49 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1615,11 +1591,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgwLCJleHAiOjE3ODQwNDY2ODAsInJvbGUiOiJhZG1pbiJ9.SjJc9yNkERNpaY9bI7gL-p7RCEsaKLugyx41ubKHtYs",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MCwiZXhwIjoxNzg0NjQ3ODgwfQ.O8kajQpjlEbiGV1JyelQR00Z7-n511K6ekDm8ixDt2g",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODA5LCJleHAiOjE3ODQxMDM0MDksInJvbGUiOiJhZG1pbiJ9.oDcvZGnRV2pSiWA0guZcV9IbKk8LlKNkmBmhFnmE2zI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgwOSwiZXhwIjoxNzg0NzA0NjA5fQ.ncvc3bKMolriSJ7Osk49bwRWrYk3I-vAmV2O_Hi8QEY",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1631,15 +1607,15 @@
   </details>
 - **2. GET http://testserver/api/v1/dashboard/summary** 
   - Status Code: 200
-  - Execution Time: 65.48 ms
-  - Response Size: 3737 bytes
+  - Execution Time: 37.44 ms
+  - Response Size: 3613 bytes
   <details><summary>Response</summary>
   ```json
   {
   "stats": [
     {
       "label": "Total FIRs",
-      "value": "227",
+      "value": "200",
       "delta": "",
       "trend": "up"
     },
@@ -1651,196 +1627,190 @@
     },
     {
       "label": "Missing Persons (open)",
-      "value": "49",
+      "value": "37",
       "delta": "",
       "trend": "down"
     }
   ],
   "district_risk": [
     {
-      "district_id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
-      "district_name": "Bengaluru Rural",
-      "score": 87,
-      "severity": "critical"
-    },
-    {
-      "district_id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
-      "district_name": "Udupi",
-      "score": 87,
-      "severity": "critical"
-    },
-    {
-      "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
+      "district_id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
       "district_name": "Bengaluru Urban",
       "score": 82,
       "severity": "critical"
     },
     {
-      "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-      "district_name": "Kalaburagi",
-      "score": 82,
-      "severity": "critical"
-    },
-    {
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "district_name": "Bagalkot",
-      "score": 82,
-      "severity": "critical"
-    },
-    {
-      "district_id": "0e671165-ad57-427e-aa48-0b35eddad590",
-      "district_name": "Gadag",
-      "score": 80,
-      "severity": "critical"
-    },
-    {
-      "district_id": "ecdc21bd-d555-4248-90a5-b451655d207b",
-      "district_name": "Koppal",
-      "score": 78,
-      "severity": "critical"
-    },
-    {
-      "district_id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
-      "district_name": "Bidar",
+      "district_id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
+      "district_name": "Chikkamagaluru",
       "score": 77,
       "severity": "critical"
     },
     {
-      "district_id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+      "district_id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
+      "district_name": "Raichur",
+      "score": 74,
+      "severity": "high"
+    },
+    {
+      "district_id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
+      "district_name": "Haveri",
+      "score": 74,
+      "severity": "high"
+    },
+    {
+      "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
+      "district_name": "Bagalkot",
+      "score": 73,
+      "severity": "high"
+    },
+    {
+      "district_id": "2ece71de-53db-460c-bbce-116062a5b242",
+      "district_name": "Bengaluru Rural",
+      "score": 72,
+      "severity": "high"
+    },
+    {
+      "district_id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
+      "district_name": "Mandya",
+      "score": 69,
+      "severity": "high"
+    },
+    {
+      "district_id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
       "district_name": "Vijayapura",
-      "score": 76,
-      "severity": "critical"
-    },
-    {
-      "district_id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
-      "district_name": "Uttara Kannada",
-      "score": 71,
+      "score": 61,
       "severity": "high"
     },
     {
-      "district_id": "57a16457-3924-47fe-93ff-3d712f898179",
-      "district_name": "Tumakuru",
-      "score": 70,
+      "district_id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
+      "district_name": "Gadag",
+      "score": 61,
       "severity": "high"
     },
     {
-      "district_id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+      "district_id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
+      "district_name": "Shivamogga",
+      "score": 59,
+      "severity": "high"
+    },
+    {
+      "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
       "district_name": "Mysuru",
       "score": 58,
       "severity": "high"
     },
     {
-      "district_id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
-      "district_name": "Shivamogga",
-      "score": 55,
+      "district_id": "98764d58-3de9-4541-9f06-75dd25c858c5",
+      "district_name": "Udupi",
+      "score": 52,
       "severity": "high"
     },
     {
-      "district_id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
-      "district_name": "Ballari",
-      "score": 55,
+      "district_id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
+      "district_name": "Yadgir",
+      "score": 52,
       "severity": "high"
     },
     {
-      "district_id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
-      "district_name": "Mandya",
-      "score": 55,
-      "severity": "high"
-    },
-    {
-      "district_id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
-      "district_name": "Davanagere",
-      "score": 53,
-      "severity": "high"
-    },
-    {
-      "district_id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
-      "district_name": "Chikkamagaluru",
-      "score": 47,
+      "district_id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
+      "district_name": "Kolar",
+      "score": 49,
       "severity": "medium"
     },
     {
-      "district_id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
-      "district_name": "Kolar",
+      "district_id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
+      "district_name": "Hassan",
+      "score": 45,
+      "severity": "medium"
+    },
+    {
+      "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+      "district_name": "Dakshina Kannada",
+      "score": 44,
+      "severity": "medium"
+    },
+    {
+      "district_id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
+      "district_name": "Belagavi",
+      "score": 41,
+      "severity": "medium"
+    },
+    {
+      "district_id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
+      "district_name": "Ballari",
       "score": 36,
       "severity": "medium"
     },
     {
-      "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-      "district_name": "Dakshina Kannada",
+      "district_id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
+      "district_name": "Tumakuru",
       "score": 35,
       "severity": "medium"
     },
     {
-      "district_id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
-      "district_name": "Haveri",
-      "score": 34,
+      "district_id": "407e3135-243b-4b77-9e0c-efb586e46d82",
+      "district_name": "Davanagere",
+      "score": 33,
       "severity": "medium"
     },
     {
-      "district_id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
-      "district_name": "Belagavi",
-      "score": 29,
-      "severity": "low"
+      "district_id": "a78b8663-4be0-42ef-937c-5f09c0146486",
+      "district_name": "Chamarajanagar",
+      "score": 33,
+      "severity": "medium"
     },
     {
-      "district_id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
-      "district_name": "Yadgir",
-      "score": 29,
-      "severity": "low"
+      "district_id": "e253fca6-7bb0-438b-a372-2c9798d09229",
+      "district_name": "Chikkaballapur",
+      "score": 33,
+      "severity": "medium"
     },
     {
-      "district_id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+      "district_id": "a81285f2-946f-4c2f-b865-388fb7616019",
+      "district_name": "Bidar",
+      "score": 32,
+      "severity": "medium"
+    },
+    {
+      "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
       "district_name": "Dharwad",
+      "score": 31,
+      "severity": "medium"
+    },
+    {
+      "district_id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
+      "district_name": "Ramanagara",
+      "score": 23,
+      "severity": "low"
+    },
+    {
+      "district_id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
+      "district_name": "Koppal",
       "score": 21,
       "severity": "low"
     },
     {
-      "district_id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
-      "district_name": "Chikkaballapur",
+      "district_id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
+      "district_name": "Chitradurga",
       "score": 20,
       "severity": "low"
     },
     {
-      "district_id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+      "district_id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
       "district_name": "Kodagu",
       "score": 18,
       "severity": "low"
     },
     {
-      "district_id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
-      "district_name": "Raichur",
-      "score": 17,
+      "district_id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
+      "district_name": "Uttara Kannada",
+      "score": 18,
       "severity": "low"
     },
     {
-      "district_id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
-      "district_name": "Chitradurga",
-      "score": 15,
-      "severity": "low"
-    },
-    {
-      "district_id": "4ded930b-2721-4ce8-bded-af87807b7816",
-      "district_name": "Chamarajanagar",
-      "score": 14,
-      "severity": "low"
-    },
-    {
-      "district_id": "c556cace-805b-469b-a10f-3277c189c111",
-      "district_name": "Hassan",
+      "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+      "district_name": "Kalaburagi",
       "score": 13,
-      "severity": "low"
-    },
-    {
-      "district_id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
-      "district_name": "Ramanagara",
-      "score": 11,
-      "severity": "low"
-    },
-    {
-      "district_id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-      "district_name": "Test District",
-      "score": 0,
       "severity": "low"
     }
   ]
@@ -1851,11 +1821,11 @@
 
 ### tests/test_fir.py::test_fir_crud
 **Status:** PASS
-**Test Duration:** 0.14s
+**Test Duration:** 0.58s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 396.23 ms
+  - Execution Time: 300.27 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -1868,11 +1838,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgwLCJleHAiOjE3ODQwNDY2ODAsInJvbGUiOiJhZG1pbiJ9.SjJc9yNkERNpaY9bI7gL-p7RCEsaKLugyx41ubKHtYs",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MCwiZXhwIjoxNzg0NjQ3ODgwfQ.O8kajQpjlEbiGV1JyelQR00Z7-n511K6ekDm8ixDt2g",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODEwLCJleHAiOjE3ODQxMDM0MTAsInJvbGUiOiJhZG1pbiJ9.RaAkjatr5cGIkH_c-dLjbwTy1wbY1ot1lGCFseGloKs",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMCwiZXhwIjoxNzg0NzA0NjEwfQ.AtbYRILLNSl8mGpAGe0mz1QFj0-BF_py_JtUYomN8LI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -1884,193 +1854,187 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 9.93 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 143.56 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -2080,193 +2044,187 @@
   </details>
 - **3. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 6.66 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 4.72 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -2276,20 +2234,20 @@
   </details>
 - **4. POST http://testserver/api/v1/fir** 
   - Status Code: 201
-  - Execution Time: 38.11 ms
+  - Execution Time: 137.90 ms
   - Response Size: 525 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "fir_no": "KA-2026-09CFC6",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "fir_no": "KA-2026-B844FA",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [
     "379"
   ],
-  "incident_datetime": "2026-07-14T15:31:20.666963+00:00",
-  "reported_datetime": "2026-07-14T15:31:20.666963+00:00",
+  "incident_datetime": "2026-07-15T07:16:50.726092+00:00",
+  "reported_datetime": "2026-07-15T07:16:50.726092+00:00",
   "location": {
     "lat": 12.9716,
     "lng": 77.5946
@@ -2302,523 +2260,573 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "85dfc886-db69-413e-b6dc-b9740d3fc985",
-  "fir_no": "KA-2026-09CFC6",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "id": "c0be9f5b-9eab-4792-806c-e1f81e533f56",
+  "fir_no": "KA-2026-B844FA",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [
     "379"
   ],
-  "incident_datetime": "2026-07-14T21:01:20.666963+05:30",
-  "reported_datetime": "2026-07-14T21:01:20.666963+05:30",
+  "incident_datetime": "2026-07-15T12:46:50.726092+05:30",
+  "reported_datetime": "2026-07-15T12:46:50.726092+05:30",
   "address_text": "Integration Test Address",
   "mo_description": "Test MO",
   "status": "open",
   "victim_age_bucket": null,
   "accused_count": 0,
   "weapon_used": null,
-  "created_at": "2026-07-14T21:01:20.248767+05:30"
+  "created_at": "2026-07-15T12:46:50.021516+05:30"
 }
   ```
   </details>
 - **5. GET http://testserver/api/v1/fir** 
   - Status Code: 200
-  - Execution Time: 33.09 ms
-  - Response Size: 12854 bytes
+  - Execution Time: 17.48 ms
+  - Response Size: 15224 bytes
   <details><summary>Response</summary>
   ```json
   {
   "items": [
     {
-      "id": "85dfc886-db69-413e-b6dc-b9740d3fc985",
-      "fir_no": "KA-2026-09CFC6",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+      "id": "c0be9f5b-9eab-4792-806c-e1f81e533f56",
+      "fir_no": "KA-2026-B844FA",
+      "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+      "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
       "crime_type": "theft",
       "ipc_sections": [
         "379"
       ],
-      "incident_datetime": "2026-07-14T21:01:20.666963+05:30",
-      "reported_datetime": "2026-07-14T21:01:20.666963+05:30",
+      "incident_datetime": "2026-07-15T12:46:50.726092+05:30",
+      "reported_datetime": "2026-07-15T12:46:50.726092+05:30",
       "address_text": "Integration Test Address",
       "mo_description": "Test MO",
       "status": "open",
       "victim_age_bucket": null,
       "accused_count": 0,
       "weapon_used": null,
-      "created_at": "2026-07-14T21:01:20.248767+05:30"
+      "created_at": "2026-07-15T12:46:50.021516+05:30"
     },
     {
-      "id": "4908a724-8475-412d-a10d-d118835e598f",
-      "fir_no": "KA-2026-255C29",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T20:58:54.989207+05:30",
-      "reported_datetime": "2026-07-14T20:58:54.989207+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:58:54.544513+05:30"
-    },
-    {
-      "id": "cebfb521-1422-4698-9a70-17b462a2d010",
-      "fir_no": "KA-2026-996A63",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "ea761c46-d48a-4104-89c9-5f2a6f8bb45a",
+      "fir_no": "FIR-2026-0189",
+      "station_id": "d565817a-7aad-42cc-a37a-440f15b1f7f3",
+      "district_id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
+      "crime_type": "chain_snatching",
       "ipc_sections": [
+        "415",
+        "300",
         "379"
       ],
-      "incident_datetime": "2026-07-14T20:58:54.396200+05:30",
-      "reported_datetime": "2026-07-14T20:58:54.396200+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-07-12T05:02:09.929601+05:30",
+      "reported_datetime": "2026-07-13T07:02:09.929601+05:30",
+      "address_text": "Near Mandya Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "open",
+      "victim_age_bucket": "51-65",
+      "accused_count": 2,
+      "weapon_used": "None",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "ca398e9e-f5ee-4919-b3fa-4051236d9416",
+      "fir_no": "FIR-2026-0055",
+      "station_id": "e2299603-a2b3-416c-811f-24585030b250",
+      "district_id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
+      "crime_type": "missing_person",
+      "ipc_sections": [
+        "351"
+      ],
+      "incident_datetime": "2026-07-11T20:02:09.882099+05:30",
+      "reported_datetime": "2026-07-13T07:02:09.882099+05:30",
+      "address_text": "Near Gadag Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "36-50",
+      "accused_count": 3,
+      "weapon_used": "Knife",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "f67de00c-55cb-4e15-ad9f-046fe1458832",
+      "fir_no": "FIR-2026-0081",
+      "station_id": "84fea1cd-9472-4a0f-b73f-1c2029f9bbda",
+      "district_id": "2ece71de-53db-460c-bbce-116062a5b242",
+      "crime_type": "vehicle_theft",
+      "ipc_sections": [
+        "420"
+      ],
+      "incident_datetime": "2026-07-08T20:02:09.895814+05:30",
+      "reported_datetime": "2026-07-11T07:02:09.895814+05:30",
+      "address_text": "Near Bengaluru Rural Town PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:58:53.905905+05:30"
+      "victim_age_bucket": "65+",
+      "accused_count": 1,
+      "weapon_used": "Rope",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "378a71f9-89a9-4ada-b07d-ab091312602c",
-      "fir_no": "KA-2026-22C254",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T20:56:11.500578+05:30",
-      "reported_datetime": "2026-07-14T20:56:11.500578+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:56:10.817722+05:30"
+      "id": "176131d3-c52e-483e-9e0c-cf1f4bd0c71a",
+      "fir_no": "FIR-2026-0109",
+      "station_id": "f2877897-26c3-4359-829f-6328bccc3411",
+      "district_id": "98764d58-3de9-4541-9f06-75dd25c858c5",
+      "crime_type": "burglary",
+      "ipc_sections": [
+        "351",
+        "420"
+      ],
+      "incident_datetime": "2026-07-07T21:02:09.906409+05:30",
+      "reported_datetime": "2026-07-09T07:02:09.906409+05:30",
+      "address_text": "Near Udupi Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "closed",
+      "victim_age_bucket": "51-65",
+      "accused_count": 2,
+      "weapon_used": "Blunt Object",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "151845fd-3c9b-49fe-aab8-e5b1b8f8fb1c",
-      "fir_no": "KA-2026-4F391D",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "d43d3d99-9d69-4069-9eee-fe59c8d3c120",
+      "fir_no": "FIR-2026-0184",
+      "station_id": "000fd116-3088-42a1-9613-407385a6100e",
+      "district_id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
+      "crime_type": "burglary",
+      "ipc_sections": [
+        "415"
+      ],
+      "incident_datetime": "2026-07-05T08:02:09.929601+05:30",
+      "reported_datetime": "2026-07-08T07:02:09.929601+05:30",
+      "address_text": "Near Mandya Cyber PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "0-18",
+      "accused_count": 5,
+      "weapon_used": "Firearm",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "592c1117-6236-43a6-9753-9a99282e84e8",
+      "fir_no": "FIR-2026-0148",
+      "station_id": "a6f2d9fd-e666-4b47-97f0-42fce4135891",
+      "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+      "crime_type": "assault",
       "ipc_sections": [
         "379"
       ],
-      "incident_datetime": "2026-07-14T20:56:10.610445+05:30",
-      "reported_datetime": "2026-07-14T20:56:10.610445+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
-      "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:56:10.037157+05:30"
-    },
-    {
-      "id": "f8a3cde2-90e5-4d00-906c-3ccfba882da7",
-      "fir_no": "KA-2026-A608FE",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T20:49:16.194794+05:30",
-      "reported_datetime": "2026-07-14T20:49:16.194794+05:30",
-      "address_text": null,
-      "mo_description": null,
+      "incident_datetime": "2026-07-04T19:02:09.919066+05:30",
+      "reported_datetime": "2026-07-05T07:02:09.919066+05:30",
+      "address_text": "Near Nazarbad PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:49:15.640786+05:30"
+      "victim_age_bucket": "0-18",
+      "accused_count": 2,
+      "weapon_used": "None",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "c153f51c-b074-48fc-a79b-1d85221e2e53",
-      "fir_no": "KA-2026-445C7F",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+      "id": "dbb1b8fe-d218-4db6-aac7-c2f3b1fff75b",
+      "fir_no": "FIR-2026-0063",
+      "station_id": "ed40d7af-0822-4033-8e87-94c507c8a5ce",
+      "district_id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
+      "crime_type": "assault",
+      "ipc_sections": [
+        "415",
+        "498A"
+      ],
+      "incident_datetime": "2026-07-04T03:02:09.888410+05:30",
+      "reported_datetime": "2026-07-06T07:02:09.888410+05:30",
+      "address_text": "Near Hassan Traffic PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "0-18",
+      "accused_count": 1,
+      "weapon_used": "None",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "73c5204a-f455-4872-9bf2-c8be92f3e7a2",
+      "fir_no": "FIR-2026-0059",
+      "station_id": "4587c619-5c88-4bfa-bf7e-174dee56be6b",
+      "district_id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
+      "crime_type": "robbery",
+      "ipc_sections": [
+        "352",
+        "302",
+        "415"
+      ],
+      "incident_datetime": "2026-07-02T16:02:09.884188+05:30",
+      "reported_datetime": "2026-07-05T07:02:09.884188+05:30",
+      "address_text": "Near Mandya Traffic PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "36-50",
+      "accused_count": 3,
+      "weapon_used": "Rope",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "5feb820e-d173-4155-909f-68b3497275c2",
+      "fir_no": "FIR-2026-0101",
+      "station_id": "1cda79dc-606a-47cd-aac1-ee2cbaef4467",
+      "district_id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
       "crime_type": "theft",
       "ipc_sections": [
-        "379"
+        "415",
+        "415"
       ],
-      "incident_datetime": "2026-07-14T20:49:15.243259+05:30",
-      "reported_datetime": "2026-07-14T20:49:15.243259+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-07-01T17:02:09.903764+05:30",
+      "reported_datetime": "2026-07-03T07:02:09.903764+05:30",
+      "address_text": "Near Chitradurga Cyber PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:49:14.693675+05:30"
+      "victim_age_bucket": "65+",
+      "accused_count": 4,
+      "weapon_used": "Firearm",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "95066287-8463-40f1-bc5e-3ef6ec106862",
-      "fir_no": "KA-2026-57B983",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T20:48:12.892870+05:30",
-      "reported_datetime": "2026-07-14T20:48:12.892870+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:48:12.349745+05:30"
-    },
-    {
-      "id": "e485b0b8-c385-40ae-9e89-00836a7455c4",
-      "fir_no": "KA-2026-22DAF1",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "902144fc-6fa6-4a7a-8355-fb4128697455",
+      "fir_no": "FIR-2026-0033",
+      "station_id": "3db8614f-d191-4318-adb5-42b5ddac3738",
+      "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+      "crime_type": "assault",
       "ipc_sections": [
-        "379"
+        "302",
+        "498A"
       ],
-      "incident_datetime": "2026-07-14T20:48:11.562038+05:30",
-      "reported_datetime": "2026-07-14T20:48:11.562038+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
-      "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:48:10.960556+05:30"
+      "incident_datetime": "2026-06-29T22:02:09.867579+05:30",
+      "reported_datetime": "2026-06-30T07:02:09.867579+05:30",
+      "address_text": "Near Pandeshwar PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "investigation",
+      "victim_age_bucket": "51-65",
+      "accused_count": 5,
+      "weapon_used": "Knife",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "96b5d865-50fa-4f1a-9e46-82e4da8f0513",
-      "fir_no": "KA-2026-D62B34",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T20:42:42.740996+05:30",
-      "reported_datetime": "2026-07-14T20:42:42.740996+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:42:42.292872+05:30"
-    },
-    {
-      "id": "33b6aa40-c2a9-411d-9d18-a3cfe8ac5f3d",
-      "fir_no": "KA-2026-AB4C24",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "6e19824c-1df8-4d8d-9168-b46a29dc9a88",
+      "fir_no": "FIR-2026-0075",
+      "station_id": "c29c1275-6d8b-416c-ac03-0931789399f8",
+      "district_id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
+      "crime_type": "cybercrime",
       "ipc_sections": [
-        "379"
+        "378",
+        "302",
+        "352"
       ],
-      "incident_datetime": "2026-07-14T20:42:42.123376+05:30",
-      "reported_datetime": "2026-07-14T20:42:42.123376+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-06-28T01:02:09.893805+05:30",
+      "reported_datetime": "2026-06-30T07:02:09.893805+05:30",
+      "address_text": "Near Raichur Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T20:42:41.640846+05:30"
+      "victim_age_bucket": "51-65",
+      "accused_count": 3,
+      "weapon_used": "Poison",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "9eb3b804-0a75-406e-bd42-fddd6de4d399",
-      "fir_no": "KA-2026-55C17F",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:40:50.069313+05:30",
-      "reported_datetime": "2026-07-14T18:40:50.069313+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:40:49.518868+05:30"
-    },
-    {
-      "id": "16e0d65b-86f9-4954-b63f-36949b86e866",
-      "fir_no": "KA-2026-DC94C3",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "fd533271-fe09-4a47-99a2-38b563a86b58",
+      "fir_no": "FIR-2026-0011",
+      "station_id": "d699bcf6-1ec1-4b79-b70d-803753cc6a6b",
+      "district_id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
+      "crime_type": "burglary",
       "ipc_sections": [
-        "379"
+        "420"
       ],
-      "incident_datetime": "2026-07-14T18:40:47.854167+05:30",
-      "reported_datetime": "2026-07-14T18:40:47.854167+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-06-27T15:02:09.847155+05:30",
+      "reported_datetime": "2026-06-28T07:02:09.847155+05:30",
+      "address_text": "Near Vijayapura Town PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:40:47.410105+05:30"
+      "victim_age_bucket": "36-50",
+      "accused_count": 3,
+      "weapon_used": "Poison",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "4ba0f30f-45b0-4b23-8502-8b1166954e49",
-      "fir_no": "KA-2026-600CDB",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:39:35.408816+05:30",
-      "reported_datetime": "2026-07-14T18:39:35.408816+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:39:35.002479+05:30"
-    },
-    {
-      "id": "d9ee8b97-8a6b-44d3-95ba-00ec423f1231",
-      "fir_no": "KA-2026-4ABD55",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "ef046873-e72b-4c0b-b0e0-9c62cf369ba6",
+      "fir_no": "FIR-2026-0089",
+      "station_id": "39738dde-dbdc-4591-b53b-3f183c53de14",
+      "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+      "crime_type": "robbery",
       "ipc_sections": [
-        "379"
+        "378",
+        "390",
+        "352"
       ],
-      "incident_datetime": "2026-07-14T18:39:34.499885+05:30",
-      "reported_datetime": "2026-07-14T18:39:34.499885+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-06-27T00:02:09.899620+05:30",
+      "reported_datetime": "2026-06-28T07:02:09.899620+05:30",
+      "address_text": "Near Kalaburagi Town PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:39:34.087850+05:30"
+      "victim_age_bucket": "0-18",
+      "accused_count": 2,
+      "weapon_used": "Blunt Object",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "eeed3d5c-37a4-4523-98d6-5a3ba4182372",
-      "fir_no": "KA-2026-DB48B4",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:38:21.429768+05:30",
-      "reported_datetime": "2026-07-14T18:38:21.429768+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:38:21.013330+05:30"
-    },
-    {
-      "id": "408edb5a-983a-4a68-b632-34c691d0f68b",
-      "fir_no": "KA-2026-D2CFE1",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "4a238b33-7928-470e-a842-dc572d05485f",
+      "fir_no": "FIR-2026-0023",
+      "station_id": "a6f2d9fd-e666-4b47-97f0-42fce4135891",
+      "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+      "crime_type": "chain_snatching",
       "ipc_sections": [
-        "379"
+        "420",
+        "390"
       ],
-      "incident_datetime": "2026-07-14T18:38:19.665437+05:30",
-      "reported_datetime": "2026-07-14T18:38:19.665437+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-06-25T09:02:09.860067+05:30",
+      "reported_datetime": "2026-06-26T07:02:09.860067+05:30",
+      "address_text": "Near Nazarbad PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:38:19.228080+05:30"
+      "victim_age_bucket": "36-50",
+      "accused_count": 4,
+      "weapon_used": "Rope",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "f4b252f2-0dd2-45cb-9334-482805b1d214",
-      "fir_no": "KA-2026-789C3F",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:36:01.657284+05:30",
-      "reported_datetime": "2026-07-14T18:36:01.657284+05:30",
-      "address_text": null,
-      "mo_description": null,
-      "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:36:00.946519+05:30"
-    },
-    {
-      "id": "45967a8e-c7c8-4f30-8de1-6627089b9f5f",
-      "fir_no": "KA-2026-C1BA72",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "1f2a1e39-5bc7-4394-8912-b4b050200b99",
+      "fir_no": "FIR-2026-0120",
+      "station_id": "c42daf9d-ba6f-4a87-9e11-81f94a94c0c9",
+      "district_id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
+      "crime_type": "robbery",
       "ipc_sections": [
-        "379"
+        "351",
+        "390"
       ],
-      "incident_datetime": "2026-07-14T18:36:00.039242+05:30",
-      "reported_datetime": "2026-07-14T18:36:00.039242+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
-      "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:35:59.590840+05:30"
-    },
-    {
-      "id": "1482dfd4-16f8-42dd-b761-6fa5851b270f",
-      "fir_no": "KA-2026-10D887",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:31:20.765232+05:30",
-      "reported_datetime": "2026-07-14T18:31:20.765232+05:30",
-      "address_text": null,
-      "mo_description": null,
+      "incident_datetime": "2026-06-23T15:02:09.910875+05:30",
+      "reported_datetime": "2026-06-25T07:02:09.910875+05:30",
+      "address_text": "Near Uttara Kannada Cyber PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:31:20.044742+05:30"
+      "victim_age_bucket": "51-65",
+      "accused_count": 4,
+      "weapon_used": "Knife",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "7aa8a496-8def-4135-88bd-b6c663cc5e86",
-      "fir_no": "KA-2026-4F7E91",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "d4bd2a72-8e5a-49db-9857-05d026e06e26",
+      "fir_no": "FIR-2026-0066",
+      "station_id": "0c9c0be5-e0b6-4b65-a72a-560d6673fa76",
+      "district_id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
+      "crime_type": "missing_person",
       "ipc_sections": [
+        "378",
+        "498A",
         "379"
       ],
-      "incident_datetime": "2026-07-14T18:31:19.345995+05:30",
-      "reported_datetime": "2026-07-14T18:31:19.345995+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
-      "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:31:18.706161+05:30"
-    },
-    {
-      "id": "12256f40-e939-46db-a84c-685903a8b8e6",
-      "fir_no": "KA-2026-AE185D",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:29:08.881979+05:30",
-      "reported_datetime": "2026-07-14T18:29:08.881979+05:30",
-      "address_text": null,
-      "mo_description": null,
+      "incident_datetime": "2026-06-19T01:02:09.888410+05:30",
+      "reported_datetime": "2026-06-19T07:02:09.888410+05:30",
+      "address_text": "Near Hassan Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:29:08.263011+05:30"
+      "victim_age_bucket": "65+",
+      "accused_count": 4,
+      "weapon_used": "Blunt Object",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "18db09a4-2008-455c-a04b-6b1ebf383e2e",
-      "fir_no": "KA-2026-DCAA27",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "7f62af00-ca5a-4b6f-9138-8d133008ba2d",
+      "fir_no": "FIR-2026-0003",
+      "station_id": "765714da-56e9-45a5-a7ee-f016aabc0fcc",
+      "district_id": "407e3135-243b-4b77-9e0c-efb586e46d82",
+      "crime_type": "other",
       "ipc_sections": [
-        "379"
+        "392"
       ],
-      "incident_datetime": "2026-07-14T18:29:07.925589+05:30",
-      "reported_datetime": "2026-07-14T18:29:07.925589+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
-      "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:29:07.058824+05:30"
+      "incident_datetime": "2026-06-18T14:02:09.832685+05:30",
+      "reported_datetime": "2026-06-19T07:02:09.832685+05:30",
+      "address_text": "Near Davanagere Cyber PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "65+",
+      "accused_count": 1,
+      "weapon_used": "None",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "85447854-f88e-456a-8418-8f6e3c52ad95",
-      "fir_no": "KA-2026-0AC4B5",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
-      "ipc_sections": [],
-      "incident_datetime": "2026-07-14T18:25:13.661353+05:30",
-      "reported_datetime": "2026-07-14T18:25:13.661353+05:30",
-      "address_text": null,
-      "mo_description": null,
+      "id": "bca1eefe-19b2-4852-aa57-d6d934f935b4",
+      "fir_no": "FIR-2026-0124",
+      "station_id": "a2ef4bd0-4d12-4160-9508-d326ab140cce",
+      "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+      "crime_type": "missing_person",
+      "ipc_sections": [
+        "302",
+        "390",
+        "352"
+      ],
+      "incident_datetime": "2026-06-16T18:02:09.911869+05:30",
+      "reported_datetime": "2026-06-17T07:02:09.911869+05:30",
+      "address_text": "Near Kalaburagi Women PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "investigation",
+      "victim_age_bucket": "0-18",
+      "accused_count": 2,
+      "weapon_used": "Blunt Object",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "c5717cd0-714d-4630-a068-97bcd984df8e",
+      "fir_no": "FIR-2026-0012",
+      "station_id": "470f6521-d703-4d50-985a-0bd5c1c4fd6f",
+      "district_id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
+      "crime_type": "other",
+      "ipc_sections": [
+        "498A",
+        "300",
+        "351"
+      ],
+      "incident_datetime": "2026-06-15T19:02:09.848272+05:30",
+      "reported_datetime": "2026-06-17T07:02:09.848272+05:30",
+      "address_text": "Near Uttara Kannada Traffic PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "investigation",
+      "victim_age_bucket": "65+",
+      "accused_count": 1,
+      "weapon_used": "Rope",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "e1e06051-3007-4e86-a76b-d0f6a815a680",
+      "fir_no": "FIR-2026-0092",
+      "station_id": "416936f5-37e0-42c7-8d94-010d459f7fda",
+      "district_id": "a78b8663-4be0-42ef-937c-5f09c0146486",
+      "crime_type": "cybercrime",
+      "ipc_sections": [
+        "300"
+      ],
+      "incident_datetime": "2026-06-15T16:02:09.900627+05:30",
+      "reported_datetime": "2026-06-16T07:02:09.900627+05:30",
+      "address_text": "Near Chamarajanagar Rural PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "investigation",
+      "victim_age_bucket": "0-18",
+      "accused_count": 3,
+      "weapon_used": "Knife",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "25dab04d-8cfb-4d75-9bf9-fb60dc5e28e1",
+      "fir_no": "FIR-2026-0021",
+      "station_id": "2d8291fd-3889-455d-80b0-946aab385d05",
+      "district_id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
+      "crime_type": "burglary",
+      "ipc_sections": [
+        "390",
+        "420",
+        "420"
+      ],
+      "incident_datetime": "2026-06-15T06:02:09.859098+05:30",
+      "reported_datetime": "2026-06-16T07:02:09.859098+05:30",
+      "address_text": "Near Shivamogga Women PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "investigation",
+      "victim_age_bucket": "65+",
+      "accused_count": 1,
+      "weapon_used": "Blunt Object",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "82b078db-0eff-46e9-9e58-fe7eb423807d",
+      "fir_no": "FIR-2026-0095",
+      "station_id": "42404f53-c79d-45ae-8583-eb165c119c0a",
+      "district_id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
+      "crime_type": "robbery",
+      "ipc_sections": [
+        "351",
+        "378"
+      ],
+      "incident_datetime": "2026-06-11T11:02:09.902245+05:30",
+      "reported_datetime": "2026-06-12T07:02:09.902245+05:30",
+      "address_text": "Near Yadgir Town PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "open",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:25:13.060517+05:30"
+      "victim_age_bucket": "65+",
+      "accused_count": 3,
+      "weapon_used": "Rope",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     },
     {
-      "id": "a7196d06-6b56-4bb2-83a6-ba30dc0641a4",
-      "fir_no": "KA-2026-4F38A2",
-      "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-      "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
-      "crime_type": "theft",
+      "id": "b60cc729-9a8b-44b7-a4da-399c53de16e7",
+      "fir_no": "FIR-2026-0070",
+      "station_id": "08f69542-ed9b-44ab-8bb0-88cbb7886d1b",
+      "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+      "crime_type": "assault",
       "ipc_sections": [
-        "379"
+        "302",
+        "300"
       ],
-      "incident_datetime": "2026-07-14T18:25:12.822448+05:30",
-      "reported_datetime": "2026-07-14T18:25:12.822448+05:30",
-      "address_text": "Integration Test Address",
-      "mo_description": "Test MO",
+      "incident_datetime": "2026-06-09T19:02:09.890924+05:30",
+      "reported_datetime": "2026-06-11T07:02:09.890924+05:30",
+      "address_text": "Near Dharwad Town PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
       "status": "closed",
-      "victim_age_bucket": null,
-      "accused_count": 0,
-      "weapon_used": null,
-      "created_at": "2026-07-14T18:25:12.182115+05:30"
+      "victim_age_bucket": "36-50",
+      "accused_count": 3,
+      "weapon_used": "Knife",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
+    },
+    {
+      "id": "2ae155db-f9b4-49ef-97ae-20926f3892cb",
+      "fir_no": "FIR-2026-0013",
+      "station_id": "17bbdcbf-7143-4a0f-bb0a-331305dd5d24",
+      "district_id": "a81285f2-946f-4c2f-b865-388fb7616019",
+      "crime_type": "missing_person",
+      "ipc_sections": [
+        "420",
+        "392",
+        "390"
+      ],
+      "incident_datetime": "2026-06-06T17:02:09.849854+05:30",
+      "reported_datetime": "2026-06-08T07:02:09.849854+05:30",
+      "address_text": "Near Bidar Traffic PS jurisdiction",
+      "mo_description": "Sample modus operandi description generated by seed script.",
+      "status": "chargesheet",
+      "victim_age_bucket": "65+",
+      "accused_count": 5,
+      "weapon_used": "Firearm",
+      "created_at": "2026-07-15T12:32:09.786243+05:30"
     }
   ],
-  "total": 228,
+  "total": 201,
   "page": 1,
   "page_size": 25,
-  "total_pages": 10
+  "total_pages": 9
 }
   ```
   </details>
-- **6. GET http://testserver/api/v1/fir/85dfc886-db69-413e-b6dc-b9740d3fc985** 
+- **6. GET http://testserver/api/v1/fir/c0be9f5b-9eab-4792-806c-e1f81e533f56** 
   - Status Code: 200
-  - Execution Time: 11.99 ms
+  - Execution Time: 5.77 ms
   - Response Size: 525 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "85dfc886-db69-413e-b6dc-b9740d3fc985",
-  "fir_no": "KA-2026-09CFC6",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "id": "c0be9f5b-9eab-4792-806c-e1f81e533f56",
+  "fir_no": "KA-2026-B844FA",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [
     "379"
   ],
-  "incident_datetime": "2026-07-14T21:01:20.666963+05:30",
-  "reported_datetime": "2026-07-14T21:01:20.666963+05:30",
+  "incident_datetime": "2026-07-15T12:46:50.726092+05:30",
+  "reported_datetime": "2026-07-15T12:46:50.726092+05:30",
   "address_text": "Integration Test Address",
   "mo_description": "Test MO",
   "status": "open",
   "victim_age_bucket": null,
   "accused_count": 0,
   "weapon_used": null,
-  "created_at": "2026-07-14T21:01:20.248767+05:30"
+  "created_at": "2026-07-15T12:46:50.021516+05:30"
 }
   ```
   </details>
-- **7. PATCH http://testserver/api/v1/fir/85dfc886-db69-413e-b6dc-b9740d3fc985** 
+- **7. PATCH http://testserver/api/v1/fir/c0be9f5b-9eab-4792-806c-e1f81e533f56** 
   - Status Code: 200
-  - Execution Time: 24.39 ms
+  - Execution Time: 12.78 ms
   - Response Size: 527 bytes
   <details><summary>Payload</summary>
   ```json
@@ -2830,50 +2838,50 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "85dfc886-db69-413e-b6dc-b9740d3fc985",
-  "fir_no": "KA-2026-09CFC6",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "id": "c0be9f5b-9eab-4792-806c-e1f81e533f56",
+  "fir_no": "KA-2026-B844FA",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [
     "379"
   ],
-  "incident_datetime": "2026-07-14T21:01:20.666963+05:30",
-  "reported_datetime": "2026-07-14T21:01:20.666963+05:30",
+  "incident_datetime": "2026-07-15T12:46:50.726092+05:30",
+  "reported_datetime": "2026-07-15T12:46:50.726092+05:30",
   "address_text": "Integration Test Address",
   "mo_description": "Test MO",
   "status": "closed",
   "victim_age_bucket": null,
   "accused_count": 0,
   "weapon_used": null,
-  "created_at": "2026-07-14T21:01:20.248767+05:30"
+  "created_at": "2026-07-15T12:46:50.021516+05:30"
 }
   ```
   </details>
-- **8. GET http://testserver/api/v1/fir/85dfc886-db69-413e-b6dc-b9740d3fc985** 
+- **8. GET http://testserver/api/v1/fir/c0be9f5b-9eab-4792-806c-e1f81e533f56** 
   - Status Code: 200
-  - Execution Time: 8.36 ms
+  - Execution Time: 4.27 ms
   - Response Size: 527 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "85dfc886-db69-413e-b6dc-b9740d3fc985",
-  "fir_no": "KA-2026-09CFC6",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "id": "c0be9f5b-9eab-4792-806c-e1f81e533f56",
+  "fir_no": "KA-2026-B844FA",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [
     "379"
   ],
-  "incident_datetime": "2026-07-14T21:01:20.666963+05:30",
-  "reported_datetime": "2026-07-14T21:01:20.666963+05:30",
+  "incident_datetime": "2026-07-15T12:46:50.726092+05:30",
+  "reported_datetime": "2026-07-15T12:46:50.726092+05:30",
   "address_text": "Integration Test Address",
   "mo_description": "Test MO",
   "status": "closed",
   "victim_age_bucket": null,
   "accused_count": 0,
   "weapon_used": null,
-  "created_at": "2026-07-14T21:01:20.248767+05:30"
+  "created_at": "2026-07-15T12:46:50.021516+05:30"
 }
   ```
   </details>
@@ -2881,11 +2889,11 @@
 
 ### tests/test_fir.py::test_fir_duplicate_no
 **Status:** PASS
-**Test Duration:** 0.05s
+**Test Duration:** 0.79s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 396.92 ms
+  - Execution Time: 321.02 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -2898,11 +2906,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgxLCJleHAiOjE3ODQwNDY2ODEsInJvbGUiOiJhZG1pbiJ9.igQo8lQRUQ-eAcmZDDaPbR1lTZOoi5AurjsmaJVEriU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MSwiZXhwIjoxNzg0NjQ3ODgxfQ.MaDAI2j9CY9ea-fSMqj2JJ4urLWMlMriswoiqvx5IHA",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODExLCJleHAiOjE3ODQxMDM0MTEsInJvbGUiOiJhZG1pbiJ9.PbLSL68EIoP36SqEFiKdYBQyEQCCEMsX-1G81aWWp9Y",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMSwiZXhwIjoxNzg0NzA0NjExfQ.aPn22aBdkrni7_q6-s3j7GG-KpDgszVdBcl3lh6w80E",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -2914,193 +2922,187 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 7.95 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 16.82 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -3110,193 +3112,187 @@
   </details>
 - **3. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 6.95 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 14.47 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -3306,17 +3302,17 @@
   </details>
 - **4. POST http://testserver/api/v1/fir** 
   - Status Code: 201
-  - Execution Time: 19.80 ms
+  - Execution Time: 741.39 ms
   - Response Size: 493 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "fir_no": "KA-2026-95C0F3",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "fir_no": "KA-2026-90A415",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
-  "incident_datetime": "2026-07-14T15:31:21.218080+00:00",
-  "reported_datetime": "2026-07-14T15:31:21.218080+00:00",
+  "incident_datetime": "2026-07-15T07:16:51.271108+00:00",
+  "reported_datetime": "2026-07-15T07:16:51.271108+00:00",
   "location": {
     "lat": 12.9716,
     "lng": 77.5946
@@ -3327,37 +3323,37 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "7897c3ba-b377-4b2b-b66d-5b7a039ecae2",
-  "fir_no": "KA-2026-95C0F3",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "id": "e5c79d40-b16d-471e-8f5c-23c28e837132",
+  "fir_no": "KA-2026-90A415",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
   "ipc_sections": [],
-  "incident_datetime": "2026-07-14T21:01:21.218080+05:30",
-  "reported_datetime": "2026-07-14T21:01:21.218080+05:30",
+  "incident_datetime": "2026-07-15T12:46:51.271108+05:30",
+  "reported_datetime": "2026-07-15T12:46:51.271108+05:30",
   "address_text": null,
   "mo_description": null,
   "status": "open",
   "victim_age_bucket": null,
   "accused_count": 0,
   "weapon_used": null,
-  "created_at": "2026-07-14T21:01:20.801882+05:30"
+  "created_at": "2026-07-15T12:46:50.914241+05:30"
 }
   ```
   </details>
 - **5. POST http://testserver/api/v1/fir** 
   - Status Code: 409
-  - Execution Time: 13.51 ms
+  - Execution Time: 17.80 ms
   - Response Size: 56 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "fir_no": "KA-2026-95C0F3",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "fir_no": "KA-2026-90A415",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
-  "incident_datetime": "2026-07-14T15:31:21.218080+00:00",
-  "reported_datetime": "2026-07-14T15:31:21.218080+00:00",
+  "incident_datetime": "2026-07-15T07:16:51.271108+00:00",
+  "reported_datetime": "2026-07-15T07:16:51.271108+00:00",
   "location": {
     "lat": 12.9716,
     "lng": 77.5946
@@ -3368,7 +3364,7 @@
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "FIR number 'KA-2026-95C0F3' already exists."
+  "detail": "FIR number 'KA-2026-90A415' already exists."
 }
   ```
   </details>
@@ -3376,11 +3372,11 @@
 
 ### tests/test_fir.py::test_fir_invalid_payload
 **Status:** PASS
-**Test Duration:** 0.03s
+**Test Duration:** 0.02s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 498.81 ms
+  - Execution Time: 301.71 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -3393,11 +3389,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgxLCJleHAiOjE3ODQwNDY2ODEsInJvbGUiOiJhZG1pbiJ9.igQo8lQRUQ-eAcmZDDaPbR1lTZOoi5AurjsmaJVEriU",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MSwiZXhwIjoxNzg0NjQ3ODgxfQ.MaDAI2j9CY9ea-fSMqj2JJ4urLWMlMriswoiqvx5IHA",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODEyLCJleHAiOjE3ODQxMDM0MTIsInJvbGUiOiJhZG1pbiJ9.KQ0lrnLkPLIx8-XkxNTEwoU8lSawW4Ty-7UyPPJ1Bn0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMiwiZXhwIjoxNzg0NzA0NjEyfQ.b-xMgu6zJH8wMtD0YhnxBsOFDrw2xAl_noaBhoNIKzA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -3409,193 +3405,187 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 7.28 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 4.80 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -3605,193 +3595,187 @@
   </details>
 - **3. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 6.76 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 4.29 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -3801,17 +3785,17 @@
   </details>
 - **4. POST http://testserver/api/v1/fir** 
   - Status Code: 422
-  - Execution Time: 9.34 ms
+  - Execution Time: 5.66 ms
   - Response Size: 352 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "fir_no": "KA-2026-3D6D7C",
-  "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-  "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "fir_no": "KA-2026-2BDF10",
+  "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+  "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "crime_type": "theft",
-  "incident_datetime": "2026-07-14T15:31:21.791005+00:00",
-  "reported_datetime": "2026-07-14T15:31:21.791005+00:00"
+  "incident_datetime": "2026-07-15T07:16:52.356193+00:00",
+  "reported_datetime": "2026-07-15T07:16:52.356193+00:00"
 }
   ```
   </details>
@@ -3827,12 +3811,12 @@
       ],
       "msg": "Field required",
       "input": {
-        "fir_no": "KA-2026-3D6D7C",
-        "station_id": "28a62998-b184-4ead-be42-85ffb52a3134",
-        "district_id": "01036fbe-c25c-4336-9014-edb51277c675",
+        "fir_no": "KA-2026-2BDF10",
+        "station_id": "997eb02f-3cd2-4171-847b-b6d022abfbf1",
+        "district_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
         "crime_type": "theft",
-        "incident_datetime": "2026-07-14T15:31:21.791005+00:00",
-        "reported_datetime": "2026-07-14T15:31:21.791005+00:00"
+        "incident_datetime": "2026-07-15T07:16:52.356193+00:00",
+        "reported_datetime": "2026-07-15T07:16:52.356193+00:00"
       }
     }
   ]
@@ -3847,7 +3831,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 374.89 ms
+  - Execution Time: 316.23 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -3860,11 +3844,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgyLCJleHAiOjE3ODQwNDY2ODIsInJvbGUiOiJhZG1pbiJ9._83K1pMVLjymDnYx0FAcoD5RZ09e-GebHpzbk6-3bNk",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MiwiZXhwIjoxNzg0NjQ3ODgyfQ.1YJlPPZq2ehto_IrCgWohv0WfdYl_9BmWeGhLM50SXU",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODEyLCJleHAiOjE3ODQxMDM0MTIsInJvbGUiOiJhZG1pbiJ9.KQ0lrnLkPLIx8-XkxNTEwoU8lSawW4Ty-7UyPPJ1Bn0",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMiwiZXhwIjoxNzg0NzA0NjEyfQ.b-xMgu6zJH8wMtD0YhnxBsOFDrw2xAl_noaBhoNIKzA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -3874,14 +3858,14 @@
 }
   ```
   </details>
-- **2. GET http://testserver/api/v1/fir/3d7b5c97-ef43-40fb-a0e4-e3844e14abfa** 
+- **2. GET http://testserver/api/v1/fir/64d430d1-7c8a-4f33-8fe5-9a843115203b** 
   - Status Code: 404
-  - Execution Time: 5.67 ms
+  - Execution Time: 4.83 ms
   - Response Size: 64 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "FIR 3d7b5c97-ef43-40fb-a0e4-e3844e14abfa not found."
+  "detail": "FIR 64d430d1-7c8a-4f33-8fe5-9a843115203b not found."
 }
   ```
   </details>
@@ -3893,7 +3877,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 391.42 ms
+  - Execution Time: 301.77 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -3906,11 +3890,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgyLCJleHAiOjE3ODQwNDY2ODIsInJvbGUiOiJhZG1pbiJ9._83K1pMVLjymDnYx0FAcoD5RZ09e-GebHpzbk6-3bNk",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MiwiZXhwIjoxNzg0NjQ3ODgyfQ.1YJlPPZq2ehto_IrCgWohv0WfdYl_9BmWeGhLM50SXU",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODEzLCJleHAiOjE3ODQxMDM0MTMsInJvbGUiOiJhZG1pbiJ9._3gbAHdhZ-GgElHD7woAtMBoRrAGeFHcR45NDMu2ids",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMywiZXhwIjoxNzg0NzA0NjEzfQ.aCbh0fcutemf4RnU8YDr34mVuSASowK6_N2k-fg3aKo",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -3922,193 +3906,187 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 6.53 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 5.05 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -4120,11 +4098,11 @@
 
 ### tests/test_geo.py::test_get_heatmap
 **Status:** PASS
-**Test Duration:** 0.02s
+**Test Duration:** 1.27s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 441.62 ms
+  - Execution Time: 290.60 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -4137,11 +4115,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgzLCJleHAiOjE3ODQwNDY2ODMsInJvbGUiOiJhZG1pbiJ9.3LCsAFPGKxjjMG8H1f5yqWZg6W5QbRUXeoYiQpiO4YM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MywiZXhwIjoxNzg0NjQ3ODgzfQ.W509c3OVJ1ePDUsGMRUZZhUqp1TvL1vZ2YCL0afDi90",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODEzLCJleHAiOjE3ODQxMDM0MTMsInJvbGUiOiJhZG1pbiJ9._3gbAHdhZ-GgElHD7woAtMBoRrAGeFHcR45NDMu2ids",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxMywiZXhwIjoxNzg0NzA0NjEzfQ.aCbh0fcutemf4RnU8YDr34mVuSASowK6_N2k-fg3aKo",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -4153,8 +4131,8 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/heatmap** 
   - Status Code: 200
-  - Execution Time: 20.37 ms
-  - Response Size: 2255 bytes
+  - Execution Time: 1272.64 ms
+  - Response Size: 455 bytes
   <details><summary>Response</summary>
   ```json
   {
@@ -4162,190 +4140,22 @@
   "window": "7d",
   "points": [
     {
-      "lat": 17.198868550489852,
-      "lng": 75.56108349451958,
-      "weight": 1.0,
-      "crime_type": "cybercrime"
-    },
-    {
-      "lat": 16.77548913815821,
-      "lng": 74.85959465138265,
-      "weight": 1.0,
-      "crime_type": "assault"
-    },
-    {
-      "lat": 15.531768620353507,
-      "lng": 75.4637600058583,
+      "lat": 14.169137623063046,
+      "lng": 74.15148347349391,
       "weight": 1.0,
       "crime_type": "missing_person"
     },
     {
-      "lat": 17.944517286679925,
-      "lng": 78.47968108570551,
+      "lat": 11.941478994123557,
+      "lng": 78.43438879217406,
       "weight": 1.0,
-      "crime_type": "other"
+      "crime_type": "vehicle_theft"
     },
     {
-      "lat": 12.9716,
-      "lng": 77.5946,
+      "lat": 13.926277712786307,
+      "lng": 76.05036763703109,
       "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
-    },
-    {
-      "lat": 12.9716,
-      "lng": 77.5946,
-      "weight": 1.0,
-      "crime_type": "theft"
+      "crime_type": "chain_snatching"
     },
     {
       "lat": 12.9716,
@@ -4371,7 +4181,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 386.91 ms
+  - Execution Time: 297.25 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -4384,11 +4194,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgzLCJleHAiOjE3ODQwNDY2ODMsInJvbGUiOiJhZG1pbiJ9.3LCsAFPGKxjjMG8H1f5yqWZg6W5QbRUXeoYiQpiO4YM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MywiZXhwIjoxNzg0NjQ3ODgzfQ.W509c3OVJ1ePDUsGMRUZZhUqp1TvL1vZ2YCL0afDi90",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODE0LCJleHAiOjE3ODQxMDM0MTQsInJvbGUiOiJhZG1pbiJ9.zel2F9C8nEbIJLVIgckTImk6YYxgOI17igbRajkhB5o",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxNCwiZXhwIjoxNzg0NzA0NjE0fQ.ktOaEbvdp4UeMQF04oBW0MbNgaL1AAkPphBAaTKLOqA",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -4400,334 +4210,334 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/hotspots** 
   - Status Code: 200
-  - Execution Time: 10.96 ms
-  - Response Size: 7042 bytes
+  - Execution Time: 8.21 ms
+  - Response Size: 7012 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "9a6c3b86-2948-49a6-8161-226aed683044",
-    "district_id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
-    "name": "Dharwad Cluster 5",
-    "radius_m": 3007.150975697286,
-    "crime_density": 147,
+    "id": "09f97b41-370d-47bd-abf4-0b1d64262eda",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+    "name": "Kalaburagi Cluster 22",
+    "radius_m": 2397.4565033206,
+    "crime_density": 149,
+    "time_window": "30d",
+    "severity": "low",
+    "centroid": {
+      "lat": 13.211057849527268,
+      "lng": 77.08732479128494
+    }
+  },
+  {
+    "id": "6d7f4eca-d5c2-4a5c-80be-11beccbbe1cb",
+    "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+    "name": "Dakshina Kannada Cluster 11",
+    "radius_m": 4993.493088811497,
+    "crime_density": 142,
     "time_window": "30d",
     "severity": "high",
     "centroid": {
-      "lat": 14.726065341572223,
-      "lng": 75.93554430301839
+      "lat": 12.03055287305078,
+      "lng": 77.31207582777243
     }
   },
   {
-    "id": "6b746062-5bc9-4612-ad3d-cd5dcc9e7b9f",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-    "name": "Kalaburagi Cluster 20",
-    "radius_m": 2372.6589876166468,
-    "crime_density": 141,
+    "id": "ea2dc192-fc11-4dbe-aa1c-10dedf3f388f",
+    "district_id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
+    "name": "Bengaluru Urban Cluster 24",
+    "radius_m": 2150.1186455328234,
+    "crime_density": 137,
+    "time_window": "30d",
+    "severity": "critical",
+    "centroid": {
+      "lat": 16.868795449917098,
+      "lng": 77.90651895468291
+    }
+  },
+  {
+    "id": "bb768abe-4a43-4705-8f38-4f771c318488",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 0",
+    "radius_m": 3748.4657938693585,
+    "crime_density": 132,
     "time_window": "30d",
     "severity": "medium",
     "centroid": {
-      "lat": 18.461973177779466,
-      "lng": 75.30893156040027
+      "lat": 16.037772467474433,
+      "lng": 75.97057046022113
     }
   },
   {
-    "id": "5a436ded-158b-4244-96e2-3c4b5a674824",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 8",
-    "radius_m": 4721.084626407972,
-    "crime_density": 141,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 16.907450261778155,
-      "lng": 77.16716685479167
-    }
-  },
-  {
-    "id": "eeed3695-e5cf-4ad3-b44f-ebe11333f5d9",
-    "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
-    "name": "Bengaluru Urban Cluster 11",
-    "radius_m": 2990.9498860362364,
-    "crime_density": 140,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 17.84665246382847,
-      "lng": 77.44834979362156
-    }
-  },
-  {
-    "id": "48e11b03-8854-431c-be39-0c03f989308f",
-    "district_id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
-    "name": "Dharwad Cluster 16",
-    "radius_m": 3413.411135730213,
-    "crime_density": 120,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 16.65090912724431,
-      "lng": 75.9714207433757
-    }
-  },
-  {
-    "id": "7db22cd5-33a0-437a-aff6-6f1a5981c366",
-    "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
-    "name": "Bengaluru Urban Cluster 4",
-    "radius_m": 4005.6030642222095,
-    "crime_density": 116,
+    "id": "9d23a56d-6ff7-4f7e-b741-a71256646d2e",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 17",
+    "radius_m": 2329.1906386523215,
+    "crime_density": 128,
     "time_window": "30d",
     "severity": "medium",
     "centroid": {
-      "lat": 14.832459873912924,
-      "lng": 76.99541626317222
+      "lat": 15.97098383633894,
+      "lng": 77.6874220355945
     }
   },
   {
-    "id": "a31c2614-4ca3-4396-bad3-86b43c953d7e",
-    "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
-    "name": "Bengaluru Urban Cluster 3",
-    "radius_m": 3896.071640321109,
-    "crime_density": 115,
+    "id": "ba717856-726c-4f71-aa12-fe955240129f",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+    "name": "Kalaburagi Cluster 10",
+    "radius_m": 4292.806299777782,
+    "crime_density": 127,
     "time_window": "30d",
     "severity": "critical",
     "centroid": {
-      "lat": 16.354640207424957,
-      "lng": 77.08090275172826
+      "lat": 13.04302772971533,
+      "lng": 74.30017806426896
     }
   },
   {
-    "id": "51d1e07c-b2b8-44e0-935e-6e512db0297e",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "d7bb12b9-909f-4991-947a-85a07bfdc9fb",
+    "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+    "name": "Mysuru Cluster 16",
+    "radius_m": 1017.0123382432063,
+    "crime_density": 118,
+    "time_window": "30d",
+    "severity": "low",
+    "centroid": {
+      "lat": 17.146632293062908,
+      "lng": 76.51843064481935
+    }
+  },
+  {
+    "id": "cdb3db2a-c283-487d-a7e8-7f4bb8e0ea84",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi Cluster 21",
-    "radius_m": 4539.716082532905,
+    "radius_m": 3518.7798772968376,
     "crime_density": 113,
     "time_window": "30d",
-    "severity": "low",
+    "severity": "high",
     "centroid": {
-      "lat": 13.98401373575671,
-      "lng": 74.94872042597075
+      "lat": 15.445704578852025,
+      "lng": 77.49942140616929
     }
   },
   {
-    "id": "febb22ed-9eba-4742-9934-7c7414098c32",
-    "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
-    "name": "Bengaluru Urban Cluster 17",
-    "radius_m": 4372.43742075097,
-    "crime_density": 111,
-    "time_window": "30d",
-    "severity": "medium",
-    "centroid": {
-      "lat": 17.038560121329574,
-      "lng": 76.89352169914254
-    }
-  },
-  {
-    "id": "35b1792e-260c-4b5e-a981-5d12ffdb869b",
-    "district_id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
-    "name": "Mysuru Cluster 0",
-    "radius_m": 1087.9426469548985,
-    "crime_density": 107,
+    "id": "ca91ae71-4319-4902-bf72-9fc5350505c2",
+    "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+    "name": "Dakshina Kannada Cluster 6",
+    "radius_m": 3908.9456138752034,
+    "crime_density": 113,
     "time_window": "30d",
     "severity": "high",
     "centroid": {
-      "lat": 12.378171808739758,
-      "lng": 76.47788860108369
+      "lat": 15.956373909904924,
+      "lng": 77.46283639552365
     }
   },
   {
-    "id": "ec175f55-5ef0-41c6-89ad-4e5bdcf1c992",
-    "district_id": "920cfca7-4717-4546-95ad-5f295be019bf",
-    "name": "Bengaluru Urban Cluster 22",
-    "radius_m": 1872.7066944569424,
-    "crime_density": 96,
+    "id": "7d14e344-5b20-45e5-8f6d-45d1b405693c",
+    "district_id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
+    "name": "Bengaluru Urban Cluster 13",
+    "radius_m": 3667.248714555681,
+    "crime_density": 113,
     "time_window": "30d",
     "severity": "critical",
     "centroid": {
-      "lat": 17.511771950850527,
-      "lng": 74.40357168246882
+      "lat": 13.403171625880427,
+      "lng": 74.87523046174847
     }
   },
   {
-    "id": "dd6b220f-0b2a-4299-8647-e3c3991c87e8",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 1",
-    "radius_m": 1679.4907344242022,
-    "crime_density": 72,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 15.122299424378706,
-      "lng": 77.81434962791062
-    }
-  },
-  {
-    "id": "2d3f407d-cdf2-46bd-aa2a-ee20959901b7",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-    "name": "Kalaburagi Cluster 19",
-    "radius_m": 1488.6733487568936,
-    "crime_density": 47,
+    "id": "cbf23c3c-b194-4af4-b871-66896deb5a6e",
+    "district_id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
+    "name": "Bengaluru Urban Cluster 14",
+    "radius_m": 4604.837252850797,
+    "crime_density": 108,
     "time_window": "30d",
     "severity": "medium",
     "centroid": {
-      "lat": 12.43461448994053,
-      "lng": 74.75905909898617
+      "lat": 11.555045237424023,
+      "lng": 76.1915327553983
     }
   },
   {
-    "id": "01f60066-aa11-4d40-b00a-5c024f0527b1",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 23",
-    "radius_m": 2770.228564615137,
+    "id": "4fbc2fe7-328c-4399-b2e9-feaae19a894a",
+    "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+    "name": "Dakshina Kannada Cluster 15",
+    "radius_m": 896.315818150164,
+    "crime_density": 101,
+    "time_window": "30d",
+    "severity": "low",
+    "centroid": {
+      "lat": 15.152034438900287,
+      "lng": 74.81022418843521
+    }
+  },
+  {
+    "id": "6466c1fd-50ca-46f0-90a4-675acbff30cd",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+    "name": "Kalaburagi Cluster 9",
+    "radius_m": 3289.688550405538,
+    "crime_density": 93,
+    "time_window": "30d",
+    "severity": "medium",
+    "centroid": {
+      "lat": 15.041600719875815,
+      "lng": 77.12844056572796
+    }
+  },
+  {
+    "id": "6c2e73e2-e144-4c23-89ad-dcaa1be7aca1",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 20",
+    "radius_m": 3427.850707420224,
+    "crime_density": 88,
+    "time_window": "30d",
+    "severity": "medium",
+    "centroid": {
+      "lat": 16.632186958232452,
+      "lng": 77.48202960571614
+    }
+  },
+  {
+    "id": "8cadb4c2-c974-42bd-8cf3-ad6e0a596ce0",
+    "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+    "name": "Mysuru Cluster 8",
+    "radius_m": 3124.603187313965,
+    "crime_density": 74,
+    "time_window": "30d",
+    "severity": "medium",
+    "centroid": {
+      "lat": 13.352609190946612,
+      "lng": 76.81056984992951
+    }
+  },
+  {
+    "id": "cd99b407-5a93-49f0-ab9d-b1f1f5c36b67",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 4",
+    "radius_m": 4255.752240826901,
+    "crime_density": 70,
+    "time_window": "30d",
+    "severity": "medium",
+    "centroid": {
+      "lat": 14.709386970972638,
+      "lng": 76.97777134828682
+    }
+  },
+  {
+    "id": "dfb2f0d8-8ff4-41f6-b565-ad7b77881ca0",
+    "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+    "name": "Mysuru Cluster 2",
+    "radius_m": 2068.4417086572976,
+    "crime_density": 64,
+    "time_window": "30d",
+    "severity": "low",
+    "centroid": {
+      "lat": 15.887090940664613,
+      "lng": 76.92199143073283
+    }
+  },
+  {
+    "id": "00e65261-c714-4705-9570-7cd32120e457",
+    "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+    "name": "Dakshina Kannada Cluster 7",
+    "radius_m": 2817.368506319955,
+    "crime_density": 63,
+    "time_window": "30d",
+    "severity": "medium",
+    "centroid": {
+      "lat": 17.257221798664883,
+      "lng": 76.32317801868865
+    }
+  },
+  {
+    "id": "62301b10-c4b2-4c2d-9a7a-ece425732436",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 1",
+    "radius_m": 2810.0739162007176,
+    "crime_density": 62,
+    "time_window": "30d",
+    "severity": "critical",
+    "centroid": {
+      "lat": 13.741442944115235,
+      "lng": 77.24023259014209
+    }
+  },
+  {
+    "id": "95d3f3f5-1e72-4481-a1f1-8fdeb1a0f8c7",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+    "name": "Kalaburagi Cluster 12",
+    "radius_m": 1637.0273998285652,
+    "crime_density": 49,
+    "time_window": "30d",
+    "severity": "high",
+    "centroid": {
+      "lat": 14.905512755937647,
+      "lng": 76.4562358712021
+    }
+  },
+  {
+    "id": "32df0068-6926-442a-829e-063812c74c06",
+    "district_id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
+    "name": "Mysuru Cluster 3",
+    "radius_m": 3635.950555977541,
+    "crime_density": 48,
+    "time_window": "30d",
+    "severity": "critical",
+    "centroid": {
+      "lat": 18.014998938582906,
+      "lng": 78.34366161436277
+    }
+  },
+  {
+    "id": "79c59b34-fc80-4b63-9ae4-95bf80c530ea",
+    "district_id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
+    "name": "Dharwad Cluster 23",
+    "radius_m": 4693.865882884087,
     "crime_density": 41,
     "time_window": "30d",
-    "severity": "low",
+    "severity": "critical",
     "centroid": {
-      "lat": 14.098575242278017,
-      "lng": 78.01208981871171
+      "lat": 12.519547408398298,
+      "lng": 77.45856376183696
     }
   },
   {
-    "id": "4953ea8b-5cd1-4e0a-9321-4dc6fc3d6955",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-    "name": "Kalaburagi Cluster 14",
-    "radius_m": 2125.3867696420807,
-    "crime_density": 39,
+    "id": "1ef2d377-1cb8-49f3-982b-3ae0374289c5",
+    "district_id": "aeff3761-528f-4789-8b63-b7baf967550c",
+    "name": "Kalaburagi Cluster 19",
+    "radius_m": 3210.029715622933,
+    "crime_density": 23,
     "time_window": "30d",
     "severity": "critical",
     "centroid": {
-      "lat": 15.905471331466543,
-      "lng": 74.81253527868878
+      "lat": 18.15676420664755,
+      "lng": 76.22528242424451
     }
   },
   {
-    "id": "bc8208e2-c58a-4c72-a189-bb24dd0c8c90",
-    "district_id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
-    "name": "Mysuru Cluster 7",
-    "radius_m": 2358.6241618655813,
-    "crime_density": 39,
+    "id": "0acb6385-cc23-485b-9614-24cd13b8cf1d",
+    "district_id": "e9be4733-1c37-430b-938b-d1065b16acf6",
+    "name": "Dakshina Kannada Cluster 5",
+    "radius_m": 1218.9050341371794,
+    "crime_density": 21,
     "time_window": "30d",
     "severity": "high",
     "centroid": {
-      "lat": 12.889803412877834,
-      "lng": 77.83077270429892
+      "lat": 17.103341683889337,
+      "lng": 75.4301112884771
     }
   },
   {
-    "id": "7d0f4e18-da23-4edd-a4f8-7f78fb0d37bc",
-    "district_id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
-    "name": "Mysuru Cluster 6",
-    "radius_m": 2811.8498331375395,
-    "crime_density": 36,
-    "time_window": "30d",
-    "severity": "medium",
-    "centroid": {
-      "lat": 14.84061714111246,
-      "lng": 76.65399117178582
-    }
-  },
-  {
-    "id": "29340272-00c0-454f-9fbc-235cc3b7a543",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-    "name": "Kalaburagi Cluster 9",
-    "radius_m": 1699.615865961242,
-    "crime_density": 36,
+    "id": "6a8cb523-7d2c-4d6f-9d72-0a6a98827faa",
+    "district_id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
+    "name": "Bengaluru Urban Cluster 18",
+    "radius_m": 571.8585111239067,
+    "crime_density": 10,
     "time_window": "30d",
     "severity": "critical",
     "centroid": {
-      "lat": 15.280379131409775,
-      "lng": 76.9436522490662
-    }
-  },
-  {
-    "id": "cd58e282-843f-45a4-998c-dff3e18659eb",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 18",
-    "radius_m": 4530.398357767233,
-    "crime_density": 35,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 12.034367883211909,
-      "lng": 78.3003452890333
-    }
-  },
-  {
-    "id": "9dfc5e8a-6420-401e-94ad-6851aaee57b3",
-    "district_id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
-    "name": "Kalaburagi Cluster 15",
-    "radius_m": 2788.5636322065147,
-    "crime_density": 33,
-    "time_window": "30d",
-    "severity": "low",
-    "centroid": {
-      "lat": 15.095004286423578,
-      "lng": 75.6670306380344
-    }
-  },
-  {
-    "id": "3685770a-a581-48c1-bbc7-2978caad1a2d",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 2",
-    "radius_m": 1296.894098593786,
-    "crime_density": 30,
-    "time_window": "30d",
-    "severity": "high",
-    "centroid": {
-      "lat": 17.93755074475023,
-      "lng": 76.7185898987601
-    }
-  },
-  {
-    "id": "0d79146b-6630-4cb6-9c13-4532b53cb4fe",
-    "district_id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
-    "name": "Mysuru Cluster 12",
-    "radius_m": 2403.3300001602156,
-    "crime_density": 26,
-    "time_window": "30d",
-    "severity": "medium",
-    "centroid": {
-      "lat": 14.283672088162337,
-      "lng": 74.12127104075819
-    }
-  },
-  {
-    "id": "d3cc3850-71d1-4822-a59c-85a3f63b241a",
-    "district_id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
-    "name": "Dharwad Cluster 13",
-    "radius_m": 1541.0534288403533,
-    "crime_density": 26,
-    "time_window": "30d",
-    "severity": "low",
-    "centroid": {
-      "lat": 14.278293162644399,
-      "lng": 78.06117451180147
-    }
-  },
-  {
-    "id": "35a52f94-8d02-4727-81f6-6c94bfffd3f5",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 10",
-    "radius_m": 1110.6105218550447,
-    "crime_density": 25,
-    "time_window": "30d",
-    "severity": "low",
-    "centroid": {
-      "lat": 12.512728824423816,
-      "lng": 75.56137831407139
-    }
-  },
-  {
-    "id": "85fde24f-3a02-48c9-bb62-aecb77e127da",
-    "district_id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
-    "name": "Dakshina Kannada Cluster 24",
-    "radius_m": 1678.3114639505877,
-    "crime_density": 22,
-    "time_window": "30d",
-    "severity": "critical",
-    "centroid": {
-      "lat": 18.00793780594666,
-      "lng": 74.48782124041244
+      "lat": 15.957166940940628,
+      "lng": 75.19367168279207
     }
   }
 ]
@@ -4737,11 +4547,11 @@
 
 ### tests/test_missing_persons.py::test_missing_persons_crud
 **Status:** PASS
-**Test Duration:** 0.05s
+**Test Duration:** 0.55s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 415.21 ms
+  - Execution Time: 301.97 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -4754,11 +4564,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDgzLCJleHAiOjE3ODQwNDY2ODMsInJvbGUiOiJhZG1pbiJ9.3LCsAFPGKxjjMG8H1f5yqWZg6W5QbRUXeoYiQpiO4YM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4MywiZXhwIjoxNzg0NjQ3ODgzfQ.W509c3OVJ1ePDUsGMRUZZhUqp1TvL1vZ2YCL0afDi90",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODE1LCJleHAiOjE3ODQxMDM0MTUsInJvbGUiOiJhZG1pbiJ9.Vj2DLbjZRFBxk9igYBshFWKnUEW_aEmohq7zWUe9Hlo",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxNSwiZXhwIjoxNzg0NzA0NjE1fQ.L9bve5EltngsHKKVW9zg7LvcPhBVoH4tlEkKmetvE5Y",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -4770,12 +4580,12 @@
   </details>
 - **2. POST http://testserver/api/v1/missing-persons** 
   - Status Code: 201
-  - Execution Time: 14.83 ms
+  - Execution Time: 509.46 ms
   - Response Size: 184 bytes
   <details><summary>Payload</summary>
   ```json
   {
-  "name_hash": "hash_d66ec29e",
+  "name_hash": "hash_42c5ec85",
   "age": 30,
   "last_seen_date": "2026-07-14",
   "last_seen_location": {
@@ -4789,8 +4599,8 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "424a8d0a-1cd0-475b-b00f-ecba38547aa3",
-  "name_hash": "hash_d66ec29e",
+  "id": "d7184c5a-ac65-4a1e-b4ee-c9522aa73377",
+  "name_hash": "hash_42c5ec85",
   "age": 30,
   "last_seen_address": "MG Road",
   "last_seen_date": "2026-07-14",
@@ -4801,23 +4611,14 @@
   </details>
 - **3. GET http://testserver/api/v1/missing-persons** 
   - Status Code: 200
-  - Execution Time: 11.26 ms
-  - Response Size: 12821 bytes
+  - Execution Time: 11.56 ms
+  - Response Size: 10414 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "c10d55f4-67c2-404b-81c7-95b22b37958f",
-    "name_hash": "string",
-    "age": 130,
-    "last_seen_address": "string",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "424a8d0a-1cd0-475b-b00f-ecba38547aa3",
-    "name_hash": "hash_d66ec29e",
+    "id": "d7184c5a-ac65-4a1e-b4ee-c9522aa73377",
+    "name_hash": "hash_42c5ec85",
     "age": 30,
     "last_seen_address": "MG Road",
     "last_seen_date": "2026-07-14",
@@ -4825,575 +4626,467 @@
     "matched_fir_id": null
   },
   {
-    "id": "4027213a-e6fd-49a9-9291-12619f09868f",
-    "name_hash": "hash_5e3b1ac2",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "7d2916d8-6084-4c7a-ab53-ef8f5e7bbd33",
-    "name_hash": "hash_64081bbc",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "bc430670-07bb-44b3-857f-9278ac75d79a",
-    "name_hash": "hash_e9143a14",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "6552229a-a7a2-4535-8d8e-22ac5653adf1",
-    "name_hash": "hash_b53aca04",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "a6f40591-58ca-4bbe-9508-a678de245524",
-    "name_hash": "hash_deb03fa0",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "637aef80-79e4-4944-a607-de4ffd539233",
-    "name_hash": "hash_547e5665",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "5d6600d8-f703-4056-a386-0a3e346bebdb",
-    "name_hash": "hash_b31703a9",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "094402a2-9cfe-4d03-8556-a6c80a855026",
-    "name_hash": "hash_4592f24d",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "d350e2df-681d-4d96-8179-eb9214fafb37",
-    "name_hash": "hash_59925617",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "b76e9f5e-82ee-44c4-81e4-f446b7709109",
-    "name_hash": "hash_f6de3736",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "bd2d153b-560f-4a36-838c-efb58927b61a",
-    "name_hash": "hash_6dc7b365",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "498899b4-c99f-48bd-8257-4759ed9068cb",
-    "name_hash": "hash_e8f503e4",
-    "age": 30,
-    "last_seen_address": "MG Road",
-    "last_seen_date": "2026-07-14",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "724b1201-82af-4bb2-81cb-db08069f74df",
-    "name_hash": "hash_person_42",
-    "age": 51,
+    "id": "e3eb7c6a-effe-43f6-9a3d-374d06557017",
+    "name_hash": "hash_person_24",
+    "age": 15,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-07-13",
-    "status": "matched",
-    "matched_fir_id": null
-  },
-  {
-    "id": "7a904d81-52fe-4f1b-9a19-55c3aeb49c0c",
-    "name_hash": "hash_person_9",
-    "age": 57,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-07-12",
+    "last_seen_date": "2026-07-14",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "38313704-0c3a-4ca6-b623-04b0d26c35a0",
-    "name_hash": "hash_person_5",
-    "age": 32,
+    "id": "dda635b2-358b-48c0-9f9d-8b37eca03630",
+    "name_hash": "hash_person_30",
+    "age": 82,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-07-12",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "8354bd43-21b8-4d5e-a4c8-92e3daf461a7",
-    "name_hash": "hash_person_6",
-    "age": 71,
+    "id": "d9c2b088-8cb0-4519-b9ef-15c9033e51f7",
+    "name_hash": "hash_person_0",
+    "age": 34,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-07-11",
-    "status": "active_search",
+    "last_seen_date": "2026-07-12",
+    "status": "reported",
     "matched_fir_id": null
   },
   {
-    "id": "c12651f7-86a9-40cc-b6a2-8440691a07d6",
-    "name_hash": "hash_person_40",
-    "age": 54,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-07-08",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "69f986b9-533a-4503-91da-11c9b51dcc1b",
-    "name_hash": "hash_person_25",
-    "age": 81,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-07-05",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "18130197-eb8d-465c-8df7-da29766628ef",
-    "name_hash": "hash_person_27",
-    "age": 20,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-26",
-    "status": "matched",
-    "matched_fir_id": null
-  },
-  {
-    "id": "fdcafd2f-48d6-4730-b672-be05341234eb",
-    "name_hash": "hash_person_48",
-    "age": 37,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-20",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "f3624412-d752-481d-ac72-5fb4995fab65",
-    "name_hash": "hash_person_1",
-    "age": 12,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-19",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "1f2b60b5-7feb-46d6-985f-a45f941fb5db",
-    "name_hash": "hash_person_17",
-    "age": 54,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-16",
-    "status": "matched",
-    "matched_fir_id": null
-  },
-  {
-    "id": "21855e3c-5cc7-4332-8637-a94553ca1353",
-    "name_hash": "hash_person_11",
+    "id": "08421c51-5ddf-47e7-a936-01536345c58a",
+    "name_hash": "hash_person_12",
     "age": 36,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-11",
+    "last_seen_date": "2026-07-11",
+    "status": "reported",
+    "matched_fir_id": null
+  },
+  {
+    "id": "c6bd8b19-0d8b-45c4-b73f-c2707e964715",
+    "name_hash": "hash_person_3",
+    "age": 61,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-07-10",
+    "status": "reported",
+    "matched_fir_id": null
+  },
+  {
+    "id": "01b6e222-cd87-4467-8391-e73ee2638e5d",
+    "name_hash": "hash_person_14",
+    "age": 40,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-07-07",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "94abc1ab-1123-4153-943a-cd0b98faae84",
+    "name_hash": "hash_person_7",
+    "age": 25,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-07-06",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "6e0711fb-057b-40f1-832c-95766d610de1",
-    "name_hash": "hash_person_28",
-    "age": 77,
+    "id": "d423e694-5752-4f92-8065-ef56e03d7d39",
+    "name_hash": "hash_person_1",
+    "age": 49,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-07-05",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "3fde118d-1d49-474a-bc0f-b89e57a0ff8e",
+    "name_hash": "hash_person_17",
+    "age": 65,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-07-04",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "018621e0-726f-4f73-8c1b-a50b74266c73",
+    "name_hash": "hash_person_11",
+    "age": 28,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-29",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "58322ad0-d07b-4eae-bf18-bb588b431def",
+    "name_hash": "hash_person_34",
+    "age": 12,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-28",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "eff8cb1a-0a6d-4968-8702-2052da6b4107",
+    "name_hash": "hash_person_46",
+    "age": 32,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-26",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "080956b6-9975-4185-9d6b-e36f52b95366",
+    "name_hash": "hash_person_48",
+    "age": 80,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-21",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "747b6778-893e-48c9-a364-88664d567654",
+    "name_hash": "hash_person_8",
+    "age": 30,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-21",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "6fd325dd-3c76-4d1d-91d0-66a470d42e25",
+    "name_hash": "hash_person_41",
+    "age": 22,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-20",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "c4f06ac1-d665-4a1a-9bbd-44420f29f40c",
+    "name_hash": "hash_person_19",
+    "age": 23,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-20",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "89e11209-d229-4007-ad33-4a09c82d9ed3",
+    "name_hash": "hash_person_47",
+    "age": 15,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-20",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "ad86b1e8-bac3-43f9-aaef-b5bf172306bd",
+    "name_hash": "hash_person_39",
+    "age": 8,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-19",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "3799d0fe-6435-424b-85e4-9f864d90169c",
+    "name_hash": "hash_person_16",
+    "age": 8,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-16",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "a1b013de-db09-404f-b6e9-5bd5599d8b69",
+    "name_hash": "hash_person_23",
+    "age": 66,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-15",
+    "status": "reported",
+    "matched_fir_id": null
+  },
+  {
+    "id": "20b194d8-7eb5-4693-af70-611d1cb13875",
+    "name_hash": "hash_person_13",
+    "age": 41,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-06-09",
+    "status": "reported",
+    "matched_fir_id": null
+  },
+  {
+    "id": "08fde59a-bc77-42d3-9072-88ee1f09b218",
+    "name_hash": "hash_person_18",
+    "age": 23,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-06-08",
-    "status": "reported",
+    "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "55a5fd92-c3d8-4e56-8d93-4ae7f6c70571",
-    "name_hash": "hash_person_10",
-    "age": 13,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-07",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "6bda5f01-feb3-4ba2-8878-ee949f2463e2",
-    "name_hash": "hash_person_16",
-    "age": 23,
+    "id": "eac011d1-9099-4a3d-b800-5b5c6b60bba0",
+    "name_hash": "hash_person_26",
+    "age": 30,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-06-07",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "20313af9-b7ce-4bfc-8484-d140d42b4a01",
-    "name_hash": "hash_person_49",
-    "age": 21,
+    "id": "dca097f0-d05b-4ad5-aabd-ca4113604767",
+    "name_hash": "hash_person_44",
+    "age": 44,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-06-06",
     "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "d791bad5-7170-4b36-83cd-54857ff88700",
-    "name_hash": "hash_person_36",
-    "age": 65,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-04",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "7543d1ab-c133-4839-9f3c-578f837f2571",
+    "id": "95524f00-c632-4202-895c-48e58649adc9",
     "name_hash": "hash_person_38",
-    "age": 47,
+    "age": 57,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-06-01",
-    "status": "reported",
+    "last_seen_date": "2026-06-03",
+    "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "4753d2b9-ffa2-405c-aad3-a62060e3d17e",
-    "name_hash": "hash_person_31",
-    "age": 34,
+    "id": "e3f99b32-7179-470b-ab29-a1738124fb9f",
+    "name_hash": "hash_person_49",
+    "age": 75,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-31",
-    "status": "reported",
+    "last_seen_date": "2026-06-03",
+    "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "d4143748-4573-42f8-843c-2cf78aba52d9",
-    "name_hash": "hash_person_37",
-    "age": 60,
+    "id": "f8763d53-a202-4bd8-97cc-11ce68ea6663",
+    "name_hash": "hash_person_28",
+    "age": 63,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-26",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "8bc05a91-100f-4f0a-98aa-1de3d3bc04c6",
-    "name_hash": "hash_person_13",
-    "age": 21,
+    "id": "1c6c4aed-bd16-450b-848d-50a5dfdf964e",
+    "name_hash": "hash_person_25",
+    "age": 49,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-28",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "a7710916-90f4-4483-9eef-64e93203a327",
-    "name_hash": "hash_person_19",
-    "age": 72,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-28",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "d6283d5c-a6f4-4dc8-9c4d-eb7af420a646",
-    "name_hash": "hash_person_2",
-    "age": 16,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-23",
+    "last_seen_date": "2026-05-17",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "534076a1-be5a-43a3-9864-934839a25467",
-    "name_hash": "hash_person_12",
-    "age": 82,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-21",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "3fc09238-f5f6-4073-b150-71a194b653bb",
-    "name_hash": "hash_person_0",
-    "age": 72,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-20",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "bc8779c0-4ac5-4ca8-83fe-075f29a632f0",
-    "name_hash": "hash_person_44",
-    "age": 15,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-19",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "05f618fc-8043-4c6a-ab68-eac81f6583d9",
-    "name_hash": "hash_person_47",
-    "age": 69,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-19",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "6a64f545-5b7e-40c7-9c19-3cf15f4e9310",
-    "name_hash": "hash_person_35",
-    "age": 48,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-18",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "f1342c7c-beda-4adb-bbaa-1a39d809a5c1",
-    "name_hash": "hash_person_4",
-    "age": 56,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-16",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "76afe83a-e72f-4ee7-8979-0217bf50da9b",
-    "name_hash": "hash_person_8",
-    "age": 30,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-14",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "4e270474-9c8c-4f98-9315-57323a6869ad",
-    "name_hash": "hash_person_32",
-    "age": 56,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-12",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "59b5e823-8bf8-45b3-be8c-9feb81eba872",
+    "id": "33f04eca-81ed-4ef3-8b6a-05756ef7e248",
     "name_hash": "hash_person_45",
-    "age": 33,
+    "age": 51,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-15",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "1656647b-599c-4b15-9063-1f5568a69d39",
-    "name_hash": "hash_person_29",
+    "id": "acb9ea3e-3601-4bb7-aa88-98c284754f92",
+    "name_hash": "hash_person_6",
+    "age": 57,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-15",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "01c1aa03-60df-445d-b66a-bf1b19b9d5d8",
+    "name_hash": "hash_person_27",
     "age": 54,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-13",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "885e4c63-9da3-4633-8be9-02125c707ff0",
+    "name_hash": "hash_person_2",
+    "age": 81,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-10",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "0c0723d1-cf44-4b21-af7f-ce88d4cc1d9e",
+    "name_hash": "hash_person_15",
+    "age": 5,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-10",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "776ca79c-0014-4d2d-affd-48397b4a013b",
+    "name_hash": "hash_person_20",
+    "age": 70,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-10",
     "status": "reported",
     "matched_fir_id": null
   },
   {
-    "id": "744c906f-ef80-4ae5-b45e-bbaae1ec87c7",
-    "name_hash": "hash_person_3",
-    "age": 76,
+    "id": "af2711bd-3c80-4dc5-856d-4652f074642a",
+    "name_hash": "hash_person_35",
+    "age": 85,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-09",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "82e772c3-5131-45ab-894b-6aba66410c3e",
-    "name_hash": "hash_person_23",
-    "age": 69,
+    "id": "1942334d-747c-4a19-9e79-06ffcffeab4c",
+    "name_hash": "hash_person_21",
+    "age": 11,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-08",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "c8f2dd32-49dd-45a6-838c-f22ec2709a2e",
-    "name_hash": "hash_person_20",
-    "age": 60,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-09",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "5aa82552-130b-42bd-92ae-98b454eae146",
-    "name_hash": "hash_person_14",
-    "age": 68,
+    "id": "01de1514-c8ef-412f-9ff6-e6648d4c8331",
+    "name_hash": "hash_person_32",
+    "age": 37,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-05-04",
-    "status": "active_search",
+    "last_seen_date": "2026-05-06",
+    "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "71d025cf-2d55-4217-abfa-73509b7d2a9b",
-    "name_hash": "hash_person_43",
-    "age": 64,
+    "id": "5c7cd224-7fb8-4563-886a-a9921c2db209",
+    "name_hash": "hash_person_40",
+    "age": 74,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-03",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "5e00d0aa-0073-4780-9342-ebc65ddc32f6",
+    "name_hash": "hash_person_5",
+    "age": 78,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-05-02",
+    "status": "reported",
+    "matched_fir_id": null
+  },
+  {
+    "id": "51a053a8-0e7c-4725-bbf4-8f5fadadc481",
+    "name_hash": "hash_person_42",
+    "age": 40,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-05-01",
     "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "96006e3a-d6c0-445d-9288-d426ba15c31f",
-    "name_hash": "hash_person_26",
-    "age": 10,
+    "id": "dcf13cd8-638b-475d-9ef1-41a7e3c4fdfa",
+    "name_hash": "hash_person_22",
+    "age": 11,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-27",
+    "last_seen_date": "2026-04-30",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "9d64ea1f-8000-4b64-9ef9-d4a2c287b16f",
-    "name_hash": "hash_person_33",
-    "age": 28,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-27",
-    "status": "matched",
-    "matched_fir_id": null
-  },
-  {
-    "id": "1fc5636b-5358-4d51-95a4-d329b083b233",
-    "name_hash": "hash_person_18",
-    "age": 85,
+    "id": "229c8904-fde5-42ab-b8c3-cd4457549fe1",
+    "name_hash": "hash_person_37",
+    "age": 22,
     "last_seen_address": "Sample Address, Karnataka",
     "last_seen_date": "2026-04-26",
     "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "d5bc8fc0-a86c-4728-b0f3-4323f3e5796d",
-    "name_hash": "hash_person_34",
-    "age": 8,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-22",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "06f461f5-768c-4961-adf4-41f54df59f2f",
-    "name_hash": "hash_person_46",
-    "age": 32,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-19",
-    "status": "closed",
-    "matched_fir_id": null
-  },
-  {
-    "id": "ce34b210-fefb-4a04-bad4-c406002d7e3c",
-    "name_hash": "hash_person_39",
+    "id": "af1859ff-dbba-4797-978c-fae6638cb84f",
+    "name_hash": "hash_person_10",
     "age": 60,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-18",
+    "last_seen_date": "2026-04-25",
     "status": "matched",
     "matched_fir_id": null
   },
   {
-    "id": "32889baf-1e72-44c7-9475-749d98a09994",
-    "name_hash": "hash_person_15",
-    "age": 57,
+    "id": "47bcb70d-25c8-429f-bbeb-d4ed5ee3d63e",
+    "name_hash": "hash_person_4",
+    "age": 33,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-18",
+    "last_seen_date": "2026-04-25",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "7e603d53-c499-4528-ad25-702a3fdfaaa5",
-    "name_hash": "hash_person_22",
-    "age": 43,
+    "id": "7071eb4d-7932-4e2c-aaff-02bcad56ce08",
+    "name_hash": "hash_person_36",
+    "age": 30,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-16",
-    "status": "matched",
-    "matched_fir_id": null
-  },
-  {
-    "id": "d9588643-9386-4772-8f07-8d2f994ec916",
-    "name_hash": "hash_person_41",
-    "age": 52,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-15",
-    "status": "reported",
-    "matched_fir_id": null
-  },
-  {
-    "id": "7b6bffad-6710-49e0-967a-35fdbbe02bff",
-    "name_hash": "hash_person_30",
-    "age": 56,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-15",
-    "status": "active_search",
-    "matched_fir_id": null
-  },
-  {
-    "id": "dc1cb946-6eed-438c-b9f4-353dcda1c030",
-    "name_hash": "hash_person_21",
-    "age": 80,
-    "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-12",
+    "last_seen_date": "2026-04-24",
     "status": "closed",
     "matched_fir_id": null
   },
   {
-    "id": "67b2a97b-61e6-4ce9-abe3-e017409f1665",
-    "name_hash": "hash_person_7",
-    "age": 76,
+    "id": "6e475fd2-7dea-4292-ba8c-27a6ac6b225b",
+    "name_hash": "hash_person_29",
+    "age": 57,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-10",
+    "last_seen_date": "2026-04-24",
+    "status": "closed",
+    "matched_fir_id": null
+  },
+  {
+    "id": "07eb2fa1-08b8-4eed-a1f0-b712b4b6d30e",
+    "name_hash": "hash_person_43",
+    "age": 22,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-04-16",
     "status": "active_search",
     "matched_fir_id": null
   },
   {
-    "id": "e9a40683-9ceb-4f64-9011-e240b4982300",
-    "name_hash": "hash_person_24",
-    "age": 70,
+    "id": "1a38de87-5aa2-420c-8ddb-5203e6d61398",
+    "name_hash": "hash_person_9",
+    "age": 25,
     "last_seen_address": "Sample Address, Karnataka",
-    "last_seen_date": "2026-04-09",
+    "last_seen_date": "2026-04-15",
+    "status": "matched",
+    "matched_fir_id": null
+  },
+  {
+    "id": "8e2a7c11-cfc2-4679-a318-626851f93df1",
+    "name_hash": "hash_person_33",
+    "age": 73,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-04-12",
+    "status": "active_search",
+    "matched_fir_id": null
+  },
+  {
+    "id": "1bef266f-e673-4de4-b4a5-aa39cafa1c47",
+    "name_hash": "hash_person_31",
+    "age": 56,
+    "last_seen_address": "Sample Address, Karnataka",
+    "last_seen_date": "2026-04-08",
     "status": "reported",
     "matched_fir_id": null
   }
 ]
   ```
   </details>
-- **4. GET http://testserver/api/v1/missing-persons/424a8d0a-1cd0-475b-b00f-ecba38547aa3** 
+- **4. GET http://testserver/api/v1/missing-persons/d7184c5a-ac65-4a1e-b4ee-c9522aa73377** 
   - Status Code: 200
-  - Execution Time: 9.61 ms
+  - Execution Time: 9.74 ms
   - Response Size: 184 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "424a8d0a-1cd0-475b-b00f-ecba38547aa3",
-  "name_hash": "hash_d66ec29e",
+  "id": "d7184c5a-ac65-4a1e-b4ee-c9522aa73377",
+  "name_hash": "hash_42c5ec85",
   "age": 30,
   "last_seen_address": "MG Road",
   "last_seen_date": "2026-07-14",
@@ -5402,14 +5095,14 @@
 }
   ```
   </details>
-- **5. GET http://testserver/api/v1/missing-persons/424a8d0a-1cd0-475b-b00f-ecba38547aa3/matches** 
+- **5. GET http://testserver/api/v1/missing-persons/d7184c5a-ac65-4a1e-b4ee-c9522aa73377/matches** 
   - Status Code: 200
-  - Execution Time: 15.71 ms
+  - Execution Time: 18.05 ms
   - Response Size: 76 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "missing_person_id": "424a8d0a-1cd0-475b-b00f-ecba38547aa3",
+  "missing_person_id": "d7184c5a-ac65-4a1e-b4ee-c9522aa73377",
   "candidates": []
 }
   ```
@@ -5418,11 +5111,11 @@
 
 ### tests/test_missing_persons.py::test_missing_persons_invalid_payload
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.00s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 446.04 ms
+  - Execution Time: 284.02 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5435,11 +5128,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg0LCJleHAiOjE3ODQwNDY2ODQsInJvbGUiOiJhZG1pbiJ9.sT0AyDGCZmxmhSY3uP-xUhKblS9H3VaH_5EK9h-CZY8",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NCwiZXhwIjoxNzg0NjQ3ODg0fQ.NWUM1OVj2_XAL6aNuVf9oE0qH4FHUzIz0Lbm28WTTCo",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODE2LCJleHAiOjE3ODQxMDM0MTYsInJvbGUiOiJhZG1pbiJ9.D_4lRQKcV-y3l9rzdrrfT1iO48_q2mR4oeewze7vMkQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxNiwiZXhwIjoxNzg0NzA0NjE2fQ.oxv9kXYHKDMau06NWGM9JQItZcZjYsTEy5ZJkOTgsdo",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5451,7 +5144,7 @@
   </details>
 - **2. POST http://testserver/api/v1/missing-persons** 
   - Status Code: 422
-  - Execution Time: 5.03 ms
+  - Execution Time: 4.03 ms
   - Response Size: 257 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5501,7 +5194,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 475.68 ms
+  - Execution Time: 291.32 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5514,11 +5207,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg0LCJleHAiOjE3ODQwNDY2ODQsInJvbGUiOiJhZG1pbiJ9.sT0AyDGCZmxmhSY3uP-xUhKblS9H3VaH_5EK9h-CZY8",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NCwiZXhwIjoxNzg0NjQ3ODg0fQ.NWUM1OVj2_XAL6aNuVf9oE0qH4FHUzIz0Lbm28WTTCo",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODE2LCJleHAiOjE3ODQxMDM0MTYsInJvbGUiOiJhZG1pbiJ9.D_4lRQKcV-y3l9rzdrrfT1iO48_q2mR4oeewze7vMkQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxNiwiZXhwIjoxNzg0NzA0NjE2fQ.oxv9kXYHKDMau06NWGM9JQItZcZjYsTEy5ZJkOTgsdo",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5528,14 +5221,14 @@
 }
   ```
   </details>
-- **2. GET http://testserver/api/v1/missing-persons/d3861ebc-e8a0-4159-a119-f87c760eeb57** 
+- **2. GET http://testserver/api/v1/missing-persons/90aa50bf-7859-4466-b764-1832be7b4ac9** 
   - Status Code: 404
-  - Execution Time: 5.46 ms
+  - Execution Time: 5.16 ms
   - Response Size: 75 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "Missing person d3861ebc-e8a0-4159-a119-f87c760eeb57 not found."
+  "detail": "Missing person 90aa50bf-7859-4466-b764-1832be7b4ac9 not found."
 }
   ```
   </details>
@@ -5543,11 +5236,11 @@
 
 ### tests/test_network.py::test_network_graph
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 3.58s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 382.92 ms
+  - Execution Time: 285.94 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5560,11 +5253,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg1LCJleHAiOjE3ODQwNDY2ODUsInJvbGUiOiJhZG1pbiJ9.S0vtWKUBtyCD058XHMTHncL-1JMYGiUqyVsRik5plHM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NSwiZXhwIjoxNzg0NjQ3ODg1fQ._-0karwzg9HyxuTG04Nlh6dGcLREcBi4xeTTTFcJTS8",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODE2LCJleHAiOjE3ODQxMDM0MTYsInJvbGUiOiJhZG1pbiJ9.D_4lRQKcV-y3l9rzdrrfT1iO48_q2mR4oeewze7vMkQ",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgxNiwiZXhwIjoxNzg0NzA0NjE2fQ.oxv9kXYHKDMau06NWGM9JQItZcZjYsTEy5ZJkOTgsdo",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5574,15 +5267,9336 @@
 }
   ```
   </details>
-- **2. GET http://testserver/api/v1/network/graph** 
+- **2. GET http://testserver/api/v1/network/graph**  ⚠️ **WARNING: >3s**
   - Status Code: 200
-  - Execution Time: 8.43 ms
-  - Response Size: 23 bytes
+  - Execution Time: 3576.25 ms
+  - Response Size: 218730 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "nodes": [],
-  "edges": []
+  "nodes": [
+    {
+      "id": "9bc67162-cd98-4b86-a982-8b61325f4c84",
+      "label": "BID-Suspect-012",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "label": "BID-Suspect-013",
+      "risk_score": 79.904,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "label": "BID-Suspect-014",
+      "risk_score": 100.0,
+      "centrality": 0.0009,
+      "case_count": 4
+    },
+    {
+      "id": "8f30b69b-68f1-4846-8c5f-f8ef58d5471e",
+      "label": "BID-Suspect-015",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "label": "BID-Suspect-016",
+      "risk_score": 79.904,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "95f280f4-c762-4884-a028-5b8dba826d35",
+      "label": "BID-Suspect-017",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "0658dfc7-4cf2-4efb-a1dc-b80da0f462a7",
+      "label": "BID-Suspect-018",
+      "risk_score": 66.288,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "5a14459f-ccf4-448a-9b37-c041d8abe06a",
+      "label": "BID-Suspect-019",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cf59e193-6d34-4c32-ac0a-f47967a6f93b",
+      "label": "BID-Suspect-020",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "a69b398e-e874-4793-abdb-3d14551af051",
+      "label": "BID-Suspect-021",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "f48f8542-5bf6-464c-966d-5d34afc11fb7",
+      "label": "BID-Suspect-022",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "label": "CHA-Suspect-000",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "e16ff9e1-9443-4cef-8b93-e90328292226",
+      "label": "CHA-Suspect-001",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "label": "CHA-Suspect-002",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "3582bf73-6ebf-4fd1-82d6-104a37c83d79",
+      "label": "CHA-Suspect-003",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "label": "CHA-Suspect-004",
+      "risk_score": 99.904,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "label": "CHA-Suspect-005",
+      "risk_score": 99.904,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "4e27b306-bf0a-42a2-9c1c-eb8c1e98d608",
+      "label": "CHA-Suspect-006",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "7e091008-e8fb-49d7-b71f-c2bbcf103333",
+      "label": "CHA-Suspect-007",
+      "risk_score": 57.808,
+      "centrality": 0.0002,
+      "case_count": 1
+    },
+    {
+      "id": "baff5d96-4fd9-4c9d-8ab2-287efa4504ea",
+      "label": "CHA-Suspect-008",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "cefc9e2b-2d37-486e-8b2c-9627b09688ac",
+      "label": "CHA-Suspect-009",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "label": "CHA-Suspect-010",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "ccf2b4f9-f1b3-44a1-a5c0-7015acb58f15",
+      "label": "CHA-Suspect-011",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "b8a1519b-8e94-47f2-8aaf-2cfd2f28de89",
+      "label": "CHA-Suspect-012",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "4cddf2ef-ad6c-484c-aa3a-10d9717eb81e",
+      "label": "CHA-Suspect-013",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "label": "RAM-Suspect-000",
+      "risk_score": 92.0,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "label": "RAM-Suspect-001",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "label": "RAM-Suspect-002",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "94701316-98c5-4a1e-a583-a399de2af046",
+      "label": "RAM-Suspect-003",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "label": "RAM-Suspect-004",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "69e9c725-e529-419c-b9cd-d100ba90a3ac",
+      "label": "RAM-Suspect-005",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "213079e9-adf2-4719-b6b1-16e17b0bd3a6",
+      "label": "RAM-Suspect-006",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "67b6b50c-80e1-4f4c-a835-37d2bb82911f",
+      "label": "RAM-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "b526cdbb-bfcb-4d14-85ea-3c947a85a7c0",
+      "label": "RAM-Suspect-008",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "39da1298-5b8d-4437-9b26-39c7911267de",
+      "label": "RAM-Suspect-009",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "e667296a-983e-480b-8cb6-7c4405bc9014",
+      "label": "MAN-Suspect-000",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "ae46ab5f-8c4d-4dda-933d-a1b1bdfe70e2",
+      "label": "MAN-Suspect-001",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "73e1eb62-8acb-4a96-9826-8f8b0ca6d5a0",
+      "label": "MAN-Suspect-002",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "label": "MAN-Suspect-003",
+      "risk_score": 79.904,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "ad96d272-b058-4243-a49a-a65abf88ae52",
+      "label": "MAN-Suspect-004",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "6b01c17b-3088-48ec-8d6e-e9e02e1f94b6",
+      "label": "MAN-Suspect-005",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "label": "MAN-Suspect-006",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "label": "BEN-Suspect-000",
+      "risk_score": 82.0,
+      "centrality": 0.0003,
+      "case_count": 1
+    },
+    {
+      "id": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "label": "BEN-Suspect-001",
+      "risk_score": 89.904,
+      "centrality": 0.0003,
+      "case_count": 3
+    },
+    {
+      "id": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "label": "BEN-Suspect-002",
+      "risk_score": 100.0,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "72791549-434c-4fbc-bfa3-4bfb53e983b9",
+      "label": "BEN-Suspect-003",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "label": "BEN-Suspect-004",
+      "risk_score": 79.904,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "47e852c0-03d7-4c36-b43c-ac64d3c08a2a",
+      "label": "BEN-Suspect-005",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "346d4b24-fae6-4a62-8c8c-8da7e9163610",
+      "label": "BEN-Suspect-006",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "756bdd17-4b47-43aa-832c-154a40ce1f4d",
+      "label": "BEN-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "e7b1a467-d3cb-4b38-a4bd-4ac4631e52db",
+      "label": "BEN-Suspect-008",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "e211b021-f8d6-4ac7-906a-83403697dd66",
+      "label": "BEN-Suspect-009",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "0ef92087-e62a-4462-8f02-bff1eb275179",
+      "label": "BEN-Suspect-010",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "label": "BEN-Suspect-011",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "label": "BEN-Suspect-012",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "label": "BEN-Suspect-013",
+      "risk_score": 79.904,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "807d7fef-1c88-4f2a-b4d9-194cc0acea5e",
+      "label": "BEN-Suspect-014",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "label": "BEN-Suspect-015",
+      "risk_score": 100.0,
+      "centrality": 0.0004,
+      "case_count": 5
+    },
+    {
+      "id": "f34e9750-52bb-49ec-8cbf-1e4225e26b34",
+      "label": "BEN-Suspect-016",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "label": "BEN-Suspect-017",
+      "risk_score": 79.904,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "93f4c478-38bb-4dfb-8646-2241b70e0108",
+      "label": "BEN-Suspect-018",
+      "risk_score": 56.288,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "decf2266-6b37-4e31-a4b6-6ee56680e9b7",
+      "label": "BEN-Suspect-019",
+      "risk_score": 56.288,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "c9b1283b-c29e-4615-be40-cfe0f9ce5680",
+      "label": "BEN-Suspect-020",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "289bab36-3a53-4c53-ace8-728016f0025e",
+      "label": "BEN-Suspect-021",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "8491c8a2-bb4f-4cf4-bb9a-7c5a6647f05b",
+      "label": "BEN-Suspect-022",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "ee3a78b8-73c4-45ad-90e2-906ec2639177",
+      "label": "BEN-Suspect-023",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "8e8311a2-ffeb-41a3-ae0e-4c3bd290d114",
+      "label": "BEN-Suspect-000",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "label": "BEN-Suspect-001",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "label": "BEN-Suspect-002",
+      "risk_score": 79.904,
+      "centrality": 0.0005,
+      "case_count": 2
+    },
+    {
+      "id": "6e9685ea-ddd4-492c-831d-7b79844331df",
+      "label": "BEN-Suspect-003",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "label": "BEN-Suspect-004",
+      "risk_score": 79.904,
+      "centrality": 0.0005,
+      "case_count": 2
+    },
+    {
+      "id": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "label": "BEN-Suspect-005",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "7485d79a-6880-4294-ad72-1bd7f346fcee",
+      "label": "BEN-Suspect-006",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "6f9938b0-4e71-4bb3-be8d-25ffc7dbabd3",
+      "label": "BEN-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "224d1057-c85e-4d9a-ab42-4eac91765f2c",
+      "label": "BEN-Suspect-008",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "label": "BEN-Suspect-009",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "ebe6f883-624a-4c16-8b4a-921279ab418f",
+      "label": "BEN-Suspect-010",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "b86a6e5a-b8ec-4b37-9a92-7238887a8f7d",
+      "label": "BEN-Suspect-011",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "fbb1f7fe-8c96-4771-af3c-3a339b6fbe49",
+      "label": "BEN-Suspect-012",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "label": "BEN-Suspect-013",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "988dc2b1-1699-431f-bfef-af3fb45aca89",
+      "label": "BEN-Suspect-014",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "b8ce6af3-6788-49de-9085-6ab85ecfe9ec",
+      "label": "BEN-Suspect-015",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "cbdcb86c-9659-460b-b407-026801547499",
+      "label": "BEN-Suspect-016",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "8b918694-63a6-41f1-b632-c095df39d6f5",
+      "label": "BEN-Suspect-017",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "9fd2c88c-8d4e-4ea8-8744-e00c15f12295",
+      "label": "BEN-Suspect-018",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "label": "BEN-Suspect-019",
+      "risk_score": 100.0,
+      "centrality": 0.0003,
+      "case_count": 4
+    },
+    {
+      "id": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "label": "BEN-Suspect-020",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "cc2cf365-974c-4b60-9c5d-6e8e3cf2f2e3",
+      "label": "BEN-Suspect-021",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "31c83cd1-062d-4f54-b40a-371b1f419a89",
+      "label": "BEN-Suspect-022",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "b49b21cb-86d1-492c-94ee-ec5729e6e233",
+      "label": "BEN-Suspect-023",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "6690761a-27c4-437c-92e5-714d99b5bf89",
+      "label": "MYS-Suspect-000",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "9d8cf7db-c9c9-4849-a7ac-491d49f0a5d2",
+      "label": "MYS-Suspect-001",
+      "risk_score": 86.288,
+      "centrality": 0.0006,
+      "case_count": 5
+    },
+    {
+      "id": "275adfb1-b12c-4f95-8845-3c1c03f0c94b",
+      "label": "MYS-Suspect-002",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "label": "MYS-Suspect-003",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "c8746463-1189-4b9d-b3a5-320e4d1f566a",
+      "label": "MYS-Suspect-004",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "label": "MYS-Suspect-005",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "b529a6d2-4504-4cf2-ad8f-fbb37a4fc933",
+      "label": "MYS-Suspect-006",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "label": "MYS-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "878f1513-ab43-4dbe-ad0d-d5232af36c11",
+      "label": "MYS-Suspect-008",
+      "risk_score": 46.288,
+      "centrality": 0.0005,
+      "case_count": 1
+    },
+    {
+      "id": "f303fd09-20e7-4a54-8fff-e788656b3a11",
+      "label": "MYS-Suspect-009",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "label": "MYS-Suspect-010",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "label": "MYS-Suspect-011",
+      "risk_score": 89.904,
+      "centrality": 0.0006,
+      "case_count": 3
+    },
+    {
+      "id": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "label": "MYS-Suspect-012",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 2
+    },
+    {
+      "id": "c1c324a2-c536-4f2a-9a5b-318eccc8bf06",
+      "label": "MYS-Suspect-013",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "2c489b70-4b64-4077-9097-f4987ccdd027",
+      "label": "MYS-Suspect-014",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "label": "MYS-Suspect-015",
+      "risk_score": 34.192,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "14396a9b-0bb5-45a6-8d0d-7661a5f7f361",
+      "label": "MYS-Suspect-016",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "bdc77b0f-8942-4301-8e55-e080774c3abe",
+      "label": "DAK-Suspect-000",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "da7763cd-640b-4180-ac21-b95ab78c9e81",
+      "label": "DAK-Suspect-001",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "label": "DAK-Suspect-002",
+      "risk_score": 100.0,
+      "centrality": 0.0003,
+      "case_count": 5
+    },
+    {
+      "id": "fec69a78-cc6d-4048-b345-aad4886902a6",
+      "label": "DAK-Suspect-003",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "3edcf9e4-9a0f-43b5-8009-be31de7b77ab",
+      "label": "DAK-Suspect-004",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "label": "DAK-Suspect-005",
+      "risk_score": 82.0,
+      "centrality": 0.0003,
+      "case_count": 1
+    },
+    {
+      "id": "dab82f6e-04cd-433a-b6b4-903fd7f8e5b9",
+      "label": "DAK-Suspect-006",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "label": "DAK-Suspect-007",
+      "risk_score": 100.0,
+      "centrality": 0.0003,
+      "case_count": 5
+    },
+    {
+      "id": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "label": "DAK-Suspect-008",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "821aa179-15ef-43f6-94ae-281459f9e01e",
+      "label": "DAK-Suspect-009",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "label": "DAK-Suspect-010",
+      "risk_score": 99.904,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "32e8e7cc-87d3-4647-a3de-879a0ebee7ec",
+      "label": "DAK-Suspect-011",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "60ea9058-00b7-4be4-983a-35113d20c676",
+      "label": "DAK-Suspect-012",
+      "risk_score": 54.192,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "a8b97e02-4fe5-4ee0-b36c-fb9a56a12b3d",
+      "label": "DAK-Suspect-013",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "5732caca-c7ea-41e8-a4f8-188882c211d3",
+      "label": "DAK-Suspect-014",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "label": "DAK-Suspect-015",
+      "risk_score": 100.0,
+      "centrality": 0.0008,
+      "case_count": 4
+    },
+    {
+      "id": "4307eec5-c1f8-4854-b692-98d902081acd",
+      "label": "DAK-Suspect-016",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "label": "DAK-Suspect-017",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "label": "DAK-Suspect-018",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "1d4a4b08-aed4-4434-91a1-71b62a8e0f6a",
+      "label": "DAK-Suspect-019",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "18565b98-ccd9-4bae-99fd-f5c7f32d0d47",
+      "label": "DAK-Suspect-020",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "label": "DAK-Suspect-021",
+      "risk_score": 94.096,
+      "centrality": 0.0003,
+      "case_count": 1
+    },
+    {
+      "id": "6757dc72-2e00-4ffc-bc45-c1ef4e4de2e8",
+      "label": "DAK-Suspect-022",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "66ec3e46-43c0-4e2c-98af-16a181b19cf2",
+      "label": "UDU-Suspect-000",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "06e94820-ae89-40c0-95fe-47a107d31b8e",
+      "label": "UDU-Suspect-001",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "e5e9a970-1f3a-44fe-b68a-13cae2bd995d",
+      "label": "UDU-Suspect-003",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "7db4a368-9876-4546-a60f-6a22bbbf49d4",
+      "label": "UDU-Suspect-004",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "828be477-e636-49b5-8652-e96d44cbae50",
+      "label": "UDU-Suspect-005",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "611438f0-8ddd-4cc8-9d59-6dded4ff61eb",
+      "label": "UDU-Suspect-006",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "label": "UDU-Suspect-007",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "label": "UDU-Suspect-008",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "label": "UDU-Suspect-009",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "label": "UDU-Suspect-010",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "label": "UDU-Suspect-011",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "label": "UDU-Suspect-012",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "f9632d77-1e72-4498-881e-d537194cab01",
+      "label": "BEL-Suspect-000",
+      "risk_score": 69.904,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "7f7dfb48-aa58-4265-8139-671c5bce2c9b",
+      "label": "BEL-Suspect-001",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "be20bc1b-33ba-4d1e-a139-24801933812c",
+      "label": "BEL-Suspect-002",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "a8aed368-626e-403d-9d40-7cce29545ad0",
+      "label": "BEL-Suspect-003",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "923e8051-cd00-489d-ad80-32740eebdc06",
+      "label": "BEL-Suspect-004",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "6df37761-b5e5-40ea-885a-baefc4bb05b5",
+      "label": "BEL-Suspect-005",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "label": "BEL-Suspect-006",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "label": "BEL-Suspect-007",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "41071f97-2939-45e3-ad48-cd7dd8883110",
+      "label": "BEL-Suspect-008",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "label": "BEL-Suspect-009",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "label": "BEL-Suspect-010",
+      "risk_score": 79.904,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "403aa989-0131-42d7-9ddd-e3a8f76fdf6d",
+      "label": "BEL-Suspect-011",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "label": "BEL-Suspect-012",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "1041ab05-9793-4d98-a2bb-d8a28c339f8a",
+      "label": "DHA-Suspect-000",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0003,
+      "case_count": 4
+    },
+    {
+      "id": "38499d79-4ab6-4ec9-99ec-ec38488f3bf9",
+      "label": "DHA-Suspect-001",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "9a1c664f-c15b-4352-a20e-4c2be68e1fc3",
+      "label": "DHA-Suspect-002",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "label": "DHA-Suspect-003",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "e0bb7fe5-a983-4a38-a871-b2e50c0827b2",
+      "label": "DHA-Suspect-004",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "a3bc0f32-6088-4417-aeb4-d965ac84e59a",
+      "label": "DHA-Suspect-005",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cd2984be-11dc-4a8b-babe-bee9d2a2e78d",
+      "label": "DHA-Suspect-006",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "label": "DHA-Suspect-007",
+      "risk_score": 86.288,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "label": "DHA-Suspect-008",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0003,
+      "case_count": 4
+    },
+    {
+      "id": "783d7a01-cb6a-49bd-81a7-d204b4e78d5f",
+      "label": "DHA-Suspect-009",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "label": "DHA-Suspect-010",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "label": "DHA-Suspect-011",
+      "risk_score": 79.904,
+      "centrality": 0.0006,
+      "case_count": 2
+    },
+    {
+      "id": "ba929246-d82e-40dd-b415-97e09d461773",
+      "label": "DHA-Suspect-012",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "5b99929a-faac-4d11-8f56-155389e62373",
+      "label": "DHA-Suspect-013",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "b87de6ef-820d-437a-bb55-ff0163c46809",
+      "label": "DHA-Suspect-014",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "6b17c37f-f7c6-4f27-a885-24962eaa920a",
+      "label": "DHA-Suspect-015",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "021f0776-b0fe-4925-b233-e4ac6218db84",
+      "label": "DHA-Suspect-016",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "label": "DHA-Suspect-017",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "3a5555f5-d24a-4e30-9d02-fcc035a4b5c5",
+      "label": "DHA-Suspect-018",
+      "risk_score": 66.288,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "label": "DHA-Suspect-019",
+      "risk_score": 100.0,
+      "centrality": 0.0006,
+      "case_count": 4
+    },
+    {
+      "id": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "label": "SHI-Suspect-000",
+      "risk_score": 100.0,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "66ed1b3d-c1fc-4ae0-9ad3-53466947e3a5",
+      "label": "SHI-Suspect-001",
+      "risk_score": 57.808,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "a212017e-3223-4094-808a-8e7744ddc72a",
+      "label": "SHI-Suspect-002",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "label": "SHI-Suspect-003",
+      "risk_score": 79.904,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+      "label": "SHI-Suspect-004",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0011,
+      "case_count": 5
+    },
+    {
+      "id": "60ed2d9e-b543-415b-b371-6b41d0ec5594",
+      "label": "SHI-Suspect-005",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "label": "SHI-Suspect-006",
+      "risk_score": 100.0,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "3df84387-3124-4311-a77e-a15dcb22b764",
+      "label": "SHI-Suspect-007",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "label": "SHI-Suspect-008",
+      "risk_score": 99.904,
+      "centrality": 0.0004,
+      "case_count": 4
+    },
+    {
+      "id": "9d87d6de-ec84-4d47-bc6a-d9befaacc8de",
+      "label": "SHI-Suspect-009",
+      "risk_score": 54.192,
+      "centrality": 0.0011,
+      "case_count": 3
+    },
+    {
+      "id": "f8cff949-0216-4859-9ea3-49ce840a3e6e",
+      "label": "SHI-Suspect-010",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 2
+    },
+    {
+      "id": "e6b0c6f1-4096-4a45-87a8-30cf1815fc72",
+      "label": "SHI-Suspect-011",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "label": "SHI-Suspect-012",
+      "risk_score": 69.904,
+      "centrality": 0.0007,
+      "case_count": 1
+    },
+    {
+      "id": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "label": "SHI-Suspect-013",
+      "risk_score": 89.904,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "label": "SHI-Suspect-014",
+      "risk_score": 100.0,
+      "centrality": 0.0013,
+      "case_count": 2
+    },
+    {
+      "id": "9d5bc4e0-e89d-420b-9eb3-e15a3e9de176",
+      "label": "SHI-Suspect-015",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "3c8c47dc-b887-4370-bada-ebff60b61265",
+      "label": "SHI-Suspect-017",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "cd1356df-de59-4a1c-83da-41511efee075",
+      "label": "SHI-Suspect-018",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "820a51ff-5778-46ae-ac86-e59569c7fbe0",
+      "label": "SHI-Suspect-019",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "5ca0093a-d014-414d-8ac1-e5d75361a6db",
+      "label": "SHI-Suspect-020",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "19174ee6-dc8f-4227-90dc-2d47b69b0e61",
+      "label": "SHI-Suspect-021",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "605429c6-c544-4175-8f92-0890876507e8",
+      "label": "SHI-Suspect-022",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "6e617961-540a-436b-b1b8-a188b77292aa",
+      "label": "SHI-Suspect-023",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "label": "SHI-Suspect-024",
+      "risk_score": 92.0,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "5647372b-1766-4b0f-8deb-29b7ea73b981",
+      "label": "HAS-Suspect-000",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "b2c09a02-19a6-484e-9e47-502c9fe824fa",
+      "label": "HAS-Suspect-001",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "c184b491-05cb-4612-b37b-b2acc9a18870",
+      "label": "HAS-Suspect-002",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "747f920c-d3ed-4be3-bdbe-cac092c0119c",
+      "label": "HAS-Suspect-003",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "45f6b98b-550a-4701-ace1-ba882e7fa7e3",
+      "label": "HAS-Suspect-004",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "3da172ca-d851-42d8-bb8f-6e7eff8d3942",
+      "label": "HAS-Suspect-005",
+      "risk_score": 46.288,
+      "centrality": 0.0006,
+      "case_count": 1
+    },
+    {
+      "id": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "label": "HAS-Suspect-006",
+      "risk_score": 89.904,
+      "centrality": 0.0006,
+      "case_count": 3
+    },
+    {
+      "id": "f20a1110-e819-4312-828b-2d8644c0dcd8",
+      "label": "HAS-Suspect-007",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "54513c4b-a6e8-4948-ab5d-18df28439e16",
+      "label": "HAS-Suspect-008",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "09da5724-28dd-4c72-96c9-55f985333c5d",
+      "label": "HAS-Suspect-009",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "label": "HAS-Suspect-010",
+      "risk_score": 100.0,
+      "centrality": 0.0005,
+      "case_count": 5
+    },
+    {
+      "id": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "label": "HAS-Suspect-011",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "label": "HAS-Suspect-012",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0005,
+      "case_count": 5
+    },
+    {
+      "id": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "label": "HAS-Suspect-013",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "label": "HAS-Suspect-014",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "56be2054-10a3-4de0-813e-8a5665d15a15",
+      "label": "HAS-Suspect-015",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "fa765de9-c6f7-4131-933e-0f9e7fb736d3",
+      "label": "HAS-Suspect-017",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0005,
+      "case_count": 3
+    },
+    {
+      "id": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "label": "HAS-Suspect-018",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "label": "KOD-Suspect-000",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "3c4453a7-1174-4eef-aef3-f0d9f4f63ba6",
+      "label": "KOD-Suspect-001",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "7e8e1403-6bc8-40b2-b663-df2423f973f3",
+      "label": "KOD-Suspect-002",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "label": "KOD-Suspect-003",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "3cc62dcb-81e9-46f9-84f5-bc0f965297d8",
+      "label": "KOD-Suspect-004",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "5093de79-d629-4db9-b6b2-d57b23e944dc",
+      "label": "KOD-Suspect-005",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "label": "KOD-Suspect-006",
+      "risk_score": 89.904,
+      "centrality": 0.0005,
+      "case_count": 3
+    },
+    {
+      "id": "a505f23b-a546-4908-a182-4132ff724088",
+      "label": "KOD-Suspect-007",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0011,
+      "case_count": 3
+    },
+    {
+      "id": "1605b9d6-49d6-4731-81d3-3895532b04d6",
+      "label": "KOD-Suspect-008",
+      "risk_score": 46.288,
+      "centrality": 0.0002,
+      "case_count": 1
+    },
+    {
+      "id": "19b071a5-e5b7-4d43-b447-ae4079632590",
+      "label": "KOD-Suspect-009",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "1dfda72a-fae9-4175-a7a9-7cd38db94022",
+      "label": "KOD-Suspect-010",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "5c2af606-e398-4e2d-9869-d19bf5ae431b",
+      "label": "KOD-Suspect-011",
+      "risk_score": 76.288,
+      "centrality": 0.0003,
+      "case_count": 4
+    },
+    {
+      "id": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "label": "KOD-Suspect-012",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 4
+    },
+    {
+      "id": "520ad31f-d3ae-4829-b6c2-544adc179f01",
+      "label": "KOD-Suspect-013",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "842b6ef9-962d-4c43-bebd-5f168cac3f78",
+      "label": "KOD-Suspect-014",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "label": "KOD-Suspect-015",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0003,
+      "case_count": 3
+    },
+    {
+      "id": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "label": "KOD-Suspect-016",
+      "risk_score": 69.904,
+      "centrality": 0.0004,
+      "case_count": 1
+    },
+    {
+      "id": "459d4e37-b081-4c87-a0ea-8e722dae7fe1",
+      "label": "KOD-Suspect-017",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "dc50a141-ada6-40b6-9ce4-9bba800f4ecf",
+      "label": "KOD-Suspect-018",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "label": "KOD-Suspect-019",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0012,
+      "case_count": 5
+    },
+    {
+      "id": "34667d62-f571-43d4-ac01-37880013b111",
+      "label": "KOD-Suspect-020",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "label": "KOD-Suspect-021",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 5
+    },
+    {
+      "id": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "label": "KOD-Suspect-022",
+      "risk_score": 69.904,
+      "centrality": 0.001,
+      "case_count": 1
+    },
+    {
+      "id": "64a6b56e-cd6e-4a8a-9352-67efaef6a89b",
+      "label": "KOD-Suspect-023",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "label": "BAL-Suspect-000",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "aa6a521e-46ab-46f4-b156-8463b844edcd",
+      "label": "BAL-Suspect-001",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "label": "BAL-Suspect-002",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "label": "BAL-Suspect-003",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "f4c421d9-e103-4672-975f-1c9f288688aa",
+      "label": "BAL-Suspect-004",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "label": "BAL-Suspect-005",
+      "risk_score": 57.808,
+      "centrality": 0.0002,
+      "case_count": 1
+    },
+    {
+      "id": "6e2a0a7d-9cb5-40d7-ac69-495740acb7bf",
+      "label": "BAL-Suspect-006",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "label": "BAL-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "41f4ce75-3b49-46c7-be0a-fb8cc361667a",
+      "label": "BAL-Suspect-008",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "label": "BAL-Suspect-009",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "label": "KAL-Suspect-000",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "label": "KAL-Suspect-001",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "6152bfce-ac87-489f-8c77-5232e5da8503",
+      "label": "KAL-Suspect-002",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "3ee5281a-41fc-439b-9801-b6fbfd3dfe3c",
+      "label": "KAL-Suspect-003",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "label": "KAL-Suspect-004",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "953aa2bb-8464-43a2-ae74-1f1dcb223892",
+      "label": "KAL-Suspect-005",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "8fe28d10-6351-400b-9038-82a4b986d920",
+      "label": "KAL-Suspect-006",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "07a11019-1377-4188-b92d-7e514f6a01e8",
+      "label": "KAL-Suspect-007",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "ddc1c143-f380-4c94-a00d-65c694e19080",
+      "label": "KAL-Suspect-008",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "f1c28fb3-b5c2-4440-908a-0870ce777fdd",
+      "label": "KAL-Suspect-009",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "9ae615a5-6f80-45d6-b7b0-fe6f890bbb31",
+      "label": "KAL-Suspect-010",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "11e584ff-00ea-470f-84c0-585af7999721",
+      "label": "KAL-Suspect-011",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "label": "RAI-Suspect-000",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "95978794-56d1-498f-8a83-a5af98043c8e",
+      "label": "RAI-Suspect-001",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "label": "RAI-Suspect-003",
+      "risk_score": 89.904,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "b8c9b77d-7600-4fc8-b85b-38935565f459",
+      "label": "RAI-Suspect-004",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "label": "RAI-Suspect-005",
+      "risk_score": 79.904,
+      "centrality": 0.0004,
+      "case_count": 2
+    },
+    {
+      "id": "3f826470-3e76-4bc8-9d9a-1d0fc91aedae",
+      "label": "RAI-Suspect-006",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "label": "RAI-Suspect-007",
+      "risk_score": 99.904,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "fc50ee89-fcfa-4b23-a20d-161e152d1d8d",
+      "label": "RAI-Suspect-008",
+      "risk_score": 76.288,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "label": "RAI-Suspect-009",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "89028806-3f6f-4832-96af-29b166653928",
+      "label": "RAI-Suspect-010",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "label": "RAI-Suspect-011",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 2
+    },
+    {
+      "id": "c4279712-d478-47ae-9f57-142389ccec74",
+      "label": "RAI-Suspect-012",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "880d9061-449c-4923-97d4-43e29739ffb5",
+      "label": "RAI-Suspect-013",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "8534e700-84c1-4491-ae12-e441e6ff5456",
+      "label": "RAI-Suspect-014",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "16bc178b-c01f-440e-bb34-4c5706cff131",
+      "label": "RAI-Suspect-015",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "label": "VIJ-Suspect-000",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "a55c4929-7808-44a8-9446-8cc8c299bdc3",
+      "label": "VIJ-Suspect-001",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "label": "VIJ-Suspect-002",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "7cf72432-f96a-4da1-abc5-8b47952d0c7b",
+      "label": "VIJ-Suspect-003",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "521743d1-2e45-410d-8784-1ef674d904bb",
+      "label": "VIJ-Suspect-004",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "6a8c8e04-8ebf-4525-a1bd-90b486c3f4ad",
+      "label": "VIJ-Suspect-005",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "18ea1b24-afe1-414c-b199-cd2216cd0539",
+      "label": "VIJ-Suspect-006",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "label": "VIJ-Suspect-007",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "71d03d33-e0ea-4e96-8904-a639b0608db5",
+      "label": "VIJ-Suspect-008",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "37fecda6-ace7-4592-b2cf-db1199a6c90b",
+      "label": "VIJ-Suspect-009",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "label": "VIJ-Suspect-010",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "332bb67c-111f-4856-9964-706f099efe59",
+      "label": "TUM-Suspect-000",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "2fea84d0-09b8-484f-ada4-230bb68c0948",
+      "label": "TUM-Suspect-001",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "7a6d2b97-7118-4930-bf07-8ba5a316a97f",
+      "label": "TUM-Suspect-002",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "2620acaf-4e6a-4e70-82a5-e68d6fd9e138",
+      "label": "TUM-Suspect-003",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "ce50ac5f-f6ca-462b-8d52-7f4bbe606592",
+      "label": "TUM-Suspect-004",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "5b5f3bfd-63f4-481e-b6e1-51e676f33ffa",
+      "label": "TUM-Suspect-005",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "2698b7a0-3fde-474b-8482-8e03438cc3f8",
+      "label": "TUM-Suspect-006",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "ae492f5b-e518-4af2-882d-940ac01f8c0a",
+      "label": "TUM-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "583252cf-fa57-4d7c-bc69-715ce2fdbfba",
+      "label": "TUM-Suspect-008",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "label": "TUM-Suspect-009",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "label": "TUM-Suspect-010",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "label": "CHI-Suspect-000",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "label": "CHI-Suspect-001",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "label": "CHI-Suspect-002",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "5336a98d-1c45-4691-8f91-705729df8227",
+      "label": "CHI-Suspect-003",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "13509d3d-bfa8-4c72-bf2d-6182a59ed071",
+      "label": "CHI-Suspect-004",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "label": "CHI-Suspect-005",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "9ed45641-7f94-49d2-ae85-aae03250be49",
+      "label": "CHI-Suspect-007",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "62d5e982-2e8a-4209-960c-30e9e6aa97d0",
+      "label": "CHI-Suspect-008",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "aad9de74-1118-4498-8e58-c650e7deefa7",
+      "label": "CHI-Suspect-009",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "dd10db0b-d756-4344-a842-40f0a72e3d4d",
+      "label": "CHI-Suspect-010",
+      "risk_score": 46.288,
+      "centrality": 0.0002,
+      "case_count": 1
+    },
+    {
+      "id": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "label": "DAV-Suspect-000",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "label": "DAV-Suspect-001",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0005,
+      "case_count": 3
+    },
+    {
+      "id": "2b35bd24-54fe-402d-88f5-7f15dc51a653",
+      "label": "DAV-Suspect-002",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "a4179eba-c4cf-468b-8400-0f658cdda350",
+      "label": "DAV-Suspect-003",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "label": "DAV-Suspect-004",
+      "risk_score": 100.0,
+      "centrality": 0.0009,
+      "case_count": 1
+    },
+    {
+      "id": "c0db6fbc-7ed6-45bb-af43-ea657ccbf69e",
+      "label": "DAV-Suspect-005",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+      "label": "DAV-Suspect-006",
+      "risk_score": 86.288,
+      "centrality": 0.0008,
+      "case_count": 5
+    },
+    {
+      "id": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "label": "DAV-Suspect-007",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "fda8062e-a2f7-483e-b4c8-b4fd585b73ba",
+      "label": "DAV-Suspect-008",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "26b917ae-8efe-4bbd-8d6f-2c6278fc5611",
+      "label": "DAV-Suspect-009",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "24426225-cfc8-43f9-b61e-b3300b1b9768",
+      "label": "DAV-Suspect-010",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "label": "DAV-Suspect-011",
+      "risk_score": 100.0,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "a64b7880-9372-41a1-afe4-fa40dd145ed6",
+      "label": "DAV-Suspect-012",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "label": "DAV-Suspect-013",
+      "risk_score": 69.904,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "label": "DAV-Suspect-014",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "be8d0bde-7e7d-4c13-86d5-273b85495405",
+      "label": "DAV-Suspect-015",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "db737c73-57f3-49dd-a8be-e4af2cf6b5a7",
+      "label": "DAV-Suspect-016",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "7c01962d-d4c3-45a0-99af-1e770aa06344",
+      "label": "DAV-Suspect-017",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "label": "DAV-Suspect-018",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "e3200de5-72c2-478c-af37-9fef19c78377",
+      "label": "DAV-Suspect-019",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cc9915a7-c6e5-40b3-8251-ac4dcebe6959",
+      "label": "KOP-Suspect-000",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "label": "KOP-Suspect-001",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "72e5f22a-4d4c-442e-8bba-7f5269473182",
+      "label": "KOP-Suspect-002",
+      "risk_score": 54.192,
+      "centrality": 0.0004,
+      "case_count": 3
+    },
+    {
+      "id": "f7484f34-8b02-4d06-8e17-37f6fe4a1b31",
+      "label": "KOP-Suspect-003",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "label": "KOP-Suspect-004",
+      "risk_score": 100.0,
+      "centrality": 0.0005,
+      "case_count": 5
+    },
+    {
+      "id": "c8cd2116-28be-4738-b8d4-1cc1ea0f19b3",
+      "label": "KOP-Suspect-005",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "label": "KOP-Suspect-006",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "cf95923a-e277-4231-a8f8-30912c0d10ee",
+      "label": "KOP-Suspect-007",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "label": "KOP-Suspect-008",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0003,
+      "case_count": 5
+    },
+    {
+      "id": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "label": "KOP-Suspect-009",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "b8e78c66-5b3c-4ca5-adab-177fa17bd690",
+      "label": "KOP-Suspect-010",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "label": "KOP-Suspect-011",
+      "risk_score": 86.288,
+      "centrality": 0.0003,
+      "case_count": 5
+    },
+    {
+      "id": "100e4002-3bf8-4f1f-a371-eb110f20149c",
+      "label": "KOP-Suspect-012",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "label": "KOP-Suspect-013",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "label": "KOP-Suspect-014",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "8b6134f9-6d5b-45be-8537-5983500b09bb",
+      "label": "GAD-Suspect-000",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "label": "GAD-Suspect-001",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "bf6e0da6-800d-451a-a10e-0ec064db9921",
+      "label": "GAD-Suspect-002",
+      "risk_score": 34.192,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "label": "GAD-Suspect-003",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "label": "GAD-Suspect-004",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "3ad5ae67-1893-43e6-ad14-281765844346",
+      "label": "GAD-Suspect-005",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "50b0e6bb-09fa-4267-ace5-ee4e0edf0898",
+      "label": "GAD-Suspect-006",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "e9cff320-7cc4-45b7-8e15-54e8313bbbfa",
+      "label": "GAD-Suspect-007",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "label": "GAD-Suspect-008",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "c318d18d-91f1-4971-b2a6-e0571fdf0f1b",
+      "label": "GAD-Suspect-009",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "27f205cd-82dd-4553-9a06-aa14db517399",
+      "label": "GAD-Suspect-010",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "label": "GAD-Suspect-011",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "640747ea-138b-4950-a74a-74f9718586c6",
+      "label": "GAD-Suspect-012",
+      "risk_score": 42.096000000000004,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "label": "GAD-Suspect-013",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "label": "GAD-Suspect-014",
+      "risk_score": 66.288,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "bf7d031d-f739-4a0e-9762-c9e90679c889",
+      "label": "GAD-Suspect-015",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "29015e76-555c-44c1-ab63-a12e01144256",
+      "label": "GAD-Suspect-016",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "92cac086-6ce2-407b-9757-4e1e77e7c646",
+      "label": "GAD-Suspect-017",
+      "risk_score": 32.096000000000004,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "e8816636-09db-4fef-a844-bddf56d3bb94",
+      "label": "GAD-Suspect-018",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "2ce4652d-8ec7-4f2a-bf6d-df5c179b307e",
+      "label": "BID-Suspect-000",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "400a6eed-d94c-4ada-801e-3b4ba0c824a6",
+      "label": "BID-Suspect-001",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "b7af01c1-3c13-483f-a7d7-2cd947e80282",
+      "label": "BID-Suspect-002",
+      "risk_score": 34.192,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "660dd612-bcec-4a5e-ae6e-c5a18aa9784d",
+      "label": "BID-Suspect-003",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "label": "BID-Suspect-004",
+      "risk_score": 89.904,
+      "centrality": 0.0002,
+      "case_count": 3
+    },
+    {
+      "id": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "label": "BID-Suspect-005",
+      "risk_score": 100.0,
+      "centrality": 0.0007,
+      "case_count": 5
+    },
+    {
+      "id": "26ddb40f-e35c-4c9f-8dec-fd71cd58bc9e",
+      "label": "BID-Suspect-006",
+      "risk_score": 66.288,
+      "centrality": 0.0003,
+      "case_count": 3
+    },
+    {
+      "id": "2446db04-12ce-4bf8-8e6a-d83b98cf9b4e",
+      "label": "BID-Suspect-007",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "label": "BID-Suspect-008",
+      "risk_score": 69.904,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "label": "BID-Suspect-009",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "12ae64f6-9860-40b4-ac65-2346ce9afa59",
+      "label": "BID-Suspect-010",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "10be67bf-cb1a-4a6f-abe8-172ab6695062",
+      "label": "BID-Suspect-011",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "label": "MAN-Suspect-007",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "5ef67a1f-acbc-42fe-baa9-4715b8a823eb",
+      "label": "MAN-Suspect-008",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "label": "MAN-Suspect-009",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "14b9376c-ff17-43ff-af7f-68f9d1c1685a",
+      "label": "MAN-Suspect-011",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "0ce64615-d6f8-4392-b80e-df068046e1d2",
+      "label": "MAN-Suspect-012",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "label": "MAN-Suspect-013",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "c58acca9-29de-4803-8e22-102fb344c057",
+      "label": "MAN-Suspect-014",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "label": "HAV-Suspect-000",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "98eadd9c-e851-4ad5-ae28-7bc2412fde92",
+      "label": "HAV-Suspect-001",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "label": "HAV-Suspect-002",
+      "risk_score": 57.808,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "3b1f2927-4354-4d81-be12-7d18a9ab2e4f",
+      "label": "HAV-Suspect-003",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "7ab567f9-736e-4d79-986b-1f911a55d55a",
+      "label": "HAV-Suspect-004",
+      "risk_score": 44.192,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "2802af17-8547-4fb9-b92c-d4cb036a64c4",
+      "label": "HAV-Suspect-005",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "054fb163-c087-4669-bf39-c3204862813e",
+      "label": "HAV-Suspect-006",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "label": "HAV-Suspect-007",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "label": "UTT-Suspect-000",
+      "risk_score": 79.904,
+      "centrality": 0.0004,
+      "case_count": 2
+    },
+    {
+      "id": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "label": "UTT-Suspect-001",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "53416517-07d0-4129-9054-3273e7ffb024",
+      "label": "UTT-Suspect-002",
+      "risk_score": 22.096,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "41a38249-d476-400c-803c-d9638a92f748",
+      "label": "UTT-Suspect-003",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "29a967fc-5b87-4785-aedb-2ed1c3e9f8be",
+      "label": "UTT-Suspect-004",
+      "risk_score": 62.096000000000004,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "label": "UTT-Suspect-005",
+      "risk_score": 46.288,
+      "centrality": 0.0006,
+      "case_count": 1
+    },
+    {
+      "id": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "label": "UTT-Suspect-006",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "label": "UTT-Suspect-008",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "8f0457c4-be86-4cd9-a0f4-3b74fa4ed5da",
+      "label": "UTT-Suspect-009",
+      "risk_score": 76.288,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "label": "UTT-Suspect-010",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "label": "UTT-Suspect-011",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "label": "UTT-Suspect-012",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0006,
+      "case_count": 3
+    },
+    {
+      "id": "ac101908-7677-4d6e-bd9a-6f88bb4d2ce2",
+      "label": "UTT-Suspect-013",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "293bbb27-729d-4846-89ef-5302882b9412",
+      "label": "UTT-Suspect-014",
+      "risk_score": 46.288,
+      "centrality": 0.0006,
+      "case_count": 1
+    },
+    {
+      "id": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "label": "UTT-Suspect-015",
+      "risk_score": 76.288,
+      "centrality": 0.0004,
+      "case_count": 4
+    },
+    {
+      "id": "7b879567-d751-469c-9163-9393f6bb05b9",
+      "label": "UTT-Suspect-016",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "label": "UTT-Suspect-017",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "7a81fceb-0ba0-4542-84a9-404fafb42f9d",
+      "label": "UTT-Suspect-018",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "label": "BAG-Suspect-000",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "label": "BAG-Suspect-001",
+      "risk_score": 34.192,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "c7976b07-a16b-4337-8129-526c90235a8a",
+      "label": "BAG-Suspect-002",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "51dd1ea3-b211-4555-be31-a56e208e1730",
+      "label": "BAG-Suspect-003",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "d9fe02aa-2c15-4c53-bea2-b88bcde03ff1",
+      "label": "BAG-Suspect-005",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "cd93d6b7-c28a-4c5c-a8cc-c5ecaf48db02",
+      "label": "BAG-Suspect-006",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "ef37e424-2dfa-4f96-8bd7-3f7d3ae24d4e",
+      "label": "BAG-Suspect-007",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "label": "BAG-Suspect-008",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "25bd52d7-5276-44d9-bcfa-19f62d8f534d",
+      "label": "YAD-Suspect-000",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "label": "YAD-Suspect-001",
+      "risk_score": 100.0,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "44494b5d-7c03-48a6-9cc8-f903f49f8d51",
+      "label": "YAD-Suspect-002",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "1a65327f-9981-4fc5-8682-fe827b27d929",
+      "label": "YAD-Suspect-003",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "label": "YAD-Suspect-004",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "0d75b370-45c7-4234-830f-d4bc1571a743",
+      "label": "YAD-Suspect-005",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "ffecd8a2-b8ca-4bf3-b7d3-093a9df7c85a",
+      "label": "YAD-Suspect-006",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "170b7221-e8a7-4ea7-afea-35f19f453fc0",
+      "label": "YAD-Suspect-007",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "cea1b8ec-814a-42ab-a824-f86e197112b1",
+      "label": "YAD-Suspect-008",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "label": "KOL-Suspect-000",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "79297e24-050e-45dd-89a1-9d765ce75d4f",
+      "label": "KOL-Suspect-001",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "9c8a0e08-f84e-4f17-8b1f-7b9b08b0f236",
+      "label": "KOL-Suspect-002",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "708dc0fd-e45a-45b6-8530-da59d36e3cc0",
+      "label": "KOL-Suspect-003",
+      "risk_score": 86.288,
+      "centrality": 0.0001,
+      "case_count": 5
+    },
+    {
+      "id": "b8bb2132-c042-4827-942c-b2b8f5f78b76",
+      "label": "KOL-Suspect-004",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "4db48224-94bb-4414-84e7-f5c2dd382586",
+      "label": "KOL-Suspect-005",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "6b770cb0-0463-4955-bab8-64d385dcb89a",
+      "label": "KOL-Suspect-006",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "label": "KOL-Suspect-007",
+      "risk_score": 89.904,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "label": "KOL-Suspect-008",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "label": "KOL-Suspect-009",
+      "risk_score": 69.904,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "8f9b924b-3fa6-4c63-ae4a-5a9144873549",
+      "label": "KOL-Suspect-010",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "4350dc4b-9319-4549-bce5-4c5d82d64956",
+      "label": "KOL-Suspect-011",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "78485dfa-f5cd-4690-a4ae-128bccf32c8a",
+      "label": "KOL-Suspect-012",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "196c01cb-0652-4705-8e67-23673f8cb8bf",
+      "label": "CHI-Suspect-000",
+      "risk_score": 56.288,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "673ae335-dd7a-4fa4-9aac-85ddb1aa32bf",
+      "label": "CHI-Suspect-001",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "label": "CHI-Suspect-002",
+      "risk_score": 92.0,
+      "centrality": 0.0005,
+      "case_count": 2
+    },
+    {
+      "id": "9d21155b-8dc4-4a2c-95c6-f587ebfaf5dc",
+      "label": "CHI-Suspect-003",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "4efe0c96-f56f-43af-a834-9af6e44820f2",
+      "label": "CHI-Suspect-004",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "label": "CHI-Suspect-005",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "c198c23b-476e-40c8-925d-3d90efb2dcdd",
+      "label": "CHI-Suspect-006",
+      "risk_score": 76.288,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "18b1463a-4293-4cba-998d-7dfcf2c3b2af",
+      "label": "CHI-Suspect-007",
+      "risk_score": 46.288,
+      "centrality": 0.0,
+      "case_count": 1
+    },
+    {
+      "id": "f0d66a10-22af-445a-9bf8-fa02b402ccfa",
+      "label": "CHI-Suspect-008",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "2d8fb229-82ad-4a98-b473-5f82f772b9ac",
+      "label": "CHI-Suspect-009",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 4
+    },
+    {
+      "id": "05245c59-0cc9-4c9e-a9ca-adcd8424e5a3",
+      "label": "CHI-Suspect-010",
+      "risk_score": 97.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 5
+    },
+    {
+      "id": "9fdf0c24-b004-4292-9f50-9dab3c3e1eee",
+      "label": "CHI-Suspect-011",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "c0215b03-000c-4caa-90cb-1fb0c7e81f90",
+      "label": "CHI-Suspect-012",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0,
+      "case_count": 2
+    },
+    {
+      "id": "627f45fb-7fae-47b2-8951-3148c7292b80",
+      "label": "CHI-Suspect-013",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "label": "CHI-Suspect-014",
+      "risk_score": 79.904,
+      "centrality": 0.0002,
+      "case_count": 2
+    },
+    {
+      "id": "67eb3da5-0ed7-4983-a54a-7aaa40db604d",
+      "label": "CHI-Suspect-015",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "ee2820d9-19dd-44e0-a8fc-a33f56e91d06",
+      "label": "CHI-Suspect-016",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "label": "CHI-Suspect-017",
+      "risk_score": 99.904,
+      "centrality": 0.0003,
+      "case_count": 4
+    },
+    {
+      "id": "e7bd5905-1e79-434c-8122-83c964c069af",
+      "label": "CHI-Suspect-018",
+      "risk_score": 46.288,
+      "centrality": 0.0001,
+      "case_count": 1
+    },
+    {
+      "id": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "label": "CHI-Suspect-019",
+      "risk_score": 100.0,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "9e1341e6-97de-412a-ae8b-8b6694aaadf2",
+      "label": "CHI-Suspect-020",
+      "risk_score": 54.192,
+      "centrality": 0.0001,
+      "case_count": 3
+    },
+    {
+      "id": "17ad7d43-9f72-4681-af18-5a6cbb9e9237",
+      "label": "CHI-Suspect-021",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "label": "CHI-Suspect-022",
+      "risk_score": 92.0,
+      "centrality": 0.0003,
+      "case_count": 2
+    },
+    {
+      "id": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "label": "CHI-Suspect-023",
+      "risk_score": 100.0,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "label": "CHI-Suspect-000",
+      "risk_score": 87.80799999999999,
+      "centrality": 0.0002,
+      "case_count": 4
+    },
+    {
+      "id": "d2659d46-3a8e-4e1c-a694-d5e585f7dbd1",
+      "label": "CHI-Suspect-001",
+      "risk_score": 64.19200000000001,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "b04e621f-b819-48fe-86ec-51986f79a3c1",
+      "label": "CHI-Suspect-002",
+      "risk_score": 66.288,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "label": "CHI-Suspect-003",
+      "risk_score": 74.19200000000001,
+      "centrality": 0.0006,
+      "case_count": 5
+    },
+    {
+      "id": "be95b287-c312-4a4c-b164-901f9a212eb4",
+      "label": "CHI-Suspect-004",
+      "risk_score": 86.288,
+      "centrality": 0.0006,
+      "case_count": 5
+    },
+    {
+      "id": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "label": "CHI-Suspect-005",
+      "risk_score": 76.288,
+      "centrality": 0.0005,
+      "case_count": 4
+    },
+    {
+      "id": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "label": "CHI-Suspect-006",
+      "risk_score": 76.288,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "1c91669c-76d3-4244-9162-c00c1c1d4bc1",
+      "label": "CHI-Suspect-007",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "label": "CHI-Suspect-008",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0005,
+      "case_count": 3
+    },
+    {
+      "id": "22ac053e-8e2a-404f-b320-40dd737684c8",
+      "label": "CHI-Suspect-009",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "3d4b8abf-a52f-4035-8b94-65d061582234",
+      "label": "CHI-Suspect-010",
+      "risk_score": 67.80799999999999,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "038bb25f-616f-4d24-9c99-ff56bcaa13d3",
+      "label": "CHI-Suspect-011",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    },
+    {
+      "id": "a47b005f-19c0-41f5-a5ba-c56faedb18bd",
+      "label": "CHI-Suspect-012",
+      "risk_score": 54.192,
+      "centrality": 0.0,
+      "case_count": 3
+    },
+    {
+      "id": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "label": "CHI-Suspect-013",
+      "risk_score": 77.80799999999999,
+      "centrality": 0.0004,
+      "case_count": 3
+    },
+    {
+      "id": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "label": "CHI-Suspect-014",
+      "risk_score": 79.904,
+      "centrality": 0.0006,
+      "case_count": 2
+    },
+    {
+      "id": "a0493614-a80f-4fc3-9a6b-0bbd64b35110",
+      "label": "CHI-Suspect-015",
+      "risk_score": 56.288,
+      "centrality": 0.0001,
+      "case_count": 2
+    },
+    {
+      "id": "9f85c333-6b5a-4e2b-8e4a-8077ecc8aed7",
+      "label": "CHI-Suspect-016",
+      "risk_score": 52.096000000000004,
+      "centrality": 0.0,
+      "case_count": 4
+    },
+    {
+      "id": "3ee78843-a238-444f-a95d-72d933abf791",
+      "label": "CHI-Suspect-017",
+      "risk_score": 86.288,
+      "centrality": 0.0,
+      "case_count": 5
+    }
+  ],
+  "edges": [
+    {
+      "source": "47e852c0-03d7-4c36-b43c-ac64d3c08a2a",
+      "target": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.84409653726
+    },
+    {
+      "source": "93f4c478-38bb-4dfb-8646-2241b70e0108",
+      "target": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7036985648185684
+    },
+    {
+      "source": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "target": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "relation_type": "Associate",
+      "weight": 0.5324856903908854
+    },
+    {
+      "source": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "target": "decf2266-6b37-4e31-a4b6-6ee56680e9b7",
+      "relation_type": "Drug Network",
+      "weight": 0.526111351108141
+    },
+    {
+      "source": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "target": "93f4c478-38bb-4dfb-8646-2241b70e0108",
+      "relation_type": "Family",
+      "weight": 0.9184109764448716
+    },
+    {
+      "source": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "target": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5029073363100738
+    },
+    {
+      "source": "f34e9750-52bb-49ec-8cbf-1e4225e26b34",
+      "target": "e7b1a467-d3cb-4b38-a4bd-4ac4631e52db",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.857703291463473
+    },
+    {
+      "source": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "target": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6461878279728566
+    },
+    {
+      "source": "72791549-434c-4fbc-bfa3-4bfb53e983b9",
+      "target": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "relation_type": "Mobile Contact",
+      "weight": 0.594522426522389
+    },
+    {
+      "source": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "target": "e7b1a467-d3cb-4b38-a4bd-4ac4631e52db",
+      "relation_type": "Associate",
+      "weight": 0.6396966129914314
+    },
+    {
+      "source": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "target": "807d7fef-1c88-4f2a-b4d9-194cc0acea5e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9580569365478443
+    },
+    {
+      "source": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "target": "ee3a78b8-73c4-45ad-90e2-906ec2639177",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8151497009435444
+    },
+    {
+      "source": "f34e9750-52bb-49ec-8cbf-1e4225e26b34",
+      "target": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "relation_type": "Gang Member",
+      "weight": 0.9999816614862105
+    },
+    {
+      "source": "0ef92087-e62a-4462-8f02-bff1eb275179",
+      "target": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "relation_type": "Gang Member",
+      "weight": 0.8985945347484653
+    },
+    {
+      "source": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "target": "93f4c478-38bb-4dfb-8646-2241b70e0108",
+      "relation_type": "Financial Link",
+      "weight": 0.7601441531179836
+    },
+    {
+      "source": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "target": "e7b1a467-d3cb-4b38-a4bd-4ac4631e52db",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7050614534717243
+    },
+    {
+      "source": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "target": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7708141903619046
+    },
+    {
+      "source": "e211b021-f8d6-4ac7-906a-83403697dd66",
+      "target": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9066403709259985
+    },
+    {
+      "source": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "target": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "relation_type": "Mobile Contact",
+      "weight": 0.943269399026692
+    },
+    {
+      "source": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "target": "8491c8a2-bb4f-4cf4-bb9a-7c5a6647f05b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6091493825920149
+    },
+    {
+      "source": "289bab36-3a53-4c53-ace8-728016f0025e",
+      "target": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5144853172895083
+    },
+    {
+      "source": "93f4c478-38bb-4dfb-8646-2241b70e0108",
+      "target": "756bdd17-4b47-43aa-832c-154a40ce1f4d",
+      "relation_type": "Drug Network",
+      "weight": 0.9651894340681322
+    },
+    {
+      "source": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "target": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9720005862853484
+    },
+    {
+      "source": "e211b021-f8d6-4ac7-906a-83403697dd66",
+      "target": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8202212123322232
+    },
+    {
+      "source": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "target": "807d7fef-1c88-4f2a-b4d9-194cc0acea5e",
+      "relation_type": "Associate",
+      "weight": 0.6828903246984412
+    },
+    {
+      "source": "decf2266-6b37-4e31-a4b6-6ee56680e9b7",
+      "target": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "relation_type": "Financial Link",
+      "weight": 0.5077159329304828
+    },
+    {
+      "source": "47e852c0-03d7-4c36-b43c-ac64d3c08a2a",
+      "target": "289bab36-3a53-4c53-ace8-728016f0025e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9639525205440589
+    },
+    {
+      "source": "f72e7496-d532-4d99-9469-ce1c87ae4100",
+      "target": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8859574615451777
+    },
+    {
+      "source": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "target": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "relation_type": "Drug Network",
+      "weight": 0.9467631715516869
+    },
+    {
+      "source": "756bdd17-4b47-43aa-832c-154a40ce1f4d",
+      "target": "ee3a78b8-73c4-45ad-90e2-906ec2639177",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6388571567216226
+    },
+    {
+      "source": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "target": "8491c8a2-bb4f-4cf4-bb9a-7c5a6647f05b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9745984384667498
+    },
+    {
+      "source": "3d7f9f68-be3b-4139-8e81-189cac98a893",
+      "target": "47e852c0-03d7-4c36-b43c-ac64d3c08a2a",
+      "relation_type": "Gang Member",
+      "weight": 0.998823858202772
+    },
+    {
+      "source": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "target": "8491c8a2-bb4f-4cf4-bb9a-7c5a6647f05b",
+      "relation_type": "Associate",
+      "weight": 0.9775214657074074
+    },
+    {
+      "source": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "target": "decf2266-6b37-4e31-a4b6-6ee56680e9b7",
+      "relation_type": "Associate",
+      "weight": 0.9485738014810225
+    },
+    {
+      "source": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "target": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "relation_type": "Family",
+      "weight": 0.5190475143413751
+    },
+    {
+      "source": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "target": "72791549-434c-4fbc-bfa3-4bfb53e983b9",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9552558858836288
+    },
+    {
+      "source": "ef779e26-abd0-404e-9493-9522e402cd42",
+      "target": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "relation_type": "Gang Member",
+      "weight": 0.6058791387200052
+    },
+    {
+      "source": "346d4b24-fae6-4a62-8c8c-8da7e9163610",
+      "target": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "relation_type": "Drug Network",
+      "weight": 0.5511348383294512
+    },
+    {
+      "source": "ddff2ac3-8239-4a8c-a519-97ff5e777f0d",
+      "target": "756bdd17-4b47-43aa-832c-154a40ce1f4d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9083413010685226
+    },
+    {
+      "source": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "target": "c9b1283b-c29e-4615-be40-cfe0f9ce5680",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9543617160259955
+    },
+    {
+      "source": "289bab36-3a53-4c53-ace8-728016f0025e",
+      "target": "7b780216-ce3a-4ea1-b066-20078b2c76d9",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9480476664080488
+    },
+    {
+      "source": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "target": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "relation_type": "Financial Link",
+      "weight": 0.811794850467495
+    },
+    {
+      "source": "e211b021-f8d6-4ac7-906a-83403697dd66",
+      "target": "de293544-d2aa-430b-9020-a2911dbe6be4",
+      "relation_type": "Drug Network",
+      "weight": 0.8787473441048603
+    },
+    {
+      "source": "61cc8a59-9e59-43c3-8645-d7af3d5e6c34",
+      "target": "0ef92087-e62a-4462-8f02-bff1eb275179",
+      "relation_type": "Gang Member",
+      "weight": 0.8700798129075447
+    },
+    {
+      "source": "c9b1283b-c29e-4615-be40-cfe0f9ce5680",
+      "target": "f34e9750-52bb-49ec-8cbf-1e4225e26b34",
+      "relation_type": "Associate",
+      "weight": 0.7376684406346011
+    },
+    {
+      "source": "807d7fef-1c88-4f2a-b4d9-194cc0acea5e",
+      "target": "decf2266-6b37-4e31-a4b6-6ee56680e9b7",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5815122299686237
+    },
+    {
+      "source": "430d3f18-2eac-4183-9819-dbdd0d64c23d",
+      "target": "e211b021-f8d6-4ac7-906a-83403697dd66",
+      "relation_type": "Drug Network",
+      "weight": 0.7518994609426131
+    },
+    {
+      "source": "8491c8a2-bb4f-4cf4-bb9a-7c5a6647f05b",
+      "target": "46b7e7e7-17bb-4cea-b4fb-1fcb3df0b60d",
+      "relation_type": "Associate",
+      "weight": 0.6826232523115479
+    },
+    {
+      "source": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "target": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9483894493222156
+    },
+    {
+      "source": "224d1057-c85e-4d9a-ab42-4eac91765f2c",
+      "target": "6f9938b0-4e71-4bb3-be8d-25ffc7dbabd3",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6322540575555438
+    },
+    {
+      "source": "cc2cf365-974c-4b60-9c5d-6e8e3cf2f2e3",
+      "target": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7968487045832409
+    },
+    {
+      "source": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "target": "cc2cf365-974c-4b60-9c5d-6e8e3cf2f2e3",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5774757805097591
+    },
+    {
+      "source": "6f9938b0-4e71-4bb3-be8d-25ffc7dbabd3",
+      "target": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "relation_type": "Financial Link",
+      "weight": 0.8264935086614253
+    },
+    {
+      "source": "cbdcb86c-9659-460b-b407-026801547499",
+      "target": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "relation_type": "Family",
+      "weight": 0.6557337655377714
+    },
+    {
+      "source": "224d1057-c85e-4d9a-ab42-4eac91765f2c",
+      "target": "988dc2b1-1699-431f-bfef-af3fb45aca89",
+      "relation_type": "Drug Network",
+      "weight": 0.8379284840304502
+    },
+    {
+      "source": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "target": "6f9938b0-4e71-4bb3-be8d-25ffc7dbabd3",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8071997993317681
+    },
+    {
+      "source": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "target": "224d1057-c85e-4d9a-ab42-4eac91765f2c",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6892078273003495
+    },
+    {
+      "source": "fbb1f7fe-8c96-4771-af3c-3a339b6fbe49",
+      "target": "cbdcb86c-9659-460b-b407-026801547499",
+      "relation_type": "Gang Member",
+      "weight": 0.6920824825013321
+    },
+    {
+      "source": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "target": "fbb1f7fe-8c96-4771-af3c-3a339b6fbe49",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9001112519910301
+    },
+    {
+      "source": "332e39b1-3083-4699-9fcf-ec47a7f98eb6",
+      "target": "fbb1f7fe-8c96-4771-af3c-3a339b6fbe49",
+      "relation_type": "Drug Network",
+      "weight": 0.5014887798382974
+    },
+    {
+      "source": "988dc2b1-1699-431f-bfef-af3fb45aca89",
+      "target": "2c85148e-6d38-4728-82f6-f47e92fc0233",
+      "relation_type": "Gang Member",
+      "weight": 0.548603353843468
+    },
+    {
+      "source": "988dc2b1-1699-431f-bfef-af3fb45aca89",
+      "target": "224d1057-c85e-4d9a-ab42-4eac91765f2c",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8146206006370247
+    },
+    {
+      "source": "fbb1f7fe-8c96-4771-af3c-3a339b6fbe49",
+      "target": "cc2cf365-974c-4b60-9c5d-6e8e3cf2f2e3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6968217725379691
+    },
+    {
+      "source": "6f9938b0-4e71-4bb3-be8d-25ffc7dbabd3",
+      "target": "cbdcb86c-9659-460b-b407-026801547499",
+      "relation_type": "Financial Link",
+      "weight": 0.7232049928882756
+    },
+    {
+      "source": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "target": "b49b21cb-86d1-492c-94ee-ec5729e6e233",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9049411547126285
+    },
+    {
+      "source": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "target": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.920203773197432
+    },
+    {
+      "source": "9fd2c88c-8d4e-4ea8-8744-e00c15f12295",
+      "target": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "relation_type": "Associate",
+      "weight": 0.9855501678648254
+    },
+    {
+      "source": "b49b21cb-86d1-492c-94ee-ec5729e6e233",
+      "target": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9793321306028896
+    },
+    {
+      "source": "7485d79a-6880-4294-ad72-1bd7f346fcee",
+      "target": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7778936997428849
+    },
+    {
+      "source": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "target": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "relation_type": "Associate",
+      "weight": 0.6049271881632294
+    },
+    {
+      "source": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "target": "9fd2c88c-8d4e-4ea8-8744-e00c15f12295",
+      "relation_type": "Financial Link",
+      "weight": 0.7625926192579221
+    },
+    {
+      "source": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "target": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "relation_type": "Gang Member",
+      "weight": 0.9547196173399488
+    },
+    {
+      "source": "b49b21cb-86d1-492c-94ee-ec5729e6e233",
+      "target": "8e8311a2-ffeb-41a3-ae0e-4c3bd290d114",
+      "relation_type": "Drug Network",
+      "weight": 0.7398316986473609
+    },
+    {
+      "source": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "target": "b8ce6af3-6788-49de-9085-6ab85ecfe9ec",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7859699491704153
+    },
+    {
+      "source": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "target": "b8ce6af3-6788-49de-9085-6ab85ecfe9ec",
+      "relation_type": "Financial Link",
+      "weight": 0.6647069672541286
+    },
+    {
+      "source": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "target": "b49b21cb-86d1-492c-94ee-ec5729e6e233",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7518242440038077
+    },
+    {
+      "source": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "target": "09ce3a70-5b95-4a7d-85e6-496f5935bbbc",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9421112743033362
+    },
+    {
+      "source": "b8ce6af3-6788-49de-9085-6ab85ecfe9ec",
+      "target": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "relation_type": "Family",
+      "weight": 0.7736767061563703
+    },
+    {
+      "source": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "target": "b8ce6af3-6788-49de-9085-6ab85ecfe9ec",
+      "relation_type": "Drug Network",
+      "weight": 0.6118883016505159
+    },
+    {
+      "source": "b8f36e07-de2a-469a-bd2a-023c22129b28",
+      "target": "9fd2c88c-8d4e-4ea8-8744-e00c15f12295",
+      "relation_type": "Drug Network",
+      "weight": 0.9855590152659044
+    },
+    {
+      "source": "332668a1-ccfa-4151-a444-a91593dc60dd",
+      "target": "6e9685ea-ddd4-492c-831d-7b79844331df",
+      "relation_type": "Associate",
+      "weight": 0.36187877627095855
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "b86a6e5a-b8ec-4b37-9a92-7238887a8f7d",
+      "relation_type": "Family",
+      "weight": 0.8611000203423309
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "b86a6e5a-b8ec-4b37-9a92-7238887a8f7d",
+      "relation_type": "Associate",
+      "weight": 0.6563416344660193
+    },
+    {
+      "source": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "target": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8076078791095885
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "31c83cd1-062d-4f54-b40a-371b1f419a89",
+      "relation_type": "Financial Link",
+      "weight": 0.7377248589721586
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5478443787309295
+    },
+    {
+      "source": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "target": "b86a6e5a-b8ec-4b37-9a92-7238887a8f7d",
+      "relation_type": "Family",
+      "weight": 0.6005190245072252
+    },
+    {
+      "source": "ebe6f883-624a-4c16-8b4a-921279ab418f",
+      "target": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6179937375211146
+    },
+    {
+      "source": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "target": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "relation_type": "Associate",
+      "weight": 0.8630215053641974
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "relation_type": "Financial Link",
+      "weight": 0.9713163491985433
+    },
+    {
+      "source": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "target": "ebe6f883-624a-4c16-8b4a-921279ab418f",
+      "relation_type": "Drug Network",
+      "weight": 0.6372595468529199
+    },
+    {
+      "source": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "target": "8b918694-63a6-41f1-b632-c095df39d6f5",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6296208257584233
+    },
+    {
+      "source": "6e9685ea-ddd4-492c-831d-7b79844331df",
+      "target": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5158699137830616
+    },
+    {
+      "source": "b86a6e5a-b8ec-4b37-9a92-7238887a8f7d",
+      "target": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8302055824949113
+    },
+    {
+      "source": "8b918694-63a6-41f1-b632-c095df39d6f5",
+      "target": "ebe6f883-624a-4c16-8b4a-921279ab418f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.700223258873061
+    },
+    {
+      "source": "bd84bed1-9ff5-4d0a-a748-01d33440afa1",
+      "target": "8b918694-63a6-41f1-b632-c095df39d6f5",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5972986351696608
+    },
+    {
+      "source": "8b3b3a15-b37f-4b73-ae4b-d778ced6fa0f",
+      "target": "7424777a-0036-4a68-90b6-1c734bb22875",
+      "relation_type": "Associate",
+      "weight": 0.5805069265478453
+    },
+    {
+      "source": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "target": "6690761a-27c4-437c-92e5-714d99b5bf89",
+      "relation_type": "Gang Member",
+      "weight": 0.9290848407647878
+    },
+    {
+      "source": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "target": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7339859439085077
+    },
+    {
+      "source": "878f1513-ab43-4dbe-ad0d-d5232af36c11",
+      "target": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8352706062412467
+    },
+    {
+      "source": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "target": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8209125028393875
+    },
+    {
+      "source": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "target": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9759023441023109
+    },
+    {
+      "source": "878f1513-ab43-4dbe-ad0d-d5232af36c11",
+      "target": "9d8cf7db-c9c9-4849-a7ac-491d49f0a5d2",
+      "relation_type": "Associate",
+      "weight": 0.5300075369879034
+    },
+    {
+      "source": "6690761a-27c4-437c-92e5-714d99b5bf89",
+      "target": "7ab47c44-0bfb-4757-8600-9576268fc2ae",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5841003822959413
+    },
+    {
+      "source": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "target": "9d8cf7db-c9c9-4849-a7ac-491d49f0a5d2",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8143929180889453
+    },
+    {
+      "source": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "target": "9d8cf7db-c9c9-4849-a7ac-491d49f0a5d2",
+      "relation_type": "Mobile Contact",
+      "weight": 0.770130146671115
+    },
+    {
+      "source": "6690761a-27c4-437c-92e5-714d99b5bf89",
+      "target": "9ba79cee-f466-4bc5-9353-2ff48fa36f32",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8462336009251898
+    },
+    {
+      "source": "9d8cf7db-c9c9-4849-a7ac-491d49f0a5d2",
+      "target": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "relation_type": "Associate",
+      "weight": 0.193280518690302
+    },
+    {
+      "source": "275adfb1-b12c-4f95-8845-3c1c03f0c94b",
+      "target": "c1c324a2-c536-4f2a-9a5b-318eccc8bf06",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9127487701459012
+    },
+    {
+      "source": "b529a6d2-4504-4cf2-ad8f-fbb37a4fc933",
+      "target": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5845250775852331
+    },
+    {
+      "source": "14396a9b-0bb5-45a6-8d0d-7661a5f7f361",
+      "target": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "relation_type": "Family",
+      "weight": 0.9573357988634945
+    },
+    {
+      "source": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "target": "14396a9b-0bb5-45a6-8d0d-7661a5f7f361",
+      "relation_type": "Gang Member",
+      "weight": 0.7839758654922631
+    },
+    {
+      "source": "275adfb1-b12c-4f95-8845-3c1c03f0c94b",
+      "target": "c1c324a2-c536-4f2a-9a5b-318eccc8bf06",
+      "relation_type": "Financial Link",
+      "weight": 0.8682417401829678
+    },
+    {
+      "source": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "target": "14396a9b-0bb5-45a6-8d0d-7661a5f7f361",
+      "relation_type": "Gang Member",
+      "weight": 0.8927771414764394
+    },
+    {
+      "source": "14396a9b-0bb5-45a6-8d0d-7661a5f7f361",
+      "target": "275adfb1-b12c-4f95-8845-3c1c03f0c94b",
+      "relation_type": "Gang Member",
+      "weight": 0.6008772773637676
+    },
+    {
+      "source": "c1c324a2-c536-4f2a-9a5b-318eccc8bf06",
+      "target": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7304654344704922
+    },
+    {
+      "source": "c1c324a2-c536-4f2a-9a5b-318eccc8bf06",
+      "target": "275adfb1-b12c-4f95-8845-3c1c03f0c94b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5878722464018167
+    },
+    {
+      "source": "b529a6d2-4504-4cf2-ad8f-fbb37a4fc933",
+      "target": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "relation_type": "Associate",
+      "weight": 0.7685636851787537
+    },
+    {
+      "source": "97efa206-d89b-4ecb-ab69-ec34d84c4119",
+      "target": "878f1513-ab43-4dbe-ad0d-d5232af36c11",
+      "relation_type": "Associate",
+      "weight": 0.3933568708298286
+    },
+    {
+      "source": "2c489b70-4b64-4077-9097-f4987ccdd027",
+      "target": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "relation_type": "Gang Member",
+      "weight": 0.651936178485268
+    },
+    {
+      "source": "f303fd09-20e7-4a54-8fff-e788656b3a11",
+      "target": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7875007133739489
+    },
+    {
+      "source": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "target": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "relation_type": "Gang Member",
+      "weight": 0.9651506281130208
+    },
+    {
+      "source": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "target": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7422686878777364
+    },
+    {
+      "source": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "target": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5921604794450197
+    },
+    {
+      "source": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "target": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "relation_type": "Gang Member",
+      "weight": 0.5790683293566069
+    },
+    {
+      "source": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "target": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "relation_type": "Gang Member",
+      "weight": 0.9926775589978396
+    },
+    {
+      "source": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "target": "f303fd09-20e7-4a54-8fff-e788656b3a11",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7083578034373765
+    },
+    {
+      "source": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "target": "f303fd09-20e7-4a54-8fff-e788656b3a11",
+      "relation_type": "Associate",
+      "weight": 0.8471278064255967
+    },
+    {
+      "source": "e720e958-8dd5-4cf8-a18b-3f1d005f7d18",
+      "target": "ba531134-a829-44c7-91aa-ab50a536c458",
+      "relation_type": "Family",
+      "weight": 0.8762577133447419
+    },
+    {
+      "source": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "target": "c8746463-1189-4b9d-b3a5-320e4d1f566a",
+      "relation_type": "Financial Link",
+      "weight": 0.6617787214951805
+    },
+    {
+      "source": "c8746463-1189-4b9d-b3a5-320e4d1f566a",
+      "target": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "relation_type": "Associate",
+      "weight": 0.5044633625466788
+    },
+    {
+      "source": "c8746463-1189-4b9d-b3a5-320e4d1f566a",
+      "target": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5987207099916096
+    },
+    {
+      "source": "c8746463-1189-4b9d-b3a5-320e4d1f566a",
+      "target": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "relation_type": "Drug Network",
+      "weight": 0.8947752175200734
+    },
+    {
+      "source": "4df3630b-7be7-48f1-a417-78a1150e569d",
+      "target": "2047d4b9-f5dc-49df-bdb3-75a5c827b250",
+      "relation_type": "Associate",
+      "weight": 0.1859105639793311
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "relation_type": "Gang Member",
+      "weight": 0.717089335809422
+    },
+    {
+      "source": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "target": "4307eec5-c1f8-4854-b692-98d902081acd",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6201953814811851
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "relation_type": "Associate",
+      "weight": 0.6052952467188906
+    },
+    {
+      "source": "821aa179-15ef-43f6-94ae-281459f9e01e",
+      "target": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9093514676024057
+    },
+    {
+      "source": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "target": "3edcf9e4-9a0f-43b5-8009-be31de7b77ab",
+      "relation_type": "Gang Member",
+      "weight": 0.7235047582427498
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6112903387737393
+    },
+    {
+      "source": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "target": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9241631421224187
+    },
+    {
+      "source": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "target": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6117392893689739
+    },
+    {
+      "source": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "target": "a8b97e02-4fe5-4ee0-b36c-fb9a56a12b3d",
+      "relation_type": "Financial Link",
+      "weight": 0.8449278444108675
+    },
+    {
+      "source": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "target": "da7763cd-640b-4180-ac21-b95ab78c9e81",
+      "relation_type": "Family",
+      "weight": 0.5610557617920258
+    },
+    {
+      "source": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "target": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5398353279670965
+    },
+    {
+      "source": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "target": "fec69a78-cc6d-4048-b345-aad4886902a6",
+      "relation_type": "Drug Network",
+      "weight": 0.6473045533673645
+    },
+    {
+      "source": "bdc77b0f-8942-4301-8e55-e080774c3abe",
+      "target": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8034110133769825
+    },
+    {
+      "source": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "target": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "relation_type": "Gang Member",
+      "weight": 0.6111391477960386
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "relation_type": "Drug Network",
+      "weight": 0.9217173900576172
+    },
+    {
+      "source": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "target": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "relation_type": "Financial Link",
+      "weight": 0.950968735213279
+    },
+    {
+      "source": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "target": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "relation_type": "Financial Link",
+      "weight": 0.6876609238295777
+    },
+    {
+      "source": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "target": "32e8e7cc-87d3-4647-a3de-879a0ebee7ec",
+      "relation_type": "Family",
+      "weight": 0.6582824427418807
+    },
+    {
+      "source": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "target": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "relation_type": "Gang Member",
+      "weight": 0.9201283825416464
+    },
+    {
+      "source": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "target": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6613461980793909
+    },
+    {
+      "source": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "target": "1d4a4b08-aed4-4434-91a1-71b62a8e0f6a",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9111638572900281
+    },
+    {
+      "source": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "target": "32e8e7cc-87d3-4647-a3de-879a0ebee7ec",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8264818917767589
+    },
+    {
+      "source": "a8b97e02-4fe5-4ee0-b36c-fb9a56a12b3d",
+      "target": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "relation_type": "Gang Member",
+      "weight": 0.6102774424314321
+    },
+    {
+      "source": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "target": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "relation_type": "Drug Network",
+      "weight": 0.6628129683282952
+    },
+    {
+      "source": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "target": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9835417317407499
+    },
+    {
+      "source": "821aa179-15ef-43f6-94ae-281459f9e01e",
+      "target": "37d80844-12fd-4417-9dfa-ba6088ceafae",
+      "relation_type": "Drug Network",
+      "weight": 0.9160871732551306
+    },
+    {
+      "source": "18565b98-ccd9-4bae-99fd-f5c7f32d0d47",
+      "target": "fec69a78-cc6d-4048-b345-aad4886902a6",
+      "relation_type": "Financial Link",
+      "weight": 0.7816279114408811
+    },
+    {
+      "source": "821aa179-15ef-43f6-94ae-281459f9e01e",
+      "target": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6968973042086498
+    },
+    {
+      "source": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "target": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "relation_type": "Gang Member",
+      "weight": 0.9243761488432889
+    },
+    {
+      "source": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "target": "6757dc72-2e00-4ffc-bc45-c1ef4e4de2e8",
+      "relation_type": "Gang Member",
+      "weight": 0.9477527324071691
+    },
+    {
+      "source": "6757dc72-2e00-4ffc-bc45-c1ef4e4de2e8",
+      "target": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9138442666040654
+    },
+    {
+      "source": "1c2d592d-a043-4412-9a35-fe945ea0b344",
+      "target": "8ec6ea51-ba9a-44ee-a08d-28d227c2f726",
+      "relation_type": "Family",
+      "weight": 0.5165323999914495
+    },
+    {
+      "source": "da7763cd-640b-4180-ac21-b95ab78c9e81",
+      "target": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7412657466676231
+    },
+    {
+      "source": "4a7c285a-165b-4154-9e19-be448ac251ff",
+      "target": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "relation_type": "Associate",
+      "weight": 0.9048077832685686
+    },
+    {
+      "source": "b3e7efb8-bafe-4d7c-896f-0a36c4526bbe",
+      "target": "bdc77b0f-8942-4301-8e55-e080774c3abe",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.920836141869219
+    },
+    {
+      "source": "f75d1a44-c1e4-4d07-88a8-9f9beb5b7bca",
+      "target": "60ea9058-00b7-4be4-983a-35113d20c676",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9504394651403228
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "4307eec5-c1f8-4854-b692-98d902081acd",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6765699884040206
+    },
+    {
+      "source": "fec69a78-cc6d-4048-b345-aad4886902a6",
+      "target": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "relation_type": "Gang Member",
+      "weight": 0.7370748926285344
+    },
+    {
+      "source": "b44a7a85-357a-40e5-a42a-bd83c1a57bea",
+      "target": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6032959437686367
+    },
+    {
+      "source": "3edcf9e4-9a0f-43b5-8009-be31de7b77ab",
+      "target": "bdc77b0f-8942-4301-8e55-e080774c3abe",
+      "relation_type": "Financial Link",
+      "weight": 0.711072502853608
+    },
+    {
+      "source": "32e8e7cc-87d3-4647-a3de-879a0ebee7ec",
+      "target": "fec69a78-cc6d-4048-b345-aad4886902a6",
+      "relation_type": "Family",
+      "weight": 0.5327889891960423
+    },
+    {
+      "source": "5732caca-c7ea-41e8-a4f8-188882c211d3",
+      "target": "60ea9058-00b7-4be4-983a-35113d20c676",
+      "relation_type": "Family",
+      "weight": 0.8347956141381397
+    },
+    {
+      "source": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+      "target": "6757dc72-2e00-4ffc-bc45-c1ef4e4de2e8",
+      "relation_type": "Drug Network",
+      "weight": 0.8056522097127847
+    },
+    {
+      "source": "4307eec5-c1f8-4854-b692-98d902081acd",
+      "target": "dab82f6e-04cd-433a-b6b4-903fd7f8e5b9",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7242625233777376
+    },
+    {
+      "source": "da7763cd-640b-4180-ac21-b95ab78c9e81",
+      "target": "1d4a4b08-aed4-4434-91a1-71b62a8e0f6a",
+      "relation_type": "Financial Link",
+      "weight": 0.9791118879133014
+    },
+    {
+      "source": "3f14f81d-ba34-4fe9-80a5-cfce10a85c52",
+      "target": "dab82f6e-04cd-433a-b6b4-903fd7f8e5b9",
+      "relation_type": "Financial Link",
+      "weight": 0.6932329023187955
+    },
+    {
+      "source": "828be477-e636-49b5-8652-e96d44cbae50",
+      "target": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "relation_type": "Gang Member",
+      "weight": 0.9743269176926215
+    },
+    {
+      "source": "7db4a368-9876-4546-a60f-6a22bbbf49d4",
+      "target": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "relation_type": "Family",
+      "weight": 0.8964582610193923
+    },
+    {
+      "source": "7db4a368-9876-4546-a60f-6a22bbbf49d4",
+      "target": "828be477-e636-49b5-8652-e96d44cbae50",
+      "relation_type": "Gang Member",
+      "weight": 0.5149744508211795
+    },
+    {
+      "source": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "target": "7db4a368-9876-4546-a60f-6a22bbbf49d4",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8143631127118613
+    },
+    {
+      "source": "828be477-e636-49b5-8652-e96d44cbae50",
+      "target": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8993611165304006
+    },
+    {
+      "source": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "target": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "relation_type": "Drug Network",
+      "weight": 0.5092022846891757
+    },
+    {
+      "source": "828be477-e636-49b5-8652-e96d44cbae50",
+      "target": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5179437035377985
+    },
+    {
+      "source": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "target": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5713475403428165
+    },
+    {
+      "source": "1c52ee5b-fbcf-4be0-a740-f494e723d624",
+      "target": "e5e9a970-1f3a-44fe-b68a-13cae2bd995d",
+      "relation_type": "Associate",
+      "weight": 0.1785901534022393
+    },
+    {
+      "source": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "target": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8904090703800862
+    },
+    {
+      "source": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "target": "06e94820-ae89-40c0-95fe-47a107d31b8e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9535783023440512
+    },
+    {
+      "source": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "target": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "relation_type": "Associate",
+      "weight": 0.5063824253251132
+    },
+    {
+      "source": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "target": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "relation_type": "Drug Network",
+      "weight": 0.849572127615367
+    },
+    {
+      "source": "06e94820-ae89-40c0-95fe-47a107d31b8e",
+      "target": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "relation_type": "Gang Member",
+      "weight": 0.8030977162512263
+    },
+    {
+      "source": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "target": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "relation_type": "Associate",
+      "weight": 0.6273121063678843
+    },
+    {
+      "source": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "target": "06e94820-ae89-40c0-95fe-47a107d31b8e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8798569317776583
+    },
+    {
+      "source": "a668d1e6-2ce2-4cb3-9c4c-35c97164cb6c",
+      "target": "06e94820-ae89-40c0-95fe-47a107d31b8e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7681548133236058
+    },
+    {
+      "source": "f25f215f-c257-445c-810b-28b247d62ac8",
+      "target": "77311586-4338-4eb6-80d0-16015b4f997c",
+      "relation_type": "Associate",
+      "weight": 0.3570232477750682
+    },
+    {
+      "source": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "target": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7494992705051884
+    },
+    {
+      "source": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "target": "66ec3e46-43c0-4e2c-98af-16a181b19cf2",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5035805874057909
+    },
+    {
+      "source": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "target": "611438f0-8ddd-4cc8-9d59-6dded4ff61eb",
+      "relation_type": "Associate",
+      "weight": 0.8538087106778407
+    },
+    {
+      "source": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "target": "611438f0-8ddd-4cc8-9d59-6dded4ff61eb",
+      "relation_type": "Gang Member",
+      "weight": 0.9969016421395548
+    },
+    {
+      "source": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "target": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "relation_type": "Gang Member",
+      "weight": 0.93595505949826
+    },
+    {
+      "source": "2697a5f5-3b9d-4c6b-80d4-6b78400b919b",
+      "target": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "relation_type": "Financial Link",
+      "weight": 0.5201443880702268
+    },
+    {
+      "source": "66ec3e46-43c0-4e2c-98af-16a181b19cf2",
+      "target": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5411119081038089
+    },
+    {
+      "source": "66ec3e46-43c0-4e2c-98af-16a181b19cf2",
+      "target": "3002d5ba-0188-44a1-bf43-b6191378732e",
+      "relation_type": "Drug Network",
+      "weight": 0.998688528337051
+    },
+    {
+      "source": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "target": "f9632d77-1e72-4498-881e-d537194cab01",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8962546568802379
+    },
+    {
+      "source": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "target": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "relation_type": "Gang Member",
+      "weight": 0.9156771247634458
+    },
+    {
+      "source": "923e8051-cd00-489d-ad80-32740eebdc06",
+      "target": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "relation_type": "Financial Link",
+      "weight": 0.53096181836238
+    },
+    {
+      "source": "403aa989-0131-42d7-9ddd-e3a8f76fdf6d",
+      "target": "923e8051-cd00-489d-ad80-32740eebdc06",
+      "relation_type": "Associate",
+      "weight": 0.646854278265925
+    },
+    {
+      "source": "923e8051-cd00-489d-ad80-32740eebdc06",
+      "target": "41071f97-2939-45e3-ad48-cd7dd8883110",
+      "relation_type": "Associate",
+      "weight": 0.9083661475877058
+    },
+    {
+      "source": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "target": "be20bc1b-33ba-4d1e-a139-24801933812c",
+      "relation_type": "Drug Network",
+      "weight": 0.8007462736744528
+    },
+    {
+      "source": "f9632d77-1e72-4498-881e-d537194cab01",
+      "target": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "relation_type": "Drug Network",
+      "weight": 0.5711961425090735
+    },
+    {
+      "source": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "target": "6df37761-b5e5-40ea-885a-baefc4bb05b5",
+      "relation_type": "Drug Network",
+      "weight": 0.581162624073039
+    },
+    {
+      "source": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "target": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "relation_type": "Family",
+      "weight": 0.9284160521238486
+    },
+    {
+      "source": "a8aed368-626e-403d-9d40-7cce29545ad0",
+      "target": "f9632d77-1e72-4498-881e-d537194cab01",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6106708091782875
+    },
+    {
+      "source": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "target": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "relation_type": "Financial Link",
+      "weight": 0.6603964737595645
+    },
+    {
+      "source": "f9632d77-1e72-4498-881e-d537194cab01",
+      "target": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6104874683503074
+    },
+    {
+      "source": "7f7dfb48-aa58-4265-8139-671c5bce2c9b",
+      "target": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7615201151404687
+    },
+    {
+      "source": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "target": "7f7dfb48-aa58-4265-8139-671c5bce2c9b",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7975083221018346
+    },
+    {
+      "source": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "target": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "relation_type": "Gang Member",
+      "weight": 0.5628622761078457
+    },
+    {
+      "source": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "target": "a8aed368-626e-403d-9d40-7cce29545ad0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9908041516565189
+    },
+    {
+      "source": "403aa989-0131-42d7-9ddd-e3a8f76fdf6d",
+      "target": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.785877966168238
+    },
+    {
+      "source": "f9632d77-1e72-4498-881e-d537194cab01",
+      "target": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "relation_type": "Gang Member",
+      "weight": 0.6850788101975371
+    },
+    {
+      "source": "7f7dfb48-aa58-4265-8139-671c5bce2c9b",
+      "target": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "relation_type": "Drug Network",
+      "weight": 0.5373279408025857
+    },
+    {
+      "source": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "target": "6df37761-b5e5-40ea-885a-baefc4bb05b5",
+      "relation_type": "Gang Member",
+      "weight": 0.8598895575192951
+    },
+    {
+      "source": "40ef91fb-696b-40db-ab4c-737aa4ad1db2",
+      "target": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8039623058217491
+    },
+    {
+      "source": "7f7dfb48-aa58-4265-8139-671c5bce2c9b",
+      "target": "403aa989-0131-42d7-9ddd-e3a8f76fdf6d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9062245585620621
+    },
+    {
+      "source": "f9632d77-1e72-4498-881e-d537194cab01",
+      "target": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9199010204602533
+    },
+    {
+      "source": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "target": "fadfb4be-f2ca-41f7-a76f-e03eaaf71f49",
+      "relation_type": "Family",
+      "weight": 0.5233992264900365
+    },
+    {
+      "source": "d28690ab-74bb-4b79-a3b4-6fdf3d0cade8",
+      "target": "f9632d77-1e72-4498-881e-d537194cab01",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9990305113619676
+    },
+    {
+      "source": "720bf434-cb19-4a88-9672-73e70ffd1e51",
+      "target": "ff2cdf00-f378-4f6f-82a8-e8eeccf82a1e",
+      "relation_type": "Gang Member",
+      "weight": 0.9308540068179713
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "relation_type": "Family",
+      "weight": 0.612826191382466
+    },
+    {
+      "source": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "target": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.812722430862734
+    },
+    {
+      "source": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "target": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "relation_type": "Gang Member",
+      "weight": 0.8998411554892503
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "relation_type": "Financial Link",
+      "weight": 0.6646608219695911
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8557157356226779
+    },
+    {
+      "source": "cd2984be-11dc-4a8b-babe-bee9d2a2e78d",
+      "target": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6491163757206331
+    },
+    {
+      "source": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "target": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "relation_type": "Family",
+      "weight": 0.6962797776248872
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5329088017544696
+    },
+    {
+      "source": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "target": "6b17c37f-f7c6-4f27-a885-24962eaa920a",
+      "relation_type": "Gang Member",
+      "weight": 0.6740504141483223
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7644707698765357
+    },
+    {
+      "source": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "target": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8129703007233078
+    },
+    {
+      "source": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "target": "3a5555f5-d24a-4e30-9d02-fcc035a4b5c5",
+      "relation_type": "Family",
+      "weight": 0.8049388083439651
+    },
+    {
+      "source": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "target": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "relation_type": "Associate",
+      "weight": 0.8276178137614669
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "4d8b7360-386a-4f3f-8767-a773449b58f2",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6576084844634871
+    },
+    {
+      "source": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "target": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "relation_type": "Family",
+      "weight": 0.9396581443096226
+    },
+    {
+      "source": "3a5555f5-d24a-4e30-9d02-fcc035a4b5c5",
+      "target": "a3bc0f32-6088-4417-aeb4-d965ac84e59a",
+      "relation_type": "Associate",
+      "weight": 0.7498619797883461
+    },
+    {
+      "source": "b87de6ef-820d-437a-bb55-ff0163c46809",
+      "target": "51f156cd-e16c-43e4-b1fb-98ae24dff696",
+      "relation_type": "Family",
+      "weight": 0.5930862438162392
+    },
+    {
+      "source": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "target": "dcc861fc-1650-46f4-b64c-8e28c2f8e26b",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7310420690119357
+    },
+    {
+      "source": "996a84d6-0e40-4ec3-b27c-3130f445f55e",
+      "target": "cd2984be-11dc-4a8b-babe-bee9d2a2e78d",
+      "relation_type": "Gang Member",
+      "weight": 0.982404135130933
+    },
+    {
+      "source": "3a5555f5-d24a-4e30-9d02-fcc035a4b5c5",
+      "target": "cd2984be-11dc-4a8b-babe-bee9d2a2e78d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7835093382243733
+    },
+    {
+      "source": "1609a39d-6ec6-401d-9aed-94b9361b8655",
+      "target": "1041ab05-9793-4d98-a2bb-d8a28c339f8a",
+      "relation_type": "Financial Link",
+      "weight": 0.34766552843450604
+    },
+    {
+      "source": "ba929246-d82e-40dd-b415-97e09d461773",
+      "target": "5b99929a-faac-4d11-8f56-155389e62373",
+      "relation_type": "Family",
+      "weight": 0.9213908762298443
+    },
+    {
+      "source": "38499d79-4ab6-4ec9-99ec-ec38488f3bf9",
+      "target": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "relation_type": "Associate",
+      "weight": 0.6957804358209418
+    },
+    {
+      "source": "9a1c664f-c15b-4352-a20e-4c2be68e1fc3",
+      "target": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "relation_type": "Gang Member",
+      "weight": 0.5723951096229895
+    },
+    {
+      "source": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "target": "ba929246-d82e-40dd-b415-97e09d461773",
+      "relation_type": "Associate",
+      "weight": 0.8611485544009305
+    },
+    {
+      "source": "38499d79-4ab6-4ec9-99ec-ec38488f3bf9",
+      "target": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "relation_type": "Drug Network",
+      "weight": 0.9926890892249627
+    },
+    {
+      "source": "ba929246-d82e-40dd-b415-97e09d461773",
+      "target": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6282836973220377
+    },
+    {
+      "source": "ba929246-d82e-40dd-b415-97e09d461773",
+      "target": "e0bb7fe5-a983-4a38-a871-b2e50c0827b2",
+      "relation_type": "Gang Member",
+      "weight": 0.5649633191318497
+    },
+    {
+      "source": "e0bb7fe5-a983-4a38-a871-b2e50c0827b2",
+      "target": "ba929246-d82e-40dd-b415-97e09d461773",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7051057606563824
+    },
+    {
+      "source": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "target": "38499d79-4ab6-4ec9-99ec-ec38488f3bf9",
+      "relation_type": "Financial Link",
+      "weight": 0.7243618976662574
+    },
+    {
+      "source": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "target": "9a1c664f-c15b-4352-a20e-4c2be68e1fc3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9308683866229133
+    },
+    {
+      "source": "38499d79-4ab6-4ec9-99ec-ec38488f3bf9",
+      "target": "1041ab05-9793-4d98-a2bb-d8a28c339f8a",
+      "relation_type": "Financial Link",
+      "weight": 0.542578303803146
+    },
+    {
+      "source": "ba929246-d82e-40dd-b415-97e09d461773",
+      "target": "783d7a01-cb6a-49bd-81a7-d204b4e78d5f",
+      "relation_type": "Associate",
+      "weight": 0.7260724423531448
+    },
+    {
+      "source": "021f0776-b0fe-4925-b233-e4ac6218db84",
+      "target": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "relation_type": "Associate",
+      "weight": 0.6623982208766076
+    },
+    {
+      "source": "e0bb7fe5-a983-4a38-a871-b2e50c0827b2",
+      "target": "ba929246-d82e-40dd-b415-97e09d461773",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7815889993451541
+    },
+    {
+      "source": "1041ab05-9793-4d98-a2bb-d8a28c339f8a",
+      "target": "9a1c664f-c15b-4352-a20e-4c2be68e1fc3",
+      "relation_type": "Financial Link",
+      "weight": 0.6767124130219639
+    },
+    {
+      "source": "ba929246-d82e-40dd-b415-97e09d461773",
+      "target": "021f0776-b0fe-4925-b233-e4ac6218db84",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8282446802275759
+    },
+    {
+      "source": "5b99929a-faac-4d11-8f56-155389e62373",
+      "target": "6be70faf-0a7c-4a3c-886f-b2196894fa48",
+      "relation_type": "Associate",
+      "weight": 0.7818883727037508
+    },
+    {
+      "source": "e0bb7fe5-a983-4a38-a871-b2e50c0827b2",
+      "target": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "relation_type": "Associate",
+      "weight": 0.5950589139621117
+    },
+    {
+      "source": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "target": "5b99929a-faac-4d11-8f56-155389e62373",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5737780089982398
+    },
+    {
+      "source": "5b99929a-faac-4d11-8f56-155389e62373",
+      "target": "1041ab05-9793-4d98-a2bb-d8a28c339f8a",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8222665332654254
+    },
+    {
+      "source": "14307b35-39f3-49e2-83ce-46058db1eaaa",
+      "target": "b87de6ef-820d-437a-bb55-ff0163c46809",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.22786710607749716
+    },
+    {
+      "source": "6e617961-540a-436b-b1b8-a188b77292aa",
+      "target": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "relation_type": "Mobile Contact",
+      "weight": 0.785408522679478
+    },
+    {
+      "source": "3df84387-3124-4311-a77e-a15dcb22b764",
+      "target": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "relation_type": "Gang Member",
+      "weight": 0.8643496773716237
+    },
+    {
+      "source": "f8cff949-0216-4859-9ea3-49ce840a3e6e",
+      "target": "66ed1b3d-c1fc-4ae0-9ad3-53466947e3a5",
+      "relation_type": "Gang Member",
+      "weight": 0.6547581912506182
+    },
+    {
+      "source": "605429c6-c544-4175-8f92-0890876507e8",
+      "target": "820a51ff-5778-46ae-ac86-e59569c7fbe0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8228601115816008
+    },
+    {
+      "source": "66ed1b3d-c1fc-4ae0-9ad3-53466947e3a5",
+      "target": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "relation_type": "Family",
+      "weight": 0.7963871514671099
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8403654291447358
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "f8cff949-0216-4859-9ea3-49ce840a3e6e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6154574563147232
+    },
+    {
+      "source": "19174ee6-dc8f-4227-90dc-2d47b69b0e61",
+      "target": "820a51ff-5778-46ae-ac86-e59569c7fbe0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8685977504677282
+    },
+    {
+      "source": "605429c6-c544-4175-8f92-0890876507e8",
+      "target": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6099853786695055
+    },
+    {
+      "source": "9d5bc4e0-e89d-420b-9eb3-e15a3e9de176",
+      "target": "e6b0c6f1-4096-4a45-87a8-30cf1815fc72",
+      "relation_type": "Financial Link",
+      "weight": 0.5160601833250562
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "relation_type": "Family",
+      "weight": 0.7818303703407807
+    },
+    {
+      "source": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "target": "9d5bc4e0-e89d-420b-9eb3-e15a3e9de176",
+      "relation_type": "Financial Link",
+      "weight": 0.8596488149178763
+    },
+    {
+      "source": "19174ee6-dc8f-4227-90dc-2d47b69b0e61",
+      "target": "f8cff949-0216-4859-9ea3-49ce840a3e6e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9133762471783191
+    },
+    {
+      "source": "e6b0c6f1-4096-4a45-87a8-30cf1815fc72",
+      "target": "820a51ff-5778-46ae-ac86-e59569c7fbe0",
+      "relation_type": "Financial Link",
+      "weight": 0.8793240068308774
+    },
+    {
+      "source": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "target": "605429c6-c544-4175-8f92-0890876507e8",
+      "relation_type": "Financial Link",
+      "weight": 0.7241727836934171
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "e6b0c6f1-4096-4a45-87a8-30cf1815fc72",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7299302902390837
+    },
+    {
+      "source": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "target": "f8cff949-0216-4859-9ea3-49ce840a3e6e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7055814450530598
+    },
+    {
+      "source": "820a51ff-5778-46ae-ac86-e59569c7fbe0",
+      "target": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6492005443547758
+    },
+    {
+      "source": "9d5bc4e0-e89d-420b-9eb3-e15a3e9de176",
+      "target": "19174ee6-dc8f-4227-90dc-2d47b69b0e61",
+      "relation_type": "Gang Member",
+      "weight": 0.8902857551900526
+    },
+    {
+      "source": "605429c6-c544-4175-8f92-0890876507e8",
+      "target": "e6b0c6f1-4096-4a45-87a8-30cf1815fc72",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6037397188151759
+    },
+    {
+      "source": "66ed1b3d-c1fc-4ae0-9ad3-53466947e3a5",
+      "target": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6736313148310342
+    },
+    {
+      "source": "3dcd6ea1-2589-4388-9127-5e1b34515b98",
+      "target": "992e988b-516a-4c40-baa1-2a01cc79719f",
+      "relation_type": "Drug Network",
+      "weight": 0.9729812438345031
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "19174ee6-dc8f-4227-90dc-2d47b69b0e61",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9309617573594287
+    },
+    {
+      "source": "66ed1b3d-c1fc-4ae0-9ad3-53466947e3a5",
+      "target": "9d5bc4e0-e89d-420b-9eb3-e15a3e9de176",
+      "relation_type": "Drug Network",
+      "weight": 0.9757586449366492
+    },
+    {
+      "source": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+      "target": "9d87d6de-ec84-4d47-bc6a-d9befaacc8de",
+      "relation_type": "Associate",
+      "weight": 0.388854409811086
+    },
+    {
+      "source": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "target": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+      "relation_type": "Family",
+      "weight": 0.6326645600791168
+    },
+    {
+      "source": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "target": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "relation_type": "Family",
+      "weight": 0.7493380828214428
+    },
+    {
+      "source": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+      "target": "60ed2d9e-b543-415b-b371-6b41d0ec5594",
+      "relation_type": "Associate",
+      "weight": 0.6606842718388412
+    },
+    {
+      "source": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "target": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "relation_type": "Gang Member",
+      "weight": 0.8096459758055492
+    },
+    {
+      "source": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "target": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8044274981035496
+    },
+    {
+      "source": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "target": "60ed2d9e-b543-415b-b371-6b41d0ec5594",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5981710651225253
+    },
+    {
+      "source": "5ca0093a-d014-414d-8ac1-e5d75361a6db",
+      "target": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "relation_type": "Drug Network",
+      "weight": 0.7008958261657495
+    },
+    {
+      "source": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "target": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "relation_type": "Financial Link",
+      "weight": 0.7209139860074396
+    },
+    {
+      "source": "60ed2d9e-b543-415b-b371-6b41d0ec5594",
+      "target": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "relation_type": "Drug Network",
+      "weight": 0.6580516408662702
+    },
+    {
+      "source": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "target": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7028725005451202
+    },
+    {
+      "source": "5ca0093a-d014-414d-8ac1-e5d75361a6db",
+      "target": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5772676073394813
+    },
+    {
+      "source": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "target": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+      "relation_type": "Drug Network",
+      "weight": 0.7510001166077249
+    },
+    {
+      "source": "cd1356df-de59-4a1c-83da-41511efee075",
+      "target": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "relation_type": "Drug Network",
+      "weight": 0.8572930270557333
+    },
+    {
+      "source": "3c8c47dc-b887-4370-bada-ebff60b61265",
+      "target": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "relation_type": "Associate",
+      "weight": 0.780412409826559
+    },
+    {
+      "source": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "target": "a212017e-3223-4094-808a-8e7744ddc72a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6469961258673277
+    },
+    {
+      "source": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "target": "cd1356df-de59-4a1c-83da-41511efee075",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8442584879307744
+    },
+    {
+      "source": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+      "target": "9d87d6de-ec84-4d47-bc6a-d9befaacc8de",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8256372850439773
+    },
+    {
+      "source": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "target": "37dc736f-033b-4ede-990f-dae72b3d9581",
+      "relation_type": "Associate",
+      "weight": 0.5552861360784067
+    },
+    {
+      "source": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "target": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9218945164284646
+    },
+    {
+      "source": "60ed2d9e-b543-415b-b371-6b41d0ec5594",
+      "target": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "relation_type": "Family",
+      "weight": 0.9751697352778704
+    },
+    {
+      "source": "d5f2eff8-7c4c-436e-891f-8fba7bc6b8e7",
+      "target": "024dc501-40b7-4082-aa0c-55fa6222f875",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9600976445867218
+    },
+    {
+      "source": "a212017e-3223-4094-808a-8e7744ddc72a",
+      "target": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7339368160665035
+    },
+    {
+      "source": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "target": "a212017e-3223-4094-808a-8e7744ddc72a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.889517977987266
+    },
+    {
+      "source": "2dc1fb62-4f17-445f-a904-e72470dc04ae",
+      "target": "e6fce4ec-60dd-4db6-b4a6-297e9c82b62a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7681569562173437
+    },
+    {
+      "source": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "target": "09da5724-28dd-4c72-96c9-55f985333c5d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9450636122368753
+    },
+    {
+      "source": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "target": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "relation_type": "Family",
+      "weight": 0.8252366989387341
+    },
+    {
+      "source": "56be2054-10a3-4de0-813e-8a5665d15a15",
+      "target": "54513c4b-a6e8-4948-ab5d-18df28439e16",
+      "relation_type": "Associate",
+      "weight": 0.6966392936294119
+    },
+    {
+      "source": "09da5724-28dd-4c72-96c9-55f985333c5d",
+      "target": "45f6b98b-550a-4701-ace1-ba882e7fa7e3",
+      "relation_type": "Drug Network",
+      "weight": 0.885150004015773
+    },
+    {
+      "source": "54513c4b-a6e8-4948-ab5d-18df28439e16",
+      "target": "45f6b98b-550a-4701-ace1-ba882e7fa7e3",
+      "relation_type": "Drug Network",
+      "weight": 0.8754181183312093
+    },
+    {
+      "source": "45f6b98b-550a-4701-ace1-ba882e7fa7e3",
+      "target": "56be2054-10a3-4de0-813e-8a5665d15a15",
+      "relation_type": "Financial Link",
+      "weight": 0.6521323711400384
+    },
+    {
+      "source": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "target": "54513c4b-a6e8-4948-ab5d-18df28439e16",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7733948532346377
+    },
+    {
+      "source": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "target": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "relation_type": "Financial Link",
+      "weight": 0.9275523133164453
+    },
+    {
+      "source": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "target": "09da5724-28dd-4c72-96c9-55f985333c5d",
+      "relation_type": "Financial Link",
+      "weight": 0.666782815285872
+    },
+    {
+      "source": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "target": "09da5724-28dd-4c72-96c9-55f985333c5d",
+      "relation_type": "Financial Link",
+      "weight": 0.8932684998571465
+    },
+    {
+      "source": "a1513a24-0128-4917-a1c3-2ef5f8c3736a",
+      "target": "56be2054-10a3-4de0-813e-8a5665d15a15",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8825312078001195
+    },
+    {
+      "source": "56be2054-10a3-4de0-813e-8a5665d15a15",
+      "target": "45f6b98b-550a-4701-ace1-ba882e7fa7e3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6120517749435699
+    },
+    {
+      "source": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "target": "f20a1110-e819-4312-828b-2d8644c0dcd8",
+      "relation_type": "Gang Member",
+      "weight": 0.6431038766303916
+    },
+    {
+      "source": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "target": "5647372b-1766-4b0f-8deb-29b7ea73b981",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5041291131428572
+    },
+    {
+      "source": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "target": "f20a1110-e819-4312-828b-2d8644c0dcd8",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5787539252587535
+    },
+    {
+      "source": "c184b491-05cb-4612-b37b-b2acc9a18870",
+      "target": "b2c09a02-19a6-484e-9e47-502c9fe824fa",
+      "relation_type": "Associate",
+      "weight": 0.9555996636261754
+    },
+    {
+      "source": "b2c09a02-19a6-484e-9e47-502c9fe824fa",
+      "target": "5647372b-1766-4b0f-8deb-29b7ea73b981",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5096444613006597
+    },
+    {
+      "source": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "target": "b2c09a02-19a6-484e-9e47-502c9fe824fa",
+      "relation_type": "Financial Link",
+      "weight": 0.9347186207559868
+    },
+    {
+      "source": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "target": "c184b491-05cb-4612-b37b-b2acc9a18870",
+      "relation_type": "Family",
+      "weight": 0.5691112220327339
+    },
+    {
+      "source": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "target": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "relation_type": "Associate",
+      "weight": 0.5586429477025403
+    },
+    {
+      "source": "5647372b-1766-4b0f-8deb-29b7ea73b981",
+      "target": "f20a1110-e819-4312-828b-2d8644c0dcd8",
+      "relation_type": "Gang Member",
+      "weight": 0.5008250370532303
+    },
+    {
+      "source": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "target": "f20a1110-e819-4312-828b-2d8644c0dcd8",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.822188684986605
+    },
+    {
+      "source": "c184b491-05cb-4612-b37b-b2acc9a18870",
+      "target": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "relation_type": "Gang Member",
+      "weight": 0.9276860417285846
+    },
+    {
+      "source": "c184b491-05cb-4612-b37b-b2acc9a18870",
+      "target": "ac6d2aff-4f1e-4336-b1d8-84c2423e19eb",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9236609331584706
+    },
+    {
+      "source": "c9cd0750-ef57-49df-ac01-69782419327d",
+      "target": "3da172ca-d851-42d8-bb8f-6e7eff8d3942",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.33000139559573716
+    },
+    {
+      "source": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "target": "747f920c-d3ed-4be3-bdbe-cac092c0119c",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9312983407880484
+    },
+    {
+      "source": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "target": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "relation_type": "Associate",
+      "weight": 0.5236632374869876
+    },
+    {
+      "source": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "target": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "relation_type": "Family",
+      "weight": 0.8578457358086201
+    },
+    {
+      "source": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "target": "747f920c-d3ed-4be3-bdbe-cac092c0119c",
+      "relation_type": "Associate",
+      "weight": 0.9389324660299314
+    },
+    {
+      "source": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "target": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.676940311570073
+    },
+    {
+      "source": "fa765de9-c6f7-4131-933e-0f9e7fb736d3",
+      "target": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "relation_type": "Drug Network",
+      "weight": 0.6045179611423039
+    },
+    {
+      "source": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "target": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.566845126626077
+    },
+    {
+      "source": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "target": "3da172ca-d851-42d8-bb8f-6e7eff8d3942",
+      "relation_type": "Family",
+      "weight": 0.8876353818109423
+    },
+    {
+      "source": "fba5a86e-d6db-48c6-b712-bbdb64f407d9",
+      "target": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "relation_type": "Associate",
+      "weight": 0.6295719172798102
+    },
+    {
+      "source": "fa765de9-c6f7-4131-933e-0f9e7fb736d3",
+      "target": "747f920c-d3ed-4be3-bdbe-cac092c0119c",
+      "relation_type": "Drug Network",
+      "weight": 0.6370212000121138
+    },
+    {
+      "source": "fa765de9-c6f7-4131-933e-0f9e7fb736d3",
+      "target": "3da172ca-d851-42d8-bb8f-6e7eff8d3942",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.592948345337668
+    },
+    {
+      "source": "fa765de9-c6f7-4131-933e-0f9e7fb736d3",
+      "target": "4404eca0-fd63-4ad7-b479-48d46f534720",
+      "relation_type": "Gang Member",
+      "weight": 0.8892361232033427
+    },
+    {
+      "source": "2aabe380-1158-4b93-8ef6-21c8e85914e8",
+      "target": "a65f6652-5d2d-48b5-90c6-d58aacb464f7",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.2709785605222239
+    },
+    {
+      "source": "1605b9d6-49d6-4731-81d3-3895532b04d6",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Drug Network",
+      "weight": 0.5666508810118479
+    },
+    {
+      "source": "3c4453a7-1174-4eef-aef3-f0d9f4f63ba6",
+      "target": "a505f23b-a546-4908-a182-4132ff724088",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7514211275154974
+    },
+    {
+      "source": "5c2af606-e398-4e2d-9869-d19bf5ae431b",
+      "target": "459d4e37-b081-4c87-a0ea-8e722dae7fe1",
+      "relation_type": "Financial Link",
+      "weight": 0.673834000585571
+    },
+    {
+      "source": "1605b9d6-49d6-4731-81d3-3895532b04d6",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Financial Link",
+      "weight": 0.6288124993154434
+    },
+    {
+      "source": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9084407710763899
+    },
+    {
+      "source": "dc50a141-ada6-40b6-9ce4-9bba800f4ecf",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7620546911293642
+    },
+    {
+      "source": "1605b9d6-49d6-4731-81d3-3895532b04d6",
+      "target": "dc50a141-ada6-40b6-9ce4-9bba800f4ecf",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9458664257280058
+    },
+    {
+      "source": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "target": "5c2af606-e398-4e2d-9869-d19bf5ae431b",
+      "relation_type": "Financial Link",
+      "weight": 0.7943370581345748
+    },
+    {
+      "source": "5c2af606-e398-4e2d-9869-d19bf5ae431b",
+      "target": "1605b9d6-49d6-4731-81d3-3895532b04d6",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5983142064922851
+    },
+    {
+      "source": "3c4453a7-1174-4eef-aef3-f0d9f4f63ba6",
+      "target": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9123357720298576
+    },
+    {
+      "source": "3c4453a7-1174-4eef-aef3-f0d9f4f63ba6",
+      "target": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9334142504943044
+    },
+    {
+      "source": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "target": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "relation_type": "Gang Member",
+      "weight": 0.8526956967535131
+    },
+    {
+      "source": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7964366026342791
+    },
+    {
+      "source": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "target": "a505f23b-a546-4908-a182-4132ff724088",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8017244040539124
+    },
+    {
+      "source": "a505f23b-a546-4908-a182-4132ff724088",
+      "target": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8199411200127175
+    },
+    {
+      "source": "dc50a141-ada6-40b6-9ce4-9bba800f4ecf",
+      "target": "bbb5f22a-a41e-413d-bbf9-c29ff6a5f2e9",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9797847923461629
+    },
+    {
+      "source": "520ad31f-d3ae-4829-b6c2-544adc179f01",
+      "target": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7254583339239113
+    },
+    {
+      "source": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "target": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5717807788385345
+    },
+    {
+      "source": "91e8b67f-ab28-4b8a-a206-62b3332e3396",
+      "target": "5c2af606-e398-4e2d-9869-d19bf5ae431b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7345395234336818
+    },
+    {
+      "source": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "target": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "relation_type": "Gang Member",
+      "weight": 0.7618734895490854
+    },
+    {
+      "source": "f23ece12-0590-49e4-bb04-ec5931a5674f",
+      "target": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6693665604138866
+    },
+    {
+      "source": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "target": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9490061380541103
+    },
+    {
+      "source": "6f1f73fb-9bbe-40d9-8c08-326f7f85aef7",
+      "target": "459d4e37-b081-4c87-a0ea-8e722dae7fe1",
+      "relation_type": "Drug Network",
+      "weight": 0.8881100135651284
+    },
+    {
+      "source": "b94b8660-a0c5-4051-9867-850c4cab8e40",
+      "target": "459d4e37-b081-4c87-a0ea-8e722dae7fe1",
+      "relation_type": "Gang Member",
+      "weight": 0.9615091902293185
+    },
+    {
+      "source": "a505f23b-a546-4908-a182-4132ff724088",
+      "target": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "relation_type": "Associate",
+      "weight": 0.14742743943116599
+    },
+    {
+      "source": "5093de79-d629-4db9-b6b2-d57b23e944dc",
+      "target": "3cc62dcb-81e9-46f9-84f5-bc0f965297d8",
+      "relation_type": "Drug Network",
+      "weight": 0.5538877742766983
+    },
+    {
+      "source": "64a6b56e-cd6e-4a8a-9352-67efaef6a89b",
+      "target": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6291826992365372
+    },
+    {
+      "source": "7e8e1403-6bc8-40b2-b663-df2423f973f3",
+      "target": "34667d62-f571-43d4-ac01-37880013b111",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8633577963641008
+    },
+    {
+      "source": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "target": "842b6ef9-962d-4c43-bebd-5f168cac3f78",
+      "relation_type": "Drug Network",
+      "weight": 0.8801185486781529
+    },
+    {
+      "source": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "target": "64a6b56e-cd6e-4a8a-9352-67efaef6a89b",
+      "relation_type": "Family",
+      "weight": 0.7057219313793646
+    },
+    {
+      "source": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "target": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5022097184103568
+    },
+    {
+      "source": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "target": "5093de79-d629-4db9-b6b2-d57b23e944dc",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8097385508829995
+    },
+    {
+      "source": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "target": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7247448525467527
+    },
+    {
+      "source": "19b071a5-e5b7-4d43-b447-ae4079632590",
+      "target": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "relation_type": "Associate",
+      "weight": 0.7921772069987452
+    },
+    {
+      "source": "19b071a5-e5b7-4d43-b447-ae4079632590",
+      "target": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "relation_type": "Associate",
+      "weight": 0.8927062701551726
+    },
+    {
+      "source": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "target": "9a70c6bb-1094-4788-b4f7-d49cf6408e8c",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9976459863856255
+    },
+    {
+      "source": "34667d62-f571-43d4-ac01-37880013b111",
+      "target": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7086106868728403
+    },
+    {
+      "source": "1dfda72a-fae9-4175-a7a9-7cd38db94022",
+      "target": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "relation_type": "Drug Network",
+      "weight": 0.5726176177527086
+    },
+    {
+      "source": "3cc62dcb-81e9-46f9-84f5-bc0f965297d8",
+      "target": "64a6b56e-cd6e-4a8a-9352-67efaef6a89b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8372795871440727
+    },
+    {
+      "source": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "target": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5210996478640195
+    },
+    {
+      "source": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "target": "19b071a5-e5b7-4d43-b447-ae4079632590",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8366741692298434
+    },
+    {
+      "source": "34667d62-f571-43d4-ac01-37880013b111",
+      "target": "7e8e1403-6bc8-40b2-b663-df2423f973f3",
+      "relation_type": "Associate",
+      "weight": 0.8264200939095999
+    },
+    {
+      "source": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "target": "7e8e1403-6bc8-40b2-b663-df2423f973f3",
+      "relation_type": "Financial Link",
+      "weight": 0.889515455464539
+    },
+    {
+      "source": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+      "target": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+      "relation_type": "Financial Link",
+      "weight": 0.7380334885128057
+    },
+    {
+      "source": "34667d62-f571-43d4-ac01-37880013b111",
+      "target": "7e8e1403-6bc8-40b2-b663-df2423f973f3",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8755919115255084
+    },
+    {
+      "source": "34667d62-f571-43d4-ac01-37880013b111",
+      "target": "64a6b56e-cd6e-4a8a-9352-67efaef6a89b",
+      "relation_type": "Family",
+      "weight": 0.7656486693775947
+    },
+    {
+      "source": "34667d62-f571-43d4-ac01-37880013b111",
+      "target": "1dfda72a-fae9-4175-a7a9-7cd38db94022",
+      "relation_type": "Family",
+      "weight": 0.898327065554165
+    },
+    {
+      "source": "de24d882-7f6c-4df4-9337-c2a8191cf49f",
+      "target": "3cc62dcb-81e9-46f9-84f5-bc0f965297d8",
+      "relation_type": "Family",
+      "weight": 0.7913462601646666
+    },
+    {
+      "source": "1dfda72a-fae9-4175-a7a9-7cd38db94022",
+      "target": "3cc62dcb-81e9-46f9-84f5-bc0f965297d8",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6359501315834568
+    },
+    {
+      "source": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "target": "f4c421d9-e103-4672-975f-1c9f288688aa",
+      "relation_type": "Family",
+      "weight": 0.5414001344393207
+    },
+    {
+      "source": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "target": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "relation_type": "Family",
+      "weight": 0.6777270506932639
+    },
+    {
+      "source": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "target": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "relation_type": "Drug Network",
+      "weight": 0.8781928192774353
+    },
+    {
+      "source": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "target": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "relation_type": "Financial Link",
+      "weight": 0.7130375658559818
+    },
+    {
+      "source": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "target": "aa6a521e-46ab-46f4-b156-8463b844edcd",
+      "relation_type": "Gang Member",
+      "weight": 0.5334437485565597
+    },
+    {
+      "source": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "target": "aa6a521e-46ab-46f4-b156-8463b844edcd",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.505973783459089
+    },
+    {
+      "source": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "target": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "relation_type": "Associate",
+      "weight": 0.6015098026951098
+    },
+    {
+      "source": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "target": "f4c421d9-e103-4672-975f-1c9f288688aa",
+      "relation_type": "Financial Link",
+      "weight": 0.517361660570195
+    },
+    {
+      "source": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "target": "82ceb3bf-08d1-49c2-805a-dc871f5573aa",
+      "relation_type": "Drug Network",
+      "weight": 0.6178651212948206
+    },
+    {
+      "source": "f4c421d9-e103-4672-975f-1c9f288688aa",
+      "target": "c15bd658-3605-42c8-95c0-fce2e5c69dda",
+      "relation_type": "Financial Link",
+      "weight": 0.7283067854427792
+    },
+    {
+      "source": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "target": "41f4ce75-3b49-46c7-be0a-fb8cc361667a",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6638092212887136
+    },
+    {
+      "source": "41f4ce75-3b49-46c7-be0a-fb8cc361667a",
+      "target": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "relation_type": "Financial Link",
+      "weight": 0.5032106444918567
+    },
+    {
+      "source": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "target": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "relation_type": "Family",
+      "weight": 0.7894790982084408
+    },
+    {
+      "source": "41f4ce75-3b49-46c7-be0a-fb8cc361667a",
+      "target": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "relation_type": "Family",
+      "weight": 0.5441343493466121
+    },
+    {
+      "source": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "target": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "relation_type": "Gang Member",
+      "weight": 0.9885882682244042
+    },
+    {
+      "source": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "target": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "relation_type": "Associate",
+      "weight": 0.972904861027087
+    },
+    {
+      "source": "0a1de1ed-c5da-4555-9ef5-babab53a91aa",
+      "target": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5540275552921345
+    },
+    {
+      "source": "6e2a0a7d-9cb5-40d7-ac69-495740acb7bf",
+      "target": "41f4ce75-3b49-46c7-be0a-fb8cc361667a",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9751562212272459
+    },
+    {
+      "source": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "target": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "relation_type": "Financial Link",
+      "weight": 0.6177533342707924
+    },
+    {
+      "source": "6e2a0a7d-9cb5-40d7-ac69-495740acb7bf",
+      "target": "0db7a6b8-c7fe-408b-9a54-cda3302f9e3a",
+      "relation_type": "Financial Link",
+      "weight": 0.6381381793313993
+    },
+    {
+      "source": "647ffc3f-7ca3-45de-b439-dbf99ce0c156",
+      "target": "63f7c3f9-67e5-420d-9df2-0e9f3ead703a",
+      "relation_type": "Financial Link",
+      "weight": 0.21946033934877454
+    },
+    {
+      "source": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "target": "6152bfce-ac87-489f-8c77-5232e5da8503",
+      "relation_type": "Drug Network",
+      "weight": 0.7662682697160417
+    },
+    {
+      "source": "07a11019-1377-4188-b92d-7e514f6a01e8",
+      "target": "6152bfce-ac87-489f-8c77-5232e5da8503",
+      "relation_type": "Associate",
+      "weight": 0.9393116912433042
+    },
+    {
+      "source": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "target": "07a11019-1377-4188-b92d-7e514f6a01e8",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6049918678019227
+    },
+    {
+      "source": "6152bfce-ac87-489f-8c77-5232e5da8503",
+      "target": "953aa2bb-8464-43a2-ae74-1f1dcb223892",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7515319905139579
+    },
+    {
+      "source": "07a11019-1377-4188-b92d-7e514f6a01e8",
+      "target": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "relation_type": "Financial Link",
+      "weight": 0.9505288154657596
+    },
+    {
+      "source": "953aa2bb-8464-43a2-ae74-1f1dcb223892",
+      "target": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "relation_type": "Financial Link",
+      "weight": 0.7002044288027198
+    },
+    {
+      "source": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "target": "07a11019-1377-4188-b92d-7e514f6a01e8",
+      "relation_type": "Gang Member",
+      "weight": 0.5411734115969951
+    },
+    {
+      "source": "6152bfce-ac87-489f-8c77-5232e5da8503",
+      "target": "f1ecd527-caed-4e01-b544-5e5c23d28810",
+      "relation_type": "Family",
+      "weight": 0.5583740961110071
+    },
+    {
+      "source": "3ee5281a-41fc-439b-9801-b6fbfd3dfe3c",
+      "target": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "relation_type": "Family",
+      "weight": 0.6452921603255275
+    },
+    {
+      "source": "8fe28d10-6351-400b-9038-82a4b986d920",
+      "target": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "relation_type": "Associate",
+      "weight": 0.7823989504767523
+    },
+    {
+      "source": "3ee5281a-41fc-439b-9801-b6fbfd3dfe3c",
+      "target": "ddc1c143-f380-4c94-a00d-65c694e19080",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9689269268598879
+    },
+    {
+      "source": "8fe28d10-6351-400b-9038-82a4b986d920",
+      "target": "3ee5281a-41fc-439b-9801-b6fbfd3dfe3c",
+      "relation_type": "Gang Member",
+      "weight": 0.5661385410554374
+    },
+    {
+      "source": "8fe28d10-6351-400b-9038-82a4b986d920",
+      "target": "ddc1c143-f380-4c94-a00d-65c694e19080",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8814121730672035
+    },
+    {
+      "source": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "target": "ddc1c143-f380-4c94-a00d-65c694e19080",
+      "relation_type": "Drug Network",
+      "weight": 0.5951172325322047
+    },
+    {
+      "source": "8fe28d10-6351-400b-9038-82a4b986d920",
+      "target": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6227763833969133
+    },
+    {
+      "source": "ddc1c143-f380-4c94-a00d-65c694e19080",
+      "target": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "relation_type": "Financial Link",
+      "weight": 0.6323880494541354
+    },
+    {
+      "source": "4bcd2150-6594-4955-8a80-05c1e2f3e32d",
+      "target": "953aa2bb-8464-43a2-ae74-1f1dcb223892",
+      "relation_type": "Financial Link",
+      "weight": 0.3452124512845356
+    },
+    {
+      "source": "11e584ff-00ea-470f-84c0-585af7999721",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Associate",
+      "weight": 0.717988211962281
+    },
+    {
+      "source": "f1c28fb3-b5c2-4440-908a-0870ce777fdd",
+      "target": "9ae615a5-6f80-45d6-b7b0-fe6f890bbb31",
+      "relation_type": "Drug Network",
+      "weight": 0.7934590411705984
+    },
+    {
+      "source": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "target": "11e584ff-00ea-470f-84c0-585af7999721",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9400504341349543
+    },
+    {
+      "source": "f1c28fb3-b5c2-4440-908a-0870ce777fdd",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Drug Network",
+      "weight": 0.9722638356664547
+    },
+    {
+      "source": "f1c28fb3-b5c2-4440-908a-0870ce777fdd",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8454317112143708
+    },
+    {
+      "source": "11e584ff-00ea-470f-84c0-585af7999721",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Drug Network",
+      "weight": 0.5426225060873745
+    },
+    {
+      "source": "11e584ff-00ea-470f-84c0-585af7999721",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Family",
+      "weight": 0.8312118164613402
+    },
+    {
+      "source": "11e584ff-00ea-470f-84c0-585af7999721",
+      "target": "a0c471ca-6148-4f67-a56a-b093abfbe0f1",
+      "relation_type": "Drug Network",
+      "weight": 0.8755284909660102
+    },
+    {
+      "source": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "target": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9284296984459008
+    },
+    {
+      "source": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "target": "89028806-3f6f-4832-96af-29b166653928",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5720033771748964
+    },
+    {
+      "source": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "target": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "relation_type": "Associate",
+      "weight": 0.7038834906600973
+    },
+    {
+      "source": "89028806-3f6f-4832-96af-29b166653928",
+      "target": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "relation_type": "Associate",
+      "weight": 0.9529482412853245
+    },
+    {
+      "source": "fc50ee89-fcfa-4b23-a20d-161e152d1d8d",
+      "target": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "relation_type": "Financial Link",
+      "weight": 0.7762962049483771
+    },
+    {
+      "source": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "target": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.653467495490144
+    },
+    {
+      "source": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "target": "b8c9b77d-7600-4fc8-b85b-38935565f459",
+      "relation_type": "Family",
+      "weight": 0.7794807547583675
+    },
+    {
+      "source": "fc50ee89-fcfa-4b23-a20d-161e152d1d8d",
+      "target": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8979952720640352
+    },
+    {
+      "source": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "target": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7382657948927127
+    },
+    {
+      "source": "89028806-3f6f-4832-96af-29b166653928",
+      "target": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7312147502757731
+    },
+    {
+      "source": "b8c9b77d-7600-4fc8-b85b-38935565f459",
+      "target": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "relation_type": "Associate",
+      "weight": 0.6094392159457526
+    },
+    {
+      "source": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "target": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "relation_type": "Drug Network",
+      "weight": 0.9516710245054004
+    },
+    {
+      "source": "fc50ee89-fcfa-4b23-a20d-161e152d1d8d",
+      "target": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "relation_type": "Associate",
+      "weight": 0.5887328377090704
+    },
+    {
+      "source": "b8c9b77d-7600-4fc8-b85b-38935565f459",
+      "target": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "relation_type": "Associate",
+      "weight": 0.9016641327050977
+    },
+    {
+      "source": "fc50ee89-fcfa-4b23-a20d-161e152d1d8d",
+      "target": "beb99ac1-f9d4-427f-89ff-cfe1cfd6eba5",
+      "relation_type": "Drug Network",
+      "weight": 0.9760605296301045
+    },
+    {
+      "source": "d5df3be2-a792-496b-9a14-fbef709fea0f",
+      "target": "cda9c36b-55f0-4724-b414-fdbf6e45a899",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7873451799812496
+    },
+    {
+      "source": "3f826470-3e76-4bc8-9d9a-1d0fc91aedae",
+      "target": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "relation_type": "Gang Member",
+      "weight": 0.922568705482622
+    },
+    {
+      "source": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "target": "8534e700-84c1-4491-ae12-e441e6ff5456",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6594886866093879
+    },
+    {
+      "source": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "target": "16bc178b-c01f-440e-bb34-4c5706cff131",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8106571908932988
+    },
+    {
+      "source": "95978794-56d1-498f-8a83-a5af98043c8e",
+      "target": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6247697746957166
+    },
+    {
+      "source": "c4279712-d478-47ae-9f57-142389ccec74",
+      "target": "95978794-56d1-498f-8a83-a5af98043c8e",
+      "relation_type": "Family",
+      "weight": 0.6508029135061434
+    },
+    {
+      "source": "c4279712-d478-47ae-9f57-142389ccec74",
+      "target": "3f826470-3e76-4bc8-9d9a-1d0fc91aedae",
+      "relation_type": "Drug Network",
+      "weight": 0.6882807251099858
+    },
+    {
+      "source": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "target": "3f826470-3e76-4bc8-9d9a-1d0fc91aedae",
+      "relation_type": "Gang Member",
+      "weight": 0.5542867711020204
+    },
+    {
+      "source": "95978794-56d1-498f-8a83-a5af98043c8e",
+      "target": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "relation_type": "Gang Member",
+      "weight": 0.6853608129831112
+    },
+    {
+      "source": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "target": "95978794-56d1-498f-8a83-a5af98043c8e",
+      "relation_type": "Financial Link",
+      "weight": 0.7346831464557453
+    },
+    {
+      "source": "880d9061-449c-4923-97d4-43e29739ffb5",
+      "target": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "relation_type": "Family",
+      "weight": 0.9418523382311609
+    },
+    {
+      "source": "8534e700-84c1-4491-ae12-e441e6ff5456",
+      "target": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "relation_type": "Family",
+      "weight": 0.7996353769379794
+    },
+    {
+      "source": "8534e700-84c1-4491-ae12-e441e6ff5456",
+      "target": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "relation_type": "Family",
+      "weight": 0.6907028909212403
+    },
+    {
+      "source": "880d9061-449c-4923-97d4-43e29739ffb5",
+      "target": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "relation_type": "Financial Link",
+      "weight": 0.6573786654540262
+    },
+    {
+      "source": "139f2b4d-ec27-4304-bb25-8eb06cf54a05",
+      "target": "16bc178b-c01f-440e-bb34-4c5706cff131",
+      "relation_type": "Drug Network",
+      "weight": 0.7044808451413164
+    },
+    {
+      "source": "16bc178b-c01f-440e-bb34-4c5706cff131",
+      "target": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7474240286211996
+    },
+    {
+      "source": "3f826470-3e76-4bc8-9d9a-1d0fc91aedae",
+      "target": "16bc178b-c01f-440e-bb34-4c5706cff131",
+      "relation_type": "Gang Member",
+      "weight": 0.7148682254481254
+    },
+    {
+      "source": "0e6fddd8-e884-4242-bbc0-a37be61fab50",
+      "target": "26489168-99dd-49ec-b36c-dbd4e6a51b4e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.12980512212582582
+    },
+    {
+      "source": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "target": "521743d1-2e45-410d-8784-1ef674d904bb",
+      "relation_type": "Gang Member",
+      "weight": 0.5701410884652172
+    },
+    {
+      "source": "18ea1b24-afe1-414c-b199-cd2216cd0539",
+      "target": "521743d1-2e45-410d-8784-1ef674d904bb",
+      "relation_type": "Gang Member",
+      "weight": 0.73054729615208
+    },
+    {
+      "source": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "target": "18ea1b24-afe1-414c-b199-cd2216cd0539",
+      "relation_type": "Drug Network",
+      "weight": 0.5737225433940198
+    },
+    {
+      "source": "521743d1-2e45-410d-8784-1ef674d904bb",
+      "target": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8911533256152605
+    },
+    {
+      "source": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "target": "18ea1b24-afe1-414c-b199-cd2216cd0539",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6178552140306603
+    },
+    {
+      "source": "ef1bef2a-b270-4414-90b6-4eeecf333fd3",
+      "target": "18ea1b24-afe1-414c-b199-cd2216cd0539",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5160430601335706
+    },
+    {
+      "source": "521743d1-2e45-410d-8784-1ef674d904bb",
+      "target": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "relation_type": "Financial Link",
+      "weight": 0.1842134815190662
+    },
+    {
+      "source": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "target": "7cf72432-f96a-4da1-abc5-8b47952d0c7b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7760880127086522
+    },
+    {
+      "source": "71d03d33-e0ea-4e96-8904-a639b0608db5",
+      "target": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "relation_type": "Financial Link",
+      "weight": 0.6654040147755393
+    },
+    {
+      "source": "71d03d33-e0ea-4e96-8904-a639b0608db5",
+      "target": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6894382461334985
+    },
+    {
+      "source": "7cf72432-f96a-4da1-abc5-8b47952d0c7b",
+      "target": "71d03d33-e0ea-4e96-8904-a639b0608db5",
+      "relation_type": "Drug Network",
+      "weight": 0.8439181024634795
+    },
+    {
+      "source": "7cf72432-f96a-4da1-abc5-8b47952d0c7b",
+      "target": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.764105290561441
+    },
+    {
+      "source": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "target": "71d03d33-e0ea-4e96-8904-a639b0608db5",
+      "relation_type": "Financial Link",
+      "weight": 0.5712224448676091
+    },
+    {
+      "source": "6a8c8e04-8ebf-4525-a1bd-90b486c3f4ad",
+      "target": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.750667729404392
+    },
+    {
+      "source": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "target": "6a8c8e04-8ebf-4525-a1bd-90b486c3f4ad",
+      "relation_type": "Drug Network",
+      "weight": 0.7715380109694989
+    },
+    {
+      "source": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "target": "6a8c8e04-8ebf-4525-a1bd-90b486c3f4ad",
+      "relation_type": "Family",
+      "weight": 0.6345507871694549
+    },
+    {
+      "source": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "target": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "relation_type": "Gang Member",
+      "weight": 0.6281735983659156
+    },
+    {
+      "source": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "target": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8289230265243321
+    },
+    {
+      "source": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "target": "11537a2c-c9b8-422a-8658-9391929d0c41",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8400652761548442
+    },
+    {
+      "source": "cf2a69c3-896c-4eb6-8362-703d7b601d79",
+      "target": "7997d04f-bcdb-41ff-8572-44b5e11baf70",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.16169239995335552
+    },
+    {
+      "source": "37fecda6-ace7-4592-b2cf-db1199a6c90b",
+      "target": "a55c4929-7808-44a8-9446-8cc8c299bdc3",
+      "relation_type": "Gang Member",
+      "weight": 0.6565508987879327
+    },
+    {
+      "source": "a55c4929-7808-44a8-9446-8cc8c299bdc3",
+      "target": "37fecda6-ace7-4592-b2cf-db1199a6c90b",
+      "relation_type": "Drug Network",
+      "weight": 0.5739505918395991
+    },
+    {
+      "source": "37fecda6-ace7-4592-b2cf-db1199a6c90b",
+      "target": "a55c4929-7808-44a8-9446-8cc8c299bdc3",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6087755299008288
+    },
+    {
+      "source": "37fecda6-ace7-4592-b2cf-db1199a6c90b",
+      "target": "a55c4929-7808-44a8-9446-8cc8c299bdc3",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8624091093248585
+    },
+    {
+      "source": "ce50ac5f-f6ca-462b-8d52-7f4bbe606592",
+      "target": "2620acaf-4e6a-4e70-82a5-e68d6fd9e138",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8610596596731963
+    },
+    {
+      "source": "2620acaf-4e6a-4e70-82a5-e68d6fd9e138",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Family",
+      "weight": 0.7130424630241818
+    },
+    {
+      "source": "2fea84d0-09b8-484f-ada4-230bb68c0948",
+      "target": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9409287230040384
+    },
+    {
+      "source": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Gang Member",
+      "weight": 0.856192095845299
+    },
+    {
+      "source": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "target": "583252cf-fa57-4d7c-bc69-715ce2fdbfba",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7229471018635236
+    },
+    {
+      "source": "ae492f5b-e518-4af2-882d-940ac01f8c0a",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9809756532882328
+    },
+    {
+      "source": "583252cf-fa57-4d7c-bc69-715ce2fdbfba",
+      "target": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "relation_type": "Family",
+      "weight": 0.6739637727527419
+    },
+    {
+      "source": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "target": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8210097305480673
+    },
+    {
+      "source": "332bb67c-111f-4856-9964-706f099efe59",
+      "target": "ce50ac5f-f6ca-462b-8d52-7f4bbe606592",
+      "relation_type": "Drug Network",
+      "weight": 0.7939453126076175
+    },
+    {
+      "source": "7a6d2b97-7118-4930-bf07-8ba5a316a97f",
+      "target": "2698b7a0-3fde-474b-8482-8e03438cc3f8",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5615858324964758
+    },
+    {
+      "source": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Financial Link",
+      "weight": 0.8928452854240687
+    },
+    {
+      "source": "583252cf-fa57-4d7c-bc69-715ce2fdbfba",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Family",
+      "weight": 0.591434085109654
+    },
+    {
+      "source": "2698b7a0-3fde-474b-8482-8e03438cc3f8",
+      "target": "2fea84d0-09b8-484f-ada4-230bb68c0948",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7559331825531146
+    },
+    {
+      "source": "ce50ac5f-f6ca-462b-8d52-7f4bbe606592",
+      "target": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "relation_type": "Gang Member",
+      "weight": 0.8200801941182645
+    },
+    {
+      "source": "2698b7a0-3fde-474b-8482-8e03438cc3f8",
+      "target": "2fea84d0-09b8-484f-ada4-230bb68c0948",
+      "relation_type": "Family",
+      "weight": 0.7424874230083595
+    },
+    {
+      "source": "5b5f3bfd-63f4-481e-b6e1-51e676f33ffa",
+      "target": "332bb67c-111f-4856-9964-706f099efe59",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7218824484490782
+    },
+    {
+      "source": "5b5f3bfd-63f4-481e-b6e1-51e676f33ffa",
+      "target": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "relation_type": "Family",
+      "weight": 0.6076356007880115
+    },
+    {
+      "source": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "target": "2fea84d0-09b8-484f-ada4-230bb68c0948",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9111273364291597
+    },
+    {
+      "source": "2698b7a0-3fde-474b-8482-8e03438cc3f8",
+      "target": "ae492f5b-e518-4af2-882d-940ac01f8c0a",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7760559823586839
+    },
+    {
+      "source": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "target": "5a1f7c90-db62-4a9e-89e7-dfe7a7a55a22",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8859881580490316
+    },
+    {
+      "source": "7a6d2b97-7118-4930-bf07-8ba5a316a97f",
+      "target": "ae492f5b-e518-4af2-882d-940ac01f8c0a",
+      "relation_type": "Associate",
+      "weight": 0.979754693927308
+    },
+    {
+      "source": "7a6d2b97-7118-4930-bf07-8ba5a316a97f",
+      "target": "3317a419-8f9b-4316-bf7e-ecb2f256eb1c",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9535917013715891
+    },
+    {
+      "source": "5336a98d-1c45-4691-8f91-705729df8227",
+      "target": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "relation_type": "Gang Member",
+      "weight": 0.5907706413490217
+    },
+    {
+      "source": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "target": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5863918243092582
+    },
+    {
+      "source": "aad9de74-1118-4498-8e58-c650e7deefa7",
+      "target": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "relation_type": "Family",
+      "weight": 0.7701314628390582
+    },
+    {
+      "source": "5336a98d-1c45-4691-8f91-705729df8227",
+      "target": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "relation_type": "Family",
+      "weight": 0.7386861496055669
+    },
+    {
+      "source": "5336a98d-1c45-4691-8f91-705729df8227",
+      "target": "aad9de74-1118-4498-8e58-c650e7deefa7",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7779547785833112
+    },
+    {
+      "source": "aad9de74-1118-4498-8e58-c650e7deefa7",
+      "target": "5336a98d-1c45-4691-8f91-705729df8227",
+      "relation_type": "Financial Link",
+      "weight": 0.6486402618230398
+    },
+    {
+      "source": "9ed45641-7f94-49d2-ae85-aae03250be49",
+      "target": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "relation_type": "Drug Network",
+      "weight": 0.9656444989991579
+    },
+    {
+      "source": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "target": "5336a98d-1c45-4691-8f91-705729df8227",
+      "relation_type": "Family",
+      "weight": 0.5534461040072491
+    },
+    {
+      "source": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "target": "aad9de74-1118-4498-8e58-c650e7deefa7",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.676844198657699
+    },
+    {
+      "source": "f846f618-c619-4d48-b2d0-8da86d984332",
+      "target": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "relation_type": "Drug Network",
+      "weight": 0.6113209111050039
+    },
+    {
+      "source": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "target": "dd10db0b-d756-4344-a842-40f0a72e3d4d",
+      "relation_type": "Gang Member",
+      "weight": 0.7188941746947511
+    },
+    {
+      "source": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "target": "62d5e982-2e8a-4209-960c-30e9e6aa97d0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5854679778150861
+    },
+    {
+      "source": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "target": "dd10db0b-d756-4344-a842-40f0a72e3d4d",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9245265067576454
+    },
+    {
+      "source": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "target": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "relation_type": "Associate",
+      "weight": 0.7781607376829077
+    },
+    {
+      "source": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "target": "13509d3d-bfa8-4c72-bf2d-6182a59ed071",
+      "relation_type": "Associate",
+      "weight": 0.8386426398521394
+    },
+    {
+      "source": "62d5e982-2e8a-4209-960c-30e9e6aa97d0",
+      "target": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "relation_type": "Gang Member",
+      "weight": 0.973579521221283
+    },
+    {
+      "source": "62d5e982-2e8a-4209-960c-30e9e6aa97d0",
+      "target": "13509d3d-bfa8-4c72-bf2d-6182a59ed071",
+      "relation_type": "Family",
+      "weight": 0.6148651523283202
+    },
+    {
+      "source": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "target": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.66419849420831
+    },
+    {
+      "source": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "target": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "relation_type": "Gang Member",
+      "weight": 0.6503548380712387
+    },
+    {
+      "source": "537fccf9-eeb1-430d-9ea7-5d5835589d62",
+      "target": "9a15f63e-62af-4b60-89f3-4c44dc8a82fb",
+      "relation_type": "Drug Network",
+      "weight": 0.8107860741873578
+    },
+    {
+      "source": "dd10db0b-d756-4344-a842-40f0a72e3d4d",
+      "target": "ccb92947-12c7-45be-8357-e559cf3ccd87",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.25863873693045836
+    },
+    {
+      "source": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "target": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "relation_type": "Financial Link",
+      "weight": 0.9060235749029666
+    },
+    {
+      "source": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+      "target": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "relation_type": "Family",
+      "weight": 0.6524682035588685
+    },
+    {
+      "source": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "target": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "relation_type": "Associate",
+      "weight": 0.9095788711898334
+    },
+    {
+      "source": "be8d0bde-7e7d-4c13-86d5-273b85495405",
+      "target": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "relation_type": "Family",
+      "weight": 0.9212493434514587
+    },
+    {
+      "source": "a4179eba-c4cf-468b-8400-0f658cdda350",
+      "target": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "relation_type": "Financial Link",
+      "weight": 0.8791301142117792
+    },
+    {
+      "source": "db737c73-57f3-49dd-a8be-e4af2cf6b5a7",
+      "target": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "relation_type": "Family",
+      "weight": 0.8297785284636718
+    },
+    {
+      "source": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "target": "be8d0bde-7e7d-4c13-86d5-273b85495405",
+      "relation_type": "Drug Network",
+      "weight": 0.7831110177225341
+    },
+    {
+      "source": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+      "target": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6803513320829038
+    },
+    {
+      "source": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "target": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "relation_type": "Family",
+      "weight": 0.9710862205723361
+    },
+    {
+      "source": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "target": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "relation_type": "Drug Network",
+      "weight": 0.9486522384318125
+    },
+    {
+      "source": "a4179eba-c4cf-468b-8400-0f658cdda350",
+      "target": "24426225-cfc8-43f9-b61e-b3300b1b9768",
+      "relation_type": "Drug Network",
+      "weight": 0.697944063899901
+    },
+    {
+      "source": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "target": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+      "relation_type": "Gang Member",
+      "weight": 0.910891730783757
+    },
+    {
+      "source": "a4179eba-c4cf-468b-8400-0f658cdda350",
+      "target": "c0db6fbc-7ed6-45bb-af43-ea657ccbf69e",
+      "relation_type": "Drug Network",
+      "weight": 0.8374748069751747
+    },
+    {
+      "source": "24426225-cfc8-43f9-b61e-b3300b1b9768",
+      "target": "c8b3b6aa-a2b1-4694-a397-d1d7e0ba727c",
+      "relation_type": "Family",
+      "weight": 0.7097727261552378
+    },
+    {
+      "source": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "target": "24426225-cfc8-43f9-b61e-b3300b1b9768",
+      "relation_type": "Drug Network",
+      "weight": 0.9733319444594413
+    },
+    {
+      "source": "c0db6fbc-7ed6-45bb-af43-ea657ccbf69e",
+      "target": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6515258002723907
+    },
+    {
+      "source": "be8d0bde-7e7d-4c13-86d5-273b85495405",
+      "target": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "relation_type": "Associate",
+      "weight": 0.6055424699588988
+    },
+    {
+      "source": "7ff86d06-8f0c-48ff-bce0-b20703a015e1",
+      "target": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8327980100520227
+    },
+    {
+      "source": "c0db6fbc-7ed6-45bb-af43-ea657ccbf69e",
+      "target": "6615fc31-6114-45ea-a6c8-5f33b84afef3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.72098833874542
+    },
+    {
+      "source": "db737c73-57f3-49dd-a8be-e4af2cf6b5a7",
+      "target": "3b8db0ca-0fd6-46d6-9e3d-99c67d3ddf15",
+      "relation_type": "Drug Network",
+      "weight": 0.5628899313086515
+    },
+    {
+      "source": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+      "target": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "relation_type": "Financial Link",
+      "weight": 0.273442716895792
+    },
+    {
+      "source": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "target": "a64b7880-9372-41a1-afe4-fa40dd145ed6",
+      "relation_type": "Gang Member",
+      "weight": 0.6619860590740472
+    },
+    {
+      "source": "26b917ae-8efe-4bbd-8d6f-2c6278fc5611",
+      "target": "2b35bd24-54fe-402d-88f5-7f15dc51a653",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7108046482943544
+    },
+    {
+      "source": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "target": "2b35bd24-54fe-402d-88f5-7f15dc51a653",
+      "relation_type": "Financial Link",
+      "weight": 0.8865989289433944
+    },
+    {
+      "source": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "target": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "relation_type": "Gang Member",
+      "weight": 0.8835501443048559
+    },
+    {
+      "source": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "target": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "relation_type": "Gang Member",
+      "weight": 0.9029444489192217
+    },
+    {
+      "source": "fda8062e-a2f7-483e-b4c8-b4fd585b73ba",
+      "target": "a64b7880-9372-41a1-afe4-fa40dd145ed6",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6980274407298868
+    },
+    {
+      "source": "a64b7880-9372-41a1-afe4-fa40dd145ed6",
+      "target": "fda8062e-a2f7-483e-b4c8-b4fd585b73ba",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6347191423755727
+    },
+    {
+      "source": "26b917ae-8efe-4bbd-8d6f-2c6278fc5611",
+      "target": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6950800712469731
+    },
+    {
+      "source": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "target": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "relation_type": "Gang Member",
+      "weight": 0.7161786908195741
+    },
+    {
+      "source": "26b917ae-8efe-4bbd-8d6f-2c6278fc5611",
+      "target": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "relation_type": "Financial Link",
+      "weight": 0.8830525933830059
+    },
+    {
+      "source": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "target": "2b35bd24-54fe-402d-88f5-7f15dc51a653",
+      "relation_type": "Associate",
+      "weight": 0.88771295299898
+    },
+    {
+      "source": "b23ddcf5-e5d8-4e14-a512-7483051f098b",
+      "target": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "relation_type": "Gang Member",
+      "weight": 0.8296780753894549
+    },
+    {
+      "source": "fda8062e-a2f7-483e-b4c8-b4fd585b73ba",
+      "target": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7408029938262437
+    },
+    {
+      "source": "8bfede1a-9eaf-4021-880a-449ce37b0680",
+      "target": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "relation_type": "Drug Network",
+      "weight": 0.814370488525894
+    },
+    {
+      "source": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "target": "7c01962d-d4c3-45a0-99af-1e770aa06344",
+      "relation_type": "Financial Link",
+      "weight": 0.8234507269750911
+    },
+    {
+      "source": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "target": "a64b7880-9372-41a1-afe4-fa40dd145ed6",
+      "relation_type": "Gang Member",
+      "weight": 0.8496969751568747
+    },
+    {
+      "source": "7c01962d-d4c3-45a0-99af-1e770aa06344",
+      "target": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9951337013540409
+    },
+    {
+      "source": "26b917ae-8efe-4bbd-8d6f-2c6278fc5611",
+      "target": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "relation_type": "Financial Link",
+      "weight": 0.7938540475270128
+    },
+    {
+      "source": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+      "target": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "relation_type": "Drug Network",
+      "weight": 0.565184083874158
+    },
+    {
+      "source": "55322956-0e1a-42f1-92d2-600869d2aa3f",
+      "target": "e3200de5-72c2-478c-af37-9fef19c78377",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8929246440072824
+    },
+    {
+      "source": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "target": "100e4002-3bf8-4f1f-a371-eb110f20149c",
+      "relation_type": "Family",
+      "weight": 0.5320683609088974
+    },
+    {
+      "source": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "target": "72e5f22a-4d4c-442e-8bba-7f5269473182",
+      "relation_type": "Drug Network",
+      "weight": 0.7913339818322468
+    },
+    {
+      "source": "c8cd2116-28be-4738-b8d4-1cc1ea0f19b3",
+      "target": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "relation_type": "Drug Network",
+      "weight": 0.7797706818545636
+    },
+    {
+      "source": "100e4002-3bf8-4f1f-a371-eb110f20149c",
+      "target": "c8cd2116-28be-4738-b8d4-1cc1ea0f19b3",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8921037155723787
+    },
+    {
+      "source": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "target": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "relation_type": "Financial Link",
+      "weight": 0.7884849992863209
+    },
+    {
+      "source": "100e4002-3bf8-4f1f-a371-eb110f20149c",
+      "target": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "relation_type": "Associate",
+      "weight": 0.7529589094979888
+    },
+    {
+      "source": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "target": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "relation_type": "Drug Network",
+      "weight": 0.7778836669785325
+    },
+    {
+      "source": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "target": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "relation_type": "Financial Link",
+      "weight": 0.6088345242265896
+    },
+    {
+      "source": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "target": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "relation_type": "Gang Member",
+      "weight": 0.9987663621615958
+    },
+    {
+      "source": "080f5f17-5cfd-4ea7-82bb-42de990be930",
+      "target": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "relation_type": "Family",
+      "weight": 0.805728708945126
+    },
+    {
+      "source": "0a89c539-29b1-4af6-9d55-82e6d9086673",
+      "target": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "relation_type": "Associate",
+      "weight": 0.3627471059779982
+    },
+    {
+      "source": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "target": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "relation_type": "Drug Network",
+      "weight": 0.7934143030618497
+    },
+    {
+      "source": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "target": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "relation_type": "Family",
+      "weight": 0.5531099780383498
+    },
+    {
+      "source": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "target": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7193193424579982
+    },
+    {
+      "source": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "target": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "relation_type": "Associate",
+      "weight": 0.9204207719172742
+    },
+    {
+      "source": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "target": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "relation_type": "Family",
+      "weight": 0.9276979772964701
+    },
+    {
+      "source": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "target": "cf95923a-e277-4231-a8f8-30912c0d10ee",
+      "relation_type": "Drug Network",
+      "weight": 0.5980790111422447
+    },
+    {
+      "source": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "target": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "relation_type": "Gang Member",
+      "weight": 0.9679636136599499
+    },
+    {
+      "source": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "target": "cf95923a-e277-4231-a8f8-30912c0d10ee",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8223180264422026
+    },
+    {
+      "source": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "target": "2d179017-c766-44c8-b4df-5f34e736a744",
+      "relation_type": "Family",
+      "weight": 0.9319195649396177
+    },
+    {
+      "source": "f7484f34-8b02-4d06-8e17-37f6fe4a1b31",
+      "target": "e9c7806a-f7fc-4687-954d-7953d764295a",
+      "relation_type": "Financial Link",
+      "weight": 0.9106173958135491
+    },
+    {
+      "source": "c0e89586-934d-41c9-bcc7-beedd64d84da",
+      "target": "72e5f22a-4d4c-442e-8bba-7f5269473182",
+      "relation_type": "Associate",
+      "weight": 0.2803174292759666
+    },
+    {
+      "source": "cc9915a7-c6e5-40b3-8251-ac4dcebe6959",
+      "target": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "relation_type": "Gang Member",
+      "weight": 0.9817451984143283
+    },
+    {
+      "source": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "target": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8300586141738275
+    },
+    {
+      "source": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "target": "b8e78c66-5b3c-4ca5-adab-177fa17bd690",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7704849671923522
+    },
+    {
+      "source": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "target": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "relation_type": "Family",
+      "weight": 0.9731050546592308
+    },
+    {
+      "source": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "target": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "relation_type": "Family",
+      "weight": 0.707984264250928
+    },
+    {
+      "source": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "target": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "relation_type": "Drug Network",
+      "weight": 0.8104562982364396
+    },
+    {
+      "source": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "target": "b8e78c66-5b3c-4ca5-adab-177fa17bd690",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5635464637775769
+    },
+    {
+      "source": "ad7f881b-b33e-42be-a904-cf9a979f4bc2",
+      "target": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "relation_type": "Gang Member",
+      "weight": 0.6234362028327367
+    },
+    {
+      "source": "cc9915a7-c6e5-40b3-8251-ac4dcebe6959",
+      "target": "2b35d9fe-e9ea-422d-b2ee-be8435c0b0a3",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9706432417252289
+    },
+    {
+      "source": "77b01853-d0b8-4396-a2f0-dc4867ee1251",
+      "target": "cc9915a7-c6e5-40b3-8251-ac4dcebe6959",
+      "relation_type": "Gang Member",
+      "weight": 0.8443774832590605
+    },
+    {
+      "source": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "target": "29015e76-555c-44c1-ab63-a12e01144256",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5707517872077712
+    },
+    {
+      "source": "29015e76-555c-44c1-ab63-a12e01144256",
+      "target": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "relation_type": "Gang Member",
+      "weight": 0.6947166312377338
+    },
+    {
+      "source": "92cac086-6ce2-407b-9757-4e1e77e7c646",
+      "target": "bf6e0da6-800d-451a-a10e-0ec064db9921",
+      "relation_type": "Financial Link",
+      "weight": 0.7050599846866308
+    },
+    {
+      "source": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "target": "c318d18d-91f1-4971-b2a6-e0571fdf0f1b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6382793110903775
+    },
+    {
+      "source": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "target": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8565844154193365
+    },
+    {
+      "source": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "target": "27f205cd-82dd-4553-9a06-aa14db517399",
+      "relation_type": "Family",
+      "weight": 0.7559680144412475
+    },
+    {
+      "source": "29015e76-555c-44c1-ab63-a12e01144256",
+      "target": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "relation_type": "Family",
+      "weight": 0.8702824135204064
+    },
+    {
+      "source": "29015e76-555c-44c1-ab63-a12e01144256",
+      "target": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "relation_type": "Drug Network",
+      "weight": 0.5648099944016812
+    },
+    {
+      "source": "640747ea-138b-4950-a74a-74f9718586c6",
+      "target": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "relation_type": "Associate",
+      "weight": 0.7261812475925133
+    },
+    {
+      "source": "29015e76-555c-44c1-ab63-a12e01144256",
+      "target": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9925630132648136
+    },
+    {
+      "source": "27f205cd-82dd-4553-9a06-aa14db517399",
+      "target": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "relation_type": "Associate",
+      "weight": 0.5207388939257425
+    },
+    {
+      "source": "c318d18d-91f1-4971-b2a6-e0571fdf0f1b",
+      "target": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8281602674689944
+    },
+    {
+      "source": "29015e76-555c-44c1-ab63-a12e01144256",
+      "target": "bf6e0da6-800d-451a-a10e-0ec064db9921",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9376226514909677
+    },
+    {
+      "source": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "target": "29015e76-555c-44c1-ab63-a12e01144256",
+      "relation_type": "Financial Link",
+      "weight": 0.944982213297761
+    },
+    {
+      "source": "92cac086-6ce2-407b-9757-4e1e77e7c646",
+      "target": "bf6e0da6-800d-451a-a10e-0ec064db9921",
+      "relation_type": "Gang Member",
+      "weight": 0.8477155759074924
+    },
+    {
+      "source": "c318d18d-91f1-4971-b2a6-e0571fdf0f1b",
+      "target": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6844852418094524
+    },
+    {
+      "source": "640747ea-138b-4950-a74a-74f9718586c6",
+      "target": "d9317f91-9129-499f-a78d-7d4857d67c4a",
+      "relation_type": "Drug Network",
+      "weight": 0.5425354571409244
+    },
+    {
+      "source": "77ddea9e-9ab7-4b93-b0c2-f1f5a179e9f2",
+      "target": "1de20672-e5dd-4b50-bad6-eb989bbb0b62",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6172307551781019
+    },
+    {
+      "source": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "target": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "relation_type": "Drug Network",
+      "weight": 0.6888729462646945
+    },
+    {
+      "source": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "target": "3ad5ae67-1893-43e6-ad14-281765844346",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9811030172551598
+    },
+    {
+      "source": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "target": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "relation_type": "Gang Member",
+      "weight": 0.6610745723867415
+    },
+    {
+      "source": "50b0e6bb-09fa-4267-ace5-ee4e0edf0898",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8314830433115132
+    },
+    {
+      "source": "8b6134f9-6d5b-45be-8537-5983500b09bb",
+      "target": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "relation_type": "Financial Link",
+      "weight": 0.5058703086436093
+    },
+    {
+      "source": "50b0e6bb-09fa-4267-ace5-ee4e0edf0898",
+      "target": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "relation_type": "Drug Network",
+      "weight": 0.780711388522036
+    },
+    {
+      "source": "3ad5ae67-1893-43e6-ad14-281765844346",
+      "target": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.934013056321561
+    },
+    {
+      "source": "e8816636-09db-4fef-a844-bddf56d3bb94",
+      "target": "bf7d031d-f739-4a0e-9762-c9e90679c889",
+      "relation_type": "Gang Member",
+      "weight": 0.8429595064198752
+    },
+    {
+      "source": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9791475516245689
+    },
+    {
+      "source": "bf7d031d-f739-4a0e-9762-c9e90679c889",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Financial Link",
+      "weight": 0.6269221723776809
+    },
+    {
+      "source": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "target": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "relation_type": "Gang Member",
+      "weight": 0.6844763686042955
+    },
+    {
+      "source": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "target": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9390648286982055
+    },
+    {
+      "source": "8b6134f9-6d5b-45be-8537-5983500b09bb",
+      "target": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "relation_type": "Associate",
+      "weight": 0.6390901224861854
+    },
+    {
+      "source": "8b6134f9-6d5b-45be-8537-5983500b09bb",
+      "target": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "relation_type": "Drug Network",
+      "weight": 0.7716621010051569
+    },
+    {
+      "source": "66f7a1ff-d692-43b7-9f73-8b861747bbb8",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Financial Link",
+      "weight": 0.6775243205835846
+    },
+    {
+      "source": "0e33a163-9be2-487c-bc01-8b58fc161eb0",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Gang Member",
+      "weight": 0.8862134828241449
+    },
+    {
+      "source": "8b6134f9-6d5b-45be-8537-5983500b09bb",
+      "target": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6884359588069311
+    },
+    {
+      "source": "04ce79e5-288e-40ec-bb20-228f3dbc6d81",
+      "target": "41167ed3-8210-4e7c-8db8-d0defbc3a363",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9552710995550537
+    },
+    {
+      "source": "bf7d031d-f739-4a0e-9762-c9e90679c889",
+      "target": "e9cff320-7cc4-45b7-8e15-54e8313bbbfa",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.2585367928386947
+    },
+    {
+      "source": "0658dfc7-4cf2-4efb-a1dc-b80da0f462a7",
+      "target": "a69b398e-e874-4793-abdb-3d14551af051",
+      "relation_type": "Financial Link",
+      "weight": 0.847695224462256
+    },
+    {
+      "source": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "target": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "relation_type": "Associate",
+      "weight": 0.8374296238855821
+    },
+    {
+      "source": "0658dfc7-4cf2-4efb-a1dc-b80da0f462a7",
+      "target": "26ddb40f-e35c-4c9f-8dec-fd71cd58bc9e",
+      "relation_type": "Family",
+      "weight": 0.714090108007753
+    },
+    {
+      "source": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Gang Member",
+      "weight": 0.8173768200624214
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "relation_type": "Family",
+      "weight": 0.5993773951132103
+    },
+    {
+      "source": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "target": "cf59e193-6d34-4c32-ac0a-f47967a6f93b",
+      "relation_type": "Drug Network",
+      "weight": 0.8594495195165748
+    },
+    {
+      "source": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "target": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.755165812043651
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6107943113873202
+    },
+    {
+      "source": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "target": "2ce4652d-8ec7-4f2a-bf6d-df5c179b307e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.523553101209117
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6615721300691138
+    },
+    {
+      "source": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "target": "cf59e193-6d34-4c32-ac0a-f47967a6f93b",
+      "relation_type": "Gang Member",
+      "weight": 0.6749992503106546
+    },
+    {
+      "source": "2446db04-12ce-4bf8-8e6a-d83b98cf9b4e",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Financial Link",
+      "weight": 0.8442371332831268
+    },
+    {
+      "source": "a69b398e-e874-4793-abdb-3d14551af051",
+      "target": "8f30b69b-68f1-4846-8c5f-f8ef58d5471e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.764267818198759
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Gang Member",
+      "weight": 0.74358996318903
+    },
+    {
+      "source": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "target": "400a6eed-d94c-4ada-801e-3b4ba0c824a6",
+      "relation_type": "Drug Network",
+      "weight": 0.9977042821386468
+    },
+    {
+      "source": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "target": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "relation_type": "Family",
+      "weight": 0.5840141762466909
+    },
+    {
+      "source": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "target": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "relation_type": "Gang Member",
+      "weight": 0.9619684320380606
+    },
+    {
+      "source": "9bc67162-cd98-4b86-a982-8b61325f4c84",
+      "target": "8f30b69b-68f1-4846-8c5f-f8ef58d5471e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9392524850194868
+    },
+    {
+      "source": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "target": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "relation_type": "Associate",
+      "weight": 0.8319574222223963
+    },
+    {
+      "source": "660dd612-bcec-4a5e-ae6e-c5a18aa9784d",
+      "target": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "relation_type": "Financial Link",
+      "weight": 0.8649576372014829
+    },
+    {
+      "source": "2ce4652d-8ec7-4f2a-bf6d-df5c179b307e",
+      "target": "12ae64f6-9860-40b4-ac65-2346ce9afa59",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9249236444300655
+    },
+    {
+      "source": "0658dfc7-4cf2-4efb-a1dc-b80da0f462a7",
+      "target": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7237043002155537
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "10be67bf-cb1a-4a6f-abe8-172ab6695062",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.768464754562698
+    },
+    {
+      "source": "9bc67162-cd98-4b86-a982-8b61325f4c84",
+      "target": "5a14459f-ccf4-448a-9b37-c041d8abe06a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7837470286329544
+    },
+    {
+      "source": "f48f8542-5bf6-464c-966d-5d34afc11fb7",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Drug Network",
+      "weight": 0.9375779013039212
+    },
+    {
+      "source": "400a6eed-d94c-4ada-801e-3b4ba0c824a6",
+      "target": "660dd612-bcec-4a5e-ae6e-c5a18aa9784d",
+      "relation_type": "Gang Member",
+      "weight": 0.6991089284341223
+    },
+    {
+      "source": "b7af01c1-3c13-483f-a7d7-2cd947e80282",
+      "target": "cf59e193-6d34-4c32-ac0a-f47967a6f93b",
+      "relation_type": "Gang Member",
+      "weight": 0.7937758733779039
+    },
+    {
+      "source": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "target": "5a14459f-ccf4-448a-9b37-c041d8abe06a",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8098464419622327
+    },
+    {
+      "source": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "target": "95f280f4-c762-4884-a028-5b8dba826d35",
+      "relation_type": "Associate",
+      "weight": 0.8180759379788634
+    },
+    {
+      "source": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "target": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "relation_type": "Drug Network",
+      "weight": 0.664652326892827
+    },
+    {
+      "source": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "target": "26ddb40f-e35c-4c9f-8dec-fd71cd58bc9e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6243728842495553
+    },
+    {
+      "source": "10be67bf-cb1a-4a6f-abe8-172ab6695062",
+      "target": "eeeb9e66-3c9b-4036-9add-b6e383fcb4b0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7205763091921458
+    },
+    {
+      "source": "e13d73d4-57e9-48ba-a657-2194a63542bb",
+      "target": "12ae64f6-9860-40b4-ac65-2346ce9afa59",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8419888361695592
+    },
+    {
+      "source": "f48f8542-5bf6-464c-966d-5d34afc11fb7",
+      "target": "10be67bf-cb1a-4a6f-abe8-172ab6695062",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5185623165615763
+    },
+    {
+      "source": "95f280f4-c762-4884-a028-5b8dba826d35",
+      "target": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "relation_type": "Associate",
+      "weight": 0.9452092938558095
+    },
+    {
+      "source": "12ae64f6-9860-40b4-ac65-2346ce9afa59",
+      "target": "2ce4652d-8ec7-4f2a-bf6d-df5c179b307e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.962707241745512
+    },
+    {
+      "source": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "target": "400a6eed-d94c-4ada-801e-3b4ba0c824a6",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8698600639465928
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "2446db04-12ce-4bf8-8e6a-d83b98cf9b4e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6473709158585081
+    },
+    {
+      "source": "b7af01c1-3c13-483f-a7d7-2cd947e80282",
+      "target": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7275673796705154
+    },
+    {
+      "source": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5622215253132307
+    },
+    {
+      "source": "73625ee6-65fe-40af-9cf5-40cf52f65a54",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7977712761058259
+    },
+    {
+      "source": "b785560f-f5c8-42bd-a764-4342cd59c239",
+      "target": "12ae64f6-9860-40b4-ac65-2346ce9afa59",
+      "relation_type": "Associate",
+      "weight": 0.9292345446032921
+    },
+    {
+      "source": "26ddb40f-e35c-4c9f-8dec-fd71cd58bc9e",
+      "target": "9bc67162-cd98-4b86-a982-8b61325f4c84",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.725862963062419
+    },
+    {
+      "source": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "target": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "relation_type": "Drug Network",
+      "weight": 0.6432060252262788
+    },
+    {
+      "source": "660dd612-bcec-4a5e-ae6e-c5a18aa9784d",
+      "target": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6573987172316615
+    },
+    {
+      "source": "15ce93d0-8902-4240-9b69-1f27db3c2f98",
+      "target": "9d0bf14a-667e-42c3-8858-13881f377bf3",
+      "relation_type": "Financial Link",
+      "weight": 0.9211667710332504
+    },
+    {
+      "source": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "target": "baff5d96-4fd9-4c9d-8ab2-287efa4504ea",
+      "relation_type": "Drug Network",
+      "weight": 0.5235414342352904
+    },
+    {
+      "source": "4cddf2ef-ad6c-484c-aa3a-10d9717eb81e",
+      "target": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8205352274820684
+    },
+    {
+      "source": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "target": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5800638199661727
+    },
+    {
+      "source": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "target": "4e27b306-bf0a-42a2-9c1c-eb8c1e98d608",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7758172037810735
+    },
+    {
+      "source": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "target": "7e091008-e8fb-49d7-b71f-c2bbcf103333",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5553770275006574
+    },
+    {
+      "source": "b8a1519b-8e94-47f2-8aaf-2cfd2f28de89",
+      "target": "7e091008-e8fb-49d7-b71f-c2bbcf103333",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5004169209230518
+    },
+    {
+      "source": "e16ff9e1-9443-4cef-8b93-e90328292226",
+      "target": "baff5d96-4fd9-4c9d-8ab2-287efa4504ea",
+      "relation_type": "Family",
+      "weight": 0.9203618277192259
+    },
+    {
+      "source": "7e091008-e8fb-49d7-b71f-c2bbcf103333",
+      "target": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "relation_type": "Associate",
+      "weight": 0.5730460783084421
+    },
+    {
+      "source": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "target": "e16ff9e1-9443-4cef-8b93-e90328292226",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6338761986198611
+    },
+    {
+      "source": "baff5d96-4fd9-4c9d-8ab2-287efa4504ea",
+      "target": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9707357424046634
+    },
+    {
+      "source": "b8a1519b-8e94-47f2-8aaf-2cfd2f28de89",
+      "target": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "relation_type": "Family",
+      "weight": 0.8364828972610743
+    },
+    {
+      "source": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "target": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "relation_type": "Financial Link",
+      "weight": 0.549651985534881
+    },
+    {
+      "source": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "target": "4cddf2ef-ad6c-484c-aa3a-10d9717eb81e",
+      "relation_type": "Gang Member",
+      "weight": 0.5206034346043813
+    },
+    {
+      "source": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "target": "3582bf73-6ebf-4fd1-82d6-104a37c83d79",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8534849834497285
+    },
+    {
+      "source": "7e091008-e8fb-49d7-b71f-c2bbcf103333",
+      "target": "cefc9e2b-2d37-486e-8b2c-9627b09688ac",
+      "relation_type": "Financial Link",
+      "weight": 0.5405268093416922
+    },
+    {
+      "source": "4e27b306-bf0a-42a2-9c1c-eb8c1e98d608",
+      "target": "4cddf2ef-ad6c-484c-aa3a-10d9717eb81e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5227247793933453
+    },
+    {
+      "source": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "target": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "relation_type": "Financial Link",
+      "weight": 0.6579981034131449
+    },
+    {
+      "source": "ccf2b4f9-f1b3-44a1-a5c0-7015acb58f15",
+      "target": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6708559317594849
+    },
+    {
+      "source": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "target": "3582bf73-6ebf-4fd1-82d6-104a37c83d79",
+      "relation_type": "Family",
+      "weight": 0.7768658977718942
+    },
+    {
+      "source": "baff5d96-4fd9-4c9d-8ab2-287efa4504ea",
+      "target": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5635222032863311
+    },
+    {
+      "source": "4e27b306-bf0a-42a2-9c1c-eb8c1e98d608",
+      "target": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8474802633463965
+    },
+    {
+      "source": "4e27b306-bf0a-42a2-9c1c-eb8c1e98d608",
+      "target": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5887086240325351
+    },
+    {
+      "source": "3582bf73-6ebf-4fd1-82d6-104a37c83d79",
+      "target": "b09a6824-4c3d-4a83-95a4-88732938dca0",
+      "relation_type": "Financial Link",
+      "weight": 0.851546755974375
+    },
+    {
+      "source": "4cddf2ef-ad6c-484c-aa3a-10d9717eb81e",
+      "target": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6732650147244283
+    },
+    {
+      "source": "f446a353-5c44-4cfa-84f1-9945c6b973bd",
+      "target": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "relation_type": "Financial Link",
+      "weight": 0.8952572762653485
+    },
+    {
+      "source": "c69f9c52-330b-4580-8afe-13f97c18726f",
+      "target": "b8a1519b-8e94-47f2-8aaf-2cfd2f28de89",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7832306826527449
+    },
+    {
+      "source": "b8a1519b-8e94-47f2-8aaf-2cfd2f28de89",
+      "target": "eb357532-a9bf-4d53-8850-24c1726c3193",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7051435925354348
+    },
+    {
+      "source": "ccf2b4f9-f1b3-44a1-a5c0-7015acb58f15",
+      "target": "e546b9db-b375-4fab-97b7-4cb1f6b931b9",
+      "relation_type": "Drug Network",
+      "weight": 0.8206247579355613
+    },
+    {
+      "source": "67b6b50c-80e1-4f4c-a835-37d2bb82911f",
+      "target": "213079e9-adf2-4719-b6b1-16e17b0bd3a6",
+      "relation_type": "Family",
+      "weight": 0.9275334978088163
+    },
+    {
+      "source": "b526cdbb-bfcb-4d14-85ea-3c947a85a7c0",
+      "target": "94701316-98c5-4a1e-a583-a399de2af046",
+      "relation_type": "Gang Member",
+      "weight": 0.5025642651839081
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "relation_type": "Financial Link",
+      "weight": 0.9567255361122785
+    },
+    {
+      "source": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "target": "67b6b50c-80e1-4f4c-a835-37d2bb82911f",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.823463209635198
+    },
+    {
+      "source": "b526cdbb-bfcb-4d14-85ea-3c947a85a7c0",
+      "target": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9735640117759337
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "67b6b50c-80e1-4f4c-a835-37d2bb82911f",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5736758897073293
+    },
+    {
+      "source": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "target": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "relation_type": "Financial Link",
+      "weight": 0.7241456534703651
+    },
+    {
+      "source": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "target": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6706824029785411
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "relation_type": "Drug Network",
+      "weight": 0.567229808833887
+    },
+    {
+      "source": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "target": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "relation_type": "Associate",
+      "weight": 0.8819212187995222
+    },
+    {
+      "source": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "target": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7272756509136427
+    },
+    {
+      "source": "840b833c-3f11-4b7a-b0e3-f25b677c78d3",
+      "target": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5334676107498907
+    },
+    {
+      "source": "69e9c725-e529-419c-b9cd-d100ba90a3ac",
+      "target": "39da1298-5b8d-4437-9b26-39c7911267de",
+      "relation_type": "Financial Link",
+      "weight": 0.8038152412388404
+    },
+    {
+      "source": "39da1298-5b8d-4437-9b26-39c7911267de",
+      "target": "94701316-98c5-4a1e-a583-a399de2af046",
+      "relation_type": "Drug Network",
+      "weight": 0.8962803610911326
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "b526cdbb-bfcb-4d14-85ea-3c947a85a7c0",
+      "relation_type": "Gang Member",
+      "weight": 0.5770647729158165
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "39da1298-5b8d-4437-9b26-39c7911267de",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7504388524036538
+    },
+    {
+      "source": "735ffc9b-02da-4ac3-92d6-c4b1f97908fb",
+      "target": "67b6b50c-80e1-4f4c-a835-37d2bb82911f",
+      "relation_type": "Associate",
+      "weight": 0.9688732903474955
+    },
+    {
+      "source": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "target": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "relation_type": "Family",
+      "weight": 0.6679235765601313
+    },
+    {
+      "source": "b526cdbb-bfcb-4d14-85ea-3c947a85a7c0",
+      "target": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6588077798791816
+    },
+    {
+      "source": "a1c83184-5b87-48d6-9bb7-a18fe087f628",
+      "target": "bf010643-abe3-441c-ad04-b08b726a3538",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9936037789979983
+    },
+    {
+      "source": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "target": "c58acca9-29de-4803-8e22-102fb344c057",
+      "relation_type": "Gang Member",
+      "weight": 0.7186870420076399
+    },
+    {
+      "source": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7334698330043874
+    },
+    {
+      "source": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "target": "c58acca9-29de-4803-8e22-102fb344c057",
+      "relation_type": "Gang Member",
+      "weight": 0.5977278483728414
+    },
+    {
+      "source": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "target": "c58acca9-29de-4803-8e22-102fb344c057",
+      "relation_type": "Associate",
+      "weight": 0.7493834871182559
+    },
+    {
+      "source": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5593418394967506
+    },
+    {
+      "source": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "target": "e667296a-983e-480b-8cb6-7c4405bc9014",
+      "relation_type": "Financial Link",
+      "weight": 0.6454188597633731
+    },
+    {
+      "source": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9144299797052713
+    },
+    {
+      "source": "ae46ab5f-8c4d-4dda-933d-a1b1bdfe70e2",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9737227275802278
+    },
+    {
+      "source": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "target": "6b01c17b-3088-48ec-8d6e-e9e02e1f94b6",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6623301000156552
+    },
+    {
+      "source": "c58acca9-29de-4803-8e22-102fb344c057",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6782021167868046
+    },
+    {
+      "source": "c58acca9-29de-4803-8e22-102fb344c057",
+      "target": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "relation_type": "Financial Link",
+      "weight": 0.7099057868273368
+    },
+    {
+      "source": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "target": "e667296a-983e-480b-8cb6-7c4405bc9014",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7185316184993396
+    },
+    {
+      "source": "c58acca9-29de-4803-8e22-102fb344c057",
+      "target": "66b4a55c-dc07-42e2-957f-bed8bfb574ee",
+      "relation_type": "Financial Link",
+      "weight": 0.5073012292440027
+    },
+    {
+      "source": "3eb2e24b-0276-4068-96db-869b071ada3e",
+      "target": "f5bf6347-ab2e-47ec-829b-8a808881c20b",
+      "relation_type": "Gang Member",
+      "weight": 0.8424802466255628
+    },
+    {
+      "source": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "target": "5ef67a1f-acbc-42fe-baa9-4715b8a823eb",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9173663336979757
+    },
+    {
+      "source": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "target": "73e1eb62-8acb-4a96-9826-8f8b0ca6d5a0",
+      "relation_type": "Family",
+      "weight": 0.9829363079904614
+    },
+    {
+      "source": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "target": "14b9376c-ff17-43ff-af7f-68f9d1c1685a",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8606371240978696
+    },
+    {
+      "source": "14b9376c-ff17-43ff-af7f-68f9d1c1685a",
+      "target": "ad96d272-b058-4243-a49a-a65abf88ae52",
+      "relation_type": "Gang Member",
+      "weight": 0.7926700227869083
+    },
+    {
+      "source": "14b9376c-ff17-43ff-af7f-68f9d1c1685a",
+      "target": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "relation_type": "Drug Network",
+      "weight": 0.8080673525323903
+    },
+    {
+      "source": "0ce64615-d6f8-4392-b80e-df068046e1d2",
+      "target": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "relation_type": "Associate",
+      "weight": 0.9983238443574409
+    },
+    {
+      "source": "ad96d272-b058-4243-a49a-a65abf88ae52",
+      "target": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8931198955922247
+    },
+    {
+      "source": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "target": "5ef67a1f-acbc-42fe-baa9-4715b8a823eb",
+      "relation_type": "Drug Network",
+      "weight": 0.6020968702061837
+    },
+    {
+      "source": "14b9376c-ff17-43ff-af7f-68f9d1c1685a",
+      "target": "0ce64615-d6f8-4392-b80e-df068046e1d2",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8443088575460727
+    },
+    {
+      "source": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "target": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6994463580821871
+    },
+    {
+      "source": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "target": "ad96d272-b058-4243-a49a-a65abf88ae52",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6102574509260095
+    },
+    {
+      "source": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "target": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "relation_type": "Drug Network",
+      "weight": 0.6713916149705692
+    },
+    {
+      "source": "ad96d272-b058-4243-a49a-a65abf88ae52",
+      "target": "ff70e4c9-e2ab-4747-93ef-0be6327c7e6b",
+      "relation_type": "Family",
+      "weight": 0.6623094515297472
+    },
+    {
+      "source": "73e1eb62-8acb-4a96-9826-8f8b0ca6d5a0",
+      "target": "8ef8df64-a124-4c2e-bf16-19f820ae8552",
+      "relation_type": "Associate",
+      "weight": 0.5383113923076647
+    },
+    {
+      "source": "7ab567f9-736e-4d79-986b-1f911a55d55a",
+      "target": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "relation_type": "Gang Member",
+      "weight": 0.8274026514021426
+    },
+    {
+      "source": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "target": "7ab567f9-736e-4d79-986b-1f911a55d55a",
+      "relation_type": "Financial Link",
+      "weight": 0.9639768044539778
+    },
+    {
+      "source": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "target": "7ab567f9-736e-4d79-986b-1f911a55d55a",
+      "relation_type": "Drug Network",
+      "weight": 0.7967315445407124
+    },
+    {
+      "source": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "target": "3b1f2927-4354-4d81-be12-7d18a9ab2e4f",
+      "relation_type": "Drug Network",
+      "weight": 0.5384584613907604
+    },
+    {
+      "source": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "target": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "relation_type": "Mobile Contact",
+      "weight": 0.744074164127393
+    },
+    {
+      "source": "7ab567f9-736e-4d79-986b-1f911a55d55a",
+      "target": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "relation_type": "Financial Link",
+      "weight": 0.7354639646989203
+    },
+    {
+      "source": "3b1f2927-4354-4d81-be12-7d18a9ab2e4f",
+      "target": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.9637025662887821
+    },
+    {
+      "source": "5b482cd0-4405-4708-8aef-70058609c8bf",
+      "target": "3b1f2927-4354-4d81-be12-7d18a9ab2e4f",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9434852497011702
+    },
+    {
+      "source": "e2a8c821-3215-42d5-8652-4f84ad82ba36",
+      "target": "054fb163-c087-4669-bf39-c3204862813e",
+      "relation_type": "Associate",
+      "weight": 0.12136273115997503
+    },
+    {
+      "source": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "target": "2802af17-8547-4fb9-b92c-d4cb036a64c4",
+      "relation_type": "Family",
+      "weight": 0.8709796119998867
+    },
+    {
+      "source": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "target": "98eadd9c-e851-4ad5-ae28-7bc2412fde92",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8626613317901444
+    },
+    {
+      "source": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "target": "2802af17-8547-4fb9-b92c-d4cb036a64c4",
+      "relation_type": "Financial Link",
+      "weight": 0.951032448493861
+    },
+    {
+      "source": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "target": "054fb163-c087-4669-bf39-c3204862813e",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6207415404698857
+    },
+    {
+      "source": "58460339-fd88-4e1f-bff2-0f579f1179aa",
+      "target": "2802af17-8547-4fb9-b92c-d4cb036a64c4",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8813818737918276
+    },
+    {
+      "source": "054fb163-c087-4669-bf39-c3204862813e",
+      "target": "98eadd9c-e851-4ad5-ae28-7bc2412fde92",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8125792748729785
+    },
+    {
+      "source": "054fb163-c087-4669-bf39-c3204862813e",
+      "target": "98eadd9c-e851-4ad5-ae28-7bc2412fde92",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5095222074738253
+    },
+    {
+      "source": "054fb163-c087-4669-bf39-c3204862813e",
+      "target": "2802af17-8547-4fb9-b92c-d4cb036a64c4",
+      "relation_type": "Family",
+      "weight": 0.9157026437944656
+    },
+    {
+      "source": "98eadd9c-e851-4ad5-ae28-7bc2412fde92",
+      "target": "3b1f2927-4354-4d81-be12-7d18a9ab2e4f",
+      "relation_type": "Associate",
+      "weight": 0.378699072401667
+    },
+    {
+      "source": "7b879567-d751-469c-9163-9393f6bb05b9",
+      "target": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "relation_type": "Family",
+      "weight": 0.635036882567389
+    },
+    {
+      "source": "7a81fceb-0ba0-4542-84a9-404fafb42f9d",
+      "target": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "relation_type": "Gang Member",
+      "weight": 0.7729138624124168
+    },
+    {
+      "source": "7a81fceb-0ba0-4542-84a9-404fafb42f9d",
+      "target": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.922827790775752
+    },
+    {
+      "source": "7b879567-d751-469c-9163-9393f6bb05b9",
+      "target": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6129354235793214
+    },
+    {
+      "source": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "target": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5092426774861277
+    },
+    {
+      "source": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "target": "7a81fceb-0ba0-4542-84a9-404fafb42f9d",
+      "relation_type": "Family",
+      "weight": 0.6828711807680371
+    },
+    {
+      "source": "7b879567-d751-469c-9163-9393f6bb05b9",
+      "target": "8f0457c4-be86-4cd9-a0f4-3b74fa4ed5da",
+      "relation_type": "Associate",
+      "weight": 0.8886497112657442
+    },
+    {
+      "source": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "target": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "relation_type": "Associate",
+      "weight": 0.5318981641240028
+    },
+    {
+      "source": "8f0457c4-be86-4cd9-a0f4-3b74fa4ed5da",
+      "target": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "relation_type": "Drug Network",
+      "weight": 0.5030053970575895
+    },
+    {
+      "source": "53416517-07d0-4129-9054-3273e7ffb024",
+      "target": "2142dfae-21fa-4d5a-b089-1c1a4f9494af",
+      "relation_type": "Drug Network",
+      "weight": 0.9854445557451779
+    },
+    {
+      "source": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "target": "7b879567-d751-469c-9163-9393f6bb05b9",
+      "relation_type": "Associate",
+      "weight": 0.92563737339322
+    },
+    {
+      "source": "7a81fceb-0ba0-4542-84a9-404fafb42f9d",
+      "target": "cc13ec14-9328-46f2-b526-79369df7f54e",
+      "relation_type": "Financial Link",
+      "weight": 0.5556166394804223
+    },
+    {
+      "source": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "target": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "relation_type": "Associate",
+      "weight": 0.5986014864172713
+    },
+    {
+      "source": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "target": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "relation_type": "Gang Member",
+      "weight": 0.7976617909017852
+    },
+    {
+      "source": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "target": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "relation_type": "Gang Member",
+      "weight": 0.5052891043646847
+    },
+    {
+      "source": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "target": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "relation_type": "Family",
+      "weight": 0.6645017797941324
+    },
+    {
+      "source": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "target": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "relation_type": "Gang Member",
+      "weight": 0.6686040851940974
+    },
+    {
+      "source": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "target": "ac101908-7677-4d6e-bd9a-6f88bb4d2ce2",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8632312473268124
+    },
+    {
+      "source": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "target": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "relation_type": "Family",
+      "weight": 0.9037597906645418
+    },
+    {
+      "source": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "target": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "relation_type": "Family",
+      "weight": 0.7068753444079158
+    },
+    {
+      "source": "3f532d15-86e6-4fc8-9ae7-34c5692fefa4",
+      "target": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.983507813367782
+    },
+    {
+      "source": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "target": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "relation_type": "Drug Network",
+      "weight": 0.7703468956192081
+    },
+    {
+      "source": "811474f8-6bc0-4d94-8374-c19ca4e3fb0c",
+      "target": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "relation_type": "Family",
+      "weight": 0.749462996962325
+    },
+    {
+      "source": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "target": "c41917be-4015-4163-b34b-2e4c0a986e4d",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9184888163708307
+    },
+    {
+      "source": "54212920-6ffb-4f40-becb-2c02e3dee20b",
+      "target": "8f0457c4-be86-4cd9-a0f4-3b74fa4ed5da",
+      "relation_type": "Financial Link",
+      "weight": 0.19227954817816045
+    },
+    {
+      "source": "29a967fc-5b87-4785-aedb-2ed1c3e9f8be",
+      "target": "293bbb27-729d-4846-89ef-5302882b9412",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5655690878645517
+    },
+    {
+      "source": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "target": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.655698755229956
+    },
+    {
+      "source": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "target": "41a38249-d476-400c-803c-d9638a92f748",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5262880801295582
+    },
+    {
+      "source": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "target": "41a38249-d476-400c-803c-d9638a92f748",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9114664739874405
+    },
+    {
+      "source": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "target": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.853709874991919
+    },
+    {
+      "source": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "target": "293bbb27-729d-4846-89ef-5302882b9412",
+      "relation_type": "Financial Link",
+      "weight": 0.855918359912393
+    },
+    {
+      "source": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "target": "41a38249-d476-400c-803c-d9638a92f748",
+      "relation_type": "Drug Network",
+      "weight": 0.9109642641090938
+    },
+    {
+      "source": "293bbb27-729d-4846-89ef-5302882b9412",
+      "target": "29a967fc-5b87-4785-aedb-2ed1c3e9f8be",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8559683509519054
+    },
+    {
+      "source": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "target": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8404154450448721
+    },
+    {
+      "source": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "target": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "relation_type": "Financial Link",
+      "weight": 0.9096045245237603
+    },
+    {
+      "source": "7c52569d-45f3-45cc-97e3-6fdfdb42b91e",
+      "target": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "relation_type": "Mobile Contact",
+      "weight": 0.5737337598935308
+    },
+    {
+      "source": "8663dcc8-97fc-4b7e-9ebe-d24141e46046",
+      "target": "10e55a90-f457-4e0b-bbc7-ccfd8801aaac",
+      "relation_type": "Family",
+      "weight": 0.7460234622976405
+    },
+    {
+      "source": "293bbb27-729d-4846-89ef-5302882b9412",
+      "target": "49a3c66c-675d-4dbe-b869-d6e5cb5094b6",
+      "relation_type": "Financial Link",
+      "weight": 0.18898576297181724
+    },
+    {
+      "source": "cd93d6b7-c28a-4c5c-a8cc-c5ecaf48db02",
+      "target": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.5959733906459095
+    },
+    {
+      "source": "51dd1ea3-b211-4555-be31-a56e208e1730",
+      "target": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8617839739553977
+    },
+    {
+      "source": "51dd1ea3-b211-4555-be31-a56e208e1730",
+      "target": "cd93d6b7-c28a-4c5c-a8cc-c5ecaf48db02",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6441972827120392
+    },
+    {
+      "source": "51dd1ea3-b211-4555-be31-a56e208e1730",
+      "target": "c7976b07-a16b-4337-8129-526c90235a8a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7257919580149228
+    },
+    {
+      "source": "c7976b07-a16b-4337-8129-526c90235a8a",
+      "target": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.8445222194531188
+    },
+    {
+      "source": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "target": "c7976b07-a16b-4337-8129-526c90235a8a",
+      "relation_type": "Family",
+      "weight": 0.9379305401269975
+    },
+    {
+      "source": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "target": "cd93d6b7-c28a-4c5c-a8cc-c5ecaf48db02",
+      "relation_type": "Gang Member",
+      "weight": 0.8393469695985676
+    },
+    {
+      "source": "c7976b07-a16b-4337-8129-526c90235a8a",
+      "target": "cd93d6b7-c28a-4c5c-a8cc-c5ecaf48db02",
+      "relation_type": "Drug Network",
+      "weight": 0.9407566613804785
+    },
+    {
+      "source": "9f8eb416-705c-414e-85f2-96c8ee026f0f",
+      "target": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.3532686953065096
+    },
+    {
+      "source": "d9fe02aa-2c15-4c53-bea2-b88bcde03ff1",
+      "target": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9325013461347926
+    },
+    {
+      "source": "ef37e424-2dfa-4f96-8bd7-3f7d3ae24d4e",
+      "target": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "relation_type": "Family",
+      "weight": 0.9991834815435858
+    },
+    {
+      "source": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "target": "ef37e424-2dfa-4f96-8bd7-3f7d3ae24d4e",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6787772782252215
+    },
+    {
+      "source": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "target": "ef37e424-2dfa-4f96-8bd7-3f7d3ae24d4e",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8244390622564995
+    },
+    {
+      "source": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "target": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "relation_type": "Drug Network",
+      "weight": 0.789962062409324
+    },
+    {
+      "source": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "target": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9799924610228075
+    },
+    {
+      "source": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "target": "d946aba7-4316-4e1a-9b74-ea0c7df2053e",
+      "relation_type": "Family",
+      "weight": 0.9048998650717313
+    },
+    {
+      "source": "d9fe02aa-2c15-4c53-bea2-b88bcde03ff1",
+      "target": "64bd56a4-d741-4d38-b069-8903d87673fb",
+      "relation_type": "Drug Network",
+      "weight": 0.5135520796161385
+    },
+    {
+      "source": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "target": "1a65327f-9981-4fc5-8682-fe827b27d929",
+      "relation_type": "Financial Link",
+      "weight": 0.7325248290548176
+    },
+    {
+      "source": "cea1b8ec-814a-42ab-a824-f86e197112b1",
+      "target": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7928759754491579
+    },
+    {
+      "source": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "target": "170b7221-e8a7-4ea7-afea-35f19f453fc0",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9842890562485946
+    },
+    {
+      "source": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "target": "1a65327f-9981-4fc5-8682-fe827b27d929",
+      "relation_type": "Drug Network",
+      "weight": 0.9424937500190692
+    },
+    {
+      "source": "ffecd8a2-b8ca-4bf3-b7d3-093a9df7c85a",
+      "target": "170b7221-e8a7-4ea7-afea-35f19f453fc0",
+      "relation_type": "Gang Member",
+      "weight": 0.7385024215095841
+    },
+    {
+      "source": "44494b5d-7c03-48a6-9cc8-f903f49f8d51",
+      "target": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5995405121994011
+    },
+    {
+      "source": "25bd52d7-5276-44d9-bcfa-19f62d8f534d",
+      "target": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "relation_type": "Family",
+      "weight": 0.910500163008241
+    },
+    {
+      "source": "0d75b370-45c7-4234-830f-d4bc1571a743",
+      "target": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6108698989672436
+    },
+    {
+      "source": "cea1b8ec-814a-42ab-a824-f86e197112b1",
+      "target": "1a65327f-9981-4fc5-8682-fe827b27d929",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9696073092489113
+    },
+    {
+      "source": "ffecd8a2-b8ca-4bf3-b7d3-093a9df7c85a",
+      "target": "0d75b370-45c7-4234-830f-d4bc1571a743",
+      "relation_type": "Drug Network",
+      "weight": 0.9728874770499958
+    },
+    {
+      "source": "25bd52d7-5276-44d9-bcfa-19f62d8f534d",
+      "target": "0d75b370-45c7-4234-830f-d4bc1571a743",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7199247041775062
+    },
+    {
+      "source": "44494b5d-7c03-48a6-9cc8-f903f49f8d51",
+      "target": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "relation_type": "Associate",
+      "weight": 0.8586661844141623
+    },
+    {
+      "source": "170b7221-e8a7-4ea7-afea-35f19f453fc0",
+      "target": "cea1b8ec-814a-42ab-a824-f86e197112b1",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9326925713739436
+    },
+    {
+      "source": "cea1b8ec-814a-42ab-a824-f86e197112b1",
+      "target": "1a65327f-9981-4fc5-8682-fe827b27d929",
+      "relation_type": "Financial Link",
+      "weight": 0.8144000538779474
+    },
+    {
+      "source": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "target": "44494b5d-7c03-48a6-9cc8-f903f49f8d51",
+      "relation_type": "Drug Network",
+      "weight": 0.6807108234716751
+    },
+    {
+      "source": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "target": "25bd52d7-5276-44d9-bcfa-19f62d8f534d",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7294752967559572
+    },
+    {
+      "source": "170b7221-e8a7-4ea7-afea-35f19f453fc0",
+      "target": "2c5b551b-1035-4a42-9f17-93a6025ae3da",
+      "relation_type": "Associate",
+      "weight": 0.8611084503724675
+    },
+    {
+      "source": "005f8078-58c3-4c0d-885d-41d0a5806460",
+      "target": "0d75b370-45c7-4234-830f-d4bc1571a743",
+      "relation_type": "Associate",
+      "weight": 0.568023464942874
+    },
+    {
+      "source": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "target": "78485dfa-f5cd-4690-a4ae-128bccf32c8a",
+      "relation_type": "Gang Member",
+      "weight": 0.6774429352552013
+    },
+    {
+      "source": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "target": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "relation_type": "Family",
+      "weight": 0.9855204420337143
+    },
+    {
+      "source": "4db48224-94bb-4414-84e7-f5c2dd382586",
+      "target": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "relation_type": "Gang Member",
+      "weight": 0.9105359220782971
+    },
+    {
+      "source": "4350dc4b-9319-4549-bce5-4c5d82d64956",
+      "target": "6b770cb0-0463-4955-bab8-64d385dcb89a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7465216858889134
+    },
+    {
+      "source": "9c8a0e08-f84e-4f17-8b1f-7b9b08b0f236",
+      "target": "4350dc4b-9319-4549-bce5-4c5d82d64956",
+      "relation_type": "Drug Network",
+      "weight": 0.9401623043934166
+    },
+    {
+      "source": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "target": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "relation_type": "Drug Network",
+      "weight": 0.8727882344912379
+    },
+    {
+      "source": "8f9b924b-3fa6-4c63-ae4a-5a9144873549",
+      "target": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.837634942096234
+    },
+    {
+      "source": "78485dfa-f5cd-4690-a4ae-128bccf32c8a",
+      "target": "b8bb2132-c042-4827-942c-b2b8f5f78b76",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5584152049300255
+    },
+    {
+      "source": "4db48224-94bb-4414-84e7-f5c2dd382586",
+      "target": "9c8a0e08-f84e-4f17-8b1f-7b9b08b0f236",
+      "relation_type": "Financial Link",
+      "weight": 0.5464632831922847
+    },
+    {
+      "source": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "target": "6b770cb0-0463-4955-bab8-64d385dcb89a",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8342923748921445
+    },
+    {
+      "source": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "target": "8f9b924b-3fa6-4c63-ae4a-5a9144873549",
+      "relation_type": "Drug Network",
+      "weight": 0.5234474599584931
+    },
+    {
+      "source": "b8bb2132-c042-4827-942c-b2b8f5f78b76",
+      "target": "708dc0fd-e45a-45b6-8530-da59d36e3cc0",
+      "relation_type": "Family",
+      "weight": 0.7209865078041333
+    },
+    {
+      "source": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "target": "9c8a0e08-f84e-4f17-8b1f-7b9b08b0f236",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.5483033016931147
+    },
+    {
+      "source": "79297e24-050e-45dd-89a1-9d765ce75d4f",
+      "target": "4350dc4b-9319-4549-bce5-4c5d82d64956",
+      "relation_type": "Financial Link",
+      "weight": 0.740972573608806
+    },
+    {
+      "source": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "target": "9c8a0e08-f84e-4f17-8b1f-7b9b08b0f236",
+      "relation_type": "Financial Link",
+      "weight": 0.6693454076468963
+    },
+    {
+      "source": "78485dfa-f5cd-4690-a4ae-128bccf32c8a",
+      "target": "708dc0fd-e45a-45b6-8530-da59d36e3cc0",
+      "relation_type": "Associate",
+      "weight": 0.8118374437467669
+    },
+    {
+      "source": "4db48224-94bb-4414-84e7-f5c2dd382586",
+      "target": "708dc0fd-e45a-45b6-8530-da59d36e3cc0",
+      "relation_type": "Gang Member",
+      "weight": 0.8744017370264046
+    },
+    {
+      "source": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "target": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "relation_type": "Gang Member",
+      "weight": 0.9992029627804783
+    },
+    {
+      "source": "8f9b924b-3fa6-4c63-ae4a-5a9144873549",
+      "target": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "relation_type": "Mobile Contact",
+      "weight": 0.9238715327663058
+    },
+    {
+      "source": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "target": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8628621289073972
+    },
+    {
+      "source": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "target": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "relation_type": "Family",
+      "weight": 0.8527181461099973
+    },
+    {
+      "source": "b8bb2132-c042-4827-942c-b2b8f5f78b76",
+      "target": "79297e24-050e-45dd-89a1-9d765ce75d4f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6012091635221013
+    },
+    {
+      "source": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "target": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7918309294749548
+    },
+    {
+      "source": "67b8c63d-84f8-43da-8c79-c419a96f8b7d",
+      "target": "563a68cf-20cc-4842-b5af-de55ffff7f10",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5737231218028764
+    },
+    {
+      "source": "8f9b924b-3fa6-4c63-ae4a-5a9144873549",
+      "target": "1899fdc1-4c1a-404e-bcbc-cbf79f960208",
+      "relation_type": "Gang Member",
+      "weight": 0.8479877209882889
+    },
+    {
+      "source": "c62886f5-17b2-4158-a55f-52c45b0e519a",
+      "target": "79297e24-050e-45dd-89a1-9d765ce75d4f",
+      "relation_type": "Financial Link",
+      "weight": 0.9936494496062607
+    },
+    {
+      "source": "196c01cb-0652-4705-8e67-23673f8cb8bf",
+      "target": "18b1463a-4293-4cba-998d-7dfcf2c3b2af",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9555036960887631
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "ee2820d9-19dd-44e0-a8fc-a33f56e91d06",
+      "relation_type": "Gang Member",
+      "weight": 0.5820003411967105
+    },
+    {
+      "source": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "target": "9d21155b-8dc4-4a2c-95c6-f587ebfaf5dc",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.7688099104313926
+    },
+    {
+      "source": "c0215b03-000c-4caa-90cb-1fb0c7e81f90",
+      "target": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6523494629227955
+    },
+    {
+      "source": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "target": "f0d66a10-22af-445a-9bf8-fa02b402ccfa",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.693112406342244
+    },
+    {
+      "source": "2d8fb229-82ad-4a98-b473-5f82f772b9ac",
+      "target": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "relation_type": "Family",
+      "weight": 0.9504929181710369
+    },
+    {
+      "source": "18b1463a-4293-4cba-998d-7dfcf2c3b2af",
+      "target": "9d21155b-8dc4-4a2c-95c6-f587ebfaf5dc",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6341206077519251
+    },
+    {
+      "source": "f0d66a10-22af-445a-9bf8-fa02b402ccfa",
+      "target": "4efe0c96-f56f-43af-a834-9af6e44820f2",
+      "relation_type": "Financial Link",
+      "weight": 0.6111470073116465
+    },
+    {
+      "source": "9fdf0c24-b004-4292-9f50-9dab3c3e1eee",
+      "target": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "relation_type": "Drug Network",
+      "weight": 0.6415033184500059
+    },
+    {
+      "source": "673ae335-dd7a-4fa4-9aac-85ddb1aa32bf",
+      "target": "17ad7d43-9f72-4681-af18-5a6cbb9e9237",
+      "relation_type": "Financial Link",
+      "weight": 0.997486866921087
+    },
+    {
+      "source": "673ae335-dd7a-4fa4-9aac-85ddb1aa32bf",
+      "target": "627f45fb-7fae-47b2-8951-3148c7292b80",
+      "relation_type": "Drug Network",
+      "weight": 0.5943482794109254
+    },
+    {
+      "source": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "target": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.6463071761960855
+    },
+    {
+      "source": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "target": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "relation_type": "Drug Network",
+      "weight": 0.6291302011880953
+    },
+    {
+      "source": "196c01cb-0652-4705-8e67-23673f8cb8bf",
+      "target": "05245c59-0cc9-4c9e-a9ca-adcd8424e5a3",
+      "relation_type": "Drug Network",
+      "weight": 0.5968910979837243
+    },
+    {
+      "source": "627f45fb-7fae-47b2-8951-3148c7292b80",
+      "target": "c0215b03-000c-4caa-90cb-1fb0c7e81f90",
+      "relation_type": "Drug Network",
+      "weight": 0.9258161909540172
+    },
+    {
+      "source": "05245c59-0cc9-4c9e-a9ca-adcd8424e5a3",
+      "target": "c0215b03-000c-4caa-90cb-1fb0c7e81f90",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7314534445066393
+    },
+    {
+      "source": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "target": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "relation_type": "Financial Link",
+      "weight": 0.8196513256428437
+    },
+    {
+      "source": "c198c23b-476e-40c8-925d-3d90efb2dcdd",
+      "target": "9fdf0c24-b004-4292-9f50-9dab3c3e1eee",
+      "relation_type": "Financial Link",
+      "weight": 0.8368474282132221
+    },
+    {
+      "source": "18b1463a-4293-4cba-998d-7dfcf2c3b2af",
+      "target": "17ad7d43-9f72-4681-af18-5a6cbb9e9237",
+      "relation_type": "Mobile Contact",
+      "weight": 0.918653364004361
+    },
+    {
+      "source": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "target": "4efe0c96-f56f-43af-a834-9af6e44820f2",
+      "relation_type": "Associate",
+      "weight": 0.891360818413572
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.5811120206456043
+    },
+    {
+      "source": "67eb3da5-0ed7-4983-a54a-7aaa40db604d",
+      "target": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "relation_type": "Gang Member",
+      "weight": 0.5388305376528054
+    },
+    {
+      "source": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "target": "e7bd5905-1e79-434c-8122-83c964c069af",
+      "relation_type": "Financial Link",
+      "weight": 0.9147601126669473
+    },
+    {
+      "source": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "target": "2d8fb229-82ad-4a98-b473-5f82f772b9ac",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7250550798374601
+    },
+    {
+      "source": "e7bd5905-1e79-434c-8122-83c964c069af",
+      "target": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "relation_type": "Family",
+      "weight": 0.510635592109817
+    },
+    {
+      "source": "e77c10c0-da49-4581-b197-dab3190287d6",
+      "target": "05245c59-0cc9-4c9e-a9ca-adcd8424e5a3",
+      "relation_type": "Family",
+      "weight": 0.5093030411471529
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "relation_type": "Associate",
+      "weight": 0.8738217113685427
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "c0215b03-000c-4caa-90cb-1fb0c7e81f90",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9007193131681845
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "relation_type": "Associate",
+      "weight": 0.7179315771577952
+    },
+    {
+      "source": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "target": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "relation_type": "Drug Network",
+      "weight": 0.939858714912628
+    },
+    {
+      "source": "f0d66a10-22af-445a-9bf8-fa02b402ccfa",
+      "target": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "relation_type": "Mobile Contact",
+      "weight": 0.784362312902139
+    },
+    {
+      "source": "2d8fb229-82ad-4a98-b473-5f82f772b9ac",
+      "target": "ee2820d9-19dd-44e0-a8fc-a33f56e91d06",
+      "relation_type": "Gang Member",
+      "weight": 0.8248101012605293
+    },
+    {
+      "source": "ee2820d9-19dd-44e0-a8fc-a33f56e91d06",
+      "target": "9d21155b-8dc4-4a2c-95c6-f587ebfaf5dc",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.915833240880896
+    },
+    {
+      "source": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "target": "627f45fb-7fae-47b2-8951-3148c7292b80",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.8727043771855879
+    },
+    {
+      "source": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "target": "9e1341e6-97de-412a-ae8b-8b6694aaadf2",
+      "relation_type": "Associate",
+      "weight": 0.5435117924988238
+    },
+    {
+      "source": "2d8fb229-82ad-4a98-b473-5f82f772b9ac",
+      "target": "ba375e29-4d9d-42d1-8054-1cadaec5f24f",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6004402379101039
+    },
+    {
+      "source": "df164a4d-7ca9-4279-b252-819b8208b196",
+      "target": "67eb3da5-0ed7-4983-a54a-7aaa40db604d",
+      "relation_type": "Gang Member",
+      "weight": 0.5608055849895326
+    },
+    {
+      "source": "67eb3da5-0ed7-4983-a54a-7aaa40db604d",
+      "target": "e7bd5905-1e79-434c-8122-83c964c069af",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.6174009899867123
+    },
+    {
+      "source": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "target": "c198c23b-476e-40c8-925d-3d90efb2dcdd",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6086985241548375
+    },
+    {
+      "source": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "target": "673ae335-dd7a-4fa4-9aac-85ddb1aa32bf",
+      "relation_type": "Drug Network",
+      "weight": 0.8239394507533824
+    },
+    {
+      "source": "9fdf0c24-b004-4292-9f50-9dab3c3e1eee",
+      "target": "4efe0c96-f56f-43af-a834-9af6e44820f2",
+      "relation_type": "Drug Network",
+      "weight": 0.7505333261869145
+    },
+    {
+      "source": "f0d66a10-22af-445a-9bf8-fa02b402ccfa",
+      "target": "fe0a197b-abcc-4ad9-af01-392faac93298",
+      "relation_type": "Gang Member",
+      "weight": 0.6236377846293395
+    },
+    {
+      "source": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "target": "627f45fb-7fae-47b2-8951-3148c7292b80",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8680284544181716
+    },
+    {
+      "source": "e7bd5905-1e79-434c-8122-83c964c069af",
+      "target": "9e1341e6-97de-412a-ae8b-8b6694aaadf2",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.7161672397930581
+    },
+    {
+      "source": "17ad7d43-9f72-4681-af18-5a6cbb9e9237",
+      "target": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "relation_type": "Associate",
+      "weight": 0.5961439792959132
+    },
+    {
+      "source": "c198c23b-476e-40c8-925d-3d90efb2dcdd",
+      "target": "b8270b35-5889-4862-8ebe-02dcd87cf466",
+      "relation_type": "Drug Network",
+      "weight": 0.52617562233947
+    },
+    {
+      "source": "0c6d006e-5f40-48a4-bb7c-18183ad7131a",
+      "target": "196c01cb-0652-4705-8e67-23673f8cb8bf",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.9334114368370634
+    },
+    {
+      "source": "264ccb22-d9a1-4128-b2c2-38d9dd22c951",
+      "target": "05245c59-0cc9-4c9e-a9ca-adcd8424e5a3",
+      "relation_type": "Family",
+      "weight": 0.6659538741020518
+    },
+    {
+      "source": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "target": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "relation_type": "Financial Link",
+      "weight": 0.6577939984621369
+    },
+    {
+      "source": "3ee78843-a238-444f-a95d-72d933abf791",
+      "target": "038bb25f-616f-4d24-9c99-ff56bcaa13d3",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.8147286035149055
+    },
+    {
+      "source": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "target": "038bb25f-616f-4d24-9c99-ff56bcaa13d3",
+      "relation_type": "Associate",
+      "weight": 0.5549533416281549
+    },
+    {
+      "source": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "target": "038bb25f-616f-4d24-9c99-ff56bcaa13d3",
+      "relation_type": "Mobile Contact",
+      "weight": 0.6799250676451813
+    },
+    {
+      "source": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "target": "d2659d46-3a8e-4e1c-a694-d5e585f7dbd1",
+      "relation_type": "Mobile Contact",
+      "weight": 0.8611897924137455
+    },
+    {
+      "source": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "target": "22ac053e-8e2a-404f-b320-40dd737684c8",
+      "relation_type": "Financial Link",
+      "weight": 0.5877130315636276
+    },
+    {
+      "source": "22ac053e-8e2a-404f-b320-40dd737684c8",
+      "target": "038bb25f-616f-4d24-9c99-ff56bcaa13d3",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7803777404980055
+    },
+    {
+      "source": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "target": "d2659d46-3a8e-4e1c-a694-d5e585f7dbd1",
+      "relation_type": "Associate",
+      "weight": 0.5999004941503299
+    },
+    {
+      "source": "3ee78843-a238-444f-a95d-72d933abf791",
+      "target": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "relation_type": "Drug Network",
+      "weight": 0.5235966284087155
+    },
+    {
+      "source": "3ee78843-a238-444f-a95d-72d933abf791",
+      "target": "d2659d46-3a8e-4e1c-a694-d5e585f7dbd1",
+      "relation_type": "Drug Network",
+      "weight": 0.7814552392073422
+    },
+    {
+      "source": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "target": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "relation_type": "Financial Link",
+      "weight": 0.8429497811725846
+    },
+    {
+      "source": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "target": "889d552f-eff7-49a3-ac64-9e1eb1f4748b",
+      "relation_type": "Family",
+      "weight": 0.5984745535233054
+    },
+    {
+      "source": "1c0eaacc-55d6-4b6a-8b1b-beca763bf275",
+      "target": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.23937998118003742
+    },
+    {
+      "source": "a0493614-a80f-4fc3-9a6b-0bbd64b35110",
+      "target": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "relation_type": "Gang Member",
+      "weight": 0.7531120427788969
+    },
+    {
+      "source": "1c91669c-76d3-4244-9162-c00c1c1d4bc1",
+      "target": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "relation_type": "Associate",
+      "weight": 0.5517636123324707
+    },
+    {
+      "source": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "target": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "relation_type": "Gang Member",
+      "weight": 0.7839996048930994
+    },
+    {
+      "source": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "target": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "relation_type": "Gang Member",
+      "weight": 0.5683840317852062
+    },
+    {
+      "source": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "target": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "relation_type": "Family",
+      "weight": 0.8545579611922651
+    },
+    {
+      "source": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "target": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "relation_type": "Gang Member",
+      "weight": 0.9469747916654374
+    },
+    {
+      "source": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "target": "1c91669c-76d3-4244-9162-c00c1c1d4bc1",
+      "relation_type": "Gang Member",
+      "weight": 0.6830834630352611
+    },
+    {
+      "source": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "target": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7719390396322989
+    },
+    {
+      "source": "6ef72c0b-c180-4d96-a84a-b2c0884e15ff",
+      "target": "a47b005f-19c0-41f5-a5ba-c56faedb18bd",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.6807733730879608
+    },
+    {
+      "source": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "target": "a47b005f-19c0-41f5-a5ba-c56faedb18bd",
+      "relation_type": "Drug Network",
+      "weight": 0.9777432617433761
+    },
+    {
+      "source": "a0493614-a80f-4fc3-9a6b-0bbd64b35110",
+      "target": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "relation_type": "Family",
+      "weight": 0.7173537173681537
+    },
+    {
+      "source": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "target": "ce2fc218-6f1d-43e0-8aea-a25e272cee08",
+      "relation_type": "Vehicle Sharing",
+      "weight": 0.7403496563381298
+    },
+    {
+      "source": "a0493614-a80f-4fc3-9a6b-0bbd64b35110",
+      "target": "9f85c333-6b5a-4e2b-8e4a-8077ecc8aed7",
+      "relation_type": "Associate",
+      "weight": 0.32015955306821076
+    },
+    {
+      "source": "b04e621f-b819-48fe-86ec-51986f79a3c1",
+      "target": "3d4b8abf-a52f-4035-8b94-65d061582234",
+      "relation_type": "Family",
+      "weight": 0.8597906301984979
+    },
+    {
+      "source": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Financial Link",
+      "weight": 0.8433186664964629
+    },
+    {
+      "source": "3d4b8abf-a52f-4035-8b94-65d061582234",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Gang Member",
+      "weight": 0.5722986032620336
+    },
+    {
+      "source": "b04e621f-b819-48fe-86ec-51986f79a3c1",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Drug Network",
+      "weight": 0.6430211146163869
+    },
+    {
+      "source": "3d4b8abf-a52f-4035-8b94-65d061582234",
+      "target": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "relation_type": "Drug Network",
+      "weight": 0.584879388656903
+    },
+    {
+      "source": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "target": "b04e621f-b819-48fe-86ec-51986f79a3c1",
+      "relation_type": "Associate",
+      "weight": 0.5757073791624677
+    },
+    {
+      "source": "b04e621f-b819-48fe-86ec-51986f79a3c1",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Mobile Contact",
+      "weight": 0.7326318772288911
+    },
+    {
+      "source": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "target": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9116397009079921
+    },
+    {
+      "source": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Frequent Co-offender",
+      "weight": 0.9965993349909394
+    },
+    {
+      "source": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "target": "06a85139-673e-448e-9829-017ec8f9d36e",
+      "relation_type": "Financial Link",
+      "weight": 0.6034720539728287
+    },
+    {
+      "source": "3d4b8abf-a52f-4035-8b94-65d061582234",
+      "target": "be95b287-c312-4a4c-b164-901f9a212eb4",
+      "relation_type": "Gang Member",
+      "weight": 0.7132559008529764
+    },
+    {
+      "source": "b8115d02-7dc6-4051-b5d1-67665141fa69",
+      "target": "be95b287-c312-4a4c-b164-901f9a212eb4",
+      "relation_type": "Weapon Supplier",
+      "weight": 0.876270515456079
+    },
+    {
+      "source": "be95b287-c312-4a4c-b164-901f9a212eb4",
+      "target": "3b82d88c-f55a-4332-bbf1-f7c70a81698c",
+      "relation_type": "Financial Link",
+      "weight": 0.3063650013665097
+    }
+  ]
 }
   ```
   </details>
@@ -5590,11 +14604,11 @@
 
 ### tests/test_network.py::test_network_central_nodes
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 2.76s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 373.13 ms
+  - Execution Time: 234.82 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5607,11 +14621,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg1LCJleHAiOjE3ODQwNDY2ODUsInJvbGUiOiJhZG1pbiJ9.S0vtWKUBtyCD058XHMTHncL-1JMYGiUqyVsRik5plHM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NSwiZXhwIjoxNzg0NjQ3ODg1fQ._-0karwzg9HyxuTG04Nlh6dGcLREcBi4xeTTTFcJTS8",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODIwLCJleHAiOjE3ODQxMDM0MjAsInJvbGUiOiJhZG1pbiJ9.0eAuICHDghjGSc5_U-JAt6TnARB3lRaS8mgSZmh2j84",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyMCwiZXhwIjoxNzg0NzA0NjIwfQ.KMhBrboozbn0FpPdbuLURb-OYKHBY7hkDr0Qsef9i-8",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5623,17 +14637,83 @@
   </details>
 - **2. GET http://testserver/api/v1/network/central-nodes** 
   - Status Code: 200
-  - Execution Time: 6.88 ms
-  - Response Size: 2 bytes
+  - Execution Time: 2755.20 ms
+  - Response Size: 1090 bytes
+  <details><summary>Response</summary>
+  ```json
+  [
+  {
+    "id": "cd9a89b2-bf3d-49a6-8cd2-248bbe9fe9c1",
+    "label": "SHI-Suspect-014",
+    "centrality": 0.0013,
+    "community_id": 0
+  },
+  {
+    "id": "3c4502ca-75c2-4e1c-a612-2521cd3c1cd4",
+    "label": "KOD-Suspect-019",
+    "centrality": 0.0012,
+    "community_id": 0
+  },
+  {
+    "id": "2abf84e3-aec5-42fb-9a6a-d4c05fdeb011",
+    "label": "SHI-Suspect-004",
+    "centrality": 0.0011,
+    "community_id": 0
+  },
+  {
+    "id": "9d87d6de-ec84-4d47-bc6a-d9befaacc8de",
+    "label": "SHI-Suspect-009",
+    "centrality": 0.0011,
+    "community_id": 0
+  },
+  {
+    "id": "a505f23b-a546-4908-a182-4132ff724088",
+    "label": "KOD-Suspect-007",
+    "centrality": 0.0011,
+    "community_id": 0
+  },
+  {
+    "id": "17933f7c-d8e2-4ca7-b388-f82d9909c548",
+    "label": "KOD-Suspect-022",
+    "centrality": 0.001,
+    "community_id": 0
+  },
+  {
+    "id": "5eeb7de2-a602-4fb8-b489-c1f79a5af4e9",
+    "label": "BID-Suspect-014",
+    "centrality": 0.0009,
+    "community_id": 0
+  },
+  {
+    "id": "dd3caadf-5d24-4663-8127-21f8a7824d77",
+    "label": "DAV-Suspect-004",
+    "centrality": 0.0009,
+    "community_id": 0
+  },
+  {
+    "id": "ff96a9a5-0653-4728-818d-59b2e4847c80",
+    "label": "DAK-Suspect-015",
+    "centrality": 0.0008,
+    "community_id": 0
+  },
+  {
+    "id": "d35fe08e-13c6-4fb0-bc8b-d59c0f7e233e",
+    "label": "DAV-Suspect-006",
+    "centrality": 0.0008,
+    "community_id": 0
+  }
+]
+  ```
+  </details>
 ---
 
-### tests/test_risk.py::test_risk_zone
+### tests/test_reports.py::test_reports_crud
 **Status:** PASS
-**Test Duration:** 0.02s
+**Test Duration:** 0.91s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 477.88 ms
+  - Execution Time: 259.10 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5646,11 +14726,262 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg2LCJleHAiOjE3ODQwNDY2ODYsInJvbGUiOiJhZG1pbiJ9.N3XWuvScE1mNvwg9KHDyokfi9kK_DgGe4pzvqPiOpMA",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NiwiZXhwIjoxNzg0NjQ3ODg2fQ.PUfF1Ak_gZkHodUlilHLk_ENgBIrnP9ZuCN3zScph04",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODIzLCJleHAiOjE3ODQxMDM0MjMsInJvbGUiOiJhZG1pbiJ9.CiHBP6lUVxrMr5ca2URA8wWGmO-Swr7zEUm379dx2JA",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyMywiZXhwIjoxNzg0NzA0NjIzfQ.-IiLiN3WtP19C2x0DJ6CijNX6Lz4iy0m2C3e1SStCnw",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
+    "name": "System Admin",
+    "badge_no": "ADMIN001",
+    "role": "admin",
+    "is_active": true,
+    "station_id": null
+  }
+}
+  ```
+  </details>
+- **2. POST http://testserver/api/v1/reports/generate** 
+  - Status Code: 202
+  - Execution Time: 878.70 ms
+  - Response Size: 179 bytes
+  <details><summary>Payload</summary>
+  ```json
+  {
+  "title": "Test Report fec6312d",
+  "type": "weekly",
+  "parameters": {
+    "date": "2026-07-14"
+  }
+}
+  ```
+  </details>
+  <details><summary>Response</summary>
+  ```json
+  {
+  "id": "5b91ad65-0f93-4195-b838-2052ac4c1e65",
+  "type": "weekly",
+  "title": "Weekly District Summary",
+  "status": "pending",
+  "file_path": null,
+  "created_at": "2026-07-15T12:47:03.252329+05:30"
+}
+  ```
+  </details>
+- **3. GET http://testserver/api/v1/reports** 
+  - Status Code: 200
+  - Execution Time: 12.04 ms
+  - Response Size: 275 bytes
+  <details><summary>Response</summary>
+  ```json
+  [
+  {
+    "id": "5b91ad65-0f93-4195-b838-2052ac4c1e65",
+    "type": "weekly",
+    "title": "Weekly District Summary",
+    "status": "ready",
+    "file_path": "C:\\Users\\Ayan\\AppData\\Local\\Temp\\sentinelx_reports\\5b91ad65-0f93-4195-b838-2052ac4c1e65.pdf",
+    "created_at": "2026-07-15T12:47:03.252329+05:30"
+  }
+]
+  ```
+  </details>
+- **4. GET http://testserver/api/v1/reports/5b91ad65-0f93-4195-b838-2052ac4c1e65/download** 
+  - Status Code: 200
+  - Execution Time: 13.63 ms
+  - Response Size: 1760 bytes
+  <details><summary>Response</summary>
+  ```json
+  "%PDF-1.3\n%\ufffd\ufffd\ufffd\ufffd ReportLab Generated PDF document (opensource)\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font\n>>\nendobj\n3 0 obj\n<<\n/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font\n>>\nendobj\n4 0 obj\n<<\n/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<\n/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]\n>> /Rotate 0 /Trans <<\n\n>> \n  /Type /Page\n>>\nendobj\n5 0 obj\n<<\n/PageMode /UseNone /Pages 7 0 R /Type /Catalog\n>>\nendobj\n6 0 obj\n<<\n/Author (anonymous) /CreationDate (D:20260715124704+05'00') /Creator (anonymous) /Keywords () /ModDate (D:20260715124704+05'00') /Producer (ReportLab PDF Library - \\(opensource\\)) \n  /Subject (unspecified) /Title (untitled) /Trapped /False\n>>\nendobj\n7 0 obj\n<<\n/Count 1 /Kids [ 4 0 R ] /Type /Pages\n>>\nendobj\n8 0 obj\n<<\n/Filter [ /ASCII85Decode /FlateDecode ] /Length 367\n>>\nstream\nGaro<_+qm%&4Gu7`>eoX`cgB%bmaeE8=ZV)&@X(D;M4!tM$#57:Dui@7$0&C7^I\"q/&6ob`j`%\".t`bjJ<2H8LkI'.pUDq*UFm^qXY'cM&%^C:'Sjs:bHff/Wc5Nl+06jaKZgt`Qrf[H4m@2X9MuJeOm(&,E,E56g+m'`=&mXcr^(6BPI'U8EuHcOa\\uCH>3:oOVA$*[65cqITlZg0WRbd\\Sps8K/.o-.W2\\O%Y\\>N+a8\">$d#WXio2ebF@T'9!TK+RsCZ/b,H*fi:UJS;**JRdC'Rco-00b0;IBSE7hE(sL[\"E2P#p#;If\"OLM2n^03s0bR#H3gO!8I0)u];nM'Z^os-YH0CIrM1`t=?-*XY8`i=~>endstream\nendobj\nxref\n0 9\n0000000000 65535 f \n0000000061 00000 n \n0000000102 00000 n \n0000000209 00000 n \n0000000321 00000 n \n0000000524 00000 n \n0000000592 00000 n \n0000000853 00000 n \n0000000912 00000 n \ntrailer\n<<\n/ID \n[<61e409c7940b9c33db945a51bfd42213><61e409c7940b9c33db945a51bfd42213>]\n% ReportLab generated PDF document -- digest (opensource)\n\n/Info 6 0 R\n/Root 5 0 R\n/Size 9\n>>\nstartxref\n1369\n%%EOF\n"
+  ```
+  </details>
+---
+
+### tests/test_reports.py::test_reports_download_nonexistent
+**Status:** PASS
+**Test Duration:** 0.01s
+#### API Requests
+- **1. POST http://testserver/api/v1/auth/login** 
+  - Status Code: 200
+  - Execution Time: 268.65 ms
+  - Response Size: 647 bytes
+  <details><summary>Payload</summary>
+  ```json
+  {
+  "badge_no": "ADMIN001",
+  "password": "Admin@123"
+}
+  ```
+  </details>
+  <details><summary>Response</summary>
+  ```json
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI0LCJleHAiOjE3ODQxMDM0MjQsInJvbGUiOiJhZG1pbiJ9.ixiGYUvRfOc1bDsFcZjwLK4sFWnRaB1ba1FhJkibwdw",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyNCwiZXhwIjoxNzg0NzA0NjI0fQ.HrRZgWKhKScLEt12dSQZWDlBq0DwzGxwlh67NuTlQbY",
+  "token_type": "bearer",
+  "user": {
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
+    "name": "System Admin",
+    "badge_no": "ADMIN001",
+    "role": "admin",
+    "is_active": true,
+    "station_id": null
+  }
+}
+  ```
+  </details>
+- **2. GET http://testserver/api/v1/reports/14a122ff-7620-4964-9c20-7d6d37ce4737/download** 
+  - Status Code: 404
+  - Execution Time: 6.67 ms
+  - Response Size: 67 bytes
+  <details><summary>Response</summary>
+  ```json
+  {
+  "detail": "Report 14a122ff-7620-4964-9c20-7d6d37ce4737 not found."
+}
+  ```
+  </details>
+---
+
+### tests/test_reports.py::test_reports_invalid_payload
+**Status:** FAIL
+**Test Duration:** 0.03s
+**Error:** `assert 202 == 422
+ +  where 202 = <Response [202 Accepted]>.status_code`
+<details><summary>Traceback</summary>
+```python
+Traceback (most recent call last):
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\runner.py", line 361, in from_call
+    result: TResult | None = func()
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\runner.py", line 250, in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\logging.py", line 865, in pytest_runtest_call
+    yield
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\capture.py", line 900, in pytest_runtest_call
+    return (yield)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 53, in run_old_style_hookwrapper
+    return result.get_result()
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_result.py", line 103, in get_result
+    raise exc.with_traceback(tb)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 38, in run_old_style_hookwrapper
+    res = yield
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\skipping.py", line 268, in pytest_runtest_call
+    return (yield)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\runner.py", line 184, in pytest_runtest_call
+    item.runtest()
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\python.py", line 1707, in runtest
+    self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+    raise exception
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\pluggy\_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "C:\Users\Ayan\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\python.py", line 167, in pytest_pyfunc_call
+    result = testfunction(**testargs)
+  File "C:\Users\Ayan\OneDrive\Desktop\Project Drishti\backend\tests\test_reports.py", line 47, in test_reports_invalid_payload
+    assert resp.status_code == 422
+AssertionError: assert 202 == 422
+ +  where 202 = <Response [202 Accepted]>.status_code
+
+```
+</details>
+#### API Requests
+- **1. POST http://testserver/api/v1/auth/login** 
+  - Status Code: 200
+  - Execution Time: 296.69 ms
+  - Response Size: 647 bytes
+  <details><summary>Payload</summary>
+  ```json
+  {
+  "badge_no": "ADMIN001",
+  "password": "Admin@123"
+}
+  ```
+  </details>
+  <details><summary>Response</summary>
+  ```json
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI1LCJleHAiOjE3ODQxMDM0MjUsInJvbGUiOiJhZG1pbiJ9.8I_l5N2tm3nk07IUKOfSiQbUPXpwj8e2yDQ9ad6gz_Q",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyNSwiZXhwIjoxNzg0NzA0NjI1fQ.spr6XSJzpeOXRLRKEMWLmRss06PYU4iln2bIX8CVFwE",
+  "token_type": "bearer",
+  "user": {
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
+    "name": "System Admin",
+    "badge_no": "ADMIN001",
+    "role": "admin",
+    "is_active": true,
+    "station_id": null
+  }
+}
+  ```
+  </details>
+- **2. POST http://testserver/api/v1/reports/generate** 
+  - Status Code: 202
+  - Execution Time: 28.42 ms
+  - Response Size: 179 bytes
+  <details><summary>Payload</summary>
+  ```json
+  {
+  "type": "weekly"
+}
+  ```
+  </details>
+  <details><summary>Response</summary>
+  ```json
+  {
+  "id": "8c918092-5fe8-414a-b715-fb2357b401b4",
+  "type": "weekly",
+  "title": "Weekly District Summary",
+  "status": "pending",
+  "file_path": null,
+  "created_at": "2026-07-15T12:47:04.732496+05:30"
+}
+  ```
+  </details>
+---
+
+### tests/test_risk.py::test_risk_zone
+**Status:** PASS
+**Test Duration:** 0.66s
+#### API Requests
+- **1. POST http://testserver/api/v1/auth/login** 
+  - Status Code: 200
+  - Execution Time: 283.79 ms
+  - Response Size: 647 bytes
+  <details><summary>Payload</summary>
+  ```json
+  {
+  "badge_no": "ADMIN001",
+  "password": "Admin@123"
+}
+  ```
+  </details>
+  <details><summary>Response</summary>
+  ```json
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI3LCJleHAiOjE3ODQxMDM0MjcsInJvbGUiOiJhZG1pbiJ9.vKXvudlSEVKZ1stlw_NTj4IrPJ14wSdl-96C-VTImms",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyNywiZXhwIjoxNzg0NzA0NjI3fQ.tkDbzBuY-1c-MFAObSFEhezfPQFeFF43FJ7wtBhJNus",
+  "token_type": "bearer",
+  "user": {
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5662,193 +14993,187 @@
   </details>
 - **2. GET http://testserver/api/v1/geo/districts** 
   - Status Code: 200
-  - Execution Time: 7.34 ms
-  - Response Size: 2981 bytes
+  - Execution Time: 4.26 ms
+  - Response Size: 2881 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "01036fbe-c25c-4336-9014-edb51277c675",
+    "id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
     "name": "Bagalkot",
     "state": null,
     "population": null
   },
   {
-    "id": "b6913b52-bfb3-4c89-b143-c7cf74c5bacf",
+    "id": "716a4005-f006-4ffd-9fc5-3c4176f6133a",
     "name": "Ballari",
     "state": null,
     "population": null
   },
   {
-    "id": "c1484fd7-7f7a-476e-ba4a-2684448d7fbc",
+    "id": "83fb567a-189e-459d-9e48-bcb57b1020a3",
     "name": "Belagavi",
     "state": null,
     "population": null
   },
   {
-    "id": "e0328f8b-68a2-45c6-9e8e-195cb16c0b36",
+    "id": "2ece71de-53db-460c-bbce-116062a5b242",
     "name": "Bengaluru Rural",
     "state": null,
     "population": null
   },
   {
-    "id": "920cfca7-4717-4546-95ad-5f295be019bf",
+    "id": "2f616626-b15e-4e68-8cfe-ea2faf19a666",
     "name": "Bengaluru Urban",
     "state": null,
     "population": null
   },
   {
-    "id": "9dafcebe-47f5-4da7-a2e2-eb6bd69f6f50",
+    "id": "a81285f2-946f-4c2f-b865-388fb7616019",
     "name": "Bidar",
     "state": null,
     "population": null
   },
   {
-    "id": "4ded930b-2721-4ce8-bded-af87807b7816",
+    "id": "a78b8663-4be0-42ef-937c-5f09c0146486",
     "name": "Chamarajanagar",
     "state": null,
     "population": null
   },
   {
-    "id": "2f82a9d4-18bd-4b2a-9c0f-a92099b66e98",
+    "id": "e253fca6-7bb0-438b-a372-2c9798d09229",
     "name": "Chikkaballapur",
     "state": null,
     "population": null
   },
   {
-    "id": "72437c0e-f8fd-4ca2-9e27-0784343cb8ac",
+    "id": "b9ad57cd-64c9-49ad-a6ac-98e7138f7125",
     "name": "Chikkamagaluru",
     "state": null,
     "population": null
   },
   {
-    "id": "9eb49de7-8983-4d1a-9987-22d4e438f6df",
+    "id": "b692a74d-520c-43ed-966a-38a1b48d79cd",
     "name": "Chitradurga",
     "state": null,
     "population": null
   },
   {
-    "id": "ef61a4f4-2fd5-4116-bea5-7fc2838d4b2c",
+    "id": "e9be4733-1c37-430b-938b-d1065b16acf6",
     "name": "Dakshina Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "a1d9ee79-0a83-4392-9f9c-07e5d1015c48",
+    "id": "407e3135-243b-4b77-9e0c-efb586e46d82",
     "name": "Davanagere",
     "state": null,
     "population": null
   },
   {
-    "id": "e4846dc4-b95b-4f6d-9614-7b2974bed954",
+    "id": "ed0059c1-7b67-47c6-8fe8-693ccccf53a4",
     "name": "Dharwad",
     "state": null,
     "population": null
   },
   {
-    "id": "0e671165-ad57-427e-aa48-0b35eddad590",
+    "id": "1d1b7822-413a-4f09-a14e-402ee122fb63",
     "name": "Gadag",
     "state": null,
     "population": null
   },
   {
-    "id": "c556cace-805b-469b-a10f-3277c189c111",
+    "id": "54bfdba0-b653-4272-bd4a-9a6d1909fc8f",
     "name": "Hassan",
     "state": null,
     "population": null
   },
   {
-    "id": "c7a32d16-de14-4c26-ba25-3fb497ea39a3",
+    "id": "4b02d59b-2371-4995-8ac7-fb9b75926b80",
     "name": "Haveri",
     "state": null,
     "population": null
   },
   {
-    "id": "78fde344-43b4-4191-8aa6-53d893e72fa7",
+    "id": "aeff3761-528f-4789-8b63-b7baf967550c",
     "name": "Kalaburagi",
     "state": null,
     "population": null
   },
   {
-    "id": "2ddc1089-65bc-43fe-b684-e734f366223f",
+    "id": "1bbcc719-88a8-4d0e-93e6-c5e5422a1fe6",
     "name": "Kodagu",
     "state": null,
     "population": null
   },
   {
-    "id": "d246ed3c-4c5a-401e-bfd0-f31fb2682a91",
+    "id": "c46040c4-2bfb-4f37-ad5b-8678ec814c63",
     "name": "Kolar",
     "state": null,
     "population": null
   },
   {
-    "id": "ecdc21bd-d555-4248-90a5-b451655d207b",
+    "id": "4b060c55-1b98-4f10-b7a6-1c0d8f0d64df",
     "name": "Koppal",
     "state": null,
     "population": null
   },
   {
-    "id": "9b5e4c14-9847-43da-a6c4-2cc44ae73b9e",
+    "id": "dccf46e0-1b41-4862-a2f5-e76f3f9983e9",
     "name": "Mandya",
     "state": null,
     "population": null
   },
   {
-    "id": "b7d572b4-bc49-4422-87aa-53b216f50e39",
+    "id": "f7bb6246-8deb-470a-9599-32e0a16bf3d9",
     "name": "Mysuru",
     "state": null,
     "population": null
   },
   {
-    "id": "c7af75ff-044e-4af7-a251-e3bd6fbe8a03",
+    "id": "233f366e-e34f-4cbe-a7d5-1c5a7d395f1a",
     "name": "Raichur",
     "state": null,
     "population": null
   },
   {
-    "id": "53f17eb6-04d9-4785-bd23-6e93bacd7052",
+    "id": "19e1d147-e49d-4a20-8fd9-9e276ef8de9d",
     "name": "Ramanagara",
     "state": null,
     "population": null
   },
   {
-    "id": "a3401b0c-0d9d-48dd-a7de-58e1822e7b34",
+    "id": "3f2ae049-4fca-415a-bd68-519a18da6bf5",
     "name": "Shivamogga",
     "state": null,
     "population": null
   },
   {
-    "id": "2aa29b7b-7a16-494d-ab20-6ac4b046d38e",
-    "name": "Test District",
-    "state": null,
-    "population": null
-  },
-  {
-    "id": "57a16457-3924-47fe-93ff-3d712f898179",
+    "id": "4cbaac87-8aef-4ca9-a15c-bcbdf2b52539",
     "name": "Tumakuru",
     "state": null,
     "population": null
   },
   {
-    "id": "84e906c4-9615-4beb-a611-3b2d4977e53b",
+    "id": "98764d58-3de9-4541-9f06-75dd25c858c5",
     "name": "Udupi",
     "state": null,
     "population": null
   },
   {
-    "id": "3826cad2-e3e6-4823-bb63-e6c6431704e9",
+    "id": "0e371445-ee52-4ee6-85ed-17cd01a3462b",
     "name": "Uttara Kannada",
     "state": null,
     "population": null
   },
   {
-    "id": "e7257647-bbf9-4610-a0e2-48fc9a59db40",
+    "id": "c0bef2ad-6ce1-4519-948b-8d46d13aecfd",
     "name": "Vijayapura",
     "state": null,
     "population": null
   },
   {
-    "id": "bd9f6476-f661-43d0-bdf1-d34d12c3d04a",
+    "id": "382bcfa8-fb70-47a1-a18d-c473521665c2",
     "name": "Yadgir",
     "state": null,
     "population": null
@@ -5856,28 +15181,28 @@
 ]
   ```
   </details>
-- **3. GET http://testserver/api/v1/risk/zone/01036fbe-c25c-4336-9014-edb51277c675** 
+- **3. GET http://testserver/api/v1/risk/zone/71773d0f-aefe-4a0b-870a-3c77fb18767c** 
   - Status Code: 200
-  - Execution Time: 7.92 ms
-  - Response Size: 338 bytes
+  - Execution Time: 650.79 ms
+  - Response Size: 332 bytes
   <details><summary>Response</summary>
   ```json
   {
   "entity_type": "zone",
-  "entity_id": "01036fbe-c25c-4336-9014-edb51277c675",
+  "entity_id": "71773d0f-aefe-4a0b-870a-3c77fb18767c",
   "entity_label": "Bagalkot",
-  "score": 82.53926645515179,
-  "severity": "critical",
+  "score": 73.6908033011333,
+  "severity": "high",
   "shap_explanation": [
     {
       "feature": "historical_crime_rate",
-      "contribution": 0.17285738060593214,
-      "value": 761.0
+      "contribution": 0.4911949801233054,
+      "value": 320.0
     },
     {
       "feature": "population_density",
-      "contribution": 0.23083199154633804,
-      "value": 911011.0
+      "contribution": 0.20829101854680027,
+      "value": 529160.0
     }
   ]
 }
@@ -5891,7 +15216,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 378.35 ms
+  - Execution Time: 262.88 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5904,11 +15229,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg2LCJleHAiOjE3ODQwNDY2ODYsInJvbGUiOiJhZG1pbiJ9.N3XWuvScE1mNvwg9KHDyokfi9kK_DgGe4pzvqPiOpMA",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NiwiZXhwIjoxNzg0NjQ3ODg2fQ.PUfF1Ak_gZkHodUlilHLk_ENgBIrnP9ZuCN3zScph04",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI4LCJleHAiOjE3ODQxMDM0MjgsInJvbGUiOiJhZG1pbiJ9.nkLnmxz5B70ZGUfhU5veJCD3YiaFK_vCGdZoubiXnHU",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyOCwiZXhwIjoxNzg0NzA0NjI4fQ.fGpED0M9z6WgOywa8javLk2rsNW6JgC_ZrI_57OTa4k",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5918,16 +15243,16 @@
 }
   ```
   </details>
-- **2. GET http://testserver/api/v1/risk/person/a1fe4352-b263-47b9-9ec1-bdc0db21a439** 
+- **2. GET http://testserver/api/v1/risk/person/77598bf5-6a72-4ac5-872b-d56b84dfee12** 
   - Status Code: 200
-  - Execution Time: 7.47 ms
+  - Execution Time: 5.48 ms
   - Response Size: 340 bytes
   <details><summary>Response</summary>
   ```json
   {
   "entity_type": "person",
-  "entity_id": "a1fe4352-b263-47b9-9ec1-bdc0db21a439",
-  "entity_label": "Person a1fe4352-b263-47b9-9ec1-bdc0db21a439",
+  "entity_id": "77598bf5-6a72-4ac5-872b-d56b84dfee12",
+  "entity_label": "Person 77598bf5-6a72-4ac5-872b-d56b84dfee12",
   "score": 42.0,
   "severity": "medium",
   "shap_explanation": [
@@ -5949,11 +15274,11 @@
 
 ### tests/test_search.py::test_search_semantic
 **Status:** SKIPPED
-**Test Duration:** 0.42s
+**Test Duration:** 0.25s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 406.32 ms
+  - Execution Time: 245.22 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -5966,11 +15291,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg3LCJleHAiOjE3ODQwNDY2ODcsInJvbGUiOiJhZG1pbiJ9.guQdsb3lWJ5f_ZZPR6-YutsYgZJt1ZMrzZS0y_N_Bhg",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NywiZXhwIjoxNzg0NjQ3ODg3fQ.CnEZysEfp7Wgh1EQJ2J2UAfREvcN87B3f9jBApCRDJw",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI4LCJleHAiOjE3ODQxMDM0MjgsInJvbGUiOiJhZG1pbiJ9.nkLnmxz5B70ZGUfhU5veJCD3YiaFK_vCGdZoubiXnHU",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyOCwiZXhwIjoxNzg0NzA0NjI4fQ.fGpED0M9z6WgOywa8javLk2rsNW6JgC_ZrI_57OTa4k",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -5982,7 +15307,7 @@
   </details>
 - **2. GET http://testserver/api/v1/health/ai** 
   - Status Code: 404
-  - Execution Time: 2.23 ms
+  - Execution Time: 1.61 ms
   - Response Size: 22 bytes
   <details><summary>Response</summary>
   ```json
@@ -5999,7 +15324,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 382.55 ms
+  - Execution Time: 238.50 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6012,11 +15337,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg3LCJleHAiOjE3ODQwNDY2ODcsInJvbGUiOiJhZG1pbiJ9.guQdsb3lWJ5f_ZZPR6-YutsYgZJt1ZMrzZS0y_N_Bhg",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4NywiZXhwIjoxNzg0NjQ3ODg3fQ.CnEZysEfp7Wgh1EQJ2J2UAfREvcN87B3f9jBApCRDJw",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI5LCJleHAiOjE3ODQxMDM0MjksInJvbGUiOiJhZG1pbiJ9.JeJFFhTYnE5vQC3SOIMjzWWBha6VuQYarueUhAkSZIw",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyOSwiZXhwIjoxNzg0NzA0NjI5fQ.8DLY8rj7Hf_K_ZX57Z0tS7cow63FRPuxEGz5-mQJk48",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6028,7 +15353,7 @@
   </details>
 - **2. POST http://testserver/api/v1/search/semantic** 
   - Status Code: 422
-  - Execution Time: 3.77 ms
+  - Execution Time: 3.25 ms
   - Response Size: 97 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6060,11 +15385,11 @@
 
 ### tests/test_users.py::test_users_crud
 **Status:** PASS
-**Test Duration:** 0.48s
+**Test Duration:** 1.05s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 516.12 ms
+  - Execution Time: 254.39 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6077,11 +15402,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg4LCJleHAiOjE3ODQwNDY2ODgsInJvbGUiOiJhZG1pbiJ9.kxb4R77IP1CX6MRc8HUiBd-vquMIfjvD5C2lL-VwaG0",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4OCwiZXhwIjoxNzg0NjQ3ODg4fQ.t-EDGx-DZ_rzOjsfGoiGIa7mhAY_e5UZRjcey9QIxxg",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODI5LCJleHAiOjE3ODQxMDM0MjksInJvbGUiOiJhZG1pbiJ9.JeJFFhTYnE5vQC3SOIMjzWWBha6VuQYarueUhAkSZIw",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgyOSwiZXhwIjoxNzg0NzA0NjI5fQ.8DLY8rj7Hf_K_ZX57Z0tS7cow63FRPuxEGz5-mQJk48",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6093,13 +15418,13 @@
   </details>
 - **2. POST http://testserver/api/v1/users** 
   - Status Code: 201
-  - Execution Time: 419.72 ms
+  - Execution Time: 984.20 ms
   - Response Size: 145 bytes
   <details><summary>Payload</summary>
   ```json
   {
   "name": "Test Officer",
-  "badge_no": "KSP-00F586",
+  "badge_no": "KSP-F1E87D",
   "role": "constable",
   "password": "Password123"
 }
@@ -6108,9 +15433,9 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "a2e24e60-d4db-4bda-be6c-d27bdf784fcc",
+  "id": "651685e2-b7c2-47c6-b1e4-361be2db2905",
   "name": "Test Officer",
-  "badge_no": "KSP-00F586",
+  "badge_no": "KSP-F1E87D",
   "role": "constable",
   "is_active": true,
   "station_id": null
@@ -6119,61 +15444,29 @@
   </details>
 - **3. GET http://testserver/api/v1/users** 
   - Status Code: 200
-  - Execution Time: 14.85 ms
-  - Response Size: 9727 bytes
+  - Execution Time: 18.94 ms
+  - Response Size: 6457 bytes
   <details><summary>Response</summary>
   ```json
   [
   {
-    "id": "20eb017b-dd57-45e3-a009-da0b8ccc207b",
-    "name": "Analyst Test",
-    "badge_no": "KSP-FIR-analyst",
-    "role": "analyst",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "90aa1c63-628d-4081-81cf-d068338f0fdf",
-    "name": "Inspector Test",
-    "badge_no": "KSP-TEST-001",
-    "role": "sho",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "61c87ec5-a061-4ab6-a817-a3643f349db7",
-    "name": "Inspector Test2",
-    "badge_no": "KSP-TEST-002",
-    "role": "sho",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "637f788d-94f1-448a-98ac-c801441391f7",
-    "name": "Inspector Test3",
-    "badge_no": "KSP-TEST-003",
-    "role": "analyst",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "eaddd6f3-59f4-4617-a705-641db52b6935",
+    "id": "1ae25966-8f4d-46ee-b5a2-01d49bf79f5d",
     "name": "Officer 1",
     "badge_no": "KSP001",
-    "role": "analyst",
+    "role": "commissioner",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "d102d703-2860-4fb4-8344-ce77fdffa0bc",
+    "id": "f9853fe7-5021-4729-bc38-c6292bac6121",
     "name": "Officer 10",
     "badge_no": "KSP010",
-    "role": "sp",
+    "role": "constable",
     "is_active": true,
-    "station_id": null
+    "station_id": "a5ce962d-2f4a-48ce-94ef-6ead3b21594c"
   },
   {
-    "id": "ce74529a-d293-4d04-bae1-e3667869d812",
+    "id": "5676bcd9-9c8e-4b84-9a2f-1f9ae67416d3",
     "name": "Officer 11",
     "badge_no": "KSP011",
     "role": "analyst",
@@ -6181,15 +15474,15 @@
     "station_id": null
   },
   {
-    "id": "7b298379-c688-4e24-9e29-22153723f84c",
+    "id": "01f220cf-0524-47c6-bf59-d76aeed55e06",
     "name": "Officer 12",
     "badge_no": "KSP012",
-    "role": "constable",
+    "role": "sp",
     "is_active": true,
-    "station_id": "cb5e6149-fdfa-4e86-8f82-ac079e870ae0"
+    "station_id": null
   },
   {
-    "id": "cfb837d1-948f-4728-ba9e-0b80e0e864da",
+    "id": "e8cf3d09-8b4f-464b-b72a-9a4668fea028",
     "name": "Officer 13",
     "badge_no": "KSP013",
     "role": "analyst",
@@ -6197,119 +15490,119 @@
     "station_id": null
   },
   {
-    "id": "3bceda51-a375-49be-a87b-f19c81b34162",
+    "id": "43236ed0-086c-4764-8d04-1fa073f0bebf",
     "name": "Officer 14",
     "badge_no": "KSP014",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "8bd9f7a3-cab1-4e72-9909-34e455b807bd"
+  },
+  {
+    "id": "37a341ab-a4ce-4658-bb30-04993c3d6d9c",
+    "name": "Officer 15",
+    "badge_no": "KSP015",
+    "role": "commissioner",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "68431afc-367d-489f-8376-aa4881d7f21a",
+    "name": "Officer 16",
+    "badge_no": "KSP016",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "b0fd3a86-72b2-4482-ab67-898b5ef4c383"
+  },
+  {
+    "id": "984d4a52-e537-452b-99b8-6e8a119c17d3",
+    "name": "Officer 17",
+    "badge_no": "KSP017",
+    "role": "constable",
+    "is_active": true,
+    "station_id": "508a510e-84b5-40b8-bfc9-164aba4b44a8"
+  },
+  {
+    "id": "fbe49fff-05c4-4f11-853d-cbb6202b9012",
+    "name": "Officer 18",
+    "badge_no": "KSP018",
     "role": "analyst",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "e0ba2ba5-aedc-4564-8456-172e035f4e69",
-    "name": "Officer 15",
-    "badge_no": "KSP015",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "72929db2-f497-44be-91d8-28ff572670b7"
-  },
-  {
-    "id": "5e72bd1f-222c-46b5-a7bc-6186e2a0460c",
-    "name": "Officer 16",
-    "badge_no": "KSP016",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "504e9167-58f0-4b31-9a7b-b9080bfb3223"
-  },
-  {
-    "id": "86e9b18e-ed19-4108-abe2-94ffa2dda974",
-    "name": "Officer 17",
-    "badge_no": "KSP017",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "4fda03ef-da8b-47b4-ab9d-4fa1e40e07cd",
-    "name": "Officer 18",
-    "badge_no": "KSP018",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "badbac62-09a0-4495-a889-84e78928ec0d"
-  },
-  {
-    "id": "66a9fe3c-d32a-4b36-99d3-ba8b6d157f88",
+    "id": "53150b93-d9eb-46d6-9e47-ce0c61b68d2b",
     "name": "Officer 19",
     "badge_no": "KSP019",
-    "role": "sho",
+    "role": "constable",
     "is_active": true,
-    "station_id": "bdb92472-0108-4218-834d-1d6a84c2fad8"
+    "station_id": "a03b356c-2d92-4803-8a59-27d7a848fae2"
   },
   {
-    "id": "03a9b67a-7274-4c0e-8e7a-5705b1a718be",
+    "id": "8288d7d0-439b-4308-8824-a3da852aaf77",
     "name": "Officer 2",
     "badge_no": "KSP002",
-    "role": "sho",
-    "is_active": true,
-    "station_id": "080d6004-6c0b-492f-a542-05a8c6db82a5"
-  },
-  {
-    "id": "cbc1311b-9cb2-4195-a84c-450e4d655eab",
-    "name": "Officer 20",
-    "badge_no": "KSP020",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "3d07c9f0-d069-4067-9183-9aeb8f0e15d3",
-    "name": "Officer 21",
-    "badge_no": "KSP021",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "bd7856e8-16bf-4973-9ea6-47a102165fb8"
-  },
-  {
-    "id": "d422ea61-6309-4fd8-8dfc-876f7ef26d76",
-    "name": "Officer 22",
-    "badge_no": "KSP022",
-    "role": "sho",
-    "is_active": true,
-    "station_id": "2489197f-43d6-40b2-bee7-76530167fcb7"
-  },
-  {
-    "id": "b4f6a11a-bbfa-49f5-bf14-b976512054d6",
-    "name": "Officer 23",
-    "badge_no": "KSP023",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "a35a3f86-7614-469b-9947-c88481fc0e36",
-    "name": "Officer 24",
-    "badge_no": "KSP024",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "3c205e18-5485-4ac3-bb44-971a9a410f0a"
-  },
-  {
-    "id": "67e2e95f-b5ba-4600-aae0-a695bb2ab611",
-    "name": "Officer 25",
-    "badge_no": "KSP025",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "14f4d2ed-faec-4967-b048-86308e0f793b",
-    "name": "Officer 26",
-    "badge_no": "KSP026",
     "role": "sp",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "6906f795-a83c-4826-8f46-d1c777cbe404",
+    "id": "6214a61e-e392-4615-9e7e-6440c0cf9878",
+    "name": "Officer 20",
+    "badge_no": "KSP020",
+    "role": "sp",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "dc5637cb-f476-452d-a722-139398f835fb",
+    "name": "Officer 21",
+    "badge_no": "KSP021",
+    "role": "constable",
+    "is_active": true,
+    "station_id": "2ceae9e8-2410-4b09-bac2-15598596b58b"
+  },
+  {
+    "id": "0b6fec96-08b7-4146-bf5b-c797229fb7c7",
+    "name": "Officer 22",
+    "badge_no": "KSP022",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "986c25e8-a2a0-4467-bf3d-89f7fe8ef845"
+  },
+  {
+    "id": "034848eb-bf4b-4f9f-8013-e0058fefb0d9",
+    "name": "Officer 23",
+    "badge_no": "KSP023",
+    "role": "analyst",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "4ee09192-3b11-45d2-9321-b77fbcfbb2bd",
+    "name": "Officer 24",
+    "badge_no": "KSP024",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "3db8614f-d191-4318-adb5-42b5ddac3738"
+  },
+  {
+    "id": "42279bf3-7bf9-4a01-a660-16a192e57929",
+    "name": "Officer 25",
+    "badge_no": "KSP025",
+    "role": "analyst",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "f3f722b8-0fa7-41a8-a8f8-bbc4df5ec8eb",
+    "name": "Officer 26",
+    "badge_no": "KSP026",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "17bbdcbf-7143-4a0f-bb0a-331305dd5d24"
+  },
+  {
+    "id": "2158866e-4549-4531-9463-6ae02cfcb4e1",
     "name": "Officer 27",
     "badge_no": "KSP027",
     "role": "commissioner",
@@ -6317,47 +15610,47 @@
     "station_id": null
   },
   {
-    "id": "ec803a53-bca1-4016-bd84-9dd93c006863",
+    "id": "e95948df-507c-4371-b10d-c15e45d32ec7",
     "name": "Officer 28",
     "badge_no": "KSP028",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "10c53f8d-bce6-47bb-902a-524803bdfc68"
+  },
+  {
+    "id": "fc1cc25a-eaa6-4936-850f-56a5733163dc",
+    "name": "Officer 29",
+    "badge_no": "KSP029",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "6bcbc23d-fcab-410c-866d-5c80a645d241"
+  },
+  {
+    "id": "81b868ca-46d1-44d5-aa0a-673c979efc10",
+    "name": "Officer 3",
+    "badge_no": "KSP003",
+    "role": "commissioner",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "783dec90-319f-4a1e-9ba5-f4ee6b204371",
+    "name": "Officer 30",
+    "badge_no": "KSP030",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "d8d43b5b-070b-4d36-bf2b-7f6e0c5d488e"
+  },
+  {
+    "id": "ae86dc25-5d24-4143-a353-2448d5154b23",
+    "name": "Officer 31",
+    "badge_no": "KSP031",
     "role": "sp",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "0784b1ab-42db-491f-a44e-7222c6ef6a96",
-    "name": "Officer 29",
-    "badge_no": "KSP029",
-    "role": "analyst",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "85b2a42e-8c8b-46dc-8a0e-181a771e1f2b",
-    "name": "Officer 3",
-    "badge_no": "KSP003",
-    "role": "analyst",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "634b8f77-2317-4265-9191-981aa45581e8",
-    "name": "Officer 30",
-    "badge_no": "KSP030",
-    "role": "analyst",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "0d0114b7-f64a-4dd3-820d-e2d402977c9e",
-    "name": "Officer 31",
-    "badge_no": "KSP031",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "3c205e18-5485-4ac3-bb44-971a9a410f0a"
-  },
-  {
-    "id": "0b5b2307-055e-4b26-a41c-c04aaae39542",
+    "id": "eb868374-1a46-466a-ada8-bda3605e4fe8",
     "name": "Officer 32",
     "badge_no": "KSP032",
     "role": "sp",
@@ -6365,71 +15658,71 @@
     "station_id": null
   },
   {
-    "id": "a017e7e1-16c4-4207-910b-bb0e3af394e4",
+    "id": "93886e69-fb17-4321-aa09-474c3a635646",
     "name": "Officer 33",
     "badge_no": "KSP033",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "f9d54898-0471-4a3c-963a-ab63b126e5b9",
-    "name": "Officer 34",
-    "badge_no": "KSP034",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "8a9fafcc-7b8e-43a0-94c8-4af1580f5c41",
-    "name": "Officer 35",
-    "badge_no": "KSP035",
-    "role": "sho",
-    "is_active": true,
-    "station_id": "1f6535e8-ef5a-481f-b775-c5dcfebf489d"
-  },
-  {
-    "id": "6c7c1af0-0cfa-4b75-9887-caf64b72dc01",
-    "name": "Officer 36",
-    "badge_no": "KSP036",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "766aa7e5-f70a-4457-b2cc-faedfaf513dd"
-  },
-  {
-    "id": "357f7f4f-e5ec-4e77-a6c4-6c3505d0f3d4",
-    "name": "Officer 37",
-    "badge_no": "KSP037",
-    "role": "sp",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "76056ba9-ef66-4530-840d-df094870663d",
-    "name": "Officer 38",
-    "badge_no": "KSP038",
-    "role": "commissioner",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "bf8eb677-95ed-4c68-a20e-1660d086c441",
-    "name": "Officer 39",
-    "badge_no": "KSP039",
-    "role": "constable",
-    "is_active": true,
-    "station_id": "9c23eedd-88e1-4e0e-b241-60c19102ca6d"
-  },
-  {
-    "id": "b6eeb184-1dc9-4c22-93a5-efe8d42da8c2",
-    "name": "Officer 4",
-    "badge_no": "KSP004",
     "role": "analyst",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "020de7a6-50dd-490e-858e-49f03abf2ccf",
+    "id": "40f88abd-a301-45f3-a71c-b2a816985408",
+    "name": "Officer 34",
+    "badge_no": "KSP034",
+    "role": "sp",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "67383857-4032-45d3-b40b-e7ba6b06a210",
+    "name": "Officer 35",
+    "badge_no": "KSP035",
+    "role": "sp",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "d15d440c-81da-4583-88a8-ff53f225af49",
+    "name": "Officer 36",
+    "badge_no": "KSP036",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "3db8614f-d191-4318-adb5-42b5ddac3738"
+  },
+  {
+    "id": "b53a602d-9dee-4d8e-afb4-82a984eeda01",
+    "name": "Officer 37",
+    "badge_no": "KSP037",
+    "role": "commissioner",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "d504ad4f-8fb6-44f0-939c-4caac21d64a8",
+    "name": "Officer 38",
+    "badge_no": "KSP038",
+    "role": "sp",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "d3699b22-b14e-4372-a96c-db3eb1352816",
+    "name": "Officer 39",
+    "badge_no": "KSP039",
+    "role": "sho",
+    "is_active": true,
+    "station_id": "c87285ee-9e6c-40eb-a7a9-f2f293d7ab1e"
+  },
+  {
+    "id": "62d9c1e3-3512-4c6c-9a7f-2e1a733d99d6",
+    "name": "Officer 4",
+    "badge_no": "KSP004",
+    "role": "commissioner",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "4596654b-0bf0-4856-a959-19cc30f46b32",
     "name": "Officer 40",
     "badge_no": "KSP040",
     "role": "analyst",
@@ -6437,55 +15730,55 @@
     "station_id": null
   },
   {
-    "id": "4db83b08-86db-4d19-81d5-899e471735d7",
+    "id": "239f1055-c0c2-4303-8461-4c6999c5d477",
     "name": "Officer 41",
     "badge_no": "KSP041",
-    "role": "commissioner",
+    "role": "constable",
     "is_active": true,
-    "station_id": null
+    "station_id": "84fea1cd-9472-4a0f-b73f-1c2029f9bbda"
   },
   {
-    "id": "f431c88b-bcca-4859-98ad-418a0b98c040",
+    "id": "9465e862-a861-44a0-b30b-191739362f52",
     "name": "Officer 5",
     "badge_no": "KSP005",
-    "role": "sho",
-    "is_active": true,
-    "station_id": "7b41fd96-aa5d-4390-8ad8-600546ed4ba7"
-  },
-  {
-    "id": "71b0884c-2ad4-4f0f-a5cc-4ff21ddc0c61",
-    "name": "Officer 6",
-    "badge_no": "KSP006",
-    "role": "sho",
-    "is_active": true,
-    "station_id": "919974c2-e3f4-4a1e-b822-88481c357d1b"
-  },
-  {
-    "id": "eac7bf65-6bd7-4724-b701-c832a536c904",
-    "name": "Officer 7",
-    "badge_no": "KSP007",
     "role": "sp",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "64cf2a3e-d08e-4eec-b27f-0d7c6f490045",
-    "name": "Officer 8",
-    "badge_no": "KSP008",
-    "role": "analyst",
+    "id": "d104b976-42ba-464f-a106-474bfb8635b5",
+    "name": "Officer 6",
+    "badge_no": "KSP006",
+    "role": "sp",
     "is_active": true,
     "station_id": null
   },
   {
-    "id": "ec739b4d-062c-4544-8ae9-661653dd9443",
+    "id": "7aa29f5c-b2fa-4785-ba08-e7459e172146",
+    "name": "Officer 7",
+    "badge_no": "KSP007",
+    "role": "constable",
+    "is_active": true,
+    "station_id": "ad1edd63-474e-4720-8be5-4af85ea89e5c"
+  },
+  {
+    "id": "d9711078-f3dc-46fb-9e1e-4f91de4297e5",
+    "name": "Officer 8",
+    "badge_no": "KSP008",
+    "role": "sp",
+    "is_active": true,
+    "station_id": null
+  },
+  {
+    "id": "4634744a-f732-44df-a62d-f3d7dda1f539",
     "name": "Officer 9",
     "badge_no": "KSP009",
     "role": "sho",
     "is_active": true,
-    "station_id": "3c30e794-af6a-4827-9947-36bb1c17ef90"
+    "station_id": "20ade272-2a89-4052-b528-04e49ee1b7fd"
   },
   {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6493,153 +15786,9 @@
     "station_id": null
   },
   {
-    "id": "a2e24e60-d4db-4bda-be6c-d27bdf784fcc",
+    "id": "651685e2-b7c2-47c6-b1e4-361be2db2905",
     "name": "Test Officer",
-    "badge_no": "KSP-00F586",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "bb10c10e-e814-42c3-b1b1-3b2288337477",
-    "name": "Test Officer",
-    "badge_no": "KSP-0F8C09",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "cd426003-0d3e-49e8-bd95-bc952f1d9507",
-    "name": "Test Officer",
-    "badge_no": "KSP-9A72BC",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "70c6793c-c64f-4e88-9ddc-dfc0243548e3",
-    "name": "Test Officer",
-    "badge_no": "KSP-7B8D0E",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "34521b07-39fc-404c-ad08-6eb88b6c042a",
-    "name": "Test Officer",
-    "badge_no": "KSP-F3E8F4",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "98aa3317-4fb1-4d5f-b870-4817c579e32e",
-    "name": "Test Officer",
-    "badge_no": "KSP-4917E1",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "edcbce22-4e46-4ab2-b999-ea9a25f165ab",
-    "name": "Test Officer",
-    "badge_no": "KSP-FA8643",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "ba1fd939-6a02-4bb2-b195-f95d0ab4dc4c",
-    "name": "Test Officer",
-    "badge_no": "KSP-8FA5DF",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "5e02c0bc-19b5-41e1-81ea-42fa80c34f80",
-    "name": "Test Officer",
-    "badge_no": "KSP-287D0A",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "b713b238-0387-4d79-86f2-bd0fb1648dde",
-    "name": "Test Officer",
-    "badge_no": "KSP-7A776A",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "a7095100-1830-467e-b2b7-ac479d7670fa",
-    "name": "Updated Officer",
-    "badge_no": "KSP-FAAC79",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "532292ca-76f0-44d3-bde5-3a3331d9b1c0",
-    "name": "Updated Officer",
-    "badge_no": "KSP-85E2FA",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "d3e15580-4499-4f5b-886b-fe91ec9e151a",
-    "name": "Updated Officer",
-    "badge_no": "KSP-FBBF39",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "0639c373-ff8c-47bf-8b48-bc37c88b9aa7",
-    "name": "Updated Officer",
-    "badge_no": "KSP-A207F3",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "f66f82f8-5e66-4171-8cf1-2a8737a06c69",
-    "name": "Updated Officer",
-    "badge_no": "KSP-03C71C",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "0bf21d3c-41b7-4bd0-af54-d06068142d4a",
-    "name": "Updated Officer",
-    "badge_no": "KSP-6BF118",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "62755507-bf49-438c-bf5f-817703ab4747",
-    "name": "Updated Officer",
-    "badge_no": "KSP-DBB760",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "c98e825f-89ec-43cf-9696-48d7000999cf",
-    "name": "Updated Officer",
-    "badge_no": "KSP-FC3050",
-    "role": "constable",
-    "is_active": true,
-    "station_id": null
-  },
-  {
-    "id": "a963d9d0-8899-406e-84d1-78eb118103a9",
-    "name": "Updated Officer",
-    "badge_no": "KSP-20396E",
+    "badge_no": "KSP-F1E87D",
     "role": "constable",
     "is_active": true,
     "station_id": null
@@ -6647,25 +15796,25 @@
 ]
   ```
   </details>
-- **4. GET http://testserver/api/v1/users/a2e24e60-d4db-4bda-be6c-d27bdf784fcc** 
+- **4. GET http://testserver/api/v1/users/651685e2-b7c2-47c6-b1e4-361be2db2905** 
   - Status Code: 200
-  - Execution Time: 10.95 ms
+  - Execution Time: 15.19 ms
   - Response Size: 145 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "a2e24e60-d4db-4bda-be6c-d27bdf784fcc",
+  "id": "651685e2-b7c2-47c6-b1e4-361be2db2905",
   "name": "Test Officer",
-  "badge_no": "KSP-00F586",
+  "badge_no": "KSP-F1E87D",
   "role": "constable",
   "is_active": true,
   "station_id": null
 }
   ```
   </details>
-- **5. PATCH http://testserver/api/v1/users/a2e24e60-d4db-4bda-be6c-d27bdf784fcc** 
+- **5. PATCH http://testserver/api/v1/users/651685e2-b7c2-47c6-b1e4-361be2db2905** 
   - Status Code: 200
-  - Execution Time: 17.67 ms
+  - Execution Time: 23.19 ms
   - Response Size: 148 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6677,25 +15826,25 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "a2e24e60-d4db-4bda-be6c-d27bdf784fcc",
+  "id": "651685e2-b7c2-47c6-b1e4-361be2db2905",
   "name": "Updated Officer",
-  "badge_no": "KSP-00F586",
+  "badge_no": "KSP-F1E87D",
   "role": "constable",
   "is_active": true,
   "station_id": null
 }
   ```
   </details>
-- **6. GET http://testserver/api/v1/users/a2e24e60-d4db-4bda-be6c-d27bdf784fcc** 
+- **6. GET http://testserver/api/v1/users/651685e2-b7c2-47c6-b1e4-361be2db2905** 
   - Status Code: 200
-  - Execution Time: 11.75 ms
+  - Execution Time: 10.76 ms
   - Response Size: 148 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "id": "a2e24e60-d4db-4bda-be6c-d27bdf784fcc",
+  "id": "651685e2-b7c2-47c6-b1e4-361be2db2905",
   "name": "Updated Officer",
-  "badge_no": "KSP-00F586",
+  "badge_no": "KSP-F1E87D",
   "role": "constable",
   "is_active": true,
   "station_id": null
@@ -6706,11 +15855,11 @@
 
 ### tests/test_users.py::test_create_duplicate_user
 **Status:** PASS
-**Test Duration:** 0.35s
+**Test Duration:** 0.55s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 377.50 ms
+  - Execution Time: 312.94 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6723,11 +15872,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg4LCJleHAiOjE3ODQwNDY2ODgsInJvbGUiOiJhZG1pbiJ9.kxb4R77IP1CX6MRc8HUiBd-vquMIfjvD5C2lL-VwaG0",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4OCwiZXhwIjoxNzg0NjQ3ODg4fQ.t-EDGx-DZ_rzOjsfGoiGIa7mhAY_e5UZRjcey9QIxxg",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODMwLCJleHAiOjE3ODQxMDM0MzAsInJvbGUiOiJhZG1pbiJ9.EsP3BuohfcQLGFrOXiws45TikTx3JodkyxuaTVXiuZ8",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzMCwiZXhwIjoxNzg0NzA0NjMwfQ.miA3GDb1W4Xqq-_5PR7a5f8dLy-8U1IY-w1cofGeE4I",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6739,13 +15888,13 @@
   </details>
 - **2. POST http://testserver/api/v1/users** 
   - Status Code: 201
-  - Execution Time: 341.24 ms
+  - Execution Time: 531.38 ms
   - Response Size: 145 bytes
   <details><summary>Payload</summary>
   ```json
   {
   "name": "Test Officer",
-  "badge_no": "KSP-8B9AF9",
+  "badge_no": "KSP-66BE4C",
   "role": "constable",
   "password": "Password123"
 }
@@ -6754,9 +15903,9 @@
   <details><summary>Response</summary>
   ```json
   {
-  "id": "ede9ec74-c60b-46b2-b5fb-636ebfc82e5d",
+  "id": "034ac26e-6911-4031-812b-ce0ca8e2e82e",
   "name": "Test Officer",
-  "badge_no": "KSP-8B9AF9",
+  "badge_no": "KSP-66BE4C",
   "role": "constable",
   "is_active": true,
   "station_id": null
@@ -6765,13 +15914,13 @@
   </details>
 - **3. POST http://testserver/api/v1/users** 
   - Status Code: 409
-  - Execution Time: 10.32 ms
+  - Execution Time: 18.23 ms
   - Response Size: 54 bytes
   <details><summary>Payload</summary>
   ```json
   {
   "name": "Test Officer",
-  "badge_no": "KSP-8B9AF9",
+  "badge_no": "KSP-66BE4C",
   "role": "constable",
   "password": "Password123"
 }
@@ -6780,7 +15929,7 @@
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "Badge number 'KSP-8B9AF9' already exists."
+  "detail": "Badge number 'KSP-66BE4C' already exists."
 }
   ```
   </details>
@@ -6788,11 +15937,11 @@
 
 ### tests/test_users.py::test_get_nonexistent_user
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.02s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 423.06 ms
+  - Execution Time: 378.19 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6805,11 +15954,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDg5LCJleHAiOjE3ODQwNDY2ODksInJvbGUiOiJhZG1pbiJ9.uHb9ziMbVpn7dUddE8MXHpqBx-vORPBkFUzFT6I15Lc",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA4OSwiZXhwIjoxNzg0NjQ3ODg5fQ.2cGMrcUOtlclLNUfbKUgIAWnjOXN_mBwcQbSI8me0N0",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODMxLCJleHAiOjE3ODQxMDM0MzEsInJvbGUiOiJhZG1pbiJ9.jD0JKIU49uXaSj8hooOesUa0gtmm8pgyvA1L0ugkYkk",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzMSwiZXhwIjoxNzg0NzA0NjMxfQ.naHLUfY1DDNkBaIOdK1odlTnwhmAq2v7F9bMYyFHZWw",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6819,14 +15968,14 @@
 }
   ```
   </details>
-- **2. GET http://testserver/api/v1/users/5f737595-22b6-4131-b5dd-e61b4d37e183** 
+- **2. GET http://testserver/api/v1/users/944366ab-2534-49ac-a5c4-5e2c862cf92e** 
   - Status Code: 404
-  - Execution Time: 10.38 ms
+  - Execution Time: 20.20 ms
   - Response Size: 65 bytes
   <details><summary>Response</summary>
   ```json
   {
-  "detail": "User 5f737595-22b6-4131-b5dd-e61b4d37e183 not found."
+  "detail": "User 944366ab-2534-49ac-a5c4-5e2c862cf92e not found."
 }
   ```
   </details>
@@ -6834,11 +15983,11 @@
 
 ### tests/test_users.py::test_change_password
 **Status:** PASS
-**Test Duration:** 0.71s
+**Test Duration:** 0.53s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 376.19 ms
+  - Execution Time: 355.25 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6851,11 +16000,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDkwLCJleHAiOjE3ODQwNDY2OTAsInJvbGUiOiJhZG1pbiJ9.YIDT7KOhNn5civ0WaZTeDspz9TikE3rcLNF8m_3X2rM",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA5MCwiZXhwIjoxNzg0NjQ3ODkwfQ.bwBxAJHjqd_BXro9CMj7nY4Qww6X4BzWDsLFJbpuqTE",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODMyLCJleHAiOjE3ODQxMDM0MzIsInJvbGUiOiJhZG1pbiJ9.gsCrpQ4Ewgy9kDgmtIH5iFNUE8iYnMaUsEypTT_RF_8",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzMiwiZXhwIjoxNzg0NzA0NjMyfQ.odDs_nrQnfkwC9knirtCFFpsXsMljwNTqbxSCmGSCMI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6867,7 +16016,7 @@
   </details>
 - **2. POST http://testserver/api/v1/users/me/change-password** 
   - Status Code: 200
-  - Execution Time: 712.76 ms
+  - Execution Time: 530.01 ms
   - Response Size: 44 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6888,11 +16037,11 @@
 
 ### tests/test_users.py::test_invalid_role
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.49s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 399.73 ms
+  - Execution Time: 245.81 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6905,11 +16054,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDkxLCJleHAiOjE3ODQwNDY2OTEsInJvbGUiOiJhZG1pbiJ9.wGAX1srVyTDQ5n4sCyXtS56Ax7jJfNyRyE1XEMsr-bI",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA5MSwiZXhwIjoxNzg0NjQ3ODkxfQ.4BKD5KK8Z3sH8oAGDw0KID0wZ_kRxX00AIKaKJfuRhY",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODMyLCJleHAiOjE3ODQxMDM0MzIsInJvbGUiOiJhZG1pbiJ9.gsCrpQ4Ewgy9kDgmtIH5iFNUE8iYnMaUsEypTT_RF_8",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzMiwiZXhwIjoxNzg0NzA0NjMyfQ.odDs_nrQnfkwC9knirtCFFpsXsMljwNTqbxSCmGSCMI",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6921,13 +16070,13 @@
   </details>
 - **2. POST http://testserver/api/v1/users** 
   - Status Code: 422
-  - Execution Time: 9.64 ms
+  - Execution Time: 485.64 ms
   - Response Size: 244 bytes
   <details><summary>Payload</summary>
   ```json
   {
   "name": "Test Officer",
-  "badge_no": "KSP-237460",
+  "badge_no": "KSP-81485F",
   "role": "INVALID_ROLE",
   "password": "Password123"
 }
@@ -6957,11 +16106,11 @@
 
 ### tests/test_vehicles.py::test_vehicles_theft_trends
 **Status:** PASS
-**Test Duration:** 0.01s
+**Test Duration:** 0.37s
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 463.66 ms
+  - Execution Time: 263.15 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -6974,11 +16123,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDkxLCJleHAiOjE3ODQwNDY2OTEsInJvbGUiOiJhZG1pbiJ9.wGAX1srVyTDQ5n4sCyXtS56Ax7jJfNyRyE1XEMsr-bI",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA5MSwiZXhwIjoxNzg0NjQ3ODkxfQ.4BKD5KK8Z3sH8oAGDw0KID0wZ_kRxX00AIKaKJfuRhY",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODMzLCJleHAiOjE3ODQxMDM0MzMsInJvbGUiOiJhZG1pbiJ9.Oel9whUHQyUEOMg7Ouf3a1sRJSmzW6XhcIGsVAtyExI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzMywiZXhwIjoxNzg0NzA0NjMzfQ.DD-kPN-bQgfbgnvuplcSw5oDfC6vby06oDadD0bvStk",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -6990,8 +16139,8 @@
   </details>
 - **2. GET http://testserver/api/v1/vehicles/theft-trends** 
   - Status Code: 200
-  - Execution Time: 13.97 ms
-  - Response Size: 447 bytes
+  - Execution Time: 371.37 ms
+  - Response Size: 448 bytes
   <details><summary>Response</summary>
   ```json
   {
@@ -7005,28 +16154,28 @@
     },
     {
       "period": "2026-01-01",
-      "stolen": 14,
+      "stolen": 11,
       "recovered": 6
     },
     {
       "period": "2026-02-01",
-      "stolen": 6,
-      "recovered": 0
-    },
-    {
-      "period": "2026-03-01",
-      "stolen": 6,
+      "stolen": 12,
       "recovered": 2
     },
     {
+      "period": "2026-03-01",
+      "stolen": 17,
+      "recovered": 6
+    },
+    {
       "period": "2026-04-01",
-      "stolen": 20,
-      "recovered": 9
+      "stolen": 7,
+      "recovered": 2
     },
     {
       "period": "2026-05-01",
-      "stolen": 14,
-      "recovered": 4
+      "stolen": 11,
+      "recovered": 3
     },
     {
       "period": "2026-06-01",
@@ -7035,8 +16184,8 @@
     },
     {
       "period": "2026-07-01",
-      "stolen": 3,
-      "recovered": 2
+      "stolen": 5,
+      "recovered": 1
     }
   ]
 }
@@ -7050,7 +16199,7 @@
 #### API Requests
 - **1. POST http://testserver/api/v1/auth/login** 
   - Status Code: 200
-  - Execution Time: 418.96 ms
+  - Execution Time: 244.59 ms
   - Response Size: 647 bytes
   <details><summary>Payload</summary>
   ```json
@@ -7063,11 +16212,11 @@
   <details><summary>Response</summary>
   ```json
   {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDQzMDkyLCJleHAiOjE3ODQwNDY2OTIsInJvbGUiOiJhZG1pbiJ9.EVUQ9jk_2R_DFVVj7_ikH88TkMLSNlh3ThNCvyjbNac",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmYTM3MGUxNS05YjE2LTQ3OTUtYTA3Ni1jYmY5OGYwZTJhY2UiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA0MzA5MiwiZXhwIjoxNzg0NjQ3ODkyfQ.kV0643-plH0o80VgyfANDtoFY5g7UhLX1aVs9iyCs28",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzg0MDk5ODM0LCJleHAiOjE3ODQxMDM0MzQsInJvbGUiOiJhZG1pbiJ9.OFZR6Gp47OygA0txm50fAmqzePxJ81dPExQ7wv_YoLI",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDYyYjdhOC01MzZiLTQ3NTUtYTU1Ny1jOTg3YjI4ODNkNWEiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTc4NDA5OTgzNCwiZXhwIjoxNzg0NzA0NjM0fQ.14GpLxAaimTZjZGNz7z5GIdcuVXA9eDZkylQwUcwUnw",
   "token_type": "bearer",
   "user": {
-    "id": "fa370e15-9b16-4795-a076-cbf98f0e2ace",
+    "id": "3462b7a8-536b-4755-a557-c987b2883d5a",
     "name": "System Admin",
     "badge_no": "ADMIN001",
     "role": "admin",
@@ -7079,7 +16228,7 @@
   </details>
 - **2. GET http://testserver/api/v1/vehicles/recovery-rate?vehicle_type=2w** 
   - Status Code: 200
-  - Execution Time: 8.04 ms
+  - Execution Time: 5.37 ms
   - Response Size: 86 bytes
   <details><summary>Response</summary>
   ```json

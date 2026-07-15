@@ -39,9 +39,9 @@ def test_reports_download_nonexistent(auth_client):
 @pytest.mark.reports
 @pytest.mark.integration
 def test_reports_invalid_payload(auth_client):
-    # missing title
+    # missing type
     payload = {
-        "type": "weekly"
+        "district_id": str(uuid.uuid4())
     }
     resp = auth_client.post("/api/v1/reports/generate", json=payload)
     assert resp.status_code == 422

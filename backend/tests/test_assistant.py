@@ -18,7 +18,7 @@ def test_assistant_chat(auth_client, check_assistant):
     if resp.status_code in (500, 503, 502, 504):
         pytest.skip("Assistant AI service unavailable or LLM not configured")
     assert resp.status_code == 200
-    assert "message" in resp.json()
+    assert "content" in resp.json()
 
 @pytest.mark.ai
 @pytest.mark.integration

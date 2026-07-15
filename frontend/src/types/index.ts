@@ -17,21 +17,21 @@ export type UserRole =
 export interface User {
   id: string;
   name: string;
-  badgeNo: string;
+  badge_no: string;
   role: UserRole;
-  stationId?: string;
-  stationName?: string;
-  districtName?: string;
-  avatarUrl?: string;
+  station_id?: string;
+  station_name?: string;
+  district_name?: string;
+  avatar_url?: string;
 }
 
 export interface AuthTokens {
-  accessToken: string;
-  refreshToken: string;
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface LoginRequest {
-  badgeNo: string;
+  badge_no: string;
   password: string;
 }
 
@@ -58,19 +58,19 @@ export type CaseStatus = "open" | "investigation" | "chargesheet" | "closed";
 
 export interface FIRRecord {
   id: string;
-  firNo: string;
-  stationName: string;
-  districtName: string;
-  crimeType: CrimeType;
-  ipcSections: string[];
-  incidentDatetime: string;
-  reportedDatetime: string;
+  fir_no: string;
+  station_name: string;
+  district_name: string;
+  crime_type: CrimeType;
+  ipc_sections: string[];
+  incident_datetime: string;
+  reported_datetime: string;
   lat: number;
   lng: number;
-  addressText: string;
-  moDescription: string;
+  address_text: string;
+  mo_description: string;
   status: CaseStatus;
-  weaponUsed?: string;
+  weapon_used?: string;
 }
 
 // ============================================================
@@ -81,20 +81,20 @@ export type SeverityLevel = "low" | "medium" | "high" | "critical";
 
 export interface Hotspot {
   id: string;
-  districtName: string;
+  district_id: string;
   lat: number;
   lng: number;
-  radiusM: number;
-  crimeDensity: number;
+  radius_m: number;
+  crime_density: number;
   severity: SeverityLevel;
-  timeWindow: string;
+  time_window: string;
 }
 
 export interface HeatmapPoint {
   lat: number;
   lng: number;
   weight: number;
-  crimeType: CrimeType;
+  crime_type: CrimeType;
 }
 
 // ============================================================
@@ -103,18 +103,18 @@ export interface HeatmapPoint {
 
 export interface ForecastPoint {
   date: string;
-  predictedCount: number;
-  lowerBound: number;
-  upperBound: number;
-  actualCount?: number;
+  predicted_count: number;
+  lower_bound: number;
+  upper_bound: number;
+  actual_count?: number;
 }
 
 export interface ForecastSeries {
-  districtName: string;
-  crimeType: CrimeType;
+  district_id: string;
+  crime_type: CrimeType;
   points: ForecastPoint[];
-  modelVersion: string;
-  generatedAt: string;
+  model_version: string;
+  generated_at: string;
 }
 
 // ============================================================
@@ -129,12 +129,12 @@ export interface ShapFeatureContribution {
 
 export interface RiskScore {
   id: string;
-  entityType: "zone" | "person";
-  entityLabel: string;
+  entity_type: "zone" | "person";
+  entity_label: string;
   score: number; // 0-100
   severity: SeverityLevel;
-  shapExplanation: ShapFeatureContribution[];
-  computedAt: string;
+  shap_explanation: ShapFeatureContribution[];
+  computed_at: string;
 }
 
 // ============================================================
@@ -144,15 +144,15 @@ export interface RiskScore {
 export interface NetworkNode {
   id: string;
   label: string;
-  riskScore: number;
+  risk_score: number;
   centrality: number;
-  caseCount: number;
+  case_count: number;
 }
 
 export interface NetworkEdge {
   source: string;
   target: string;
-  relationType: string;
+  relation_type: string;
   weight: number;
 }
 
@@ -173,10 +173,10 @@ export type MissingPersonStatus =
 
 export interface MissingPerson {
   id: string;
-  nameHash: string;
+  name_hash: string;
   age: number;
-  lastSeenLocation: string;
-  lastSeenDate: string;
+  last_seen_location: string;
+  last_seen_date: string;
   status: MissingPersonStatus;
 }
 
@@ -186,11 +186,11 @@ export interface MissingPerson {
 
 export interface VehicleCrimeRecord {
   id: string;
-  vehicleType: string;
-  theftLocation: string;
-  recoveryLocation?: string;
+  vehicle_type: string;
+  theft_location: string;
+  recovery_location?: string;
   status: "stolen" | "recovered" | "under_investigation";
-  theftDate: string;
+  theft_date: string;
 }
 
 // ============================================================
@@ -208,7 +208,7 @@ export interface AlertItem {
   type: AlertType;
   message: string;
   severity: SeverityLevel;
-  createdAt: string;
+  created_at: string;
   acknowledged: boolean;
 }
 
@@ -220,8 +220,8 @@ export interface ChatMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
-  createdAt: string;
-  chartPayload?: unknown;
+  created_at: string;
+  chart_payload?: unknown;
 }
 
 // ============================================================
@@ -232,15 +232,15 @@ export type ReportType = "weekly" | "hotspot" | "case";
 
 export interface ReportRequest {
   type: ReportType;
-  districtName?: string;
-  dateFrom?: string;
-  dateTo?: string;
+  district_name?: string;
+  date_from?: string;
+  date_to?: string;
 }
 
 export interface ReportItem {
   id: string;
   type: ReportType;
   title: string;
-  generatedAt: string;
-  downloadUrl: string;
+  generated_at: string;
+  download_url: string;
 }

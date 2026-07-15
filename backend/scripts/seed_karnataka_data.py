@@ -18,6 +18,8 @@ from app.models.vehicle import Vehicle, VehicleCrimeStatus
 from app.models.alert import Alert, AlertType
 from app.models.analytics import CrimeHotspot as Hotspot, HotspotSeverity, RiskScore, RiskEntityType
 from app.models.report import Report, ReportStatus, ReportType
+from app.models.people import Suspect
+from app.models.criminal import CriminalNetworkEdge
 from app.schemas.crime_type import CrimeType
 from app.core.security import hash_password
 
@@ -48,6 +50,8 @@ def get_random_location():
 def clear_data(db: Session):
     print("Clearing existing data...")
     # Delete in reverse dependency order
+    db.execute(text("DELETE FROM criminal_network_edges"))
+    db.execute(text("DELETE FROM suspects"))
     db.execute(text("DELETE FROM reports"))
     db.execute(text("DELETE FROM risk_scores"))
     db.execute(text("DELETE FROM hotspots"))
@@ -269,6 +273,96 @@ def seed_reports(db: Session):
         db.add(rep)
     db.commit()
 
+    db.commit()
+
+def seed_network(db: Session, firs, districts):
+    print("Seeding criminal network...")
+    db.execute(text("DELETE FROM criminal_network_edges"))
+    db.execute(text("DELETE FROM suspects"))
+    db.commit()
+
+    suspects = []
+    edges_created = 0
+    
+    relation_types = [
+        "Gang Member", "Family", "Associate", "Financial Link", 
+        "Drug Network", "Weapon Supplier", "Vehicle Sharing", 
+        "Mobile Contact", "Frequent Co-offender"
+    ]
+    
+    # Generate network per district so they are realistic and localized
+    for dist in districts:
+        dist_firs = [f for f in firs if f.district_id == dist.id]
+        if not dist_firs:
+            continue
+            
+        num_suspects = random.randint(8, 25) # 8 to 25 per district
+        dist_suspects = []
+        
+        for i in range(num_suspects):
+            fir = random.choice(dist_firs)
+            s = Suspect(
+                id=uuid.uuid4(),
+                fir_id=fir.id,
+                name_hash=f"suspect_{dist.name.lower().replace(' ', '_')}_{i}",
+                display_label=f"{dist.name[:3].upper()}-Suspect-{i:03d}",
+                age_bucket=random.choice(["19-35", "36-50", "51-65"]),
+                gender=random.choice(["M", "M", "M", "M", "F"]), # More males typically in such databases
+                prior_case_ids=[random.choice(dist_firs).fir_no for _ in range(random.randint(0, 4))]
+            )
+            db.add(s)
+            dist_suspects.append(s)
+            suspects.append(s)
+            
+        db.commit() # Commit to get IDs
+        
+        # Form 1-3 gangs/clusters within the district
+        num_clusters = random.randint(1, 3)
+        if len(dist_suspects) < num_clusters:
+            continue
+            
+        # Split suspects into clusters roughly
+        random.shuffle(dist_suspects)
+        cluster_size = len(dist_suspects) // num_clusters
+        clusters = [dist_suspects[i:i + cluster_size] for i in range(0, len(dist_suspects), cluster_size)]
+        
+        for cluster in clusters:
+            if len(cluster) < 2:
+                continue
+            
+            # Connect within gang (high density)
+            for _ in range(len(cluster) * 2):
+                s_a, s_b = random.sample(cluster, 2)
+                edge = CriminalNetworkEdge(
+                    id=uuid.uuid4(),
+                    suspect_a_id=s_a.id,
+                    suspect_b_id=s_b.id,
+                    relation_type=random.choice(relation_types),
+                    weight=random.uniform(0.5, 1.0),
+                    source_fir_id=random.choice(dist_firs).id
+                )
+                db.add(edge)
+                edges_created += 1
+                
+            # Connect to other gangs in same district (low density)
+            other_clusters = [c for c in clusters if c != cluster]
+            if other_clusters and random.random() > 0.5:
+                s_a = random.choice(cluster)
+                s_b = random.choice(random.choice(other_clusters))
+                edge = CriminalNetworkEdge(
+                    id=uuid.uuid4(),
+                    suspect_a_id=s_a.id,
+                    suspect_b_id=s_b.id,
+                    relation_type=random.choice(["Financial Link", "Weapon Supplier", "Associate"]),
+                    weight=random.uniform(0.1, 0.4),
+                    source_fir_id=random.choice(dist_firs).id
+                )
+                db.add(edge)
+                edges_created += 1
+                
+    db.commit()
+    print(f"Created {len(suspects)} suspects and {edges_created} relationships.")
+
 def verify(db: Session):
     print("\nVerification Summary:")
     print("-" * 20)
@@ -286,7 +380,7 @@ def verify(db: Session):
     }
     
     for k, v in counts.items():
-        print(f"✓ {k}: {v}")
+        print(f"[OK] {k}: {v}")
 
 def main():
     db = SessionLocal()
@@ -301,6 +395,7 @@ def main():
         seed_hotspots(db, districts)
         seed_risk_scores(db, districts)
         seed_reports(db)
+        seed_network(db, firs, districts)
         verify(db)
         print("\nSeeding completed successfully!")
     except Exception as e:

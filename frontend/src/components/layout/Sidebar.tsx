@@ -1,9 +1,3 @@
-/**
- * SentinelX AI — Sidebar
- * Primary navigation for the command dashboard. Collapsible; active route
- * is highlighted via NavLink. Nav targets reference ROUTES from the router
- * so paths are never hardcoded in two places.
- */
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -22,17 +16,18 @@ import {
 import clsx from "clsx";
 import { useUIStore } from "@/store/uiStore";
 import { ROUTES } from "@/router/routes";
+import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
-  { label: "Dashboard", to: ROUTES.DASHBOARD, icon: LayoutDashboard, end: true },
-  { label: "Crime Heatmap", to: ROUTES.HEATMAP, icon: Map, end: false },
-  { label: "Crime Analytics", to: ROUTES.ANALYTICS, icon: BarChart3, end: false },
-  { label: "AI Assistant", to: ROUTES.ASSISTANT, icon: Bot, end: false },
-  { label: "Criminal Network", to: ROUTES.NETWORK, icon: Share2, end: false },
-  { label: "Forecast", to: ROUTES.FORECAST, icon: TrendingUp, end: false },
-  { label: "Reports", to: ROUTES.REPORTS, icon: FileText, end: false },
-  { label: "Alerts", to: ROUTES.ALERTS, icon: Bell, end: false },
-  { label: "Settings", to: ROUTES.SETTINGS, icon: Settings, end: false },
+  { label: "Command Center", to: ROUTES.DASHBOARD, icon: LayoutDashboard, end: true },
+  { label: "Tactical Heatmap", to: ROUTES.HEATMAP, icon: Map, end: false },
+  { label: "Intelligence", to: ROUTES.ANALYTICS, icon: BarChart3, end: false },
+  { label: "Sentinel Core", to: ROUTES.ASSISTANT, icon: Bot, end: false },
+  { label: "Network Matrix", to: ROUTES.NETWORK, icon: Share2, end: false },
+  { label: "Predictive AI", to: ROUTES.FORECAST, icon: TrendingUp, end: false },
+  { label: "Dossiers", to: ROUTES.REPORTS, icon: FileText, end: false },
+  { label: "Live Alerts", to: ROUTES.ALERTS, icon: Bell, end: false },
+  { label: "System Config", to: ROUTES.SETTINGS, icon: Settings, end: false },
 ];
 
 export default function Sidebar() {
@@ -40,22 +35,35 @@ export default function Sidebar() {
   const toggleSidebar = useUIStore((s) => s.toggleSidebar);
 
   return (
-    <aside
-      className={clsx(
-        "h-screen shrink-0 flex flex-col bg-sx-panel backdrop-blur-md border-r border-sx-border transition-all duration-200",
-        isSidebarCollapsed ? "w-[72px]" : "w-64"
-      )}
+    <motion.aside
+      initial={false}
+      animate={{ width: isSidebarCollapsed ? 88 : 280 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="h-full shrink-0 flex flex-col bg-[#050B14]/60 backdrop-blur-3xl border border-white/10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] relative z-20 group/sidebar"
     >
-      <div className="flex items-center gap-2 px-4 h-16 border-b border-sx-border shrink-0 overflow-hidden shadow-glow-dim">
-        <ShieldAlert className="h-6 w-6 text-sx-accent shrink-0 drop-shadow-[0_0_8px_rgba(0,242,254,0.8)]" />
+      {/* Glossy Top Highlight */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+
+      <div className="flex items-center gap-3 px-6 h-24 shrink-0 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/5 to-transparent pointer-events-none" />
+        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#00E5FF]/20 to-[#8B5CF6]/20 border border-[#00E5FF]/30 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+           <ShieldAlert className="h-5 w-5 text-[#00E5FF]" />
+        </div>
         {!isSidebarCollapsed && (
-          <span className="text-white tracking-widest whitespace-nowrap sx-heading text-lg">
-            Sentinel<span className="text-sx-accent drop-shadow-[0_0_8px_rgba(0,242,254,0.8)]">X</span> AI
-          </span>
+          <motion.div 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex flex-col"
+          >
+            <span className="text-white font-black tracking-widest text-lg font-rajdhani uppercase">
+              Sentinel<span className="text-[#00E5FF]">X</span>
+            </span>
+            <span className="text-[9px] text-[#8B5CF6] font-bold uppercase tracking-[0.2em]">Command Engine</span>
+          </motion.div>
         )}
       </div>
 
-      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-1">
+      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-4 px-3 space-y-2 scrollbar-none">
         {NAV_ITEMS.map(({ label, to, icon: Icon, end }) => (
           <NavLink
             key={to}
@@ -64,32 +72,60 @@ export default function Sidebar() {
             title={isSidebarCollapsed ? label : undefined}
             className={({ isActive }) =>
               clsx(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "group relative flex items-center gap-4 rounded-2xl px-3 py-3 font-medium transition-all duration-300 overflow-hidden",
                 isActive
-                  ? "bg-sx-accent/15 text-sx-accent"
-                  : "text-sx-text-dim hover:bg-sx-panel-light hover:text-sx-text"
+                  ? "bg-gradient-to-r from-[#00E5FF]/10 to-transparent text-white"
+                  : "text-white/40 hover:text-white hover:bg-white/5"
               )
             }
           >
-            <Icon className="h-[18px] w-[18px] shrink-0" />
-            {!isSidebarCollapsed && <span className="truncate">{label}</span>}
+            {({ isActive }) => (
+              <>
+                {/* Active Indicator Bar */}
+                {isActive && (
+                  <motion.div 
+                    layoutId="activeNavIndicator"
+                    className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-[#00E5FF] rounded-r-full shadow-[0_0_10px_#00E5FF]" 
+                  />
+                )}
+
+                {/* Icon Container */}
+                <div className={clsx(
+                  "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 z-10",
+                  isActive 
+                    ? "bg-[#00E5FF]/20 border border-[#00E5FF]/40 text-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.3)]" 
+                    : "bg-black/20 border border-white/5 group-hover:border-white/20 group-hover:bg-white/10"
+                )}>
+                  <Icon className="h-5 w-5" />
+                </div>
+
+                {!isSidebarCollapsed && (
+                  <span className="text-sm truncate font-medium z-10 tracking-wide">{label}</span>
+                )}
+                
+                {/* Subtle Hover Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/0 to-white/0 group-hover:via-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
 
+      {/* Collapse Toggle */}
       <button
         onClick={toggleSidebar}
-        className="flex items-center justify-center gap-2 h-12 border-t border-sx-border text-sx-text-dim hover:text-white hover:bg-sx-panel-light transition-colors shrink-0"
+        className="mx-4 mb-6 mt-2 h-12 rounded-xl border border-white/10 bg-black/40 text-white/40 hover:text-white hover:bg-white/10 hover:border-white/20 flex items-center justify-center gap-3 transition-all duration-300 group overflow-hidden relative shrink-0"
       >
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
         {isSidebarCollapsed ? (
           <ChevronRight className="h-4 w-4" />
         ) : (
           <>
             <ChevronLeft className="h-4 w-4" />
-            <span className="text-xs">Collapse</span>
+            <span className="text-xs font-semibold tracking-wider uppercase">Collapse</span>
           </>
         )}
       </button>
-    </aside>
+    </motion.aside>
   );
 }

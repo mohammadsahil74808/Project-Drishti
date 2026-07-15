@@ -28,7 +28,7 @@ export const useAuthStore = create<AuthState>()(
       isHydrated: false,
 
       loginSuccess: (payload) => {
-        tokenStorage.setTokens(payload.accessToken, payload.refreshToken);
+        tokenStorage.setTokens(payload.access_token, payload.refresh_token);
         set({ user: payload.user, isAuthenticated: true });
       },
 

@@ -6,7 +6,7 @@ export const reportsApi = {
     return data;
   },
   createReport: async (payload: any) => {
-    const { data } = await client.post("/reports", payload);
+    const { data } = await client.post("/reports/generate", payload);
     return data;
   },
   downloadReport: async (reportId: string) => {

@@ -2,7 +2,7 @@
 
 import uuid
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, BackgroundTasks
 
 from app.core.deps import CurrentUser, DbSession
 from app.schemas.report import ReportGenerateRequest, ReportResponse
@@ -20,9 +20,9 @@ def list_reports(db: DbSession, current_user: CurrentUser):
     "/generate", response_model=ReportResponse, status_code=status.HTTP_202_ACCEPTED
 )
 def generate_report(
-    payload: ReportGenerateRequest, db: DbSession, current_user: CurrentUser
+    payload: ReportGenerateRequest, db: DbSession, current_user: CurrentUser, background_tasks: BackgroundTasks
 ):
-    return report_service.request_report(db, payload, current_user.id)
+    return report_service.request_report(db, payload, current_user.id, background_tasks)
 
 
 @router.get("/{report_id}/download")

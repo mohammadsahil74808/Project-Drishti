@@ -11,9 +11,11 @@ subscribes to that channel and rebroadcasts to all connected clients via
 
 import asyncio
 import json
-
 import redis.asyncio as aioredis
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query
+
+from app.core.security import decode_token, TokenError
 
 from app.core.config import settings
 from app.core.logging import get_logger
@@ -26,7 +28,16 @@ REDIS_ALERT_CHANNEL = "sentinelx:alerts"
 
 
 @router.websocket("/ws/alerts")
-async def alerts_websocket(websocket: WebSocket):
+async def alerts_websocket(websocket: WebSocket, token: str | None = Query(None)):
+    if not token:
+        await websocket.close(code=1008)
+        return
+    try:
+        decode_token(token, expected_type="access")
+    except TokenError:
+        await websocket.close(code=1008)
+        return
+
     await manager.connect(websocket)
     try:
         while True:
