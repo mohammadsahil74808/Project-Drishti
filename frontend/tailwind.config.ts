@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
 // SentinelX AI design tokens — premium cyber command-center theme
 export default {
@@ -53,6 +54,6 @@ export default {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
+    typography,
   ],
 } satisfies Config;
