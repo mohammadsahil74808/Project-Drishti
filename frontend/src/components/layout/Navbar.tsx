@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Search, Bell, Bot, LogOut, ChevronDown, Command, Shield, Clock } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/authStore";
-import { useUIStore } from "@/store/uiStore";
+
 import { alertsApi, firApi, reportsApi } from "@/api";
 import { formatDistanceToNow, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
-  const toggleAssistant = useUIStore((s) => s.toggleAssistant);
+
   const [isMenuOpen, setIsMenuOpen] = useState<string | null>(null);
   const [time, setTime] = useState(new Date());
 

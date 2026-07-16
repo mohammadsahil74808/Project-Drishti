@@ -1,14 +1,14 @@
 import React, { useState, useMemo, type FormEvent } from "react";
 import { 
-  FileText, Download, CheckCircle2, XCircle, Loader2, Plus, Search, 
-  Filter, Calendar, MapPin, BarChart2, Activity, Printer, FileSpreadsheet, 
-  Eye, ChevronRight, HardDriveDownload, Archive, Layers, Shield, Cpu, 
-  RefreshCcw, Clock, AlertCircle, X, DownloadCloud
+  FileText, CheckCircle2, XCircle, Loader2, Plus, Search, 
+  Filter, Calendar, MapPin, Activity, FileSpreadsheet, 
+  Eye, HardDriveDownload, Archive, Layers, Shield, Cpu, 
+  RefreshCcw, AlertCircle, X, DownloadCloud
 } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { reportsApi, geoApi } from "@/api";
-import { useToastStore } from "@/store/toastStore";
+
 import type { ReportType } from "@/types";
 import { format } from "date-fns";
 
@@ -26,7 +26,7 @@ export default function Reports() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
-  const [districtFilter, setDistrictFilter] = useState("all");
+  const [districtFilter] = useState("all");
   
   // Form State
   const [formType, setFormType] = useState<ReportType>("weekly");
