@@ -49,7 +49,7 @@ export default function Navbar() {
   const unreadCount = alerts.filter((a: any) => a.severity === 'critical' || a.severity === 'high').length;
 
   return (
-    <header className="h-14 shrink-0 bg-[#050B14]/60 backdrop-blur-3xl rounded-3xl border border-white/10 px-2 flex items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] z-30 relative">
+    <header className="h-14 shrink-0 bg-[#050B14]/60 backdrop-blur-md rounded-3xl border border-white/10 px-2 flex items-center justify-between gap-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] z-30 relative">
       {/* Top Gloss */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
 
@@ -77,7 +77,7 @@ export default function Navbar() {
         <div className="hidden lg:flex flex-col items-end mr-2 pr-4 border-r border-white/10">
            <div className="flex items-center gap-2 text-white">
               <Clock className="w-4 h-4 text-[#00E5FF]" />
-              <span className="font-rajdhani text-lg font-bold tracking-wider">{format(time, "HH:mm:ss")}</span>
+              <span className="font-rajdhani text-lg font-bold tracking-wider">{format(time, "hh:mm:ss a")}</span>
            </div>
            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8B5CF6]">IST · {format(time, "dd MMM yyyy")}</span>
         </div>
@@ -111,7 +111,7 @@ export default function Navbar() {
           </button>
           
           {isMenuOpen === 'notifications' && (
-            <div className="absolute right-0 mt-4 w-96 rounded-3xl border border-white/10 bg-[#050B14]/90 backdrop-blur-3xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] py-3 z-50 flex flex-col max-h-[500px] overflow-hidden">
+            <div className="absolute right-0 mt-4 w-96 rounded-3xl border border-white/10 bg-[#050B14]/90 backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.8)] py-3 z-50 flex flex-col max-h-[500px] overflow-hidden">
               <div className="px-5 py-3 border-b border-white/10 flex justify-between items-center shrink-0">
                 <span className="font-bold text-white tracking-wide">Command Alerts</span>
                 <span className="text-[10px] text-[#00E5FF] uppercase tracking-widest font-bold cursor-pointer hover:text-white transition-colors">Mark Read</span>
@@ -165,7 +165,7 @@ export default function Navbar() {
           </button>
 
           {isMenuOpen === 'user' && (
-            <div className="absolute right-0 mt-4 w-64 rounded-3xl border border-white/10 bg-[#050B14]/90 backdrop-blur-3xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] py-2 z-50 overflow-hidden">
+            <div className="absolute right-0 mt-4 w-64 rounded-3xl border border-white/10 bg-[#050B14]/90 backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.8)] py-2 z-50 overflow-hidden">
               <div className="px-5 py-4 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
                 <p className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-1">Clearance Level</p>
                 <div className="flex items-center gap-2">

@@ -195,7 +195,7 @@ export default function Reports() {
           ].map((s, i) => (
             <motion.div 
               key={s.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
-              className="bg-gradient-to-br from-[#050B14]/80 to-black/80 backdrop-blur-xl border border-white/10 rounded-2xl p-5 relative overflow-hidden group hover:border-white/20 transition-all shadow-lg"
+              className="bg-gradient-to-br from-[#050B14]/80 to-black/80 backdrop-blur-md border border-white/10 rounded-2xl p-5 relative overflow-hidden group hover:border-white/20 transition-all shadow-lg"
             >
               <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: s.color }} />
               <div className="flex justify-between items-start">
@@ -249,7 +249,7 @@ export default function Reports() {
         </div>
 
         {/* Data Grid / Cards */}
-        <div className="bg-[#050B14]/80 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="bg-[#050B14]/80 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
            {isLoading ? (
               <div className="p-12 space-y-4">
                  {[1,2,3,4,5].map((i: number) => (
@@ -438,7 +438,7 @@ export default function Reports() {
                initial={{ opacity: 0, y: 50, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.9 }}
                className="fixed bottom-6 right-6 z-[100] max-w-sm w-full"
             >
-               <div className={`p-4 rounded-2xl border backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-start gap-3 ${
+               <div className={`p-4 rounded-2xl border backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-start gap-3 ${
                   toast.type === 'success' ? 'bg-[#10B981]/10 border-[#10B981]/30' : 
                   toast.type === 'error' ? 'bg-[#EF4444]/10 border-[#EF4444]/30' : 
                   'bg-[#00E5FF]/10 border-[#00E5FF]/30'

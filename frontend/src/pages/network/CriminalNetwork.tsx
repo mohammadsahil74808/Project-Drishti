@@ -1,4 +1,4 @@
-﻿import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { 
   Share2, User, 
   Car, Phone, MapPin, Building, Briefcase, FileText,
@@ -7,7 +7,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import ReactECharts from "echarts-for-react";
 import { networkApi } from "@/api";
-import { motion, AnimatePresence } from "framer-motion";`nimport { useToastStore } from "@/store/toastStore";
+import { motion, AnimatePresence } from "framer-motion";
+import { useToastStore } from "@/store/toastStore";
 
 // ---- TYPE HEURISTICS ---- //
 const getNodeType = (label: string = "") => {
@@ -58,7 +59,8 @@ const getRelationColor = (relation: string = "") => {
 export default function CriminalNetwork() {
   const [selectedNode, setSelectedNode] = useState<any | null>(null);
   const [selectedType, setSelectedType] = useState<string>("All");
-
+  const { addToast } = useToastStore();
+  const [flaggedNodes, setFlaggedNodes] = useState<Set<string>>(new Set());
 
 
   const { data, isLoading } = useQuery({
@@ -113,7 +115,7 @@ export default function CriminalNetwork() {
              const tgt = allNodes.find((n:any) => n.id === params.data.target)?.label || 'Unknown';
             return `<div class="uppercase tracking-widest text-[9px] text-[#00E5FF] mb-1">RELATIONSHIP</div>
                     <div class="font-bold text-white mb-2">${params.data.relation}</div>
-                    <div class="text-white/60 text-xs">${src} â†” ${tgt}</div>`;
+                    <div class="text-white/60 text-xs">${src} ↔ ${tgt}</div>`;
           }
           const t = getNodeType(params.data.name);
           return `<div class="uppercase tracking-widest text-[9px] text-[${getTypeColor(t, params.data.riskScore)}] mb-1">${t}</div>
@@ -133,7 +135,7 @@ export default function CriminalNetwork() {
             edgeLength: [100, 250],
             gravity: 0.1,
             friction: 0.6,
-            layoutAnimation: false,
+            layoutAnimation: true,
           },
           roam: true,
           nodeScaleRatio: 0.6,
@@ -170,8 +172,6 @@ export default function CriminalNetwork() {
                symbolSize: isSelected ? 40 : 25 + (n.case_count || n.caseCount || 0) * 1.5,
                itemStyle: {
                  color: color,
-                 shadowBlur: isSelected ? 15 : 5,
-                 shadowColor: color,
                  borderColor: isSelected ? "#FFF" : "rgba(255,255,255,0.8)",
                  borderWidth: isSelected ? 3 : 1,
                  opacity: isSelected ? 1 : 0.8
@@ -188,8 +188,6 @@ export default function CriminalNetwork() {
                relation: e.relation_type || e.relation,
                lineStyle: {
                   color: color,
-                  shadowColor: color,
-                  shadowBlur: 5,
                }
              };
           }),
@@ -220,9 +218,7 @@ export default function CriminalNetwork() {
     <div className="flex-1 w-full relative bg-[#020617] overflow-hidden rounded-2xl border border-white/5 shadow-2xl">
       {/* Deep Space Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48L3N2Zz4=')] opacity-50 mix-blend-overlay" />
-         <div className="absolute top-[20%] left-[30%] w-[600px] h-[600px] bg-[#00E5FF]/10 rounded-full blur-[100px] mix-blend-screen" />
-         <div className="absolute bottom-[10%] right-[20%] w-[500px] h-[500px] bg-[#A855F7]/10 rounded-full blur-[100px] mix-blend-screen" />
+         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMikiLz48L3N2Zz4=')] opacity-20" />
       </div>
 
       {/* CENTER PANEL: Full Screen Interactive Graph */}

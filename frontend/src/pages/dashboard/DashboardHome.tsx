@@ -157,8 +157,8 @@ export default function DashboardHome() {
       {/* Animated Deep Background */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#050B14] rounded-3xl">
         <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
-        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[#00F2FE] blur-[150px] mix-blend-screen pointer-events-none" />
-        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.15, 0.05] }} transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-[#A855F7] blur-[150px] mix-blend-screen pointer-events-none" />
+        <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[#00F2FE] blur-[150px] pointer-events-none" style={{ willChange: "transform, opacity" }} />
+        <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.15, 0.05] }} transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-[#A855F7] blur-[150px] pointer-events-none" style={{ willChange: "transform, opacity" }} />
       </div>
 
       <div className="px-6 py-2 space-y-6 relative z-10">
@@ -167,7 +167,8 @@ export default function DashboardHome() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative rounded-3xl py-5 px-6 overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-[#0A101C]/80 to-transparent backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+          className="relative rounded-3xl py-5 px-6 overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-[#0A101C]/80 to-transparent backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+          style={{ willChange: "transform" }}
         >
           {/* Inner glass reflections */}
           <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10 pointer-events-none" />
@@ -258,7 +259,8 @@ export default function DashboardHome() {
                   key={stat.label}
                   variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
                   whileHover={{ scale: 1.05, rotateX: 5, rotateY: -5, z: 20 }}
-                  className={`relative overflow-hidden rounded-2xl border bg-gradient-to-br backdrop-blur-xl transition-all duration-300 group cursor-default ${colorTheme.split(' shadow')[0]} border-white/10 hover:border-white/30`}
+                  className={`relative overflow-hidden rounded-2xl border bg-gradient-to-br backdrop-blur-md transition-all duration-300 group cursor-default ${colorTheme.split(' shadow')[0]} border-white/10 hover:border-white/30`}
+                  style={{ willChange: "transform" }}
                 >
                   {/* Liquid background glow on hover */}
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${colorTheme.split(' shadow')[0]} blur-xl`} />
@@ -302,7 +304,8 @@ export default function DashboardHome() {
           <motion.div 
             whileHover={{ rotateX: 1, rotateY: -1, z: 10 }}
             transition={{ type: "spring", stiffness: 150, damping: 20 }}
-            className="border border-white/10 bg-gradient-to-br from-white/5 to-[#050B14]/80 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.6)] overflow-hidden relative h-full flex flex-col"
+            className="border border-white/10 bg-gradient-to-br from-white/5 to-[#050B14]/80 backdrop-blur-md rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.6)] overflow-hidden relative h-full flex flex-col"
+            style={{ willChange: "transform" }}
           >
              {/* Animated Light Sweep & Background Grid */}
              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 bg-gradient-to-tr from-transparent via-[#00E5FF]/5 to-transparent blur-2xl pointer-events-none" />
@@ -372,8 +375,8 @@ export default function DashboardHome() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="border border-white/10 bg-[#050B14]/90 backdrop-blur-3xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.8)] overflow-hidden relative group"
-            style={{ perspective: 1000 }}
+            className="border border-white/10 bg-[#050B14]/90 backdrop-blur-md rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.8)] overflow-hidden relative group"
+            style={{ perspective: 1000, willChange: "transform" }}
           >
             <motion.div 
                whileHover={{ rotateX: 2, rotateY: -2, z: 20 }}
@@ -382,8 +385,8 @@ export default function DashboardHome() {
             >
                {/* Animated Grid & Particles */}
                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMCwyMjksMjU1LDAuMDUpIi8+PC9zdmc+')] opacity-40 mix-blend-screen pointer-events-none" />
-               <motion.div animate={{ opacity: [0, 0.5, 0], scale: [0.5, 1.5, 0.5] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#00E5FF]/10 rounded-full blur-3xl pointer-events-none" />
-               <motion.div animate={{ opacity: [0, 0.3, 0], scale: [0.5, 2, 0.5] }} transition={{ duration: 6, repeat: Infinity, ease: "linear", delay: 2 }} className="absolute bottom-0 right-0 w-48 h-48 bg-[#8B5CF6]/10 rounded-full blur-3xl pointer-events-none" />
+               <motion.div animate={{ opacity: [0, 0.5, 0], scale: [0.5, 1.5, 0.5] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute top-1/2 left-1/4 w-32 h-32 bg-[#00E5FF]/10 rounded-full blur-3xl pointer-events-none" style={{ willChange: "transform, opacity" }} />
+               <motion.div animate={{ opacity: [0, 0.3, 0], scale: [0.5, 2, 0.5] }} transition={{ duration: 6, repeat: Infinity, ease: "linear", delay: 2 }} className="absolute bottom-0 right-0 w-48 h-48 bg-[#8B5CF6]/10 rounded-full blur-3xl pointer-events-none" style={{ willChange: "transform, opacity" }} />
 
                {/* Header */}
                <div className="flex items-center justify-between mb-6 relative z-10 border-b border-white/5 pb-4">
@@ -490,7 +493,7 @@ export default function DashboardHome() {
             </motion.div>
           </motion.div>
 
-          <Card className="border border-white/10 bg-black/20 backdrop-blur-xl flex flex-col h-[350px] rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+          <Card className="border border-white/10 bg-black/20 backdrop-blur-md flex flex-col h-[350px] rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
             <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
               <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><ShieldAlert className="h-5 w-5 text-[#FF4500]" /> Live Alerts Feed</CardTitle>
             </CardHeader>
@@ -543,7 +546,7 @@ export default function DashboardHome() {
 
       {/* Bottom Row - Activity, Status & Previews */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-md lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
           <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><Activity className="h-5 w-5 text-[#00F2FE]" /> Live Activity Feed</CardTitle>
           </CardHeader>
@@ -572,7 +575,7 @@ export default function DashboardHome() {
           </CardContent>
         </Card>
 
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-md lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
           <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><ShieldAlert className="h-5 w-5 text-[#10B981]" /> System Status Panel</CardTitle>
           </CardHeader>
@@ -597,7 +600,7 @@ export default function DashboardHome() {
           </CardContent>
         </Card>
 
-        <Card className="border border-white/10 bg-black/20 backdrop-blur-xl lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
+        <Card className="border border-white/10 bg-black/20 backdrop-blur-md lg:col-span-1 rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[360px]">
           <CardHeader className="pb-3 border-b border-white/10 bg-white/5 shrink-0">
             <CardTitle className="flex items-center gap-2 text-white/90 font-bold"><Network className="h-5 w-5 text-[#EAB308]" /> District Risk Ranking</CardTitle>
           </CardHeader>
@@ -634,7 +637,7 @@ export default function DashboardHome() {
 
         {/* Intelligence Previews */}
         <div className="lg:col-span-1 space-y-6">
-          <Card className="border border-white/10 bg-black/20 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#00F2FE]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/forecast'}>
+          <Card className="border border-white/10 bg-black/20 backdrop-blur-md rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#00F2FE]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/forecast'}>
             <CardContent className="p-4 flex items-center gap-4">
               <div className="h-12 w-12 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/30 flex items-center justify-center shrink-0 group-hover:bg-[#00F2FE]/20 transition-colors shadow-[0_0_15px_rgba(0,242,254,0.3)]">
                 <TrendingUp className="h-6 w-6 text-[#00F2FE]" />
@@ -647,7 +650,7 @@ export default function DashboardHome() {
             </CardContent>
           </Card>
 
-          <Card className="border border-white/10 bg-black/20 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#EAB308]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/network'}>
+          <Card className="border border-white/10 bg-black/20 backdrop-blur-md rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#EAB308]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/network'}>
             <CardContent className="p-4 flex items-center gap-4">
               <div className="h-12 w-12 rounded-2xl bg-[#EAB308]/10 border border-[#EAB308]/30 flex items-center justify-center shrink-0 group-hover:bg-[#EAB308]/20 transition-colors shadow-[0_0_15px_rgba(234,179,8,0.3)]">
                 <Network className="h-6 w-6 text-[#EAB308]" />
@@ -660,7 +663,7 @@ export default function DashboardHome() {
             </CardContent>
           </Card>
 
-          <Card className="border border-white/10 bg-black/20 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#A855F7]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/reports'}>
+          <Card className="border border-white/10 bg-black/20 backdrop-blur-md rounded-3xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.5)] group hover:border-[#A855F7]/50 transition-colors cursor-pointer" onClick={() => window.location.href='/reports'}>
             <CardContent className="p-4 flex items-center gap-4">
               <div className="h-12 w-12 rounded-2xl bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center shrink-0 group-hover:bg-[#A855F7]/20 transition-colors shadow-[0_0_15px_rgba(168,85,247,0.3)]">
                 <FileText className="h-6 w-6 text-[#A855F7]" />

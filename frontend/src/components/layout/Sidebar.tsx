@@ -19,15 +19,15 @@ import { ROUTES } from "@/router/routes";
 import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
-  { label: "Command Center", to: ROUTES.DASHBOARD, icon: LayoutDashboard, end: true },
-  { label: "Tactical Heatmap", to: ROUTES.HEATMAP, icon: Map, end: false },
-  { label: "Intelligence", to: ROUTES.ANALYTICS, icon: BarChart3, end: false },
-  { label: "Sentinel Core", to: ROUTES.ASSISTANT, icon: Bot, end: false },
-  { label: "Network Matrix", to: ROUTES.NETWORK, icon: Share2, end: false },
-  { label: "Predictive AI", to: ROUTES.FORECAST, icon: TrendingUp, end: false },
-  { label: "Dossiers", to: ROUTES.REPORTS, icon: FileText, end: false },
-  { label: "Live Alerts", to: ROUTES.ALERTS, icon: Bell, end: false },
-  { label: "System Config", to: ROUTES.SETTINGS, icon: Settings, end: false },
+  { label: "Dashboard", to: ROUTES.DASHBOARD, icon: LayoutDashboard, end: true },
+  { label: "Crime Map", to: ROUTES.HEATMAP, icon: Map, end: false },
+  { label: "Analytics", to: ROUTES.ANALYTICS, icon: BarChart3, end: false },
+  { label: "AI Assistant", to: ROUTES.ASSISTANT, icon: Bot, end: false },
+  { label: "Connections", to: ROUTES.NETWORK, icon: Share2, end: false },
+  { label: "Forecast", to: ROUTES.FORECAST, icon: TrendingUp, end: false },
+  { label: "Reports", to: ROUTES.REPORTS, icon: FileText, end: false },
+  { label: "Alerts", to: ROUTES.ALERTS, icon: Bell, end: false },
+  { label: "Settings", to: ROUTES.SETTINGS, icon: Settings, end: false },
 ];
 
 export default function Sidebar() {
@@ -39,7 +39,7 @@ export default function Sidebar() {
       initial={false}
       animate={{ width: isSidebarCollapsed ? 80 : 240 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full shrink-0 flex flex-col bg-[#050B14]/60 backdrop-blur-3xl border border-white/10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] relative z-20 group/sidebar"
+      className="h-full shrink-0 flex flex-col bg-[#050B14]/60 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(255,255,255,0.02)] relative z-20 group/sidebar"
     >
       {/* Glossy Top Highlight */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />

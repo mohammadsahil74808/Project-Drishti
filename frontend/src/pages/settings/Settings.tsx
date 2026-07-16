@@ -1,8 +1,8 @@
 import React, { useState, type FormEvent, useMemo } from "react";
 import { 
-  User, Bell, Lock, Save, Shield, Eye, EyeOff, Check, X, Info, 
-  CheckCircle2, ChevronRight, Activity, Smartphone, Server, Cpu, 
-  Paintbrush, Palette, Sparkles, Globe, Monitor, Moon, Sun, Terminal, Key,
+  User, Bell, Lock, Shield, Eye, EyeOff,
+  CheckCircle2, Activity, Smartphone, Server, Cpu, 
+  Sparkles, Globe, Monitor, Terminal, Key,
   Fingerprint
 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ import { usersApi } from "@/api";
 const PremiumCard = ({ children, title, icon: Icon, desc }: { children: React.ReactNode, title: string, icon: any, desc: string }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-    className="bg-gradient-to-br from-[#050B14]/80 to-black/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative group"
+    className="bg-gradient-to-br from-[#050B14]/80 to-black/80 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden relative group"
   >
     <div className="absolute inset-0 bg-gradient-to-tr from-[#00E5FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
     <div className="flex items-center gap-4 mb-8 relative z-10 border-b border-white/10 pb-6">
@@ -215,54 +215,7 @@ const SecuritySection = React.memo(() => {
   );
 });
 
-const AppearanceSection = React.memo(() => {
-  const [theme, setTheme] = useState('dark');
-  const [accent, setAccent] = useState('blue');
 
-  return (
-    <PremiumCard title="Interface Aesthetics" desc="Command Center Visuals" icon={Palette}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-         <div>
-            <label className="block text-[10px] text-white/50 uppercase font-black tracking-widest mb-3">Core Theme</label>
-            <div className="grid grid-cols-3 gap-3">
-               {[
-                  { id: 'light', label: 'Light', icon: Sun },
-                  { id: 'dark', label: 'Dark', icon: Moon },
-                  { id: 'system', label: 'System', icon: Monitor }
-               ].map(t => (
-                  <button 
-                     key={t.id} onClick={() => setTheme(t.id)}
-                     className={`flex flex-col items-center gap-2 p-3 rounded-xl border transition-all ${theme === t.id ? 'bg-white/10 border-[#00E5FF]/50 text-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,0.15)]' : 'bg-white/5 border-white/10 text-white/40 hover:bg-white/10 hover:text-white'}`}
-                  >
-                     <t.icon className="w-5 h-5" />
-                     <span className="text-[10px] font-bold uppercase tracking-wider">{t.label}</span>
-                  </button>
-               ))}
-            </div>
-         </div>
-         <div>
-            <label className="block text-[10px] text-white/50 uppercase font-black tracking-widest mb-3">Accent Hologram</label>
-            <div className="grid grid-cols-4 gap-3">
-               {[
-                  { id: 'blue', color: '#00E5FF', label: 'Neon' },
-                  { id: 'police', color: '#3B82F6', label: 'Police' },
-                  { id: 'emerald', color: '#10B981', label: 'Secure' },
-                  { id: 'purple', color: '#8B5CF6', label: 'Royal' }
-               ].map(c => (
-                  <button 
-                     key={c.id} onClick={() => setAccent(c.id)}
-                     className={`flex flex-col items-center gap-2 p-3 rounded-xl border transition-all ${accent === c.id ? 'bg-white/10 border-white/30' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}
-                  >
-                     <div className={`w-4 h-4 rounded-full shadow-[0_0_10px_${c.color}]`} style={{ backgroundColor: c.color }} />
-                     <span className={`text-[9px] font-bold uppercase tracking-wider ${accent === c.id ? 'text-white' : 'text-white/40'}`}>{c.label}</span>
-                  </button>
-               ))}
-            </div>
-         </div>
-      </div>
-    </PremiumCard>
-  );
-});
 
 const AIPreferencesSection = React.memo(() => {
   const [style, setStyle] = useState('precise');
@@ -281,7 +234,7 @@ const AIPreferencesSection = React.memo(() => {
                ].map(s => (
                   <button 
                      key={s.id} onClick={() => setStyle(s.id)}
-                     className={`flex-1 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${style === s.id ? 'bg-white/10 text-[#8B5CF6] shadow-sm' : 'text-white/40 hover:text-white'}`}
+                     className={`flex-1 py-2 px-1 rounded-lg text-[9px] font-black uppercase tracking-wider truncate transition-all ${style === s.id ? 'bg-white/10 text-[#8B5CF6] shadow-sm' : 'text-white/40 hover:text-white'}`}
                   >
                      {s.label}
                   </button>
@@ -309,24 +262,24 @@ const AboutSection = React.memo(() => (
        <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#00E5FF]/20 to-[#8B5CF6]/20 border border-white/10 flex items-center justify-center shadow-[0_0_30px_rgba(0,229,255,0.15)] shrink-0">
           <Shield className="w-10 h-10 text-white" />
        </div>
-       <div className="w-full grid grid-cols-2 gap-4">
-          <div className="bg-white/5 border border-white/10 rounded-xl p-3">
-             <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold">Build Version</p>
-             <p className="text-sm font-mono text-white mt-1">v2.4.1-beta</p>
+       <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-3 overflow-hidden">
+             <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold truncate">Build Version</p>
+             <p className="text-xs font-mono text-white mt-1 truncate">v2.4.1-beta</p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-3">
-             <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold">Neural Core Status</p>
-             <p className="text-sm font-mono text-[#10B981] mt-1 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+          <div className="bg-white/5 border border-white/10 rounded-xl p-3 overflow-hidden">
+             <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold truncate">Neural Core</p>
+             <p className="text-xs font-mono text-[#10B981] mt-1 flex items-center gap-1.5 truncate">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse shrink-0" />
                 ONLINE (99.9%)
              </p>
           </div>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-3 col-span-2 flex justify-between items-center">
-             <div>
-                <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold">Uplink Gateway</p>
+          <div className="bg-white/5 border border-white/10 rounded-xl p-3 sm:col-span-2 flex justify-between items-center overflow-hidden">
+             <div className="min-w-0 pr-4">
+                <p className="text-[9px] text-white/40 uppercase tracking-widest font-bold truncate">Uplink Gateway</p>
                 <p className="text-xs font-mono text-white/70 mt-1 truncate">wss://api.sentinelx.gov.in/v1</p>
              </div>
-             <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+             <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0" />
           </div>
        </div>
     </div>
@@ -377,7 +330,6 @@ export default function Settings() {
            {/* Right Column */}
            <div className="lg:col-span-5 space-y-8">
               <NotificationsSection />
-              <AppearanceSection />
               <AIPreferencesSection />
               <AboutSection />
            </div>

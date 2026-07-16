@@ -116,7 +116,7 @@ export default function AIAssistant() {
     <div className="flex h-[calc(100vh-4rem)] bg-[#020617] overflow-hidden rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
       
       {/* Sidebar - Left */}
-      <div className={`bg-[#050B14]/80 backdrop-blur-2xl border-r border-white/10 flex-col shrink-0 hidden lg:flex transition-all duration-300 ${isSidebarOpen ? 'w-56 opacity-100' : 'w-0 opacity-0 overflow-hidden border-none'}`}>
+      <div className={`bg-[#050B14]/80 backdrop-blur-md border-r border-white/10 flex-col shrink-0 hidden lg:flex transition-all duration-300 ${isSidebarOpen ? 'w-56 opacity-100' : 'w-0 opacity-0 overflow-hidden border-none'}`}>
          <div className="p-4 border-b border-white/5">
             <button className="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-3 transition-colors group">
                <div className="flex items-center gap-2 text-sm font-bold text-white">
@@ -188,15 +188,15 @@ export default function AIAssistant() {
                   <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 mb-3 tracking-wide">How can I assist you today?</h2>
                   <p className="text-sm text-white/40 max-w-md mx-auto mb-12 leading-relaxed">I am SentinelX AI. Ask me to analyze crime patterns, generate automated reports, or predict regional hotspots across Karnataka.</p>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-2xl">
                      {SUGGESTED_PROMPTS.map((p, i) => (
-                        <button key={i} onClick={() => sendMessage(p.text)} className="group flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-left relative overflow-hidden">
+                        <button key={i} onClick={() => sendMessage(p.text)} className="group flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all text-left relative overflow-hidden">
                            <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/0 via-[#00E5FF]/0 to-[#00E5FF]/0 group-hover:via-[#00E5FF]/5 transition-colors" />
-                           <div className="w-10 h-10 rounded-xl bg-black/40 flex items-center justify-center border border-white/10 group-hover:border-[#00E5FF]/30 transition-colors shrink-0">
-                              <p.icon className="w-5 h-5 text-white/50 group-hover:text-[#00E5FF] transition-colors" />
+                           <div className="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center border border-white/10 group-hover:border-[#00E5FF]/30 transition-colors shrink-0">
+                              <p.icon className="w-4 h-4 text-white/50 group-hover:text-[#00E5FF] transition-colors" />
                            </div>
-                           <div className="flex-1 mt-2">
-                              <span className="text-sm text-white/70 group-hover:text-white transition-colors block leading-snug">{p.text}</span>
+                           <div className="flex-1">
+                              <span className="text-xs text-white/70 group-hover:text-white transition-colors block leading-snug">{p.text}</span>
                            </div>
                         </button>
                      ))}
@@ -259,8 +259,12 @@ export default function AIAssistant() {
          {/* Floating Input Area */}
          <div className="absolute bottom-0 w-full px-4 md:px-8 lg:px-12 pb-3 bg-gradient-to-t from-[#020617] via-[#020617] to-transparent pt-10 pointer-events-none">
             <div className="max-w-5xl mx-auto w-full relative group pointer-events-auto">
-               <form onSubmit={handleSubmit} className="relative flex items-end bg-[#050B14]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-2 shadow-[0_10px_40px_rgba(0,0,0,0.6)] focus-within:border-[#00E5FF]/50 focus-within:shadow-[0_0_30px_rgba(0,229,255,0.15)] transition-all duration-500">
-                  <div className="flex flex-col flex-1 pb-1">
+               <form onSubmit={handleSubmit} className="relative flex items-end bg-[#050B14]/80 backdrop-blur-md border border-white/10 rounded-3xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.6)] focus-within:border-[#00E5FF]/50 focus-within:shadow-[0_0_30px_rgba(0,229,255,0.15)] transition-all duration-500">
+                  <div className="flex items-center pb-0.5 pl-1 shrink-0">
+                     <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileSelect} />
+                     <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-colors"><Paperclip className="w-4 h-4" /></button>
+                  </div>
+                  <div className="flex flex-col flex-1">
                      <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
@@ -271,15 +275,13 @@ export default function AIAssistant() {
                            }
                         }}
                         placeholder="Ask SentinelX AI about crimes, FIRs, hotspots, reports or investigations..."
-                        className="w-full bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none resize-none max-h-32 min-h-[44px] scrollbar-thin scrollbar-thumb-white/10"
+                        className="w-full bg-transparent px-3 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none resize-none max-h-32 min-h-[40px] scrollbar-thin scrollbar-thumb-white/10"
                         rows={1}
                      />
                   </div>
-                  <div className="flex items-center gap-2 p-1">
-                     <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileSelect} />
-                     <button type="button" onClick={() => fileInputRef.current?.click()} className="p-2.5 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-colors"><Paperclip className="w-4 h-4" /></button>
-                     <button type="button" onClick={handleMic} className={`p-2.5 rounded-xl transition-colors ${isListening ? 'text-[#EF4444] bg-[#EF4444]/20 animate-pulse' : 'text-white/40 hover:text-white hover:bg-white/10'}`}><Mic className="w-4 h-4" /></button>
-                     <button type="submit" disabled={!input.trim() || isThinking} className="p-2.5 rounded-xl bg-white/10 text-white hover:bg-[#00E5FF] hover:text-black hover:shadow-[0_0_20px_#00E5FF] disabled:opacity-30 disabled:pointer-events-none transition-all duration-300">
+                  <div className="flex items-center gap-1.5 p-0.5 shrink-0">
+                     <button type="button" onClick={handleMic} className={`p-2 rounded-xl transition-colors ${isListening ? 'text-[#EF4444] bg-[#EF4444]/20 animate-pulse' : 'text-white/40 hover:text-white hover:bg-white/10'}`}><Mic className="w-4 h-4" /></button>
+                     <button type="submit" disabled={!input.trim() || isThinking} className="p-2 rounded-xl bg-white/10 text-white hover:bg-[#00E5FF] hover:text-black hover:shadow-[0_0_20px_#00E5FF] disabled:opacity-30 disabled:pointer-events-none transition-all duration-300">
                         <Send className="w-4 h-4" />
                      </button>
                   </div>

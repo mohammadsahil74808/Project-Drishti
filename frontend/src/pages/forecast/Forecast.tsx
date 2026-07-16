@@ -130,7 +130,7 @@ export default function Forecast() {
           type: "line",
           data: actual,
           smooth: true,
-          lineStyle: { color: "#00E5FF", width: 2, shadowColor: "rgba(0,229,255,0.5)", shadowBlur: 10 },
+          lineStyle: { color: "#00E5FF", width: 2 },
           itemStyle: { color: "#00E5FF", borderWidth: 2, borderColor: "#020617" },
           symbol: "circle",
           symbolSize: 6,
@@ -142,7 +142,7 @@ export default function Forecast() {
           type: "line",
           data: predicted,
           smooth: true,
-          lineStyle: { color: "#8B5CF6", width: 3, type: "dashed", shadowColor: "rgba(139,92,246,0.5)", shadowBlur: 15 },
+          lineStyle: { color: "#8B5CF6", width: 3, type: "dashed" },
           itemStyle: { color: "#8B5CF6", borderWidth: 2, borderColor: "#020617" },
           symbol: "circle",
           symbolSize: 8,
@@ -161,15 +161,15 @@ export default function Forecast() {
     <div className="flex flex-col h-full w-full relative bg-[#020617] overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 rounded-2xl border border-white/5 shadow-2xl">
       {/* Premium Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMSkiLz48L3N2Zz4=')] mix-blend-overlay" />
-         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-[120px] mix-blend-screen" />
-         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#8B5CF6]/5 rounded-full blur-[150px] mix-blend-screen" />
+         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMSkiLz48L3N2Zz4=')] opacity-30" />
+         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-[120px]" />
+         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#8B5CF6]/5 rounded-full blur-[150px]" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-full p-4 lg:p-6 space-y-6">
          
          {/* TOP HEADER */}
-         <div className="relative z-50 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-black/40 backdrop-blur-xl border border-white/5 rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+         <div className="relative z-50 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
             <div>
                <div className="flex items-center gap-3 mb-2">
                   <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/20 text-[#EF4444] text-[8px] font-black uppercase tracking-widest animate-pulse">
@@ -203,7 +203,7 @@ export default function Forecast() {
                            initial={{ opacity: 0, y: 10 }}
                            animate={{ opacity: 1, y: 0 }}
                            exit={{ opacity: 0, y: 10 }}
-                           className="absolute top-full mt-2 w-full bg-[#050B14]/90 backdrop-blur-2xl border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
+                           className="absolute top-full mt-2 w-full bg-[#050B14]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
                         >
                            <div className="p-2 border-b border-white/5 relative">
                               <Search className="h-3 w-3 absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
@@ -250,7 +250,7 @@ export default function Forecast() {
          <div className="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6">
             
             {/* CENTER: Main Interactive Graph */}
-            <div className="lg:col-span-3 flex flex-col bg-black/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+            <div className="lg:col-span-3 flex flex-col bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                <div className="p-5 border-b border-white/5 flex items-center justify-between bg-gradient-to-r from-white/5 to-transparent">
                   <div className="flex items-center gap-3">
                      <Target className="h-4 w-4 text-[#00E5FF]" />
@@ -300,7 +300,7 @@ export default function Forecast() {
             <div className="lg:col-span-1 flex flex-col gap-6 pb-4">
                
                {/* Summary Cards */}
-               <div className="bg-black/40 backdrop-blur-xl border border-white/5 rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+               <div className="bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl p-5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#8B5CF6]/10 rounded-full blur-[30px] group-hover:bg-[#8B5CF6]/20 transition-colors" />
                   <div className="relative z-10">
                      <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-1 flex items-center gap-2"><Target className="h-3 w-3" /> Predicted Peak</p>
@@ -314,12 +314,12 @@ export default function Forecast() {
                </div>
 
                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-[#10B981]/10 to-black/40 backdrop-blur-xl border border-[#10B981]/20 rounded-2xl p-4 shadow-inner">
+                  <div className="bg-gradient-to-br from-[#10B981]/10 to-black/40 backdrop-blur-md border border-[#10B981]/20 rounded-2xl p-4 shadow-inner">
                      <p className="text-[8px] font-bold text-white/40 uppercase tracking-widest mb-2 flex items-center gap-1.5"><CheckCircle2 className="h-2.5 w-2.5 text-[#10B981]" /> Accuracy</p>
                      <p className="text-xl font-black text-white">92.9%</p>
                      <p className="text-[8px] text-[#10B981] font-bold uppercase mt-1">7.1% MAPE</p>
                   </div>
-                  <div className="bg-gradient-to-br from-[#F59E0B]/10 to-black/40 backdrop-blur-xl border border-[#F59E0B]/20 rounded-2xl p-4 shadow-inner">
+                  <div className="bg-gradient-to-br from-[#F59E0B]/10 to-black/40 backdrop-blur-md border border-[#F59E0B]/20 rounded-2xl p-4 shadow-inner">
                      <p className="text-[8px] font-bold text-white/40 uppercase tracking-widest mb-2 flex items-center gap-1.5"><TrendingUp className="h-2.5 w-2.5 text-[#F59E0B]" /> Trend</p>
                      <p className="text-xl font-black text-white">Rising</p>
                      <p className="text-[8px] text-[#F59E0B] font-bold uppercase mt-1">+14% vs Base</p>
@@ -327,7 +327,7 @@ export default function Forecast() {
                </div>
 
                {/* Risk Indicators */}
-               <div className="bg-black/40 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+               <div className="bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                   <div className="p-4 border-b border-white/5 bg-white/5">
                      <h3 className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
                         <AlertTriangle className="h-3 w-3 text-[#EF4444]" /> Risk Indicators
@@ -366,7 +366,7 @@ export default function Forecast() {
                </div>
 
                {/* Recommendations */}
-               <div className="bg-black/40 backdrop-blur-xl border border-white/5 rounded-2xl flex-1 min-h-[150px] shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden">
+               <div className="bg-black/40 backdrop-blur-md border border-white/5 rounded-2xl flex-1 min-h-[150px] shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden">
                   <div className="p-4 border-b border-white/5 bg-gradient-to-r from-[#8B5CF6]/10 to-transparent flex items-center justify-between">
                      <h3 className="text-[10px] font-black text-white uppercase tracking-widest flex items-center gap-2">
                         <Info className="h-3 w-3 text-[#8B5CF6]" /> AI Directives

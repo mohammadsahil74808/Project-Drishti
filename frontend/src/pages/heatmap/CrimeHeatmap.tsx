@@ -35,17 +35,17 @@ function MapCustomControls() {
    const map = useMap();
    return (
       <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-[400]">
-         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.zoomIn()} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.zoomIn()} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <Plus className="w-5 h-5" />
          </motion.button>
-         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.zoomOut()} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.zoomOut()} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <Minus className="w-5 h-5" />
          </motion.button>
          <div className="w-10 h-[1px] bg-white/10 my-1" />
-         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.flyTo([14.5, 76.0], 7, { duration: 2 })} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-[#00E5FF] hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+         <motion.button whileHover={{ scale: 1.1, x: -5 }} onClick={() => map.flyTo([14.5, 76.0], 7, { duration: 2 })} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#00E5FF] hover:border-[#00E5FF]/50 hover:bg-[#00E5FF]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)]">
             <Maximize className="w-4 h-4" />
          </motion.button>
-         <motion.button whileHover={{ scale: 1.1, x: -5 }} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-[#8B5CF6] hover:border-[#8B5CF6]/50 hover:bg-[#8B5CF6]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)] mt-2">
+         <motion.button whileHover={{ scale: 1.1, x: -5 }} className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#8B5CF6] hover:border-[#8B5CF6]/50 hover:bg-[#8B5CF6]/10 transition-all shadow-[0_0_15px_rgba(0,0,0,0.5)] mt-2">
             <Layers className="w-4 h-4" />
          </motion.button>
       </div>
@@ -99,7 +99,7 @@ export default function CrimeHeatmap() {
     `}</style>
     <div className="min-h-[calc(100vh-6rem)] w-full flex flex-col px-4 pt-1 pb-4 space-y-4 relative overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-white/10">
        {/* Background FX */}
-       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-30 mix-blend-screen pointer-events-none z-0" />
+       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')] opacity-30 pointer-events-none z-0" />
        
        <div className="flex-1 w-full relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-4">
           
@@ -108,7 +108,7 @@ export default function CrimeHeatmap() {
              initial={{ opacity: 0, scale: 0.98 }}
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.8, ease: "easeOut" }}
-             className="lg:col-span-3 w-full h-[calc(100vh-6.5rem)] relative rounded-3xl border border-white/10 bg-[#050B14]/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group"
+             className="lg:col-span-3 w-full h-[calc(100vh-6.5rem)] relative rounded-3xl border border-white/10 bg-[#050B14]/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group"
           >
              {/* Map Overlay Glows */}
              <div className="absolute inset-0 bg-gradient-to-t from-[#00E5FF]/10 via-transparent to-transparent pointer-events-none z-[400]" />
@@ -117,7 +117,7 @@ export default function CrimeHeatmap() {
              {/* Live HUD (Top Left) */}
              <div className="absolute top-3 left-3 z-[450] flex flex-col gap-3">
 
-                <div className="bg-black/60 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-xl flex flex-wrap items-center gap-2">
+                <div className="bg-black/60 backdrop-blur-md border border-white/10 p-2 rounded-2xl shadow-xl flex flex-wrap items-center gap-2">
                    <Filter className="h-3.5 w-3.5 text-[#8B5CF6] ml-2" />
                    <select value={selectedDistrictId} onChange={(e) => { setDistrict(e.target.value); setSelected(null); }} className="bg-transparent border-none text-[11px] font-bold text-white uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-0 [&>option]:bg-[#050B14]">
                       <option value="">All Karnataka</option>
@@ -145,7 +145,7 @@ export default function CrimeHeatmap() {
                       initial={{ opacity: 0, y: -20, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      className="absolute top-6 right-6 z-[500] w-80 bg-gradient-to-br from-[#050B14]/95 to-black/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
+                      className="absolute top-6 right-6 z-[500] w-80 bg-gradient-to-br from-[#050B14]/95 to-black/95 backdrop-blur-md border border-white/20 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
                    >
                       <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: severityColors[selected.severity as SeverityLevel] || "#00E5FF" }} />
                       <div className="p-5 relative">
@@ -174,7 +174,7 @@ export default function CrimeHeatmap() {
              </AnimatePresence>
 
              {/* Floating Legend */}
-             <div className="absolute bottom-3 right-3 z-[450] bg-black/60 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-xl flex items-center gap-4 hidden sm:flex">
+             <div className="absolute bottom-3 right-3 z-[450] bg-black/60 backdrop-blur-md border border-white/10 p-3 rounded-2xl shadow-xl flex items-center gap-4 hidden sm:flex">
                 {Object.entries(severityColors).map(([level, color]) => (
                    <div key={level} className="flex items-center gap-1.5">
                       <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color, boxShadow: `0 0 8px ${color}` }} />
@@ -217,7 +217,7 @@ export default function CrimeHeatmap() {
              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
              className="lg:col-span-1 h-[calc(100vh-6.5rem)] flex flex-col gap-4"
           >
-             <div className="flex-1 border border-white/10 bg-gradient-to-b from-[#050B14]/90 to-[#0A101C]/90 backdrop-blur-2xl rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.8)] p-5 overflow-hidden relative flex flex-col">
+             <div className="flex-1 border border-white/10 bg-gradient-to-b from-[#050B14]/90 to-[#0A101C]/90 backdrop-blur-md rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.8)] p-5 overflow-hidden relative flex flex-col">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#8B5CF6]/5 to-transparent pointer-events-none" />
                 
                 <h3 className="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-white tracking-widest uppercase flex items-center gap-2 mb-4 drop-shadow-[0_0_8px_rgba(139,92,246,0.3)]">
