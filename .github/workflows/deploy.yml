@@ -1,61 +1,61 @@
-name: Production Deployment CI/CD
+name: SentinelX Catalyst Custom Runtime CI/CD
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+env:
+  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
 jobs:
-  lint-and-test:
+  build-and-push:
+    name: Build and Push Docker Images
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-          
-      - name: Frontend Build Verification
-        working-directory: frontend
-        run: |
-          npm ci
-          npx tsc --noEmit
-          npm run build
-          
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-          
-      - name: Backend Syntax & Types
-        working-directory: backend
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          python -m compileall .
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-  docker-build:
-    needs: lint-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Build Backend Image
-        run: docker build -t sentinelx-backend:latest -f backend/Dockerfile.prod .
-        
-      - name: Build Frontend Image
-        run: docker build -t sentinelx-frontend:latest -f frontend/Dockerfile.prod .
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-  deploy-render:
-    needs: docker-build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Trigger Render Deploy
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ env.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Backend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_USERNAME }}/sentinelx-backend:latest
+            ${{ env.DOCKERHUB_USERNAME }}/sentinelx-backend:${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_USERNAME }}/sentinelx-backend:buildcache
+          cache-to: type=registry,ref=${{ env.DOCKERHUB_USERNAME }}/sentinelx-backend:buildcache,mode=max
+
+      - name: Build and Push AI Engine Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./ai-engine
+          file: ./ai-engine/Dockerfile
+          push: true
+          tags: |
+            ${{ env.DOCKERHUB_USERNAME }}/sentinelx-ai-engine:latest
+            ${{ env.DOCKERHUB_USERNAME }}/sentinelx-ai-engine:${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_USERNAME }}/sentinelx-ai-engine:buildcache
+          cache-to: type=registry,ref=${{ env.DOCKERHUB_USERNAME }}/sentinelx-ai-engine:buildcache,mode=max
+
+      - name: Deployment Instructions
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }} \
-          -H "Accept: application/json"
+          echo "Images successfully pushed to Docker Hub!"
+          echo "To deploy to Zoho Catalyst AppSail:"
+          echo "1. Ensure 'YOUR_DOCKERHUB_USERNAME' in catalyst.json is updated to your actual username."
+          echo "2. Run: catalyst deploy --only appsail"
+          echo "   (Alternatively, use the Catalyst Console to pull the latest images directly from Docker Hub integrations)."

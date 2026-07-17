@@ -4,6 +4,7 @@ import path from "path";
 
 // SentinelX AI — Vite configuration
 export default defineConfig({
+  base: "./",
   plugins: [react()],
   resolve: {
     alias: {

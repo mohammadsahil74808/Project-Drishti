@@ -1,0 +1,15 @@
+{
+  "client": {
+    "source": "frontend/dist"
+  },
+  "appsail": [
+    {
+      "name": "sentinelx-backend",
+      "source": "docker://YOUR_DOCKERHUB_USERNAME/sentinelx-backend:latest"
+    },
+    {
+      "name": "sentinelx-ai-engine",
+      "source": "docker://YOUR_DOCKERHUB_USERNAME/sentinelx-ai-engine:latest"
+    }
+  ]
+}
