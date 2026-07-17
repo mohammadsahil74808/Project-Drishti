@@ -1,3 +1,28 @@
+# Stage 1: Builder
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY requirements.txt .
+
+# Pre-install PyTorch using CPU-only index to strip heavy CUDA binaries
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining requirements
+RUN pip install --no-cache-dir -r requirements.txt gunicorn
+
+# Stage 2: Runtime
 FROM python:3.11-slim
 
 # Create a non-root user
@@ -5,18 +30,16 @@ RUN groupadd -r sentinelx && useradd -r -g sentinelx sentinelx
 
 WORKDIR /app
 
-# System deps needed for psycopg2 / geo libs / build tools
+# Install ONLY runtime system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libpq-dev \
-    gcc \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-# We need gunicorn for production
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-# Copy all required modules (Catalyst sets build context to the backend folder)
+# Copy application code
 COPY . /app
 
 # Change ownership to non-root user
