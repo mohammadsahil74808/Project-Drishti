@@ -16,11 +16,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY requirements.txt .
 
-# Pre-install PyTorch using CPU-only index to strip heavy CUDA binaries
-RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
-
-# Install remaining requirements
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
+# Install all requirements using CPU-only index to strip heavy CUDA binaries natively
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt gunicorn --extra-index-url https://download.pytorch.org/whl/cpu
 
 # Stage 2: Runtime
 FROM python:3.11-slim
