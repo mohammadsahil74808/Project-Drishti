@@ -5,11 +5,11 @@
   "appsail": [
     {
       "name": "sentinelx-backend",
-      "source": "docker://YOUR_DOCKERHUB_USERNAME/sentinelx-backend:latest"
+      "source": "docker://mohammadsahil7480/sentinelx-backend:latest"
     },
     {
       "name": "sentinelx-ai-engine",
-      "source": "docker://YOUR_DOCKERHUB_USERNAME/sentinelx-ai-engine:latest"
+      "source": "docker://mohammadsahil7480/sentinelx-ai-engine:latest"
     }
   ]
 }
