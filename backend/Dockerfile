@@ -20,6 +20,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+# Verification requested by user: fail the build if uvicorn is missing
+RUN python -m pip show uvicorn
+RUN python -m pip list
+
 # Aggressive cleanup of the virtual environment to minimize size
 RUN find /opt/venv -type d -name "__pycache__" -exec rm -r {} + && \
     find /opt/venv -name "*.pyc" -delete && \
@@ -58,5 +62,5 @@ USER sentinelx
 
 EXPOSE 8000
 
-# Use Uvicorn directly, dynamically binding to Zoho Catalyst's port
-CMD sh -c "python -m uvicorn app.main:app --host 0.0.0.0 --port ${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
+# Use Uvicorn directly via the absolute path of the virtual environment to ensure no path mismatch
+CMD sh -c "/opt/venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port ${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
