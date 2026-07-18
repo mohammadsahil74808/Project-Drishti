@@ -12,7 +12,7 @@ import axios, {
 } from "axios";
 
 const API_BASE_URL: string =
-  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000/api/v1";
+  import.meta.env.VITE_API_BASE_URL ?? "https://sentinelx-backend-50044079824.development.catalystappsail.in/api/v1";
 
 const ACCESS_TOKEN_KEY = "sentinelx_access_token";
 const REFRESH_TOKEN_KEY = "sentinelx_refresh_token";

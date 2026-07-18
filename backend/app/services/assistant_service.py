@@ -12,9 +12,10 @@ logger = get_logger(__name__)
 def answer_query(db: Session, query: str, district_id: uuid.UUID | None = None) -> dict:
     try:
         # Connect to the standalone AI engine microservice
+        from app.core.config import settings
         with httpx.Client(timeout=30.0) as client:
             resp = client.post(
-                "http://localhost:8500/assistant/chat",
+                f"{settings.ai_engine_url}/assistant/chat",
                 json={"query": query, "session_id": str(district_id) if district_id else None}
             )
             resp.raise_for_status()

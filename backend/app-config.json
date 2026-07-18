@@ -1,0 +1,7 @@
+{
+  "env": "python3.11",
+  "scripts": {
+    "build": "pip3 install -r requirements.txt",
+    "start": "python3 run.py"
+  }
+}

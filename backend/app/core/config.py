@@ -52,6 +52,7 @@ class Settings(BaseSettings):
     # ---- AI / ML ----
     embedding_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"
     faiss_index_path: str = "./data/faiss_index"
+    ai_engine_url: str = "https://sentinelx-ai-engine.onrender.com"
 
     # ---- Logging ----
     log_level: str = "INFO"

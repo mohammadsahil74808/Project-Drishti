@@ -24,18 +24,6 @@ passlib[bcrypt]>=1.7
 redis>=5.0
 celery>=5.4
 
-# --- AI / ML (added incrementally as features are built) ---
-scikit-learn>=1.5
-lightgbm>=4.3
-xgboost>=2.0
-shap>=0.45
-networkx>=3.3
-fastembed>=0.2.0
-faiss-cpu>=1.8
-langchain>=0.2
-pandas>=2.2
-numpy>=1.26
-
 # --- Dev / Quality ---
 ruff>=0.5
 black>=24.4

@@ -67,9 +67,10 @@ def get_network_graph(
 
     try:
         import httpx
+        from app.core.config import settings
         with httpx.Client(timeout=10.0) as client:
             resp = client.post(
-                "http://localhost:8500/network/analyze",
+                f"{settings.ai_engine_url}/network/analyze",
                 json={
                     "nodes": [{"id": str(n.id), "label": n.label, "case_count": n.case_count} for n in nodes],
                     "edges": [{"source": str(e.source), "target": str(e.target), "relation_type": e.relation_type, "weight": e.weight} for e in edge_responses]

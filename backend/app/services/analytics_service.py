@@ -93,3 +93,15 @@ def generate_ai_insight(distribution: CrimeTypeDistributionResponse, trend: Crim
             f"({top.count} cases, {pct:.0f}% of total). Overall volume trend for the period looks {recent_trend}."
         )
     return AIInsight(summary=summary, generated_at=datetime.utcnow().isoformat())
+
+
+def classify_text(text: str) -> dict:
+    import requests
+    from app.core.config import settings
+    
+    try:
+        resp = requests.post(f"{settings.ai_engine_url}/classify", json={"text": text}, timeout=10.0)
+        resp.raise_for_status()
+        return resp.json()
+    except Exception as e:
+        return {"error": str(e), "predictions": []}

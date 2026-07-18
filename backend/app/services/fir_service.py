@@ -64,20 +64,27 @@ def list_firs(
     return items, total
 
 
-from app.ai.nlp.fir_parser import parse_fir_text
 def create_fir(db: Session, payload: FIRCreate) -> FIR:
     existing = db.scalar(select(FIR).where(FIR.fir_no == payload.fir_no))
     if existing:
         raise DuplicateFIRNumberError(f"FIR number '{payload.fir_no}' already exists.")
     if payload.mo_description:
+        import requests
+        from app.core.config import settings
         try:
-            parsed = parse_fir_text(payload.mo_description, use_spacy=False)
-            if not payload.ipc_sections and parsed.get("sections"):
-                payload.ipc_sections = parsed["sections"]
-            if not payload.weapon_used and parsed.get("weapons"):
-                payload.weapon_used = parsed["weapons"][0]
-        except Exception:
-            pass
+            resp = requests.post(
+                f"{settings.ai_engine_url}/nlp/parse-fir", 
+                json={"text": payload.mo_description, "use_spacy": False},
+                timeout=10.0
+            )
+            if resp.status_code == 200:
+                parsed = resp.json()
+                if not payload.ipc_sections and parsed.get("sections"):
+                    payload.ipc_sections = parsed["sections"]
+                if not payload.weapon_used and parsed.get("weapons"):
+                    payload.weapon_used = parsed["weapons"][0]
+        except Exception as e:
+            print(f"Failed to parse FIR: {e}")
 
     fir = FIR(
         fir_no=payload.fir_no,

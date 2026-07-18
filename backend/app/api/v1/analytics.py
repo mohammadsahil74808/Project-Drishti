@@ -14,7 +14,6 @@ from app.schemas.analytics import (
     DayOfWeekBucket,
 )
 from app.services import analytics_service
-from app.core.ai_deps import CrimeClassifierDep
 from pydantic import BaseModel
 
 class ClassifyRequest(BaseModel):
@@ -64,7 +63,7 @@ def ai_insight(db: DbSession, district_id: uuid.UUID | None = None):
     )
     return analytics_service.generate_ai_insight(distribution, trend)
 
-@router.post('/classify')
-def classify_text(payload: ClassifyRequest, classifier: CrimeClassifierDep):
-    return classifier.predict(payload.text)
 
+@router.post('/classify')
+def classify_text(payload: ClassifyRequest):
+    return analytics_service.classify_text(payload.text)

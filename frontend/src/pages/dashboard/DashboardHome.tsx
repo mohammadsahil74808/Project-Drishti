@@ -71,7 +71,7 @@ export default function DashboardHome() {
   useEffect(() => {
     const token = tokenStorage.getAccessToken();
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const host = import.meta.env.VITE_API_BASE_URL ? new URL(import.meta.env.VITE_API_BASE_URL).host : "localhost:8000";
+    const host = import.meta.env.VITE_API_BASE_URL ? new URL(import.meta.env.VITE_API_BASE_URL).host : "sentinelx-backend-50044079824.development.catalystappsail.in";
     const wsUrl = new URL(`${protocol}//${host}/api/v1/ws/alerts`);
     if (token) wsUrl.searchParams.set("token", token);
     const ws = new WebSocket(wsUrl.toString());

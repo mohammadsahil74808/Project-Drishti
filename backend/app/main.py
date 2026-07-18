@@ -3,7 +3,6 @@ import logging
 
 import sys
 import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lib')))
 
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,29 +16,8 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting up and loading AI models...")
-    try:
-        from app.ai.classification.crime_classifier import CrimeClassifier
-        app.state.crime_classifier = CrimeClassifier.load_latest()
-    except Exception:
-        app.state.crime_classifier = None
-
-    try:
-        from app.ai.risk_scoring.risk_predictor import RiskPredictor
-        app.state.risk_predictor = RiskPredictor.load_latest()
-    except Exception:
-        app.state.risk_predictor = None
-
-    try:
-        from app.ai.search.semantic_search import SemanticSearchService
-        app.state.semantic_search = SemanticSearchService()
-    except Exception:
-        app.state.semantic_search = None
-
+    logger.info("Starting up Backend API...")
     yield
-    app.state.crime_classifier = None
-    app.state.risk_predictor = None
-    app.state.semantic_search = None
 
 app = FastAPI(
     title=settings.app_name,
@@ -83,9 +61,10 @@ def health_redis():
 
 @app.get("/health/ai", tags=["system"])
 def health_ai():
-    return {
-        "status": "ok",
-        "crime_classifier": app.state.crime_classifier is not None,
-        "risk_predictor": app.state.risk_predictor is not None,
-        "semantic_search": app.state.semantic_search is not None,
-    }
+    import requests
+    try:
+        resp = requests.get(f"{settings.ai_engine_url}/health", timeout=5.0)
+        resp.raise_for_status()
+        return {"status": "ok", "ai_engine": "connected", "details": resp.json()}
+    except Exception as e:
+        return {"status": "error", "ai_engine": "disconnected", "detail": str(e)}

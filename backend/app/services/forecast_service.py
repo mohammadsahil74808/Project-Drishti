@@ -106,9 +106,10 @@ def _fallback_forecast(
     district_name = district.name if district else "Unknown"
 
     try:
+        from app.core.config import settings
         with httpx.Client(timeout=10.0) as client:
             resp = client.post(
-                "http://localhost:8500/forecast/predict",
+                f"{settings.ai_engine_url}/forecast/predict",
                 json={"district": district_name, "crime_type": crime_type.value, "horizon_days": horizon_days}
             )
             resp.raise_for_status()
