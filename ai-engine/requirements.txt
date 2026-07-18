@@ -8,7 +8,6 @@ shap>=0.45
 networkx>=3.3
 pandas>=2.2
 numpy>=1.26
-spacy>=3.7
 python-dateutil>=2.9
 fastapi>=0.111
 uvicorn[standard]>=0.30
