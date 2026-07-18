@@ -28,9 +28,10 @@ class EmbeddingGenerator:
 
     def _load(self):
         if self._model is None:
-            from sentence_transformers import SentenceTransformer
+            from fastembed import TextEmbedding
 
-            self._model = SentenceTransformer(self.model_name)
+            # By default FastEmbed caches to a local directory, very lightweight
+            self._model = TextEmbedding(model_name=self.model_name)
         return self._model
 
     def encode(self, texts: str | list[str], normalize: bool = True) -> np.ndarray:
@@ -40,8 +41,18 @@ class EmbeddingGenerator:
         batch = [t if t and t.strip() else " " for t in batch]
 
         model = self._load()
-        vectors = model.encode(batch, normalize_embeddings=normalize, show_progress_bar=False)
-        vectors = np.asarray(vectors, dtype="float32")
+        # FastEmbed encode returns a generator of numpy arrays
+        vectors_gen = model.embed(batch)
+        vectors = np.array(list(vectors_gen), dtype="float32")
+        
+        # FastEmbed automatically normalizes L2 under the hood for most models, 
+        # but if we explicitly require it to ensure compatibility:
+        if normalize:
+            norms = np.linalg.norm(vectors, axis=1, keepdims=True)
+            # Avoid division by zero
+            norms[norms == 0] = 1
+            vectors = vectors / norms
+
         return vectors[0] if single else vectors
 
     def dim(self) -> int:
