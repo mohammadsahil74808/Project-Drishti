@@ -31,22 +31,59 @@ def _daily_counts(df: pd.DataFrame, dt_col: str = "incident_datetime") -> pd.Dat
     return daily
 
 
+class LightweightForecaster:
+    def __init__(self):
+        from sklearn.linear_model import Ridge
+        self.model = Ridge(alpha=1.0)
+        self.std_dev = 0.0
+        self.min_date = None
+        self.last_date = None
+
+    def _make_features(self, df):
+        days = (df["ds"] - self.min_date).dt.days.values.reshape(-1, 1)
+        dow = df["ds"].dt.dayofweek.values
+        annual_sin = np.sin(2 * np.pi * df["ds"].dt.dayofyear / 365.25).values.reshape(-1, 1)
+        annual_cos = np.cos(2 * np.pi * df["ds"].dt.dayofyear / 365.25).values.reshape(-1, 1)
+        weekly_sin = np.sin(2 * np.pi * dow / 7).values.reshape(-1, 1)
+        weekly_cos = np.cos(2 * np.pi * dow / 7).values.reshape(-1, 1)
+        return np.hstack([days, annual_sin, annual_cos, weekly_sin, weekly_cos])
+
+    def fit(self, df):
+        self.min_date = df["ds"].min()
+        self.last_date = df["ds"].max()
+        X = self._make_features(df)
+        self.model.fit(X, df["y"])
+        preds = self.model.predict(X)
+        self.std_dev = np.std(df["y"] - preds)
+
+    def predict(self, df):
+        X = self._make_features(df)
+        preds = self.model.predict(X)
+        out = pd.DataFrame({"ds": df["ds"]})
+        out["yhat"] = preds
+        out["yhat_lower"] = preds - 1.96 * self.std_dev
+        out["yhat_upper"] = preds + 1.96 * self.std_dev
+        return out
+
+    def make_future_dataframe(self, periods):
+        import datetime
+        start = self.min_date
+        end = self.last_date + datetime.timedelta(days=periods)
+        dates = pd.date_range(start=start, end=end, freq='D')
+        return pd.DataFrame({"ds": dates})
+
+
 class CrimeForecaster:
     def __init__(self):
         self.prophet_model = None
         self.residual_model = None
 
     def fit(self, df: pd.DataFrame, dt_col: str = "incident_datetime") -> dict:
-        from prophet import Prophet
-
         daily = _daily_counts(df, dt_col)
         daily = daily.rename(columns={daily.columns[0]: "date"}) if "date" not in daily.columns else daily
 
         prophet_df = daily.rename(columns={"date": "ds", "count": "y"})
-        self.prophet_model = Prophet(
-            weekly_seasonality=True, yearly_seasonality=True, daily_seasonality=False,
-            interval_width=0.85,
-        )
+        self.prophet_model = LightweightForecaster()
         self.prophet_model.fit(prophet_df)
 
         in_sample = self.prophet_model.predict(prophet_df[["ds"]])
@@ -72,7 +109,7 @@ class CrimeForecaster:
         else:
             self.residual_model = None
             metrics["residual_model_trained"] = False
-            metrics["note"] = "Too few historical days for residual model; using Prophet-only."
+            metrics["note"] = "Too few historical days for residual model; using Baseline-only."
 
         return metrics
 

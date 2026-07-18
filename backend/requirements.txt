@@ -28,7 +28,6 @@ celery>=5.4
 scikit-learn>=1.5
 lightgbm>=4.3
 xgboost>=2.0
-prophet>=1.1
 shap>=0.45
 networkx>=3.3
 sentence-transformers>=3.0
