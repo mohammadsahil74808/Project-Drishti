@@ -18,7 +18,7 @@ COPY requirements.txt .
 
 # Install all requirements cleanly (ML dependencies have been removed)
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt gunicorn
+    pip install --no-cache-dir -r requirements.txt
 
 # Aggressive cleanup of the virtual environment to minimize size
 RUN find /opt/venv -type d -name "__pycache__" -exec rm -r {} + && \
@@ -58,5 +58,5 @@ USER sentinelx
 
 EXPOSE 8000
 
-# Use Gunicorn with Uvicorn workers, dynamically binding to Zoho Catalyst's port
-CMD sh -c "gunicorn app.main:app --workers 2 --worker-class uvicorn.workers.UvicornWorker --timeout 60 --bind 0.0.0.0:${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
+# Use Uvicorn directly, dynamically binding to Zoho Catalyst's port
+CMD sh -c "python -m uvicorn app.main:app --host 0.0.0.0 --port ${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
