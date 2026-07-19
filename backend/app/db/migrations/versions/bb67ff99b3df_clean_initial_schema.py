@@ -30,7 +30,6 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_index('idx_districts_boundary', 'districts', ['boundary'], unique=False, postgresql_using='gist')
     op.create_table('risk_scores',
     sa.Column('entity_type', postgresql.ENUM('zone', 'person', name='risk_entity_type'), nullable=False),
     sa.Column('entity_id', sa.String(length=100), nullable=False),
@@ -72,7 +71,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['district_id'], ['districts.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_hotspots_centroid', 'hotspots', ['centroid'], unique=False, postgresql_using='gist')
     op.create_table('stations',
     sa.Column('name', sa.String(length=150), nullable=False),
     sa.Column('district_id', sa.UUID(), nullable=False),
@@ -107,7 +105,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['station_id'], ['stations.id'], ondelete='RESTRICT'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_fir_records_location', 'fir_records', ['location'], unique=False, postgresql_using='gist')
     op.create_index(op.f('ix_fir_records_crime_type'), 'fir_records', ['crime_type'], unique=False)
     op.create_index(op.f('ix_fir_records_fir_no'), 'fir_records', ['fir_no'], unique=True)
     op.create_index(op.f('ix_fir_records_incident_datetime'), 'fir_records', ['incident_datetime'], unique=False)
@@ -142,7 +139,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['station_id'], ['stations.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_alerts_location', 'alerts', ['location'], unique=False, postgresql_using='gist')
     op.create_table('audit_log',
     sa.Column('user_id', sa.UUID(), nullable=True),
     sa.Column('action', sa.String(length=100), nullable=False),
@@ -168,7 +164,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['matched_fir_id'], ['fir_records.id'], ondelete='SET NULL'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_missing_persons_last_seen_location', 'missing_persons', ['last_seen_location'], unique=False, postgresql_using='gist')
     op.create_index(op.f('ix_missing_persons_name_hash'), 'missing_persons', ['name_hash'], unique=False)
     op.create_table('reports',
     sa.Column('type', postgresql.ENUM('weekly', 'hotspot', 'case', name='report_type'), nullable=False),
@@ -212,8 +207,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['fir_id'], ['fir_records.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('idx_vehicles_recovery_location', 'vehicles', ['recovery_location'], unique=False, postgresql_using='gist')
-    op.create_index('idx_vehicles_theft_location', 'vehicles', ['theft_location'], unique=False, postgresql_using='gist')
     op.create_table('criminal_network_edges',
     sa.Column('suspect_a_id', sa.UUID(), nullable=False),
     sa.Column('suspect_b_id', sa.UUID(), nullable=False),
@@ -244,17 +237,13 @@ def downgrade() -> None:
     sa.PrimaryKeyConstraint('srid', name=op.f('spatial_ref_sys_pkey'))
     )
     op.drop_table('criminal_network_edges')
-    op.drop_index('idx_vehicles_theft_location', table_name='vehicles', postgresql_using='gist')
-    op.drop_index('idx_vehicles_recovery_location', table_name='vehicles', postgresql_using='gist')
     op.drop_table('vehicles')
     op.drop_index(op.f('ix_suspects_name_hash'), table_name='suspects')
     op.drop_table('suspects')
     op.drop_table('reports')
     op.drop_index(op.f('ix_missing_persons_name_hash'), table_name='missing_persons')
-    op.drop_index('idx_missing_persons_last_seen_location', table_name='missing_persons', postgresql_using='gist')
     op.drop_table('missing_persons')
     op.drop_table('audit_log')
-    op.drop_index('idx_alerts_location', table_name='alerts', postgresql_using='gist')
     op.drop_table('alerts')
     op.drop_index(op.f('ix_users_badge_no'), table_name='users')
     op.drop_table('users')
@@ -262,15 +251,12 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_fir_records_incident_datetime'), table_name='fir_records')
     op.drop_index(op.f('ix_fir_records_fir_no'), table_name='fir_records')
     op.drop_index(op.f('ix_fir_records_crime_type'), table_name='fir_records')
-    op.drop_index('idx_fir_records_location', table_name='fir_records', postgresql_using='gist')
     op.drop_table('fir_records')
     op.drop_table('stations')
-    op.drop_index('idx_hotspots_centroid', table_name='hotspots', postgresql_using='gist')
     op.drop_table('hotspots')
     op.drop_index(op.f('ix_crime_forecasts_forecast_date'), table_name='crime_forecasts')
     op.drop_table('crime_forecasts')
     op.drop_index(op.f('ix_risk_scores_entity_id'), table_name='risk_scores')
     op.drop_table('risk_scores')
-    op.drop_index('idx_districts_boundary', table_name='districts', postgresql_using='gist')
     op.drop_table('districts')
     # ### end Alembic commands ###
