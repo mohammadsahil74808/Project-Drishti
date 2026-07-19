@@ -22,12 +22,31 @@ class InactiveUserError(Exception):
     pass
 
 
+import logging
+logger = logging.getLogger(__name__)
+
 def authenticate_user(db: Session, badge_no: str, password: str) -> User:
+    logger.info("--- AUTHENTICATION DEBUG ---")
+    logger.info(f"Attempting login for badge_no: '{badge_no}'")
+    logger.info(f"provided_password_repr: {repr(password)}")
+    
     user = db.scalar(select(User).where(User.badge_no == badge_no))
-    if user is None or not verify_password(password, user.password_hash):
+    logger.info(f"user_found={user is not None}")
+    
+    if user is None:
         raise InvalidCredentialsError("Invalid badge number or password.")
+        
+    logger.info(f"stored_hash={user.password_hash}")
+    verify_result = verify_password(password, user.password_hash)
+    logger.info(f"verify_result={verify_result}")
+    logger.info(f"is_active={user.is_active}")
+    
+    if not verify_result:
+        raise InvalidCredentialsError("Invalid badge number or password.")
+        
     if not user.is_active:
         raise InactiveUserError("This account has been deactivated.")
+        
     return user
 
 
