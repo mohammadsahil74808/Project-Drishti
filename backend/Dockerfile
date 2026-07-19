@@ -62,5 +62,4 @@ USER sentinelx
 
 EXPOSE 8000
 
-# Use Uvicorn directly via the absolute path of the virtual environment to ensure no path mismatch
-CMD sh -c "/opt/venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port ${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
+CMD ["/opt/venv/bin/python", "run.py"]
