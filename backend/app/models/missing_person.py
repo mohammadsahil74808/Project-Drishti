@@ -24,5 +24,5 @@ class MissingPerson(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     last_seen_location: Mapped[str] = mapped_column(Geography(geometry_type="POINT", srid=4326), nullable=False)
     last_seen_address: Mapped[str] = mapped_column(String(255), nullable=True)
     last_seen_date: Mapped[date] = mapped_column(Date, nullable=False)
-    status: Mapped[MissingPersonStatus] = mapped_column(ENUM(MissingPersonStatus, name="missing_person_status", create_type=True), nullable=False, server_default="reported")
+    status: Mapped[MissingPersonStatus] = mapped_column(ENUM(MissingPersonStatus, name="missing_person_status", create_type=False), nullable=False, server_default="reported")
     matched_fir_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("fir_records.id", ondelete="SET NULL"), nullable=True)

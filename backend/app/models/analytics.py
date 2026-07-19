@@ -15,7 +15,7 @@ class CrimeForecast(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "crime_forecasts"
     
     district_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("districts.id", ondelete="CASCADE"), nullable=False)
-    crime_type: Mapped[CrimeType] = mapped_column(ENUM(CrimeType, name="crime_type", create_type=True), nullable=False)
+    crime_type: Mapped[CrimeType] = mapped_column(ENUM(CrimeType, name="crime_type", create_type=False), nullable=False)
     forecast_date: Mapped[date] = mapped_column(Date, nullable=False, index=True)
     predicted_count: Mapped[float] = mapped_column(Float, nullable=False)
     lower_bound: Mapped[float] = mapped_column(Float, nullable=False)
@@ -31,7 +31,7 @@ class RiskEntityType(str, enum.Enum):
 class RiskScore(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "risk_scores"
     
-    entity_type: Mapped[RiskEntityType] = mapped_column(ENUM(RiskEntityType, name="risk_entity_type", create_type=True), nullable=False)
+    entity_type: Mapped[RiskEntityType] = mapped_column(ENUM(RiskEntityType, name="risk_entity_type", create_type=False), nullable=False)
     entity_id: Mapped[str] = mapped_column(String(100), nullable=False, index=True)
     entity_label: Mapped[str] = mapped_column(String(150), nullable=False)
     score: Mapped[float] = mapped_column(Float, nullable=False)
@@ -54,4 +54,4 @@ class CrimeHotspot(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     radius_m: Mapped[float] = mapped_column(Float, server_default="250.0")
     crime_density: Mapped[int] = mapped_column(Integer, server_default="0")
     time_window: Mapped[str] = mapped_column(String(20), server_default="30d")
-    severity: Mapped[HotspotSeverity] = mapped_column(ENUM(HotspotSeverity, name="hotspot_severity", create_type=True), nullable=False)
+    severity: Mapped[HotspotSeverity] = mapped_column(ENUM(HotspotSeverity, name="hotspot_severity", create_type=False), nullable=False)

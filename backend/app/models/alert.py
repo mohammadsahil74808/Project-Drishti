@@ -19,9 +19,9 @@ class AlertType(str, enum.Enum):
 class Alert(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     __tablename__ = "alerts"
     
-    type: Mapped[AlertType] = mapped_column(ENUM(AlertType, name="alert_type", create_type=True), nullable=False)
+    type: Mapped[AlertType] = mapped_column(ENUM(AlertType, name="alert_type", create_type=False), nullable=False)
     message: Mapped[str] = mapped_column(Text, nullable=False)
-    severity: Mapped[HotspotSeverity] = mapped_column(ENUM(HotspotSeverity, name="hotspot_severity", create_type=True), nullable=False)
+    severity: Mapped[HotspotSeverity] = mapped_column(ENUM(HotspotSeverity, name="hotspot_severity", create_type=False), nullable=False)
     target_role: Mapped[str] = mapped_column(String(30), nullable=True)
     station_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("stations.id", ondelete="SET NULL"), nullable=True)
     location: Mapped[str] = mapped_column(Geography(geometry_type="POINT", srid=4326), nullable=True)

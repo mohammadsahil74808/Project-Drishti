@@ -5,7 +5,7 @@
  * Navbar/redirects reference a single source of truth instead of hardcoded
  * strings scattered across the app.
  */
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
@@ -35,7 +35,7 @@ function NotFound() {
   );
 }
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: ROUTES.LOGIN,
     element: <Login />,

@@ -23,5 +23,5 @@ class Vehicle(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     reg_pattern_hash: Mapped[str] = mapped_column(String(128), nullable=False)
     theft_location: Mapped[str] = mapped_column(Geography(geometry_type="POINT", srid=4326), nullable=False)
     recovery_location: Mapped[str] = mapped_column(Geography(geometry_type="POINT", srid=4326), nullable=True)
-    status: Mapped[VehicleCrimeStatus] = mapped_column(ENUM(VehicleCrimeStatus, name="vehicle_crime_status", create_type=True), nullable=False, server_default="stolen")
+    status: Mapped[VehicleCrimeStatus] = mapped_column(ENUM(VehicleCrimeStatus, name="vehicle_crime_status", create_type=False), nullable=False, server_default="stolen")
     theft_date: Mapped[date] = mapped_column(Date, nullable=False)

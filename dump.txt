@@ -1,0 +1,1405 @@
+
+==================================================
+FILE: backend/run.py
+==================================================
+
+import os
+import sys
+import uvicorn
+import logging
+from alembic.config import Config
+from alembic import command
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from app.models.user import User, UserRole
+from app.core.security import hash_password
+from app.core.config import settings
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def run_startup_tasks():
+    # 1. Run Alembic migrations
+    logger.info("Running database migrations...")
+    try:
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        logger.info("Database migrations completed successfully.")
+    except Exception as e:
+        logger.error(f"Migration failed: {e}", exc_info=True)
+        sys.exit(1)
+        
+    # 2. Seed ADMIN001
+    logger.info("Checking for ADMIN001 user...")
+    try:
+        engine = create_engine(settings.database_url)
+        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+        db = SessionLocal()
+        
+        admin = db.query(User).filter_by(badge_no="ADMIN001").first()
+        if not admin:
+            logger.info("ADMIN001 does not exist. Seeding...")
+            admin = User(
+                name="System Admin",
+                badge_no="ADMIN001",
+                role=UserRole.admin,
+                password_hash=hash_password("Admin@123"),
+                is_active=True
+            )
+            db.add(admin)
+            db.commit()
+            logger.info("ADMIN001 seeded successfully.")
+        else:
+            logger.info("ADMIN001 already exists. Skipping seed.")
+    except Exception as e:
+        logger.error(f"Error seeding admin: {e}", exc_info=True)
+        sys.exit(1)
+    finally:
+        if 'db' in locals():
+            db.close()
+
+if __name__ == "__main__":
+    run_startup_tasks()
+
+    # Zoho Catalyst passes the port as an environment variable
+    # We must read it in Python rather than depending on bash expansion
+    port_str = os.environ.get("X_ZOHO_CATALYST_LISTEN_PORT", "8000")
+    try:
+        port = int(port_str)
+    except ValueError:
+        port = 8000
+    
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port)
+
+==================================================
+FILE: backend/app/main.py
+==================================================
+
+from contextlib import asynccontextmanager
+import logging
+
+import sys
+import os
+
+from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
+import redis
+
+from app.api.v1.router import api_router
+from app.core.config import settings
+
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting up Backend API...")
+    yield
+
+app = FastAPI(
+    title=settings.app_name,
+    description="AI-Driven Crime Analytics & Visualization Platform — Karnataka State Police",
+    version="0.1.0",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_allow_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(api_router, prefix=settings.api_v1_prefix)
+
+from app.core.deps import DbSession
+
+@app.get("/health", tags=["system"])
+def health_check():
+    return {"status": "ok", "service": "SentinelX AI backend"}
+
+@app.get("/health/db", tags=["system"])
+def health_db(db: DbSession):
+    try:
+        db.execute(text("SELECT 1"))
+        return {"status": "ok", "db": "connected"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+
+@app.get("/health/redis", tags=["system"])
+def health_redis():
+    try:
+        r = redis.from_url(settings.redis_url)
+        if r.ping():
+            return {"status": "ok", "redis": "connected"}
+    except Exception as e:
+        return {"status": "error", "detail": str(e)}
+
+@app.get("/health/ai", tags=["system"])
+def health_ai():
+    import requests
+    try:
+        resp = requests.get(f"{settings.ai_engine_url}/health", timeout=5.0)
+        resp.raise_for_status()
+        return {"status": "ok", "ai_engine": "connected", "details": resp.json()}
+    except Exception as e:
+        return {"status": "error", "ai_engine": "disconnected", "detail": str(e)}
+
+==================================================
+FILE: backend/alembic.ini
+==================================================
+
+# SentinelX AI — Alembic Configuration
+
+[alembic]
+script_location = app/db/migrations
+prepend_sys_path = .
+sqlalchemy.url = driver://user:pass@localhost/dbname
+
+[post_write_hooks]
+
+[loggers]
+keys = root,sqlalchemy,alembic
+
+[handlers]
+keys = console
+
+[formatters]
+keys = generic
+
+[logger_root]
+level = WARN
+handlers = console
+qualname =
+
+[logger_sqlalchemy]
+level = WARN
+handlers =
+qualname = sqlalchemy.engine
+
+[logger_alembic]
+level = INFO
+handlers =
+qualname = alembic
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[formatter_generic]
+format = %(levelname)-5.5s [%(name)s] %(message)s
+datefmt = %H:%M:%S
+
+==================================================
+FILE: backend/app/db/migrations/env.py
+==================================================
+
+"""
+SentinelX AI — Alembic Migration Environment
+
+Overrides the SQLAlchemy URL from app.core.config (not alembic.ini's
+placeholder) and targets database.models' metadata for autogenerate, so
+`alembic revision --autogenerate` picks up every model automatically.
+"""
+
+from logging.config import fileConfig
+
+from alembic import context
+from sqlalchemy import engine_from_config, pool
+
+from app.core.config import settings
+from app.db.base import Base  # noqa: F401 — imports every model onto Base.metadata
+
+config = context.config
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
+
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+target_metadata = Base.metadata
+
+
+def run_migrations_offline() -> None:
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(
+        url=url,
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+        compare_type=True,
+    )
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def run_migrations_online() -> None:
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+    )
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            compare_type=True,
+        )
+        with context.begin_transaction():
+            context.run_migrations()
+
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()
+
+==================================================
+FILE: backend/app/db/migrations/versions/de379822be81_initial_schema.py
+==================================================
+
+"""initial schema — all SentinelX AI tables
+
+Hand-authored baseline migration (no live Postgres instance was available
+in the scaffold environment to run `alembic revision --autogenerate`
+against). Mirrors app/models/*.py exactly as of this commit. Once a real
+Postgres+PostGIS instance is available, verify with:
+    alembic upgrade head && alembic check
+and let autogenerate produce all subsequent migrations from here on.
+
+Revision ID: de379822be81
+Revises:
+Create Date: 2026-07-11
+
+"""
+
+from typing import Sequence, Union
+
+import geoalchemy2
+import sqlalchemy as sa
+from alembic import op
+from sqlalchemy.dialects import postgresql
+
+revision: str = "de379822be81"
+down_revision: Union[str, None] = None
+branch_labels: Union[str, Sequence[str], None] = None
+depends_on: Union[str, Sequence[str], None] = None
+
+
+def upgrade() -> None:
+    op.execute("CREATE EXTENSION IF NOT EXISTS postgis")
+    op.execute('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+
+    # ---- districts ----
+    op.create_table(
+        "districts",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("name", sa.String(120), nullable=False, unique=True),
+        sa.Column(
+            "boundary",
+            geoalchemy2.Geography(geometry_type="POLYGON", srid=4326),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- stations ----
+    op.create_table(
+        "stations",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("name", sa.String(150), nullable=False),
+        sa.Column(
+            "district_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("districts.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("lat", sa.Float, nullable=False),
+        sa.Column("lng", sa.Float, nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- users ----
+    user_role_enum = postgresql.ENUM(
+        "constable", "sho", "sp", "commissioner", "analyst", "admin", name="user_role"
+    )
+    user_role_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "users",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("name", sa.String(150), nullable=False),
+        sa.Column("badge_no", sa.String(50), nullable=False, unique=True),
+        sa.Column("role", user_role_enum, nullable=False),
+        sa.Column("password_hash", sa.String(255), nullable=False),
+        sa.Column("is_active", sa.Boolean, nullable=False, server_default=sa.true()),
+        sa.Column(
+            "station_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("stations.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index("ix_users_badge_no", "users", ["badge_no"])
+
+    # ---- fir_records ----
+    crime_type_enum = postgresql.ENUM(
+        "theft",
+        "chain_snatching",
+        "burglary",
+        "assault",
+        "vehicle_theft",
+        "cybercrime",
+        "missing_person",
+        "robbery",
+        "other",
+        name="crime_type",
+    )
+    crime_type_enum.create(op.get_bind(), checkfirst=True)
+    case_status_enum = postgresql.ENUM(
+        "open", "investigation", "chargesheet", "closed", name="case_status"
+    )
+    case_status_enum.create(op.get_bind(), checkfirst=True)
+
+    op.create_table(
+        "fir_records",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("fir_no", sa.String(50), nullable=False, unique=True),
+        sa.Column(
+            "station_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("stations.id", ondelete="RESTRICT"),
+            nullable=False,
+        ),
+        sa.Column(
+            "district_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("districts.id", ondelete="RESTRICT"),
+            nullable=False,
+        ),
+        sa.Column("crime_type", crime_type_enum, nullable=False),
+        sa.Column("ipc_sections", postgresql.ARRAY(sa.String(20)), server_default="{}"),
+        sa.Column("incident_datetime", sa.DateTime(timezone=True), nullable=False),
+        sa.Column("reported_datetime", sa.DateTime(timezone=True), nullable=False),
+        sa.Column(
+            "location",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=False,
+        ),
+        sa.Column("address_text", sa.Text, nullable=True),
+        sa.Column("mo_description", sa.Text, nullable=True),
+        sa.Column("status", case_status_enum, nullable=False, server_default="open"),
+        sa.Column("victim_age_bucket", sa.String(20), nullable=True),
+        sa.Column("accused_count", sa.Integer, server_default="0"),
+        sa.Column("weapon_used", sa.String(100), nullable=True),
+        sa.Column("embedding", sa.JSON, nullable=True),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index("ix_fir_records_fir_no", "fir_records", ["fir_no"])
+    op.create_index("ix_fir_records_crime_type", "fir_records", ["crime_type"])
+    op.create_index("ix_fir_records_status", "fir_records", ["status"])
+    op.create_index(
+        "ix_fir_records_incident_datetime", "fir_records", ["incident_datetime"]
+    )
+
+    # ---- suspects ----
+    op.create_table(
+        "suspects",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "fir_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("fir_records.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("name_hash", sa.String(128), nullable=False),
+        sa.Column("display_label", sa.String(100), nullable=False),
+        sa.Column("age_bucket", sa.String(20), nullable=True),
+        sa.Column("gender", sa.String(20), nullable=True),
+        sa.Column(
+            "prior_case_ids", postgresql.ARRAY(sa.String(50)), server_default="{}"
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index("ix_suspects_name_hash", "suspects", ["name_hash"])
+
+    # ---- criminal_network_edges ----
+    op.create_table(
+        "criminal_network_edges",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "suspect_a_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("suspects.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column(
+            "suspect_b_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("suspects.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("relation_type", sa.String(50), nullable=False),
+        sa.Column("weight", sa.Float, server_default="1.0"),
+        sa.Column(
+            "source_fir_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("fir_records.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- missing_persons ----
+    mp_status_enum = postgresql.ENUM(
+        "reported", "active_search", "matched", "closed", name="missing_person_status"
+    )
+    mp_status_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "missing_persons",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("name_hash", sa.String(128), nullable=False),
+        sa.Column("age", sa.Integer, nullable=False),
+        sa.Column(
+            "last_seen_location",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=False,
+        ),
+        sa.Column("last_seen_address", sa.String(255), nullable=True),
+        sa.Column("last_seen_date", sa.Date, nullable=False),
+        sa.Column("status", mp_status_enum, nullable=False, server_default="reported"),
+        sa.Column(
+            "matched_fir_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("fir_records.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index("ix_missing_persons_name_hash", "missing_persons", ["name_hash"])
+
+    # ---- vehicles ----
+    vehicle_status_enum = postgresql.ENUM(
+        "stolen", "recovered", "under_investigation", name="vehicle_crime_status"
+    )
+    vehicle_status_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "vehicles",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "fir_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("fir_records.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("vehicle_type", sa.String(50), nullable=False),
+        sa.Column("reg_pattern_hash", sa.String(128), nullable=False),
+        sa.Column(
+            "theft_location",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=False,
+        ),
+        sa.Column(
+            "recovery_location",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=True,
+        ),
+        sa.Column(
+            "status", vehicle_status_enum, nullable=False, server_default="stolen"
+        ),
+        sa.Column("theft_date", sa.Date, nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- crime_forecasts ----
+    op.create_table(
+        "crime_forecasts",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "district_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("districts.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("crime_type", crime_type_enum, nullable=False),
+        sa.Column("forecast_date", sa.Date, nullable=False),
+        sa.Column("predicted_count", sa.Float, nullable=False),
+        sa.Column("lower_bound", sa.Float, nullable=False),
+        sa.Column("upper_bound", sa.Float, nullable=False),
+        sa.Column("model_version", sa.String(50), server_default="v1"),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index(
+        "ix_crime_forecasts_forecast_date", "crime_forecasts", ["forecast_date"]
+    )
+
+    # ---- risk_scores ----
+    risk_entity_enum = postgresql.ENUM("zone", "person", name="risk_entity_type")
+    risk_entity_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "risk_scores",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("entity_type", risk_entity_enum, nullable=False),
+        sa.Column("entity_id", sa.String(100), nullable=False),
+        sa.Column("entity_label", sa.String(150), nullable=False),
+        sa.Column("score", sa.Float, nullable=False),
+        sa.Column("shap_explanation", sa.JSON, server_default="[]"),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+    op.create_index("ix_risk_scores_entity_id", "risk_scores", ["entity_id"])
+
+    # ---- hotspots ----
+    severity_enum = postgresql.ENUM(
+        "low", "medium", "high", "critical", name="hotspot_severity"
+    )
+    severity_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "hotspots",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "district_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("districts.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
+        sa.Column("name", sa.String(150), nullable=True),
+        sa.Column(
+            "centroid",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=False,
+        ),
+        sa.Column("radius_m", sa.Float, server_default="250.0"),
+        sa.Column("crime_density", sa.Integer, server_default="0"),
+        sa.Column("time_window", sa.String(20), server_default="30d"),
+        sa.Column("severity", severity_enum, nullable=False),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- alerts ----
+    alert_type_enum = postgresql.ENUM(
+        "anomaly",
+        "forecast_spike",
+        "new_hotspot",
+        "missing_person_match",
+        name="alert_type",
+    )
+    alert_type_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "alerts",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("type", alert_type_enum, nullable=False),
+        sa.Column("message", sa.Text, nullable=False),
+        sa.Column("severity", severity_enum, nullable=False),
+        sa.Column("target_role", sa.String(30), nullable=True),
+        sa.Column(
+            "station_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("stations.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "location",
+            geoalchemy2.Geography(geometry_type="POINT", srid=4326),
+            nullable=True,
+        ),
+        sa.Column(
+            "acknowledged", sa.Boolean, nullable=False, server_default=sa.false()
+        ),
+        sa.Column(
+            "acknowledged_by",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("users.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- audit_log ----
+    op.create_table(
+        "audit_log",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column(
+            "user_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("users.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column("action", sa.String(100), nullable=False),
+        sa.Column("resource", sa.String(150), nullable=False),
+        sa.Column("ip_address", sa.String(64), nullable=True),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+    # ---- reports ----
+    report_type_enum = postgresql.ENUM("weekly", "hotspot", "case", name="report_type")
+    report_type_enum.create(op.get_bind(), checkfirst=True)
+    report_status_enum = postgresql.ENUM(
+        "pending", "generating", "ready", "failed", name="report_status"
+    )
+    report_status_enum.create(op.get_bind(), checkfirst=True)
+    op.create_table(
+        "reports",
+        sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True),
+        sa.Column("type", report_type_enum, nullable=False),
+        sa.Column("title", sa.String(200), nullable=False),
+        sa.Column(
+            "status", report_status_enum, nullable=False, server_default="pending"
+        ),
+        sa.Column(
+            "requested_by",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("users.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column("file_path", sa.String(500), nullable=True),
+        sa.Column(
+            "district_id",
+            postgresql.UUID(as_uuid=True),
+            sa.ForeignKey("districts.id", ondelete="SET NULL"),
+            nullable=True,
+        ),
+        sa.Column(
+            "created_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+        sa.Column(
+            "updated_at",
+            sa.DateTime(timezone=True),
+            server_default=sa.func.now(),
+            nullable=False,
+        ),
+    )
+
+
+def downgrade() -> None:
+    op.drop_table("reports")
+    op.drop_table("audit_log")
+    op.drop_table("alerts")
+    op.drop_table("hotspots")
+    op.drop_table("risk_scores")
+    op.drop_table("crime_forecasts")
+    op.drop_table("vehicles")
+    op.drop_table("missing_persons")
+    op.drop_table("criminal_network_edges")
+    op.drop_table("suspects")
+    op.drop_table("fir_records")
+    op.drop_table("users")
+    op.drop_table("stations")
+    op.drop_table("districts")
+
+    for enum_name in (
+        "report_status",
+        "report_type",
+        "alert_type",
+        "hotspot_severity",
+        "risk_entity_type",
+        "missing_person_status",
+        "vehicle_crime_status",
+        "case_status",
+        "crime_type",
+        "user_role",
+    ):
+        op.execute(f"DROP TYPE IF EXISTS {enum_name}")
+
+==================================================
+FILE: backend/app/db/session.py
+==================================================
+
+"""
+SentinelX AI — Database Session Management
+"""
+from collections.abc import Generator
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, sessionmaker
+
+from app.core.config import settings
+
+engine = create_engine(
+    settings.database_url,
+    pool_pre_ping=True,
+    pool_size=settings.db_pool_size,
+    max_overflow=settings.db_max_overflow,
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def get_db() -> Generator[Session, None, None]:
+    """FastAPI dependency — one session per request, always closed."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+==================================================
+FILE: backend/app/db/base.py
+==================================================
+
+"""
+SentinelX AI — Declarative Base & Shared Model Mixins
+"""
+import uuid
+from datetime import datetime
+
+from sqlalchemy import DateTime, func
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+class Base(DeclarativeBase):
+    """Project-wide declarative base. Alembic's env.py targets this metadata."""
+    pass
+
+
+class UUIDPrimaryKeyMixin:
+    id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+
+
+class TimestampMixin:
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        onupdate=func.now(),
+        nullable=False,
+    )
+
+# Import models at the end to avoid circular imports but ensure metadata is populated
+from app.models import *
+==================================================
+FILE: backend/app/models/user.py
+==================================================
+
+import uuid
+import enum
+from sqlalchemy import String, Boolean, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID, ENUM
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.db.base import Base, UUIDPrimaryKeyMixin, TimestampMixin
+
+
+class UserRole(str, enum.Enum):
+    constable = "constable"
+    sho = "sho"
+    sp = "sp"
+    commissioner = "commissioner"
+    analyst = "analyst"
+    admin = "admin"
+
+
+class User(Base, UUIDPrimaryKeyMixin, TimestampMixin):
+    __tablename__ = "users"
+    
+    name: Mapped[str] = mapped_column(String(150), nullable=False)
+    badge_no: Mapped[str] = mapped_column(String(50), nullable=False, unique=True, index=True)
+    role: Mapped[UserRole] = mapped_column(ENUM(UserRole, name="user_role", create_type=True), nullable=False)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, server_default="true")
+    station_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("stations.id", ondelete="SET NULL"), nullable=True)
+
+==================================================
+FILE: backend/app/core/config.py
+==================================================
+
+"""
+SentinelX AI — Application Configuration
+
+Loaded from environment variables (see root .env.example). Single source of
+truth for every setting used across the backend — never read os.environ
+directly elsewhere in the app.
+"""
+import json
+from functools import lru_cache
+from typing import List, Union
+from pathlib import Path
+
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=str(ROOT_DIR / ".env"),
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore",
+    )
+
+    # ---- App ----
+    app_name: str = "SentinelX AI"
+    app_env: str = "development"
+    app_debug: bool = True
+    app_secret_key: str = "change-me-to-a-long-random-string"
+    api_v1_prefix: str = "/api/v1"
+
+    # ---- Database ----
+    database_url: str = (
+        "postgresql+psycopg2://sentinelx:change-me@localhost:5432/sentinelx_db"
+    )
+    db_pool_size: int = 10
+    db_max_overflow: int = 20
+
+    # ---- Redis / Celery ----
+    redis_url: str = "redis://localhost:6379/0"
+
+    # ---- Auth / JWT ----
+    jwt_secret_key: str = "change-me-to-a-long-random-string"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60
+    refresh_token_expire_days: int = 7
+
+    # ---- CORS ----
+    cors_allow_origins: Union[str, List[str]] = ["http://localhost:5173"]
+
+    # ---- AI / ML ----
+    embedding_model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"
+    faiss_index_path: str = "./data/faiss_index"
+    ai_engine_url: str = "https://sentinelx-ai-engine.onrender.com"
+
+    # ---- Logging ----
+    log_level: str = "INFO"
+
+    @field_validator("cors_allow_origins", mode="before")
+    @classmethod
+    def _split_csv(cls, v):
+        if isinstance(v, str):
+            v = v.strip()
+            if v.startswith("[") and v.endswith("]"):
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
+
+
+@lru_cache
+def get_settings() -> Settings:
+    """Cached settings singleton — import this, not Settings() directly."""
+    return Settings()
+
+
+settings = get_settings()
+==================================================
+FILE: backend/Dockerfile
+==================================================
+
+# Stage 1: Builder
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY requirements.txt .
+
+# Install all requirements cleanly (ML dependencies have been removed)
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Verification requested by user: fail the build if uvicorn is missing
+RUN python -m pip show uvicorn
+RUN python -m pip list
+
+# Aggressive cleanup of the virtual environment to minimize size
+RUN find /opt/venv -type d -name "__pycache__" -exec rm -r {} + && \
+    find /opt/venv -name "*.pyc" -delete && \
+    find /opt/venv -name "*.pyo" -delete && \
+    rm -rf /opt/venv/lib/python*/site-packages/pip && \
+    rm -rf /opt/venv/lib/python*/site-packages/setuptools && \
+    rm -rf /opt/venv/lib/python*/site-packages/wheel
+
+# Stage 2: Runtime
+FROM python:3.11-slim
+
+# Create a non-root user
+RUN groupadd -r sentinelx && useradd -r -g sentinelx sentinelx
+
+WORKDIR /app
+
+# Install ONLY runtime system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Copy application code
+COPY . /app
+
+# Final cleanup of app code
+RUN find /app -type d -name "__pycache__" -exec rm -r {} + && \
+    find /app -name "*.pyc" -delete
+
+# Change ownership to non-root user
+RUN chown -R sentinelx:sentinelx /app
+USER sentinelx
+
+EXPOSE 8000
+
+# Use Uvicorn directly via the absolute path of the virtual environment to ensure no path mismatch
+CMD sh -c "/opt/venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port ${X_ZOHO_CATALYST_LISTEN_PORT:-8000}"
+
+==================================================
+FILE: docker-compose.yml
+==================================================
+
+# SentinelX AI — Local Development Orchestration
+# Everything here uses free, open-source images only.
+
+services:
+  db:
+    image: postgis/postgis:15-3.4
+    container_name: sentinelx-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sentinelx}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      POSTGRES_DB: ${POSTGRES_DB:-sentinelx_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sentinelx}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinelx-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: sentinelx-backend
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: sentinelx-worker
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - backend
+      - redis
+    volumes:
+      - .:/app
+    command: celery -A app.workers.celery_app worker --loglevel=info
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sentinelx-frontend
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+
+volumes:
+  pgdata:
+  redis-data:
+
+==================================================
+FILE: docker-compose.prod.yml
+==================================================
+
+# SentinelX AI — Production Deployment Orchestration
+
+services:
+  db:
+    image: postgis/postgis:15-3.4
+    container_name: sentinelx-db-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sentinelx_prod}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure-password}
+      POSTGRES_DB: ${POSTGRES_DB:-sentinelx_prod_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata-prod:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sentinelx_prod}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis:
+    image: redis:7-alpine
+    container_name: sentinelx-redis-prod
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data-prod:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.prod
+    container_name: sentinelx-backend-prod
+    restart: always
+    env_file: .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  worker:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.prod
+    container_name: sentinelx-worker-prod
+    restart: always
+    env_file: .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A app.workers.celery_app worker --loglevel=info
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.prod
+    container_name: sentinelx-frontend-prod
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+
+volumes:
+  pgdata-prod:
+  redis-data-prod:
+
+==================================================
+FILE: backend/app-config.json
+==================================================
+
+{
+  "env": "python3.11",
+  "scripts": {
+    "build": "pip3 install -r requirements.txt",
+    "start": "python3 run.py"
+  }
+}
+
+==================================================
+FILE: catalyst.json
+==================================================
+
+{
+  "client": {
+    "source": "frontend/dist"
+  },
+  "appsail": [
+    {
+      "name": "sentinelx-backend",
+      "source": "docker://mohammadsahil7480/sentinelx-backend:latest"
+    },
+    {
+      "name": "sentinelx-ai-engine",
+      "source": "docker://mohammadsahil7480/sentinelx-ai-engine:latest"
+    }
+  ]
+}
+==================================================
+FILE: render.yaml
+==================================================
+
+# SentinelX AI — Render.com Infrastructure as Code
+services:
+  - type: web
+    name: sentinelx-ai-engine
+    env: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./ai-engine/Dockerfile
+    dockerContext: ./ai-engine
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+
+==================================================
+FILE: backend/requirements.txt
+==================================================
+
+# ============================================================
+# SentinelX AI — Backend Dependencies (all free/open-source)
+# Pin versions once Phase 2 development begins; ranges for now.
+# ============================================================
+
+# --- Core API ---
+fastapi>=0.111
+uvicorn[standard]>=0.30
+pydantic>=2.7
+pydantic-settings>=2.3
+python-multipart>=0.0.9
+
+# --- Database ---
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+geoalchemy2>=0.15
+alembic>=1.13
+
+# --- Auth ---
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+
+# --- Cache / Queue ---
+redis>=5.0
+celery>=5.4
+
+# --- Dev / Quality ---
+ruff>=0.5
+black>=24.4
+pytest>=8.2
+httpx>=0.27
