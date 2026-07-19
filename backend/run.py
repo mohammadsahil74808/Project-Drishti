@@ -24,7 +24,11 @@ def run_startup_tasks():
         command.upgrade(alembic_cfg, "head")
         logger.info("Database migrations completed successfully.")
     except Exception as e:
-        logger.error(f"Migration failed: {e}", exc_info=True)
+        import traceback
+        error_msg = f"Migration failed: {e}\n{traceback.format_exc()}"
+        print(error_msg, file=sys.stdout)
+        print(error_msg, file=sys.stderr)
+        logger.error(error_msg)
         sys.exit(1)
         
     # 2. Seed ADMIN001
