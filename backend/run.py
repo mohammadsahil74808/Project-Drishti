@@ -61,7 +61,10 @@ def run_startup_tasks():
             db.close()
 
 if __name__ == "__main__":
-    run_startup_tasks()
+    import threading
+    startup_thread = threading.Thread(target=run_startup_tasks)
+    startup_thread.daemon = True
+    startup_thread.start()
 
     # Zoho Catalyst passes the port as an environment variable
     # We must read it in Python rather than depending on bash expansion
