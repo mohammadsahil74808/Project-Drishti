@@ -8,10 +8,6 @@ from app.core.config import settings
 def main():
     engine = create_engine(settings.database_url)
     
-    print("Creating all tables...")
-    Base.metadata.create_all(bind=engine)
-    print("Tables created successfully.")
-    
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = SessionLocal()
     
