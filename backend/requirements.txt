@@ -18,7 +18,8 @@ alembic>=1.13
 
 # --- Auth ---
 python-jose[cryptography]>=3.3
-passlib[bcrypt]>=1.7
+passlib>=1.7
+bcrypt<4.0.0
 
 # --- Cache / Queue ---
 redis>=5.0
