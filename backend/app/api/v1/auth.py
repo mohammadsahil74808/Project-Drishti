@@ -10,17 +10,21 @@ from app.services import auth_service
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
+import traceback
+
 @router.post("/login", response_model=LoginResponse)
 def login(payload: LoginRequest, db: DbSession):
     try:
         user = auth_service.authenticate_user(db, payload.badge_no, payload.password)
+        tokens = auth_service.issue_token_pair(user)
+        return LoginResponse(**tokens, user=UserResponse.model_validate(user))
     except auth_service.InvalidCredentialsError as exc:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, str(exc)) from exc
     except auth_service.InactiveUserError as exc:
         raise HTTPException(status.HTTP_403_FORBIDDEN, str(exc)) from exc
-
-    tokens = auth_service.issue_token_pair(user)
-    return LoginResponse(**tokens, user=UserResponse.model_validate(user))
+    except Exception as exc:
+        tb = traceback.format_exc()
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, f"CRITICAL BACKEND ERROR: {exc}\n{tb}")
 
 
 @router.post("/refresh", response_model=TokenPair)
