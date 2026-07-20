@@ -22,8 +22,43 @@ class InactiveUserError(Exception):
     pass
 
 
+import sqlalchemy
+from alembic.config import Config
+from alembic import command
+from app.models.user import UserRole
+from app.core.security import hash_password
+import logging
+
+logger = logging.getLogger(__name__)
+
 def authenticate_user(db: Session, badge_no: str, password: str) -> User:
-    user = db.scalar(select(User).where(User.badge_no == badge_no))
+    user = None
+    try:
+        user = db.scalar(select(User).where(User.badge_no == badge_no))
+    except sqlalchemy.exc.ProgrammingError as e:
+        if "relation \"users\" does not exist" in str(e):
+            logger.warning("Users table missing. Running inline migrations...")
+            db.rollback()
+            alembic_cfg = Config("alembic.ini")
+            command.upgrade(alembic_cfg, "head")
+        else:
+            raise e
+
+    # Auto-seed ADMIN001 if it's missing (bypasses serverless background thread deaths)
+    if user is None and badge_no == "ADMIN001" and password == "Admin@123":
+        logger.info("Auto-seeding ADMIN001 during login request...")
+        user = User(
+            name="System Admin",
+            badge_no="ADMIN001",
+            role=UserRole.admin,
+            password_hash=hash_password("Admin@123"),
+            is_active=True
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+        return user
+
     if user is None or not verify_password(password, user.password_hash):
         raise InvalidCredentialsError("Invalid badge number or password.")
     if not user.is_active:
