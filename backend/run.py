@@ -20,6 +20,22 @@ def run_startup_tasks():
     logger.info("Running database migrations...")
     logger.info(f"Current working directory (pwd): {os.getcwd()}")
     try:
+        # Force-kill any lingering connections/locks from the Neon SQL Editor before migrating
+        logger.info("Attempting to forcefully clear Neon database locks...")
+        try:
+            engine = create_engine(settings.database_url)
+            with engine.connect() as conn:
+                from sqlalchemy import text
+                conn.execute(text("""
+                    SELECT pg_terminate_backend(pid) 
+                    FROM pg_stat_activity 
+                    WHERE pid <> pg_backend_pid() AND usename = current_user;
+                """))
+                conn.commit()
+            engine.dispose()
+        except Exception as lock_err:
+            logger.error(f"Error clearing locks: {lock_err}")
+
         alembic_cfg = Config("alembic.ini")
         command.upgrade(alembic_cfg, "head")
         logger.info("Database migrations completed successfully.")

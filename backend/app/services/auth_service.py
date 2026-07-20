@@ -39,6 +39,19 @@ def authenticate_user(db: Session, badge_no: str, password: str) -> User:
         if "relation \"users\" does not exist" in str(e):
             logger.warning("Users table missing. Running inline migrations...")
             db.rollback()
+            
+            logger.info("Attempting to forcefully clear Neon database locks...")
+            try:
+                db.execute(sqlalchemy.text("""
+                    SELECT pg_terminate_backend(pid) 
+                    FROM pg_stat_activity 
+                    WHERE pid <> pg_backend_pid() AND usename = current_user;
+                """))
+                db.commit()
+            except Exception as lock_err:
+                logger.error(f"Error clearing locks: {lock_err}")
+                db.rollback()
+
             alembic_cfg = Config("alembic.ini")
             command.upgrade(alembic_cfg, "head")
         else:
